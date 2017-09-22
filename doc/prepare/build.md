@@ -13,7 +13,7 @@ Vue.js 源码是基于 Rollup 构建的，它的构建相关配置都在 build �
   "script": {
       "build": "node build/build.js",
       "build:ssr": "npm run build -- vue.runtime.common.js,vue-server-renderer",
-      "build:weex": "npm run build -- weex-vue-framework,weex-template-compiler",
+      "build:weex": "npm run build -- weex-vue-framework,weex-template-compiler"
   }
 }
  
