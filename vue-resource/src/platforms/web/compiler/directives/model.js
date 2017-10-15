@@ -23,13 +23,6 @@ export default function model (
   const type = el.attrsMap.type
 
   if (process.env.NODE_ENV !== 'production') {
-    const dynamicType = el.attrsMap['v-bind:type'] || el.attrsMap[':type']
-    if (tag === 'input' && dynamicType) {
-      warn(
-        `<input :type="${dynamicType}" v-model="${value}">:\n` +
-        `v-model does not support dynamic input types. Use v-if branches instead.`
-      )
-    }
     // inputs with type="file" are read only and setting the input's
     // value will throw an error.
     if (tag === 'input' && type === 'file') {
@@ -86,7 +79,7 @@ function genCheckboxModel (
           : `:_q(${value},${trueValueBinding})`
       )
   )
-  addHandler(el, CHECKBOX_RADIO_TOKEN,
+  addHandler(el, 'change',
     `var $$a=${value},` +
         '$$el=$event.target,' +
         `$$c=$$el.checked?(${trueValueBinding}):(${falseValueBinding});` +
@@ -109,7 +102,7 @@ function genRadioModel (
   let valueBinding = getBindingAttr(el, 'value') || 'null'
   valueBinding = number ? `_n(${valueBinding})` : valueBinding
   addProp(el, 'checked', `_q(${value},${valueBinding})`)
-  addHandler(el, CHECKBOX_RADIO_TOKEN, genAssignmentCode(value, valueBinding), null, true)
+  addHandler(el, 'change', genAssignmentCode(value, valueBinding), null, true)
 }
 
 function genSelect (

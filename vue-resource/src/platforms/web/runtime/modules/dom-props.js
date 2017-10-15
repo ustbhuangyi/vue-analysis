@@ -28,6 +28,11 @@ function updateDOMProps (oldVnode: VNodeWithData, vnode: VNodeWithData) {
     if (key === 'textContent' || key === 'innerHTML') {
       if (vnode.children) vnode.children.length = 0
       if (cur === oldProps[key]) continue
+      // #6601 work around Chrome version <= 55 bug where single textNode
+      // replaced by innerHTML/textContent retains its parentNode property
+      if (elm.childNodes.length === 1) {
+        elm.removeChild(elm.childNodes[0])
+      }
     }
 
     if (key === 'value') {
@@ -36,7 +41,7 @@ function updateDOMProps (oldVnode: VNodeWithData, vnode: VNodeWithData) {
       elm._value = cur
       // avoid resetting cursor position when value is the same
       const strCur = isUndef(cur) ? '' : String(cur)
-      if (shouldUpdateValue(elm, vnode, strCur)) {
+      if (shouldUpdateValue(elm, strCur)) {
         elm.value = strCur
       }
     } else {
@@ -48,13 +53,9 @@ function updateDOMProps (oldVnode: VNodeWithData, vnode: VNodeWithData) {
 // check platforms/web/util/attrs.js acceptValue
 type acceptValueElm = HTMLInputElement | HTMLSelectElement | HTMLOptionElement;
 
-function shouldUpdateValue (
-  elm: acceptValueElm,
-  vnode: VNodeWithData,
-  checkVal: string
-): boolean {
+function shouldUpdateValue (elm: acceptValueElm, checkVal: string): boolean {
   return (!elm.composing && (
-    vnode.tag === 'option' ||
+    elm.tagName === 'OPTION' ||
     isDirty(elm, checkVal) ||
     isInputChanged(elm, checkVal)
   ))

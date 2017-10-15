@@ -38,7 +38,14 @@ export function isObject (obj: mixed): boolean %checks {
   return obj !== null && typeof obj === 'object'
 }
 
+/**
+ * Get the raw type string of a value e.g. [object Object]
+ */
 const _toString = Object.prototype.toString
+
+export function toRawType (value: any): string {
+  return _toString.call(value).slice(8, -1)
+}
 
 /**
  * Strict object type check. Only returns true
@@ -56,7 +63,7 @@ export function isRegExp (v: any): boolean {
  * Check if val is a valid array index.
  */
 export function isValidArrayIndex (val: any): boolean {
-  const n = parseFloat(val)
+  const n = parseFloat(String(val))
   return n >= 0 && Math.floor(n) === n && isFinite(val)
 }
 
@@ -106,7 +113,7 @@ export const isBuiltInTag = makeMap('slot,component', true)
 /**
  * Check if a attribute is a reserved attribute.
  */
-export const isReservedAttribute = makeMap('key,ref,slot,is')
+export const isReservedAttribute = makeMap('key,ref,slot,slot-scope,is')
 
 /**
  * Remove an item from an array
