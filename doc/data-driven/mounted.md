@@ -1,9 +1,86 @@
 # Vue 实例挂载的实现
 
-Vue 中我们是通过 `$mount` 实例方法去挂载 Vue 实例的，`$mount` 方法在多个文件中都有定义，如 `src/platform/web/entry-runtime-with-compiler.js`、`src/platform/web/runtime/index.js`、`src/platform/weex/runtime/index.js`。这些文件实际上对应的 Vue 打包不同的入口，因为 `$mount` 这个方法的实现是和平台、构建方式都相关的。接下来我们重点分析 `runtime-only` 版本的 `$monut` 实现，在 `src/platform/web/runtime/index.js` 文件中定义：
+Vue 中我们是通过 `$mount` 实例方法去挂载 Vue 实例的，`$mount` 方法在多个文件中都有定义，如 `src/platform/web/entry-runtime-with-compiler.js`、`src/platform/web/runtime/index.js`、`src/platform/weex/runtime/index.js`。因为 `$mount` 这个方法的实现是和平台、构建方式都相关的。接下来我们重点分析带 `compiler` 版本的 `$monut` 实现，因为抛开 webpack 的 vue-loader 我们在纯前端浏览器环境分析 Vue 的工作原理，有助于我们对原理理解的深入。
+
+`compiler` 版本的 `$monut` 实现非常有意思，先来看一下 `src/platform/web/entry-runtime-with-compiler.js` 文件中定义：
 
 ```js
-//
+// 先缓存之前原型上的 $mount 方法
+const mount = Vue.prototype.$mount
+// 然后重写原型上的 $mount 方法
+Vue.prototype.$mount = function (
+  el?: string | Element,
+  hydrating?: boolean
+): Component {
+  el = el && query(el)
+
+  // el 不允许是 html 或者 body 这样的根节点
+  if (el === document.body || el === document.documentElement) {
+    process.env.NODE_ENV !== 'production' && warn(
+      `Do not mount Vue to <html> or <body> - mount to normal elements instead.`
+    )
+    return this
+  }
+
+  const options = this.$options
+  // 解析 template 或者 el 并转换成 render 方法
+  if (!options.render) {
+    let template = options.template
+    // 把 template 转换成 html 字符串
+    if (template) {
+      if (typeof template === 'string') {
+        if (template.charAt(0) === '#') {
+          template = idToTemplate(template)
+          /* istanbul ignore if */
+          if (process.env.NODE_ENV !== 'production' && !template) {
+            warn(
+              `Template element not found or is empty: ${options.template}`,
+              this
+            )
+          }
+        }
+      } else if (template.nodeType) {
+        template = template.innerHTML
+      } else {
+        if (process.env.NODE_ENV !== 'production') {
+          warn('invalid template option:' + template, this)
+        }
+        return this
+      }
+    } else if (el) {
+      template = getOuterHTML(el)
+    }
+    if (template) {
+      // 非生成环境做一些性能监控
+      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+        mark('compile')
+      }
+
+      // 把 template 转成 render 方法
+      const { render, staticRenderFns } = compileToFunctions(template, {
+        shouldDecodeNewlines,
+        delimiters: options.delimiters,
+        comments: options.comments
+      }, this)
+      // 结果赋值给 options
+      options.render = render
+      options.staticRenderFns = staticRenderFns
+      
+      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+        mark('compile end')
+        measure(`vue ${this._name} compile`, 'compile', 'compile end')
+      }
+    }
+  }
+  // 调用原先的原型上 $mount 方法
+  return mount.call(this, el, hydrating)
+}
+```
+这段代码首先缓存了原型上的 `$mount` 方法，再重新定义该方法，我们先来分析这段代码。首先，它对 `el` 做了限制，Vue 不能挂载在 `body`、`html` 这样的根节点上。接下来的是很关键的逻辑 —— 如果没有定义 `render` 方法，则会把 `el` 或者 `template` 字符串转换成 `render` 方法。这里我们要牢记，在 Vue 2.0 版本中，所有 Vue 的组件的渲染最终都需要 `render` 方法，无论我们是用单文件 .vue 方式开发组件，还是写了 `el` 或者 `template` 属性，最终都会转换成 `render` 方法，那么这个过程是 Vue 的一个“在线编译”的过程，它是调用 `compileToFunctions` 方法实现的，编译过程我们之后会介绍。最后，调用原先原型上的 $mount 方法挂载。
+
+原先原型上的 $mount 方法在 `src/platform/web/runtime/index.js` 中定义，之所以这么设计完全是为了复用，因为它是可以被 `runtime only` 版本的 Vue 直接使用的。
+
+```js
 Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
@@ -12,6 +89,7 @@ Vue.prototype.$mount = function (
   return mountComponent(this, el, hydrating)
 }
 ```
+
 `$mount` 方法支持传入 2 个参数，第一个是 `el`，它表示挂载的元素，可以是字符串，也可以是 DOM 对象，如果是字符串在浏览器环境下会调用 `query` 方法转换成 DOM 对象的。第二个参数是和服务端渲染相关，之后我们会介绍，在浏览器环境下我们不需要传第二个参数。
 
 `$mount` 方法实际上回去调用 `mountComponent` 方法，这个方法定义在 `src/core/instance/lifecycle.js` 文件中。
@@ -83,15 +161,16 @@ export function mountComponent (
   vm._watcher = new Watcher(vm, updateComponent, noop)
   hydrating = false
 
-  // manually mounted instance, call mounted on self
-  // mounted is called for render-created child components in its inserted hook
+  // 根组件调用 mounted 钩子函数
+  // 而对于子组件， mounted 钩子是在它们被插入的钩子函数中调用。
   if (vm.$vnode == null) {
     vm._isMounted = true
+    // 调用 mounted 的钩子函数
     callHook(vm, 'mounted')
   }
   return vm
 }
 ```
-从上面的代码可以看到，`mountComponent` 核心就是先调用 `vm._render` 方法先生成虚拟 Node，再调用 `vm._update` 方法更新 DOM。并且，它还给 `vm` 创建了一个 `Watcher` 对象，用来检测 `vm` 的数据变化后重新调用 `updateComponent` 方法更新 DOM。
+从上面的代码可以看到，`mountComponent` 核心就是先调用 `vm._render` 方法先生成虚拟 Node，再调用 `vm._update` 方法更新 DOM。并且，它还给 `vm` 创建了一个 `Watcher` 对象，用来检测 `vm` 的数据变化后重新调用 `updateComponent` 方法更新 DOM。最后判断为根节点的时候设置 `vm._isMounted` 为 true， 表示这个实例已经挂载了，同时执行 `mounted` 钩子函数。 这里注意 `vm.$vnode` 表示 Vue 实例的父虚拟 Node，所以它为 Null 则表示当前是根 Vue 的实例。
 
 所以 `mountComponent` 方法的逻辑也是非常清晰的，接下来我们要重点分析 2 个方法：`vm._render` 和 `vm._update`。
