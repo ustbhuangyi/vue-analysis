@@ -110,4 +110,4 @@ export function initRender (vm: Component) {
 }
 ```
 
-实际上，`vm.$createElement` 方法定义是在执行 `initRender` 方法的时候，可以看到除了 `vm.$createElement` 方法，还有一个 `vm._c` 方法，它是被模板编译成的 `render` 函数使用，而 `vm.$createElement` 是用户手写 `render` 方法使用的， 这俩个方法支持的参数相同，并且内部都调用了 `createElement` 方法，它定义在 `src/core/vdom/create-elemenet.js` 中。在去分析 `createElement` 的实现前，我们先了解一下 Virtual DOM 的概念。
+实际上，`vm.$createElement` 方法定义是在执行 `initRender` 方法的时候，可以看到除了 `vm.$createElement` 方法，还有一个 `vm._c` 方法，它是被模板编译成的 `render` 函数使用，而 `vm.$createElement` 是用户手写 `render` 方法使用的， 这俩个方法支持的参数相同，并且内部都调用了 `createElement` 方法。在分析 `createElement` 的实现前，我们先了解一下 Virtual DOM 的概念。
