@@ -171,6 +171,10 @@ export function mountComponent (
   return vm
 }
 ```
-从上面的代码可以看到，`mountComponent` 核心就是先调用 `vm._render` 方法先生成虚拟 Node，再调用 `vm._update` 方法更新 DOM。并且，它还给 `vm` 创建了一个 `Watcher` 对象，用来检测 `vm` 的数据变化后重新调用 `updateComponent` 方法更新 DOM。最后判断为根节点的时候设置 `vm._isMounted` 为 true， 表示这个实例已经挂载了，同时执行 `mounted` 钩子函数。 这里注意 `vm.$vnode` 表示 Vue 实例的父虚拟 Node，所以它为 Null 则表示当前是根 Vue 的实例。
+从上面的代码可以看到，`mountComponent` 核心就是先调用 `vm._render` 方法先生成虚拟 Node，再给 vm 实例添加一个 `Watcher`，在它的回调函数中会调用 `updateComponent` 方法，最终调用 `vm._update` 更新 DOM。
 
-所以 `mountComponent` 方法的逻辑也是非常清晰的，接下来我们要重点分析 2 个方法：`vm._render` 和 `vm._update`。
+`Watcher` 在这里起到两个作用，一个是初始化的时候会执行回调函数，另一个是当 vm 实例中的监测的数据发生变化的时候执行回调函数，这块儿我们会在之后分析响应式原理的时候中介绍。
+
+函数最后判断为根节点的时候设置 `vm._isMounted` 为 `true`， 表示这个实例已经挂载了，同时执行 `mounted` 钩子函数。 这里注意 `vm.$vnode` 表示 Vue 实例的父虚拟 Node，所以它为 `Null` 则表示当前是根 Vue 的实例。
+
+所以 `mountComponent` 方法的逻辑也是非常清晰的，接下来我们要重点分析最核心的 2 个方法：`vm._render` 和 `vm._update`。

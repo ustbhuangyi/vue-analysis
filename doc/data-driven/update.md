@@ -81,6 +81,7 @@ export function createPatchFunction (backend) {
   
   return function patch (oldVnode, vnode, hydrating, removeOnly, parentElm, refElm) {
     if (isUndef(vnode)) {
+      // 执行销毁旧节点的钩子函数
       if (isDef(oldVnode)) invokeDestroyHook(oldVnode)
       return
     }
@@ -89,26 +90,29 @@ export function createPatchFunction (backend) {
     const insertedVnodeQueue = []
 
     if (isUndef(oldVnode)) {
-      // empty mount (likely as component), create new root element
+      // 空挂载，在做一些动态插入的组件的时候常用到
       isInitialPatch = true
+      // 给 vnode 添加 elm 对象并且渲染整个 DOM 树
       createElm(vnode, insertedVnodeQueue, parentElm, refElm)
     } else {
+      // isRealElement 表示它是一个原生的 DOM 节点，第一次 patch 的时候 oldVnode 是原生的 DOM 节点
       const isRealElement = isDef(oldVnode.nodeType)
       if (!isRealElement && sameVnode(oldVnode, vnode)) {
-        // patch existing root node
+        // diff 更新过程
         patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly)
       } else {
         if (isRealElement) {
-          // mounting to a real element
-          // check if this is server-rendered content and if we can perform
-          // a successful hydration.
+          // 命中该逻辑表示这个节点是通过 server-render 创建的
           if (oldVnode.nodeType === 1 && oldVnode.hasAttribute(SSR_ATTR)) {
             oldVnode.removeAttribute(SSR_ATTR)
             hydrating = true
           }
           if (isTrue(hydrating)) {
+            // 服务端渲染的节点调用 hydrate 方法更新 vnode 的一些属性
             if (hydrate(oldVnode, vnode, insertedVnodeQueue)) {
+              // 执行插入的钩子函数
               invokeInsertHook(vnode, insertedVnodeQueue, true)
+              // 返回 oldVnode，此时它还是原生 DOM 节点
               return oldVnode
             } else if (process.env.NODE_ENV !== 'production') {
               warn(
@@ -120,13 +124,14 @@ export function createPatchFunction (backend) {
               )
             }
           }
-          // either not server-rendered, or hydration failed.
-          // create an empty node and replace it
+          // 非 server-rendered 或者 hydration 失败的时候基于原生 DOM 创建一个 VNode 节点，oldVnode 此时是一个 VNode 对象
           oldVnode = emptyNodeAt(oldVnode)
         }
-        // replacing existing element
+        // 当前 DOM 对象
         const oldElm = oldVnode.elm
+        // 当前 DOM 对象的父级 DOM
         const parentElm = nodeOps.parentNode(oldElm)
+        // 给 vnode 添加 elm 对象并且渲染整个 DOM 树
         createElm(
           vnode,
           insertedVnodeQueue,
@@ -138,6 +143,7 @@ export function createPatchFunction (backend) {
         )
 
         if (isDef(vnode.parent)) {
+          // 组件根节点的替换，递归调用
           // component root element replaced.
           // update parent placeholder node element, recursively
           let ancestor = vnode.parent
@@ -169,14 +175,18 @@ export function createPatchFunction (backend) {
         }
 
         if (isDef(parentElm)) {
+          // 有父节点的情况则删除旧节点
           removeVnodes(parentElm, [oldVnode], 0, 0)
         } else if (isDef(oldVnode.tag)) {
+          // 当前节点被直接替换，
           invokeDestroyHook(oldVnode)
         }
       }
     }
 
+    // 根据插入的 VNode 顺序，执行 insert hook
     invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch)
+    // 返回 vnode 对应的真实 DOM 节点
     return vnode.elm
   }
 }
@@ -187,5 +197,7 @@ export function createPatchFunction (backend) {
 在介绍 `patch` 的方法实现之前，我们可以思考一下为何 Vue.js 源码绕了这么一大圈，把相关代码分散到各个目录。因为前面介绍过，`patch` 是平台相关的，在 Web 和 Weex 环境，它们把虚拟 DOM 映射到 “平台 DOM” 的方法是不同的，并且对 “DOM” 包括的属性模块创建和更新也不尽相同。因此每个平台都有各自的 `nodeOps` 和 `modules`，它们的代码需要托管在 `src/platforms` 这个大目录下。
 
 而不同平台的 `patch` 的主要逻辑部分是相同的，所以这部分公共的部分托管在 `core` 这个大目录下。差异化部分只需要通过参数来区别，这里用到了一个函数柯里化的技巧，通过 `createPatchFunction` 把差异化参数提前固化，这样不用每次调用 `patch` 的时候都传递 `nodeOps` 和 `modules` 了，这种编程技巧也非常值得学习。
+
+在这里，`nodeOps` 表示对 “平台 DOM” 的一些操作方法，`modules` 表示平台的一些模块，它们会在整个 `patch` 过程的不同阶段执行相应的钩子函数。这些代码的具体实现会在之后的章节介绍。
 
 回到 `patch` 方法本身，它接收 6 个参数，`oldVnode` 表示旧的 VNode 节点，它也可以不存在或者是一个 DOM 对象；`vnode` 表示当前的 `_render` 后的 VNode 的节点；`hydrating` 表示是否是服务端渲染；`removeOnly` 是给 `transition-group` 用的，之后会介绍；``
