@@ -41,8 +41,6 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
     if (vm.$vnode && vm.$parent && vm.$vnode === vm.$parent._vnode) {
       vm.$parent.$el = vm.$el
     }
-    // updated hook is called by the scheduler to ensure that children are
-    // updated in a parent's updated hook.
   }
 ```
 
@@ -90,7 +88,7 @@ export function createPatchFunction (backend) {
     const insertedVnodeQueue = []
 
     if (isUndef(oldVnode)) {
-      // 空挂载，在做一些动态插入的组件的时候常用到
+      // 空挂载，比如组件的创建，创建新的根元素
       isInitialPatch = true
       // 给 vnode 添加 elm 对象并且渲染整个 DOM 树
       createElm(vnode, insertedVnodeQueue, parentElm, refElm)
@@ -200,4 +198,142 @@ export function createPatchFunction (backend) {
 
 在这里，`nodeOps` 表示对 “平台 DOM” 的一些操作方法，`modules` 表示平台的一些模块，它们会在整个 `patch` 过程的不同阶段执行相应的钩子函数。这些代码的具体实现会在之后的章节介绍。
 
-回到 `patch` 方法本身，它接收 6 个参数，`oldVnode` 表示旧的 VNode 节点，它也可以不存在或者是一个 DOM 对象；`vnode` 表示当前的 `_render` 后的 VNode 的节点；`hydrating` 表示是否是服务端渲染；`removeOnly` 是给 `transition-group` 用的，之后会介绍；``
+回到 `patch` 方法本身，它接收 6 个参数，`oldVnode` 表示旧的 VNode 节点，它也可以不存在或者是一个 DOM 对象；`vnode` 表示执行 `_render` 后返回的 VNode 的节点；`hydrating` 表示是否是服务端渲染；`removeOnly` 是给 `transition-group` 用的，之后会介绍；`parentElm` 表示 `oldVnode` 的父元素，而 `refElm` 表示最后节点插入的相对元素。
+
+`patch` 的逻辑看上去相对复杂，因为它有着非常多的分支逻辑，为了方便理解，我们并不会在这里介绍所有的逻辑，仅会针对我们之前的例子分析它的执行逻辑。之后我们对其它场景做源码分析的时候会再次回顾 `patch` 方法。
+
+先来回顾我们的例子：
+
+```js
+var app = new Vue({
+  el: '#app',
+  render: function (createElement) {
+    return createElement('div', {
+      attrs: {
+        id: 'app'
+      },
+    }, this.message)
+  },
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+```
+
+然后我们在 `vm._update` 的方法里是这么调用 `patch` 方法的：
+
+```js
+vm.$el = vm.__patch__(
+    vm.$el, vnode, hydrating, false /* removeOnly */,
+    vm.$options._parentElm,
+    vm.$options._refElm
+  )
+```
+
+结合我们的例子，我们的场景是首次渲染，所以在执行 `patch` 函数的时候，传入的 `vm.$el` 对应的是例子中 id 为 `app` 的 DOM 对象，这个也就是我们在 index.html 模板中写的 `<div id="app">`， vm.$el` 的赋值是在之前 `mountComponent` 函数做的，`vnode` 对应的是调用 `render` 函数的返回值，`hydrating` 在非服务端渲染情况下为 false，`removeOnly` 为 false，`vm.$options._parentElm` 和 `vm.$options._refElm` 在这里都是 undefined.
+
+确定了这些入参后，我们回到 `patch` 函数的执行过程，看几个关键步骤。由于我们传入的 `oldVnode` 实际上是一个 DOM container，所以 `isRealElement` 为 true，接下来又通过 `emptyNodeAt` 方法把 `oldVnode` 转换成 `VNode` 对象，然后再调用 `createElm` 方法，这个方法在这里非常重要，来看一下它的实现，它定义在 `src/core/vdom/patch.js` 中。
+
+```js
+function createElm (vnode, insertedVnodeQueue, parentElm, refElm, nested) {
+    vnode.isRootInsert = !nested // for transition enter check
+    
+    // 创建组件
+    if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
+      return
+    }
+
+    const data = vnode.data
+    const children = vnode.children
+    const tag = vnode.tag
+    if (isDef(tag)) {
+      if (process.env.NODE_ENV !== 'production') {
+        // 在一个 pre 环境中
+        if (data && data.pre) {
+          inPre++
+        }
+        if (
+          !inPre &&
+          !vnode.ns &&
+          !(
+            config.ignoredElements.length &&
+            config.ignoredElements.some(ignore => {
+              return isRegExp(ignore)
+                ? ignore.test(tag)
+                : ignore === tag
+            })
+          ) &&
+          config.isUnknownElement(tag)
+        ) {
+          // 没有注册的组件，或者是非法的 html 标签
+          warn(
+            'Unknown custom element: <' + tag + '> - did you ' +
+            'register the component correctly? For recursive components, ' +
+            'make sure to provide the "name" option.',
+            vnode.context
+          )
+        }
+      }
+      // 创建真实的 DOM
+      vnode.elm = vnode.ns
+        ? nodeOps.createElementNS(vnode.ns, tag)
+        : nodeOps.createElement(tag, vnode)
+      setScope(vnode)
+
+      /* istanbul ignore if */
+      if (__WEEX__) {
+        // in Weex, the default insertion order is parent-first.
+        // List items can be optimized to use children-first insertion
+        // with append="tree".
+        const appendAsTree = isDef(data) && isTrue(data.appendAsTree)
+        if (!appendAsTree) {
+          if (isDef(data)) {
+            invokeCreateHooks(vnode, insertedVnodeQueue)
+          }
+          insert(parentElm, vnode.elm, refElm)
+        }
+        createChildren(vnode, children, insertedVnodeQueue)
+        if (appendAsTree) {
+          if (isDef(data)) {
+            invokeCreateHooks(vnode, insertedVnodeQueue)
+          }
+          insert(parentElm, vnode.elm, refElm)
+        }
+      } else {
+         // 创建子节点
+        createChildren(vnode, children, insertedVnodeQueue)
+        if (isDef(data)) {
+          // 调用 create 的钩子并把 vnode push 到 insertedVnodeQueue
+          invokeCreateHooks(vnode, insertedVnodeQueue)
+        }
+        // 插入到父节点中
+        insert(parentElm, vnode.elm, refElm)
+      }
+
+      if (process.env.NODE_ENV !== 'production' && data && data.pre) {
+        inPre--
+      }
+    } else if (isTrue(vnode.isComment)) {
+      // 创建注释节点
+      vnode.elm = nodeOps.createComment(vnode.text)
+      insert(parentElm, vnode.elm, refElm)
+    } else {
+      // 创建普通的文本节点
+      vnode.elm = nodeOps.createTextNode(vnode.text)
+      insert(parentElm, vnode.elm, refElm)
+    }
+  }
+```
+
+`createElm` 的作用是通过虚拟节点创建真实的 DOM 并插入到它的父节点中。 方法接收 5 个参数，其中 `vnode` 表示对应的虚拟节点，`insertedVnodeQueue` 表示插入顺序的虚拟节点队列，`parentElm` 表示父节点，`refElm` 表示插入的相对节点，`nested` 表示是否是嵌套的子节点。
+
+`createElm` 的逻辑也很简单，首先执行 `createComponent` 的方法，这个逻辑在之后组件的章节会详细介绍，在当前这个 case 下它的返回值为 false；接下来判断 `vnode` 是否包含 tag，如果包含，先简单对 tag 的合法性在非生产环境下做校验，看是否是一个合法标签；然后再去调用平台 DOM 的操作去创建一个元素。接下来调用 `createChildren` 方法去创建子元素，它实际上是遍历子元素，递归调用 `createElm`，这是一种常用的深度优先的遍历算法，然后再调用 create 的钩子并把 `vnode` push 到 `insertedVnodeQueue` 中，接着调用 `insert` 方法把 `DOM` 插入到父节点中，所以 `vnode` 的插入顺序是先子后父。
+
+在 `createElm` 过程中，如果 `vnode` 节点如果不包含 `tag`，则它有可能是一个注释或者纯文本节点，可以直接插入到父元素中。
+
+再回到 `patch` 方法，当首次渲染我们调用了 `createElm` 方法，实际上是创建了一个完整的 DOM 树并插入到 body 上。
+
+接下来对 `vnode.parent` 的判断，该 case 下为 undefined，所以判断内部的逻辑暂时不讲。最后对 `parentElm` 判断，满足条件接着执行 `removeVnodes` 删除了旧的 `oldVNode`，这样就相当于替换了之前 html 模板中定义的 id 为 `app` 的根节点。
+
+最后，我们根据之前递归 `createElm` 生成的 `vnode` 插入顺序队列，执行相关的 init 钩子函数。
+
