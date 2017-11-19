@@ -335,5 +335,5 @@ function createElm (vnode, insertedVnodeQueue, parentElm, refElm, nested) {
 
 接下来对 `vnode.parent` 的判断，该 case 下为 undefined，所以判断内部的逻辑暂时不讲。最后对 `parentElm` 判断，满足条件接着执行 `removeVnodes` 删除了旧的 `oldVNode`，这样就相当于替换了之前 html 模板中定义的 id 为 `app` 的根节点。
 
-最后，我们根据之前递归 `createElm` 生成的 `vnode` 插入顺序队列，执行相关的 init 钩子函数。
+最后，我们根据之前递归 `createElm` 生成的 `vnode` 插入顺序队列，执行相关的 insert 钩子函数。
 
