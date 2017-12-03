@@ -128,6 +128,19 @@ function genDefaultModel (
   modifiers: ?ASTModifiers
 ): ?boolean {
   const type = el.attrsMap.type
+
+  // warn if v-bind:value conflicts with v-model
+  if (process.env.NODE_ENV !== 'production') {
+    const value = el.attrsMap['v-bind:value'] || el.attrsMap[':value']
+    if (value) {
+      const binding = el.attrsMap['v-bind:value'] ? 'v-bind:value' : ':value'
+      warn(
+        `${binding}="${value}" conflicts with v-model on the same element ` +
+        'because the latter already expands to a value binding internally'
+      )
+    }
+  }
+
   const { lazy, number, trim } = modifiers || {}
   const needCompositionGuard = !lazy && type !== 'range'
   const event = lazy

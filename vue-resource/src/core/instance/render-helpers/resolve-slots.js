@@ -11,7 +11,6 @@ export function resolveSlots (
   if (!children) {
     return slots
   }
-  const defaultSlot = []
   for (let i = 0, l = children.length; i < l; i++) {
     const child = children[i]
     const data = child.data
@@ -21,7 +20,7 @@ export function resolveSlots (
     }
     // named slots should only be respected if the vnode was rendered in the
     // same context.
-    if ((child.context === context || child.functionalContext === context) &&
+    if ((child.context === context || child.fnContext === context) &&
       data && data.slot != null
     ) {
       const name = child.data.slot
@@ -32,18 +31,20 @@ export function resolveSlots (
         slot.push(child)
       }
     } else {
-      defaultSlot.push(child)
+      (slots.default || (slots.default = [])).push(child)
     }
   }
-  // ignore whitespace
-  if (!defaultSlot.every(isWhitespace)) {
-    slots.default = defaultSlot
+  // ignore slots that contains only whitespace
+  for (const name in slots) {
+    if (slots[name].every(isWhitespace)) {
+      delete slots[name]
+    }
   }
   return slots
 }
 
 function isWhitespace (node: VNode): boolean {
-  return node.isComment || node.text === ' '
+  return (node.isComment && !node.asyncFactory) || node.text === ' '
 }
 
 export function resolveScopedSlots (
