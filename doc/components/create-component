@@ -17,13 +17,12 @@ export function createComponent (
   // baseCtor 在这里就是 Vue
   const baseCtor = context.$options._base
 
- // 普通对象会通过 Vue.extend 方法构造出一个 Vue 的构造函数
+  // 普通对象会通过 Vue.extend 继承 Vue，变成组件的构造函数
   if (isObject(Ctor)) {
     Ctor = baseCtor.extend(Ctor)
   }
 
-  // if at this stage it's not a constructor or an async component factory,
-  // reject.
+  // 如果不是一个函数构造器，则组件的定义是不合法的
   if (typeof Ctor !== 'function') {
     if (process.env.NODE_ENV !== 'production') {
       warn(`Invalid Component definition: ${String(Ctor)}`, context)
@@ -31,15 +30,12 @@ export function createComponent (
     return
   }
 
-  // async component
+  // 异步组件
   let asyncFactory
   if (isUndef(Ctor.cid)) {
     asyncFactory = Ctor
     Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)
     if (Ctor === undefined) {
-      // return a placeholder node for async component, which is rendered
-      // as a comment node but preserves all the raw information for the node.
-      // the information will be used for async server-rendering and hydration.
       return createAsyncPlaceholder(
         asyncFactory,
         data,
@@ -52,36 +48,30 @@ export function createComponent (
 
   data = data || {}
 
-  // resolve constructor options in case global mixins are applied after
-  // component constructor creation
+  // 解析构造函数的 options 避免全局 Mixin 在组件构造器创建后应用
   resolveConstructorOptions(Ctor)
 
-  // transform component v-model data into props & events
+  // 把组件中的 v-model 数据转换成 props 和 events 的形式
   if (isDef(data.model)) {
     transformModel(Ctor.options, data)
   }
 
-  // extract props
+  // 提取 props 数据
   const propsData = extractPropsFromVNodeData(data, Ctor, tag)
 
-  // functional component
+  // 函数组件
   if (isTrue(Ctor.options.functional)) {
-     // 创建函数组件
     return createFunctionalComponent(Ctor, propsData, data, context, children)
   }
 
-  // extract listeners, since these needs to be treated as
-  // child component listeners instead of DOM listeners
+  // 提取 v-on 绑定的自定义事件
   const listeners = data.on
-  // replace with listeners with .native modifier
-  // so it gets processed during parent component patch.
+  
+  // 把带有 .native 修饰符的原生事件替换到 data.on 上，当父组件 patch 的时候会处理
   data.on = data.nativeOn
 
   if (isTrue(Ctor.options.abstract)) {
-    // abstract components do not keep anything
-    // other than props & listeners & slot
-
-    // work around flow
+    // 抽象组件只保留 propsData、listeners 和 slot
     const slot = data.slot
     data = {}
     if (slot) {
@@ -138,4 +128,77 @@ Vue.options._base = Vue
 这样就把 Vue 上的一些 option 扩展到了 vm.$option 上，所以我们也就能通过 `vm.$options._base` 拿到 Vue 这个构造函数了。
 
 在了解了 `baseCtor` 指向了 Vue 之后，我们来看一下 `Vue.extend` 函数的定义，在 `src/core/global-api/extend.js` 中。
+
+```js
+// 经典继承
+Vue.extend = function (extendOptions: Object): Function {
+    extendOptions = extendOptions || {}
+    const Super = this
+    const SuperId = Super.cid
+    const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
+    if (cachedCtors[SuperId]) {
+      return cachedCtors[SuperId]
+    }
+
+    // 组件名称
+    const name = extendOptions.name || Super.options.name
+    if (process.env.NODE_ENV !== 'production') {
+      // 对组件名称做校验
+      if (!/^[a-zA-Z][\w-]*$/.test(name)) {
+        warn(
+          'Invalid component name: "' + name + '". Component names ' +
+          'can only contain alphanumeric characters and the hyphen, ' +
+          'and must start with a letter.'
+        )
+      }
+    }
+
+    const Sub = function VueComponent (options) {
+      // 执行 Vue 的 _init 方法初始化
+      this._init(options)
+    }
+    // 原型继承
+    Sub.prototype = Object.create(Super.prototype)
+    Sub.prototype.constructor = Sub
+    // 自增计数
+    Sub.cid = cid++
+    // 扩展 option
+    Sub.options = mergeOptions(
+      Super.options,
+      extendOptions
+    )
+    Sub['super'] = Super
+
+    // props 和 computed 在 Vue.extend 阶段通过定义 proxy 的 getters 在它们的原型上，这样就可以避免每一次实例化组件的时候都调用一次 Object.defineProperty
+    if (Sub.options.props) {
+      initProps(Sub)
+    }
+    if (Sub.options.computed) {
+      initComputed(Sub)
+    }
+
+    // 保留对父类静态方法的引用
+    Sub.extend = Super.extend
+    Sub.mixin = Super.mixin
+    Sub.use = Super.use
+
+    // 继承的组件也能拥有注册 component、directive 以及 filter 的能力，为这些组件私有。
+    ASSET_TYPES.forEach(function (type) {
+      Sub[type] = Super[type]
+    })
+    // 允许递归自查找
+    if (name) {
+      Sub.options.components[name] = Sub
+    }
+
+    // 保留父类 options 的引用，在实例化的过程中我们可以检查父类的 options 是否更新
+    Sub.superOptions = Super.options
+    Sub.extendOptions = extendOptions
+    Sub.sealedOptions = extend({}, Sub.options)
+
+    // 缓存构造函数
+    cachedCtors[SuperId] = Sub
+    return Sub
+  }
+```
 
