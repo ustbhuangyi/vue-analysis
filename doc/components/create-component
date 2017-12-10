@@ -202,3 +202,5 @@ Vue.extend = function (extendOptions: Object): Function {
   }
 ```
 
+我们通过分析 Vue.extend
+
