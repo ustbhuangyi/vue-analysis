@@ -119,7 +119,7 @@ export function _createElement (
 
 `createElement` 函数的流程略微有点多，我们接下来主要分析几个重点的流程。
 
-- children 的规范化
+## children 的规范化
 
 由于 Virtual DOM 实际上是一个树状结构，每一个 VNode 可能会有若干个子节点，这些子节点应该也是 VNode 的类型。`_createElement` 接收的第 4 个参数 children 是任意类型的，因此我们需要把它们规范成 VNode 类型。
 
@@ -203,7 +203,7 @@ function normalizeArrayChildren (children: any, nestedIndex?: string): Array<VNo
 
 经过对 `children` 的规范化，`children` 变成了一个类型为 VNode 的 Array。
 
-- VNode 的创建
+## VNode 的创建
 
 规范化 `children` 后，接下来会去创建一个 VNode 的实例。这里是对 `tag` 做判断，如果是 `string` 类型，则接着判断如果是内置的一些节点，则直接创建一个普通 VNode，如果是 是否为已注册的组件名，则通过 `createComponent` 创建一个组件类型的 VNode，否则创建一个未知的标签的 VNode。 如果是 `tag` 一个 `Component` 类型，则直接调用 `createComponent` 创建一个组件类型的 VNode 节点。
 
