@@ -46,6 +46,24 @@ export function genHandlers (
   return res.slice(0, -1) + '}'
 }
 
+// Generate handler code with binding params on Weex
+/* istanbul ignore next */
+function genWeexHandler (params: Array<any>, handlerCode: string) {
+  let innerHandlerCode = handlerCode
+  const exps = params.filter(exp => simplePathRE.test(exp) && exp !== '$event')
+  const bindings = exps.map(exp => ({ '@binding': exp }))
+  const args = exps.map((exp, i) => {
+    const key = `$_${i + 1}`
+    innerHandlerCode = innerHandlerCode.replace(exp, key)
+    return key
+  })
+  args.push('$event')
+  return '{\n' +
+    `handler:function(${args.join(',')}){${innerHandlerCode}},\n` +
+    `params:${JSON.stringify(bindings)}\n` +
+    '}'
+}
+
 function genHandler (
   name: string,
   handler: ASTElementHandler | Array<ASTElementHandler>
@@ -62,9 +80,14 @@ function genHandler (
   const isFunctionExpression = fnExpRE.test(handler.value)
 
   if (!handler.modifiers) {
-    return isMethodPath || isFunctionExpression
-      ? handler.value
-      : `function($event){${handler.value}}` // inline statement
+    if (isMethodPath || isFunctionExpression) {
+      return handler.value
+    }
+    /* istanbul ignore if */
+    if (__WEEX__ && handler.params) {
+      return genWeexHandler(handler.params, handler.value)
+    }
+    return `function($event){${handler.value}}` // inline statement
   } else {
     let code = ''
     let genModifierCode = ''
@@ -100,6 +123,10 @@ function genHandler (
       : isFunctionExpression
         ? `(${handler.value})($event)`
         : handler.value
+    /* istanbul ignore if */
+    if (__WEEX__ && handler.params) {
+      return genWeexHandler(handler.params, code + handlerCode)
+    }
     return `function($event){${code}${handlerCode}}`
   }
 }

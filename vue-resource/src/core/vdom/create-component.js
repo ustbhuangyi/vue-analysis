@@ -27,6 +27,11 @@ import {
   deactivateChildComponent
 } from '../instance/lifecycle'
 
+import {
+  isRecyclableComponent,
+  renderRecyclableComponentTemplate
+} from 'weex/runtime/recycle-list/render-component-template'
+
 // hooks to be invoked on component VNodes during patch
 const componentVNodeHooks = {
   init (
@@ -35,7 +40,15 @@ const componentVNodeHooks = {
     parentElm: ?Node,
     refElm: ?Node
   ): ?boolean {
-    if (!vnode.componentInstance || vnode.componentInstance._isDestroyed) {
+    if (
+      vnode.componentInstance &&
+      !vnode.componentInstance._isDestroyed &&
+      vnode.data.keepAlive
+    ) {
+      // kept-alive components, treat as a patch
+      const mountedNode: any = vnode // work around flow
+      componentVNodeHooks.prepatch(mountedNode, mountedNode)
+    } else {
       const child = vnode.componentInstance = createComponentInstanceForVnode(
         vnode,
         activeInstance,
@@ -43,10 +56,6 @@ const componentVNodeHooks = {
         refElm
       )
       child.$mount(hydrating ? vnode.elm : undefined, hydrating)
-    } else if (vnode.data.keepAlive) {
-      // kept-alive components, treat as a patch
-      const mountedNode: any = vnode // work around flow
-      componentVNodeHooks.prepatch(mountedNode, mountedNode)
     }
   },
 
@@ -102,7 +111,7 @@ export function createComponent (
   context: Component,
   children: ?Array<VNode>,
   tag?: string
-): VNode | void {
+): VNode | Array<VNode> | void {
   if (isUndef(Ctor)) {
     return
   }
@@ -191,6 +200,15 @@ export function createComponent (
     { Ctor, propsData, listeners, tag, children },
     asyncFactory
   )
+
+  // Weex specific: invoke recycle-list optimized @render function for
+  // extracting cell-slot template.
+  // https://github.com/Hanks10100/weex-native-directive/tree/master/component
+  /* istanbul ignore if */
+  if (__WEEX__ && isRecyclableComponent(vnode)) {
+    return renderRecyclableComponentTemplate(vnode)
+  }
+
   return vnode
 }
 
