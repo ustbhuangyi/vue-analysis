@@ -100,7 +100,7 @@ export function createComponentInstanceForVnode (
 }
 ```
 
-`createComponentInstanceForVnode` 函数构造的一个内部组件的参数，然后执行 `new vnode.componentOptions.Ctor(options)`。这里的 vnode.componentOptions.Ctor 对应的就是子组件的构造函数，我们上一节分析了它实际上是继承于 Vue 的一个构造器，相当于 `new Vue(options)` 这里有几个关键参数要注意几个点，`_isComponent` 为 `true` 表示它是一个组件，`parent` 表示当前组件的实例（注意，这里比较有意思的是如何拿到组件实例，后面会介绍），`_parentVnode` 表示当前组件的 VNode 实例，`_parentElm` 表示当前组件的父容器，也是组件的最终的挂载点。
+`createComponentInstanceForVnode` 函数构造的一个内部组件的参数，然后执行 `new vnode.componentOptions.Ctor(options)`。这里的 `vnode.componentOptions.Ctor` 对应的就是子组件的构造函数，我们上一节分析了它实际上是继承于 Vue 的一个构造器 `Sub`，相当于 `new Sub(options)` 这里有几个关键参数要注意几个点，`_isComponent` 为 `true` 表示它是一个组件，`parent` 表示当前激活的组件实例（注意，这里比较有意思的是如何拿到组件实例，后面会介绍），`_parentVnode` 表示实例化子组件的父 VNode 实例，`_parentElm` 表示实例化子组件的父容器，也是子组件的最终的挂载点。
 
 所以子组件的实例化实际上就是在这个时机执行的，并且它会执行实例的 `_init` 方法，这个过程有一些和之前不同的地方需要挑出来说，代码在 `src/core/instance/init.js` 中。
 
@@ -158,12 +158,12 @@ export function initRender (vm: Component) {
   // 组件渲染的 vnode
   vm._vnode = null
   const options = vm.$options
-  // 当前组件的 vnode 实例
+  // 当前组件的父 vnode 实例
   const parentVnode = vm.$vnode = options._parentVnode
   // ....
 }
 ```
-我们只看 `initRender` 的关键部分代码，这里定义了 `vm._vnode`，它是用于当前组件渲染的 VNode，后面会介绍，而 `vm.$vnode` 保留了对 `options._parentVnode` 的引用，它是当前组件的 VNode 的实例。那么 `vm._vnode` 和 `vm.$vnode` 的关系这里我们也先打个问号。
+我们只看 `initRender` 的关键部分代码，这里定义了 `vm._vnode`，它是用于当前组件渲染的 VNode，后面会介绍，而 `vm.$vnode` 保留了对 `options._parentVnode` 的引用，它是当前组件的父 VNode 的实例。那么 `vm._vnode` 和 `vm.$vnode` 的关系这里我们也先打个问号。
 
 再来看一下 `_init` 函数最后执行的代码：
 
@@ -243,7 +243,7 @@ Vue.prototype._render = function (): VNode {
   }
 ```
 
-我们只保留关键部分的代码，这里的 `_parentVnode` 就是当前组件的 VNode，那么组件通过 `render` 函数生成的 VNode 的 `parent` 就指向了 `vm.$vnode`。这块儿也是很多同学容易混淆的一点，这里我们可以这么去记，组件本身的 VNode 和组件渲染的 VNode 是 2 个不同的 VNode，它们是一种父子的关系。
+我们只保留关键部分的代码，这里的 `_parentVnode` 就是当前组件的父 VNode，那么组件通过 `render` 函数生成的 VNode 的 `parent` 就指向了 `vm.$vnode`。这块儿也是很多同学容易混淆的一点，这里我们可以这么去记，组件的父 VNode 和组件渲染的 VNode 是 2 个不同的 VNode，它们是一种父子的关系。
 
 我们知道在执行完 `vm._render` 生成 VNode 后，接下来就要执行 `vm._update` 去渲染 VNode 了。来看一下组件渲染的过程中有哪些需要注意的，`vm._update` 的定义在 `src/core/instance/lifecycle.js` 中。
 
@@ -274,7 +274,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
     activeInstance = prevActiveInstance
   }
 ```
-`_update` 过程中有几个关键的代码，首先 `vm._vnode = vnode` 的逻辑，这个 `vnode` 是通过 `vm._render()` 返回的组件渲染 VNode，还记得前面我们提的问题吗，`vm._vnode` 和 `vm.$vnode` 的关系就是一种父子关系，用代码表达就是 `vm._vnode.parent === vm.$vnode`。 还有一段比较有意思的代码：
+`_update` 过程中有几个关键的代码，首先 `vm._vnode = vnode` 的逻辑，这个 `vnode` 是通过 `vm._render()` 返回的组件渲染 VNode，还记得前面我们提的问题吗，`vm._vnode` 和 `vm.$vnode` 的关系就是一种父子关系，用代码表达就是 `vm._vnode.parent === vm.$vnode`。还有一段比较有意思的代码：
 
 ```js
 export let activeInstance: any = null
@@ -287,7 +287,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
   }
 
 ```
-这个 `activeInstance` 作用就是保持当前上下文的 Vue 实例，它是在 `lifecycle` 模块的全局变量，定义是 `export let activeInstance: any = null`，并且在之前我们调用 `createComponentInstanceForVnode` 方法的时候从 `lifecycle` 模块获取，并且作为参数传入的。因为实际上 Vue 整个初始化是一个深度遍历的过程，在初始化组件 VNode 的过程中，它需要知道当前上下文的 Vue 实例是什么，所以就在 `vm._update` 的过程中，把当前的 `vm` 赋值给 `activeInstance`，同时通过 `const prevActiveInstance = activeInstance` 用 `prevActiveInstance` 保留上一次的 `activeInstance`。实际上，`prevActiveInstance` 和当前的 `vm` 是一个父子关系，当一个 `vm` 实例完成它的所有子树的 patch 或者 update 过程后，`activeInstance` 会回到它的父实例，这样就完美的保证了 `createComponentInstanceForVnode` 整个深度遍历过程中，我们在实例化子组件 的时候能传入当前组件实例的父实例，并且这个关系的保留发生在 `_init` 的过程中。之前我们提到过对子组件的实例化过程先会调用 `initInternalComponent(vm, options)` 合并 `options`，把 `parent` 存储在 `vm.$options` 中，接着会调用 `initLifecycle(vm)` 方法，它的定义在 `src/core/instance/lifecycle.js` 中。
+这个 `activeInstance` 作用就是保持当前上下文的 Vue 实例，它是在 `lifecycle` 模块的全局变量，定义是 `export let activeInstance: any = null`，并且在之前我们调用 `createComponentInstanceForVnode` 方法的时候从 `lifecycle` 模块获取，并且作为参数传入的。因为实际上 Vue 整个初始化是一个深度遍历的过程，在初始化组件 VNode 的过程中，它需要知道当前上下文的 Vue 实例是什么，所以就在 `vm._update` 的过程中，把当前的 `vm` 赋值给 `activeInstance`，同时通过 `const prevActiveInstance = activeInstance` 用 `prevActiveInstance` 保留上一次的 `activeInstance`。实际上，`prevActiveInstance` 和当前的 `vm` 是一个父子关系，当一个 `vm` 实例完成它的所有子树的 patch 或者 update 过程后，`activeInstance` 会回到它的父实例，这样就完美的保证了 `createComponentInstanceForVnode` 整个深度遍历过程中，我们在实例化子组件 的时候能传入当前子组件实例的父实例，并且这个关系的保留发生在 `_init` 的过程中。之前我们提到过对子组件的实例化过程先会调用 `initInternalComponent(vm, options)` 合并 `options`，把 `parent` 存储在 `vm.$options` 中，接着会调用 `initLifecycle(vm)` 方法，它的定义在 `src/core/instance/lifecycle.js` 中。
 
 ```js
 export function initLifecycle (vm: Component) {
