@@ -157,8 +157,9 @@ export function mountComponent (
     }
   }
 
-  // 同时给 vm 实例添加一个 Watcher，用来监测 vm 数据发生变化
-  vm._watcher = new Watcher(vm, updateComponent, noop)
+  // 实例化一个 Render Watcher，用来监测 vm 数据发生变化并重新渲染
+ new Watcher(vm, updateComponent, noop, null, true /* isRenderWatcher */)
+   hydrating = false
   hydrating = false
 
   // 根组件调用 mounted 钩子函数
