@@ -101,6 +101,9 @@ export function popTarget () {
 ```
 `Dep` 是一个 Class，它定义了一些属性和方法，这里需要特别注意的是它有一个静态属性 `target`，这是一个全局唯一 `Watcher`，另外它的自身属性 `subs` 也是 `Watcher` 的数组。`Dep` 实际上就是对 `Watcher` 的一种管理，`Dep`  脱离 `Watcher` 单独存在是没有意义的，为了完整地讲清楚依赖收集过程，我们有必要看一下 `Watcher` 的一些相关实现，它的定义在 `src/core/observer/watcher.js` 中。
 
+
+## `Watcher`
+
 ```js
 export default class Watcher {
   vm: Component;
@@ -221,8 +224,6 @@ export default class Watcher {
 }
 ```
 
-## `Watcher`
-
 `Watcher` 是一个 Class，在它的构造函数中，定义了一些和 `Dep` 相关的属性：
 
 ```js
@@ -245,7 +246,7 @@ this.newDepIds = new Set()
  }
   new Watcher(vm, updateComponent, noop, null, true /* isRenderWatcher */)
 ```
-当我们去实例化一个渲染的 `Watcher` 时候，首先进入 `Watcher` 的构造函数逻辑，然后会执行它的 `this.get*()` 方法，进入 `get` 函数，然后执行关键的一句：
+当我们去实例化一个渲染的 `Watcher` 时候，首先进入 `Watcher` 的构造函数逻辑，然后会执行它的 `this.get()` 方法，进入 `get` 函数，然后执行关键的一句：
 
 ```js
 pushTarget(this)
@@ -313,4 +314,4 @@ this.cleanupDeps()
 
 ## 总结
 
-那么至此，我们对 Vue 数据的依赖收集过程已经有了认识，并且对这其中的一些细节做了分析。收集依赖的目的是为了当这些响应式数据发送变化，触发它们的 setter 的时候，能知道应该通知哪些订阅者去做相应的逻辑处理，我们把这个过程叫派发更新，那么下一节我们来详细分析一下派发更新的过程。
+通过这一节的分析，我们对 Vue 数据的依赖收集过程已经有了认识，并且对这其中的一些细节做了分析。收集依赖的目的是为了当这些响应式数据发送变化，触发它们的 setter 的时候，能知道应该通知哪些订阅者去做相应的逻辑处理，我们把这个过程叫派发更新，那么下一节我们来详细分析一下派发更新的过程。
