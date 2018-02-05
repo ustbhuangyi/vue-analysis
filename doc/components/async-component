@@ -1,0 +1,19 @@
+# 异步组件
+
+在我们平时的开发工作中，为了减少首屏代码体积，往往会把一些非首屏的组件设计成异步组件，按需加载。Vue 也原生支持了异步组件的能力，如下：
+
+```js
+Vue.component('async-example', function (resolve, reject) {
+  setTimeout(function () {
+    // 将组件定义传入 resolve 回调函数
+    resolve({
+      template: '<div>I am async!</div>'
+    })
+  }, 1000)
+})
+```
+
+示例中可以看到，Vue 注册的组件不再是一个对象，而是一个函数，函数有两个参数 `resolve` 和 `reject`，函数内部用 `setTimout` 模拟了异步，实际使用可能是通过动态请求异步组件的 JS 地址，最终通过执行 `resolve` 方法，它的参数就是我们的异步组件对象。
+
+在了解了异步组件如何注册后，我们从源码的角度来分析一下它的实现。
+

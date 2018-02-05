@@ -163,7 +163,7 @@ export function initRender (vm: Component) {
   // ....
 }
 ```
-我们只看 `initRender` 的关键部分代码，这里定义了 `vm._vnode`，它是用于当前组件渲染的 VNode，后面会介绍，而 `vm.$vnode` 保留了对 `options._parentVnode` 的引用，它是当前组件的父 VNode 的实例。那么 `vm._vnode` 和 `vm.$vnode` 的关系这里我们也先打个问号。
+我们只看 `initRender` 的关键部分代码，这里定义了 `vm._vnode`，它是用于当前组件渲染的 VNode，后面会介绍，而 `vm.$vnode` 保留了对 `options._parentVnode` 的引用，它是当前组件的父 VNode 的实例。
 
 再来看一下 `_init` 函数最后执行的代码：
 
@@ -274,7 +274,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
     activeInstance = prevActiveInstance
   }
 ```
-`_update` 过程中有几个关键的代码，首先 `vm._vnode = vnode` 的逻辑，这个 `vnode` 是通过 `vm._render()` 返回的组件渲染 VNode，还记得前面我们提的问题吗，`vm._vnode` 和 `vm.$vnode` 的关系就是一种父子关系，用代码表达就是 `vm._vnode.parent === vm.$vnode`。还有一段比较有意思的代码：
+`_update` 过程中有几个关键的代码，首先 `vm._vnode = vnode` 的逻辑，这个 `vnode` 是通过 `vm._render()` 返回的组件渲染 VNode，`vm._vnode` 和 `vm.$vnode` 的关系就是一种父子关系，用代码表达就是 `vm._vnode.parent === vm.$vnode`。还有一段比较有意思的代码：
 
 ```js
 export let activeInstance: any = null

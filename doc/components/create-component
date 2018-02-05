@@ -51,67 +51,13 @@ export function createComponent (
   if (isObject(Ctor)) {
     Ctor = baseCtor.extend(Ctor)
   }
-
-  // 如果不是一个函数构造器，则组件的定义是不合法的
-  if (typeof Ctor !== 'function') {
-    if (process.env.NODE_ENV !== 'production') {
-      warn(`Invalid Component definition: ${String(Ctor)}`, context)
-    }
-    return
-  }
-
-  // 异步组件
-  let asyncFactory
-  if (isUndef(Ctor.cid)) {
-    asyncFactory = Ctor
-    Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)
-    if (Ctor === undefined) {
-      return createAsyncPlaceholder(
-        asyncFactory,
-        data,
-        context,
-        children,
-        tag
-      )
-    }
-  }
-
-  data = data || {}
-
-  // 解析构造函数的 options 避免全局 Mixin 在组件构造器创建后应用
-  resolveConstructorOptions(Ctor)
-
-  // 把组件中的 v-model 数据转换成 props 和 events 的形式
-  if (isDef(data.model)) {
-    transformModel(Ctor.options, data)
-  }
-
-  // 提取 props 数据
-  const propsData = extractPropsFromVNodeData(data, Ctor, tag)
-
-  // 函数组件
-  if (isTrue(Ctor.options.functional)) {
-    return createFunctionalComponent(Ctor, propsData, data, context, children)
-  }
-
-  // 提取 v-on 绑定的自定义事件
-  const listeners = data.on
   
-  // 把带有 .native 修饰符的原生事件替换到 data.on 上，当父组件 patch 的时候会处理
-  data.on = data.nativeOn
-
-  if (isTrue(Ctor.options.abstract)) {
-    // 抽象组件只保留 propsData、listeners 和 slot
-    const slot = data.slot
-    data = {}
-    if (slot) {
-      data.slot = slot
-    }
-  }
+  //...
 
   // 合并组件管理的钩子到 data.hook 中
   mergeHooks(data)
 
+  // 实例化 VNode
   const name = Ctor.options.name || tag
   const vnode = new VNode(
     `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,
@@ -157,11 +103,11 @@ Vue.options._base = Vue
 细心的同学会发现，这里定义的是 `Vue.option`，而我们的 `createComponent` 取的是 `context.$options`，实际上在 `src/core/instance/init.js` 里的 `Vue.propertype._init` 函数中有这么一段逻辑：
 
 ```js
- vm.$options = mergeOptions(
-        resolveConstructorOptions(vm.constructor),
-        options || {},
-        vm
-      )
+vm.$options = mergeOptions(
+  resolveConstructorOptions(vm.constructor),
+      options || {},
+      vm
+  )
 ```
 
 这样就把 Vue 上的一些 option 扩展到了 vm.$option 上，所以我们也就能通过 `vm.$options._base` 拿到 Vue 这个构造函数了。`mergeOptions` 的实现我们会在后续章节中具体分析，现在只需要理解它的功能是把 Vue 构造函数的 `options` 和用户传入的 `options` 做一层合并。
