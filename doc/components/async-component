@@ -394,6 +394,46 @@ if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
 
 如果超时，则走到了 `reject` 逻辑，之后逻辑和加载失败一样，渲染 error 组件。
 
+## 异步组件 patch
+
+回到 `createComponent` 的逻辑：
+
+```js
+Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)
+Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)
+if (Ctor === undefined) {
+  return createAsyncPlaceholder(
+    asyncFactory,
+    data,
+    context,
+    children,
+    tag
+  )
+}
+```
+
+如果是第一次执行 `resolveAsyncComponent`，除非使用高级异步组件 `0 delay` 去创建了一个 loading 组件，否则返回是 `undefiend`，接着通过 `createAsyncPlaceholder` 创建一个注释节点作为占位符。它的定义在 `src/core/vdom/helpers/resolve-async-components.js` 中：
+
+```js
+export function createAsyncPlaceholder (
+  factory: Function,
+  data: ?VNodeData,
+  context: Component,
+  children: ?Array<VNode>,
+  tag: ?string
+): VNode {
+  const node = createEmptyVNode()
+  node.asyncFactory = factory
+  node.asyncMeta = { data, context, children, tag }
+  return node
+}
+```
+
+实际上就是就是创建了一个占位的注释 VNode，同时把 `asyncFactory` 和 `asyncMeta` 赋值给当前 `vnode`。
+
+然后再一次执行 `resolveAsyncComponent` 的时候，就会根据不同的情况，可能返回 loading、error 或成功加载的异步组件，返回值不为 `undefined`，因此就走正常的组件 `render`、`patch` 过程，与组件第一次渲染流程不一样，这个时候是存在新旧 `vnode` 的，下一章我会分析组件更新的 `patch` 过程。
+
+
 ## 总结
 
 通过以上代码分析，我们对 Vue 的异步组件的实现有了深入的了解，知道了 3 种异步组件的实现方式，并且看到高级异步组件的实现是非常巧妙的，它实现了 loading、resolve、reject、timeout 4 种状态，并通过 `forceRender` 强制重新渲染让它的几种状态按我们的期望方式呈现。
