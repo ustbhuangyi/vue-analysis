@@ -113,6 +113,70 @@ function markStaticRoots (node: ASTNode, isInFor: boolean) {
 
 接下来和标记静态节点的逻辑一样，遍历 `children` 以及 `ifConditions`，递归执行 `markStaticRoots`。
 
+回归我们之前的例子，经过 `optimize` 后，AST 树变成了如下：
+
+```js
+ast = {
+  'type': 1,
+  'tag': 'ul',
+  'attrsList': [],
+  'attrsMap': {
+    ':class': 'bindCls',
+    'class': 'list',
+    'v-if': 'isShow'
+  },
+  'if': 'isShow',
+  'ifConditions': [{
+    'exp': 'isShow',
+    'block': // ul ast element
+  }],
+  'parent': undefined,
+  'plain': false,
+  'staticClass': 'list',
+  'classBinding': 'bindCls',
+  'static': false,
+  'staticRoot': false,
+  'children': [{
+    'type': 1,
+    'tag': 'li',
+    'attrsList': [{
+      'name': '@click',
+      'value': 'clickItem(index)'
+    }],
+    'attrsMap': {
+      '@click': 'clickItem(index)',
+      'v-for': '(item,index) in data'
+     },
+    'parent': // ul ast element
+    'plain': false,
+    'events': {
+      'click': {
+        'value': 'clickItem(index)'
+      }
+    },
+    'hasBindings': true,
+    'for': 'data',
+    'alias': 'item',
+    'iterator1': 'index',
+    'static': false,
+    'staticRoot': false,
+    'children': [
+      'type': 2,
+      'expression': '_s(item)+":"+_s(index)'
+      'text': '{{item}}:{{index}}',
+      'tokens': [
+        {'@binding':'item'},
+        ':',
+        {'@binding':'index'}
+      ],
+      'static': false
+    ]
+  }]
+}
+```
+
+我们发现每一个 AST 元素节点都多了 `staic` 属性，并且 `type` 为 1 的普通元素 AST 节点多了 `staticRoot` 属性。
+
 ## 总结
 
 那么至此我们分析完了 `optimize` 的过程，就是深度遍历这个 AST 树，去检测它的每一颗子树是不是静态节点，如果是静态节点则它们生成 DOM 永远不需要改变，这对运行时对模板的更新起到极大的优化作用。

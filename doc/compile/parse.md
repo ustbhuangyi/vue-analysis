@@ -27,12 +27,10 @@ ast = {
     'exp': 'isShow',
     'block': // ul ast element
   }],
-  'ifProcessed': true,
   'parent': undefined,
   'plain': false,
-  'static': false,
   'staticClass': 'list',
-  'staticRoot': false,
+  'classBinding': 'bindCls',
   'children': [{
     'type': 1,
     'tag': 'li',
@@ -46,21 +44,18 @@ ast = {
      },
     'parent': // ul ast element
     'plain': false,
-    'static': false,
-    'staticRoot': false,
     'events': {
       'click': {
         'value': 'clickItem(index)'
       }
     },
+    'hasBindings': true,
     'for': 'data',
-    'forProcessed': true,
     'alias': 'item',
     'iterator1': 'index',
     'children': [
       'type': 2,
       'expression': '_s(item)+":"+_s(index)'
-      'static': false,
       'text': '{{item}}:{{index}}',
       'tokens': [
         {'@binding':'item'},
@@ -757,6 +752,6 @@ return {
 
 那么至此，`parse` 的过程就分析完了，看似复杂，但我们可以抛开细节理清它的整体流程。`parse` 的目标是把 `template` 模板字符串转换成 AST 树，它是一种用 JavaScript 对象的形式来描述整个模板。那么整个 `parse` 的过程是利用正则表达式顺序解析模板，当解析到开始标签、闭合标签、文本的时候都会分别执行对应的回调函数，来达到构造 AST 树的目的。
 
-AST 元素节点总共有 3 种类型，`type` 为 1 表示是普通元素，为 2 表示是表达式，为 3 表示是纯文本。其实这里我觉得源码写的不够好，这种是典型的魔术数字，如果转换成用常量表达会更利于源码阅读。
+AST 元素节点总共有 3 种类型，`type` 为 1 表示是普通元素，为 2 表示是表达式，为 3 表示是纯文本。其实这里我觉得源码写的不够友好，这种是典型的魔术数字，如果转换成用常量表达会更利于源码阅读。
 
 当 AST 树构造完毕，下一步就是 `optimize` 优化这颗树。
