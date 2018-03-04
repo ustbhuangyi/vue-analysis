@@ -234,7 +234,7 @@ Vue.prototype.$destroy = function () {
 
 ## activated & deactivated
 
-`activated` 和 `deactivated` 钩子函数是专门为 `KeepAlive` 组件定制的钩子，我们会在介绍 `KeepAlive` 组件的时候详细介绍，这里先留个悬念。
+`activated` 和 `deactivated` 钩子函数是专门为 `keep-alive` 组件定制的钩子，我们会在介绍 `keep-alive` 组件的时候详细介绍，这里先留个悬念。
 
 ## 总结
 
