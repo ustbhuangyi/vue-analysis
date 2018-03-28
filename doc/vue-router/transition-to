@@ -26,7 +26,7 @@ transitionTo (location: RawLocation, onComplete?: Function, onAbort?: Function) 
 }
 ```
 
-`transitionTo` 首先根据目标 `location` 和当前路线 `this.current` 执行 `this.router.match` 方法去匹配到目标的路线。这里 `this.current` 是 `history` 维护的当前路线，它的初始值是在 `history` 的构造函数中初始化的：
+`transitionTo` 首先根据目标 `location` 和当前路径 `this.current` 执行 `this.router.match` 方法去匹配到目标的路径。这里 `this.current` 是 `history` 维护的当前路径，它的初始值是在 `history` 的构造函数中初始化的：
 
 ```js
 this.current = START
@@ -42,7 +42,7 @@ export const START = createRoute(null, {
 
 这样就创建了一个初始的 `Route`，而 `transitionTo` 实际上也就是在切换 `this.current`，稍后我们会看到。
 
-拿到新的路线后，那么接下来就会执行 `confirmTransition` 方法去做真正的切换，由于这个过程可能有一些异步的操作（如异步组件），所以整个 `confirmTransition` API 设计成带有成功回调函数和失败回调函数，先来看一下它的定义：
+拿到新的路径后，那么接下来就会执行 `confirmTransition` 方法去做真正的切换，由于这个过程可能有一些异步的操作（如异步组件），所以整个 `confirmTransition` API 设计成带有成功回调函数和失败回调函数，先来看一下它的定义：
 
 ```js
 confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
@@ -133,7 +133,7 @@ confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
 }
 ```
 
-首先定义了 `abort` 函数，然后判断如果满足计算后的 `route` 和 `current` 是相同路线的话，则直接调用 `this.ensureUrl` 和 `abort`，`ensureUrl` 这个函数我们之后会介绍。
+首先定义了 `abort` 函数，然后判断如果满足计算后的 `route` 和 `current` 是相同路径的话，则直接调用 `this.ensureUrl` 和 `abort`，`ensureUrl` 这个函数我们之后会介绍。
 
 接着又根据 `current.matched` 和 `route.matched` 执行了 `resolveQueue` 方法解析出 3 个队列：
 
@@ -161,13 +161,13 @@ function resolveQueue (
 }
 ```
 
-因为 `route.matched` 是一个 `RouteRecord` 的数组，由于路线是由 `current` 变向 `route`，那么就遍历对比 2 边的 `RouteRecord`，找到一个不一样的位置 `i`，那么 `next` 中从 0 到 `i` 的 `RouteRecord` 是两边都一样，则为 `updated` 的部分；从 `i` 到最后的 `RouteRecord` 是 `next` 独有的，为 `activated` 的部分；而 `current` 中从 `i` 到最后的 `RouteRecord` 则没有了，为 `deactivated` 的部分。
+因为 `route.matched` 是一个 `RouteRecord` 的数组，由于路径是由 `current` 变向 `route`，那么就遍历对比 2 边的 `RouteRecord`，找到一个不一样的位置 `i`，那么 `next` 中从 0 到 `i` 的 `RouteRecord` 是两边都一样，则为 `updated` 的部分；从 `i` 到最后的 `RouteRecord` 是 `next` 独有的，为 `activated` 的部分；而 `current` 中从 `i` 到最后的 `RouteRecord` 则没有了，为 `deactivated` 的部分。
 
-拿到 `updated`、`activated`、`deactivated` 3 个 `ReouteRecord` 数组后，接下来就是路线变换后的一个重要部分，执行一系列的钩子函数。
+拿到 `updated`、`activated`、`deactivated` 3 个 `ReouteRecord` 数组后，接下来就是路径变换后的一个重要部分，执行一系列的钩子函数。
 
 ## 导航守卫
 
-官方的说法叫导航守卫，实际上就是发生在路由路线切换的时候，执行的一系列钩子函数。
+官方的说法叫导航守卫，实际上就是发生在路由路径切换的时候，执行的一系列钩子函数。
 
 我们先从整体上看一下这些钩子函数执行的逻辑，首先构造一个队列 `queue`，它实际上是一个数组；然后再定义一个迭代器函数 `iterator`；最后再执行 `runQueue` 方法来执行这个队列。我们先来看一下 `runQueue` 的定义，在 `src/util/async.js` 中：
 
@@ -679,7 +679,7 @@ setupListeners () {
 }
 ```
 
-当点击浏览器返回按钮的时候，如果已经有 url 被压入历史栈，则会触发 `popstate` 事件，然后拿到当前要跳转的 `hash`，执行 `transtionTo` 方法做一次路线转换。
+当点击浏览器返回按钮的时候，如果已经有 url 被压入历史栈，则会触发 `popstate` 事件，然后拿到当前要跳转的 `hash`，执行 `transtionTo` 方法做一次路径转换。
 
 同学们在使用 Vue-Router 开发项目的时候，打开调试页面 `http://localhost:8080` 后会自动把 url 修改为 `http://localhost:8080/#/`，这是怎么做到呢？原来在实例化 `HashHistory` 的时候，构造函数会执行 `ensureSlash()` 方法：
 
@@ -773,7 +773,7 @@ export default {
 }
 ```
 
-`<router-view>` 是一个 `functional` 组件，它的渲染也是依赖 `render` 函数，那么 `<router-view>` 具体应该渲染什么组件呢，首先获取当前的路线：
+`<router-view>` 是一个 `functional` 组件，它的渲染也是依赖 `render` 函数，那么 `<router-view>` 具体应该渲染什么组件呢，首先获取当前的路径：
 
 ```js
 const route = parent.$route
@@ -838,7 +838,7 @@ const matched = route.matched[depth]
 const component = cache[name] = matched.components[name]
 ```
 
-`parent._routerRoot` 表示的是根 Vue 实例，那么这个循环就是从当前的 `<router-view>` 的父节点向上找，一直找到根 Vue 实例，在这个过程，如果碰到了父节点也是 `<router-view>` 的时候，说明 `<router-view>` 有嵌套的情况，`depth++`。遍历完成后，根据当前线路匹配的路线和 `depth` 找到对应的 `RouteRecord`，进而找到该渲染的组件。
+`parent._routerRoot` 表示的是根 Vue 实例，那么这个循环就是从当前的 `<router-view>` 的父节点向上找，一直找到根 Vue 实例，在这个过程，如果碰到了父节点也是 `<router-view>` 的时候，说明 `<router-view>` 有嵌套的情况，`depth++`。遍历完成后，根据当前线路匹配的路径和 `depth` 找到对应的 `RouteRecord`，进而找到该渲染的组件。
 
 除了找到了应该渲染的组件，还定义了一个注册路由实例的方法：
 
@@ -1053,9 +1053,9 @@ function createHref (base: string, fullPath: string, mode) {
 }
 ```
 
-它先规范生成目标 `location`，再根据 `location` 和 `match` 通过 `this.match` 方法计算生成目标路线 `route`，然后再根据 `base`、`fullPath` 和 `this.mode` 通过 `createHref` 方法计算出最终跳转的 `href`。
+它先规范生成目标 `location`，再根据 `location` 和 `match` 通过 `this.match` 方法计算生成目标路径 `route`，然后再根据 `base`、`fullPath` 和 `this.mode` 通过 `createHref` 方法计算出最终跳转的 `href`。
 
-解析完 `router` 获得目标 `location`、`route`、`href` 后，接下来对 `exactActiveClass` 和 `activeClass` 做处理，当配置 `exact` 为 true 的时候，只有当目标路线和当前路线完全匹配的时候，会添加 `exactActiveClass`；而当目标路线包含当前路线的时候，会添加 `activeClass`。
+解析完 `router` 获得目标 `location`、`route`、`href` 后，接下来对 `exactActiveClass` 和 `activeClass` 做处理，当配置 `exact` 为 true 的时候，只有当目标路径和当前路径完全匹配的时候，会添加 `exactActiveClass`；而当目标路径包含当前路径的时候，会添加 `activeClass`。
 
 接着创建了一个守卫函数 ：
 
@@ -1112,4 +1112,4 @@ replace (location: RawLocation, onComplete?: Function, onAbort?: Function) {
 
 那么至此我们把路由的 `transitionTo` 的主体过程分析完毕了，其他一些分支比如重定向、别名、滚动行为等同学们可以自行再去分析。
 
-路线变化是路由中最重要的功能，我们要记住以下内容：路由始终会维护当前的线路，路由切换的时候会把当前线路切换到目标线路，切换过程中会执行一系列的导航守卫钩子函数，会更改 url，同样也会渲染对应的组件，切换完毕后会把目标线路更新替换当前线路，这样就会作为下一次的路线切换的依据。
+路径变化是路由中最重要的功能，我们要记住以下内容：路由始终会维护当前的线路，路由切换的时候会把当前线路切换到目标线路，切换过程中会执行一系列的导航守卫钩子函数，会更改 url，同样也会渲染对应的组件，切换完毕后会把目标线路更新替换当前线路，这样就会作为下一次的路径切换的依据。
