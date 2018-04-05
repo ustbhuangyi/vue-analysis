@@ -1,19 +1,19 @@
-# Vue.js 源码的构建
+# Vue.js 源码构建
 
-Vue.js 源码是基于 Rollup 构建的，它的构建相关配置都在 build 目录下。
+Vue.js 源码是基于 [Rollup](https://github.com/rollup/rollup) 构建的，它的构建相关配置都在 scripts 目录下。
 
 ## 构建脚本
 
 通常一个基于 NPM 托管的项目都会有一个 package.json 文件，它是对项目的描述文件，它的内容实际上是一个标准的 JSON 对象。
 
-这个 JSON 对象一般会有 `script` 字段，作为 NPM 的执行脚本，Vue.js 源码构建的脚本如下：
+我们通常会配置 `script` 字段作为 NPM 的执行脚本，Vue.js 源码构建的脚本如下：
 
 ```json
 {
   "script": {
-      "build": "node build/build.js",
-      "build:ssr": "npm run build -- vue.runtime.common.js,vue-server-renderer",
-      "build:weex": "npm run build -- weex-vue-framework,weex-template-compiler"
+    "build": "node scripts/build.js",
+    "build:ssr": "npm run build -- web-runtime-cjs,web-server-renderer",
+    "build:weex": "npm run build --weex"
   }
 }
  
@@ -21,45 +21,42 @@ Vue.js 源码是基于 Rollup 构建的，它的构建相关配置都在 build �
 
 这里总共有 3 条命令，作用都是构建 Vue.js，后面 2 条是在第一条命令的基础上，添加一些环境参数。
 
-当在命令行运行 `npm run build` 的时候，实际上就会执行 `node build/build.js`，接下来我们来看看它实际是怎么构建的。
+当在命令行运行 `npm run build` 的时候，实际上就会执行 `node scripts/build.js`，接下来我们来看看它实际是怎么构建的。
 
 ## 构建过程
 
-我们对于构建过程分析是基于源码的，先打开构建的入口 JS 文件。
-
-源码目录：`build/build.js`
+我们对于构建过程分析是基于源码的，先打开构建的入口 JS 文件，在 `scripts/build.js` 中：
 ```js
-// 读取 config.js 下的构建配置
 let builds = require('./config').getAllBuilds()
 
-// 通过命令行参数对构建配置做过滤
+// filter builds via command line arg
 if (process.argv[2]) {
   const filters = process.argv[2].split(',')
   builds = builds.filter(b => {
-    return filters.some(f => b.dest.indexOf(f) > -1)
+    return filters.some(f => b.output.file.indexOf(f) > -1 || b._name.indexOf(f) > -1)
   })
 } else {
-  // 默认构建（无参数）会过滤掉 weex
+  // filter out weex builds by default
   builds = builds.filter(b => {
-    return b.dest.indexOf('weex') === -1
+    return b.output.file.indexOf('weex') === -1
   })
 }
+
+build(builds)
 ```
 
-这段代码逻辑非常简单，先从配置文件读取配置，再通过命令行参数对构建配置做过滤，这样就可以构建出不同用途的 Vue.js 了。接下来我们看一下配置文件。
-
-源码目录：`build/config.js`
+这段代码逻辑非常简单，先从配置文件读取配置，再通过命令行参数对构建配置做过滤，这样就可以构建出不同用途的 Vue.js 了。接下来我们看一下配置文件，在 `scripts/config.js` 中：
 
 ```js
 const builds = {
-  // 仅运行时的构建 (CommonJS)；通常需要借助一些工具如 Webpack 和 Browserify 使用
+  // Runtime only (CommonJS). Used by bundlers e.g. Webpack & Browserify
   'web-runtime-cjs': {
     entry: resolve('web/entry-runtime.js'),
     dest: resolve('dist/vue.runtime.common.js'),
     format: 'cjs',
     banner
   },
-  // 基于运行时+编译器的构建 (CommonJS)
+  // Runtime+compiler CommonJS build (CommonJS)
   'web-full-cjs': {
     entry: resolve('web/entry-runtime-with-compiler.js'),
     dest: resolve('dist/vue.common.js'),
@@ -67,14 +64,15 @@ const builds = {
     alias: { he: './entity-decoder' },
     banner
   },
-  // 仅运行时的构建 (ES Modules). 通常需要借助一些支持 ES Module 的工具如 Webpack 和 Browserify 使用
+  // Runtime only (ES Modules). Used by bundlers that support ES Modules,
+  // e.g. Rollup & Webpack 2
   'web-runtime-esm': {
     entry: resolve('web/entry-runtime.js'),
     dest: resolve('dist/vue.runtime.esm.js'),
     format: 'es',
     banner
   },
-  // 基于运行时+编译器的构建 (ES Modules)
+  // Runtime+compiler CommonJS build (ES Modules)
   'web-full-esm': {
     entry: resolve('web/entry-runtime-with-compiler.js'),
     dest: resolve('dist/vue.esm.js'),
@@ -82,7 +80,7 @@ const builds = {
     alias: { he: './entity-decoder' },
     banner
   },
-  // 仅运行时基于开发环境的构建 (Browser)
+  // runtime-only build (Browser)
   'web-runtime-dev': {
     entry: resolve('web/entry-runtime.js'),
     dest: resolve('dist/vue.runtime.js'),
@@ -90,7 +88,7 @@ const builds = {
     env: 'development',
     banner
   },
-  // 仅运行时基于生产环境的构建 (Browser)
+  // runtime-only production build (Browser)
   'web-runtime-prod': {
     entry: resolve('web/entry-runtime.js'),
     dest: resolve('dist/vue.runtime.min.js'),
@@ -98,7 +96,7 @@ const builds = {
     env: 'production',
     banner
   },
-  // 运行时+编译器基于开发环境的构建 (Browser)
+  // Runtime+compiler development build (Browser)
   'web-full-dev': {
     entry: resolve('web/entry-runtime-with-compiler.js'),
     dest: resolve('dist/vue.js'),
@@ -107,7 +105,7 @@ const builds = {
     alias: { he: './entity-decoder' },
     banner
   },
-  // 运行时+编译器基于生产环境的构建 (Browser)
+  // Runtime+compiler production build  (Browser)
   'web-full-prod': {
     entry: resolve('web/entry-runtime-with-compiler.js'),
     dest: resolve('dist/vue.min.js'),
@@ -116,23 +114,9 @@ const builds = {
     alias: { he: './entity-decoder' },
     banner
   },
-  // Web 编译器构建 (CommonJS).
-  'web-compiler': {
-    entry: resolve('web/entry-compiler.js'),
-    dest: resolve('packages/vue-template-compiler/build.js'),
-    format: 'cjs',
-    external: Object.keys(require('../packages/vue-template-compiler/package.json').dependencies)
-  },
-  // 服务端渲染构建 (CommonJS).
-  'web-server-renderer': {
-    entry: resolve('web/entry-server-renderer.js'),
-    dest: resolve('packages/vue-server-renderer/build.js'),
-    format: 'cjs',
-    external: Object.keys(require('../packages/vue-server-renderer/package.json').dependencies)
-  }
   // ...
 }
-```
+````
 
 这里列举了一些 Vue.js 构建的配置，关于还有一些服务端渲染 webpack 插件以及 weex 的打包配置就不列举了。
 
@@ -141,10 +125,9 @@ const builds = {
 以 `web-runtime-cjs` 配置为例，它的 `entry` 是
 `resolve('web/entry-runtime.js')`，先来看一下 `resolve` 函数的定义。
 
-源码目录：`build/config.js`
+源码目录：`scripts/config.js`
 
 ```js
-// 别名配置
 const aliases = require('./alias')
 const resolve = p => {
   const base = p.split('/')[0]
@@ -156,9 +139,7 @@ const resolve = p => {
 }
 ```
 
-这里的 `resolve` 函数实现非常简单，它先把 `resolve` 函数传入的参数 `p` 通过 `/` 做了分割成数组，然后取数组第一个元素设置为 `base`。在我们这个例子中，参数 `p` 是 `web/entry-runtime.js`，那么 `base` 则为 `web`。`base` 并不是实际的路径，它的真实路径借助了别名的配置，我们来看一下别名配置的代码。
-
-源码目录：`build/alias`
+这里的 `resolve` 函数实现非常简单，它先把 `resolve` 函数传入的参数 `p` 通过 `/` 做了分割成数组，然后取数组第一个元素设置为 `base`。在我们这个例子中，参数 `p` 是 `web/entry-runtime.js`，那么 `base` 则为 `web`。`base` 并不是实际的路径，它的真实路径借助了别名的配置，我们来看一下别名配置的代码，在 `scripts/alias` 中：
 
 ```js
 const path = require('path')
@@ -176,6 +157,7 @@ module.exports = {
 }
 ```
 很显然，这里 `web` 对应的真实的路径是 `path.resolve(__dirname, '../src/platforms/web')`，这个路径就找到了 Vue.js 源码的 web 目录。然后 `resolve` 函数通过 `path.resolve(aliases[base], p.slice(base.length + 1))` 找到了最终路径，它就是 Vue.js 源码 web 目录下的 `entry-runtime.js`。因此，`web-runtime-cjs` 配置对应的入口文件就找到了。
+
 它经过 Rollup 的构建打包后，最终会在 dist 目录下生成 `vue.runtime.common.js`。
 
 ## Runtime Only VS Runtime+Compiler 
@@ -184,7 +166,7 @@ module.exports = {
  
 - Runtime Only
 
-我们在使用 Runtime Only 版本的 Vue.js 的时候，通常需要借助如 webpack 的 vue-loader 工具把 .vue 文件编译成 Javascript，因为编译阶段是在编译阶段做的，所以它只包含运行时的 Vue.js 代码，因此代码体积也会更轻量。
+我们在使用 Runtime Only 版本的 Vue.js 的时候，通常需要借助如 webpack 的 vue-loader 工具把 .vue 文件编译成 JavaScript，因为编译阶段是在编译阶段做的，所以它只包含运行时的 Vue.js 代码，因此代码体积也会更轻量。
 
 - Runtime+Compiler
 
@@ -204,7 +186,11 @@ new Vue({
 })
 ```
 
-因为在 Vue.js 2.0 中，最终渲染都是通过 render 函数，如果写 template 属性，则需要编译成 render 函数，那么这个编译过程会发生运行时，所以需要带有编译器的版本。
+因为在 Vue.js 2.0 中，最终渲染都是通过 `render` 函数，如果写 `template` 属性，则需要编译成 `render` 函数，那么这个编译过程会发生运行时，所以需要带有编译器的版本。
 
 很显然，这个编译过程对性能会有一定损耗，所以通常我们更推荐使用 Runtime-Only 的 Vue.js。
+
+## 总结
+
+通过这一节的分析，我们可以了解到 Vue.js 的构建打包过程，也知道了不同作用和功能的 Vue.js 它们对应的入口以及最终编译生成的 JS 文件。尽管在实际开发过程中我们会用 Runtime Only 版本开发比较多，但为了分析 Vue 的编译过程，我们这门课重点分析的源码是 Runtime+Compiler 的 Vue.js。
 

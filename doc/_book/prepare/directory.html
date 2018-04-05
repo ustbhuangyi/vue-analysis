@@ -1,0 +1,334 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Vue.js 源码目录设计 · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="build.html" />
+    
+    
+    <link rel="prev" href="flow.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    准备
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="flow.html">
+            
+                <a href="flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="directory.html">
+            
+                <a href="directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="build.html">
+            
+                <a href="build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="entrance.html">
+            
+                <a href="entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Vue.js 源码目录设计</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="vuejs-&#x6E90;&#x7801;&#x76EE;&#x5F55;&#x8BBE;&#x8BA1;">Vue.js &#x6E90;&#x7801;&#x76EE;&#x5F55;&#x8BBE;&#x8BA1;</h1>
+<p>Vue.js &#x7684;&#x6E90;&#x7801;&#x90FD;&#x5728; src &#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x5176;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#x3002;</p>
+<pre><code>src
+&#x251C;&#x2500;&#x2500; compiler        # &#x7F16;&#x8BD1;&#x76F8;&#x5173; 
+&#x251C;&#x2500;&#x2500; core            # &#x6838;&#x5FC3;&#x4EE3;&#x7801; 
+&#x251C;&#x2500;&#x2500; platforms       # &#x4E0D;&#x540C;&#x5E73;&#x53F0;&#x7684;&#x652F;&#x6301;
+&#x251C;&#x2500;&#x2500; server          # &#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3;
+&#x251C;&#x2500;&#x2500; sfc             # .vue &#x6587;&#x4EF6;&#x89E3;&#x6790;
+&#x251C;&#x2500;&#x2500; shared          # &#x5171;&#x4EAB;&#x4EE3;&#x7801;
+</code></pre><h2 id="compiler">compiler</h2>
+<p>&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x5F00;&#x53D1;&#x9879;&#x76EE;&#x90FD;&#x662F;&#x57FA;&#x4E8E; .vue &#x5355;&#x6587;&#x4EF6;&#x5F00;&#x53D1;&#xFF0C;&#x4F46;&#x6700;&#x7EC8;&#x8FD0;&#x884C;&#x5230;&#x7EBF;&#x4E0A;&#x7684;&#x4EE3;&#x7801;&#x65E0;&#x975E;&#x8FD8;&#x662F;&#x4F20;&#x7EDF;&#x7684; HTML&#x3001;JS&#x3001;CSS&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x662F;&#x4E0D;&#x8BA4;&#x8BC6;&#x4E5F;&#x6CA1;&#x6CD5;&#x89E3;&#x6790; .vue &#x6587;&#x4EF6;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5BF9;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x505A;&#x7F16;&#x8BD1;&#x3002;</p>
+<p>compiler &#x76EE;&#x5F55;&#x5305;&#x542B; Vue.js &#x6240;&#x6709;&#x7F16;&#x8BD1;&#x76F8;&#x5173;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x5B83;&#x5305;&#x62EC;&#x628A;&#x6A21;&#x677F;&#x89E3;&#x6790;&#x6210; ast &#x8BED;&#x6CD5;&#x6811;&#xFF0C;ast &#x8BED;&#x6CD5;&#x6811;&#x4F18;&#x5316;&#xFF0C;&#x4EE3;&#x7801;&#x751F;&#x6210;&#x7B49;&#x529F;&#x80FD;&#x3002;</p>
+<p>&#x7F16;&#x8BD1;&#x7684;&#x5DE5;&#x4F5C;&#x53EF;&#x4EE5;&#x5728;&#x6784;&#x5EFA;&#x65F6;&#x505A;&#xFF08;&#x501F;&#x52A9; webpack&#x3001;vue-loader &#x7B49;&#x8F85;&#x52A9;&#x63D2;&#x4EF6;&#xFF09;&#xFF1B;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x505A;&#xFF0C;&#x4F7F;&#x7528;&#x5305;&#x542B;&#x6784;&#x5EFA;&#x529F;&#x80FD;&#x7684; Vue.js&#x3002;&#x663E;&#x7136;&#xFF0C;&#x7F16;&#x8BD1;&#x662F;&#x4E00;&#x9879;&#x8017;&#x6027;&#x80FD;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x6240;&#x4EE5;&#x66F4;&#x63A8;&#x8350;&#x524D;&#x8005;&#x2014;&#x2014;&#x79BB;&#x7EBF;&#x7F16;&#x8BD1;&#x3002;</p>
+<h2 id="core">core</h2>
+<p>core &#x76EE;&#x5F55;&#x5305;&#x542B;&#x4E86; Vue.js &#x7684;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#xFF0C;&#x5305;&#x62EC;&#x5185;&#x7F6E;&#x7EC4;&#x4EF6;&#x3001;&#x5168;&#x5C40; API &#x5C01;&#x88C5;&#xFF0C;Vue &#x5B9E;&#x4F8B;&#x5316;&#x3001;&#x89C2;&#x5BDF;&#x8005;&#x3001;&#x865A;&#x62DF; DOM&#x3001;&#x5DE5;&#x5177;&#x51FD;&#x6570;&#x7B49;&#x7B49;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x7684;&#x4EE3;&#x7801;&#x53EF;&#x8C13;&#x662F; Vue.js &#x7684;&#x7075;&#x9B42;&#xFF0C;&#x4E5F;&#x662F;&#x6211;&#x4EEC;&#x4E4B;&#x540E;&#x9700;&#x8981;&#x91CD;&#x70B9;&#x5206;&#x6790;&#x7684;&#x5730;&#x65B9;&#x3002;</p>
+<h2 id="platform">platform</h2>
+<p>Vue.js &#x662F;&#x4E00;&#x4E2A;&#x8DE8;&#x5E73;&#x53F0;&#x7684; MVVM &#x6846;&#x67B6;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x8DD1;&#x5728; web &#x4E0A;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x914D;&#x5408; weex &#x8DD1;&#x5728; natvie &#x5BA2;&#x6237;&#x7AEF;&#x4E0A;&#x3002;platform &#x662F; Vue.js &#x7684;&#x5165;&#x53E3;&#xFF0C;2 &#x4E2A;&#x76EE;&#x5F55;&#x4EE3;&#x8868; 2 &#x4E2A;&#x4E3B;&#x8981;&#x5165;&#x53E3;&#xFF0C;&#x5206;&#x522B;&#x6253;&#x5305;&#x6210;&#x8FD0;&#x884C;&#x5728; web &#x4E0A;&#x548C; weex &#x4E0A;&#x7684; Vue.js&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x4F1A;&#x91CD;&#x70B9;&#x5206;&#x6790; web &#x5165;&#x53E3;&#x6253;&#x5305;&#x540E;&#x7684; Vue.js&#xFF0C;&#x5BF9;&#x4E8E; weex &#x5165;&#x53E3;&#x6253;&#x5305;&#x7684; Vue.js&#xFF0C;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x540C;&#x5B66;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x7814;&#x7A76;&#x3002;</p>
+<h2 id="server">server</h2>
+<p>Vue.js 2.0 &#x652F;&#x6301;&#x4E86;&#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3;&#xFF0C;&#x6240;&#x6709;&#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3;&#x76F8;&#x5173;&#x7684;&#x903B;&#x8F91;&#x90FD;&#x5728;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x8FD9;&#x90E8;&#x5206;&#x4EE3;&#x7801;&#x662F;&#x8DD1;&#x5728;&#x670D;&#x52A1;&#x7AEF;&#x7684; Node.js&#xFF0C;&#x4E0D;&#x8981;&#x548C;&#x8DD1;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x6D4B;&#x7684; Vue.js &#x6DF7;&#x4E3A;&#x4E00;&#x8C08;&#x3002;</p>
+<p>&#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3;&#x4E3B;&#x8981;&#x7684;&#x5DE5;&#x4F5C;&#x662F;&#x628A;&#x7EC4;&#x4EF6;&#x6E32;&#x67D3;&#x4E3A;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x7684; HTML &#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5C06;&#x5B83;&#x4EEC;&#x76F4;&#x63A5;&#x53D1;&#x9001;&#x5230;&#x6D4F;&#x89C8;&#x5668;&#xFF0C;&#x6700;&#x540E;&#x5C06;&#x9759;&#x6001;&#x6807;&#x8BB0;&quot;&#x6DF7;&#x5408;&quot;&#x4E3A;&#x5BA2;&#x6237;&#x7AEF;&#x4E0A;&#x5B8C;&#x5168;&#x4EA4;&#x4E92;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;</p>
+<h2 id="sfc">sfc</h2>
+<p>&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x5F00;&#x53D1; Vue.js &#x90FD;&#x4F1A;&#x501F;&#x52A9; webpack &#x6784;&#x5EFA;&#xFF0C; &#x7136;&#x540E;&#x901A;&#x8FC7; .vue &#x5355;&#x6587;&#x4EF6;&#x7684;&#x7F16;&#x5199;&#x7EC4;&#x4EF6;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#x903B;&#x8F91;&#x4F1A;&#x628A; .vue &#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x89E3;&#x6790;&#x6210;&#x4E00;&#x4E2A; JavaScript &#x7684;&#x5BF9;&#x8C61;&#x3002;</p>
+<h2 id="shared">shared</h2>
+<p>Vue.js &#x4F1A;&#x5B9A;&#x4E49;&#x4E00;&#x4E9B;&#x5DE5;&#x5177;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;&#x7684;&#x5DE5;&#x5177;&#x65B9;&#x6CD5;&#x90FD;&#x662F;&#x4F1A;&#x88AB;&#x6D4F;&#x89C8;&#x5668;&#x7AEF;&#x7684; Vue.js &#x548C;&#x670D;&#x52A1;&#x7AEF;&#x7684; Vue.js &#x6240;&#x5171;&#x4EAB;&#x7684;&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x4ECE; Vue.js &#x7684;&#x76EE;&#x5F55;&#x8BBE;&#x8BA1;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x4F5C;&#x8005;&#x628A;&#x529F;&#x80FD;&#x6A21;&#x5757;&#x62C6;&#x5206;&#x7684;&#x975E;&#x5E38;&#x6E05;&#x695A;&#xFF0C;&#x76F8;&#x5173;&#x7684;&#x903B;&#x8F91;&#x653E;&#x5728;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x76EE;&#x5F55;&#x4E0B;&#x7EF4;&#x62A4;&#xFF0C;&#x5E76;&#x4E14;&#x628A;&#x590D;&#x7528;&#x7684;&#x4EE3;&#x7801;&#x4E5F;&#x62BD;&#x6210;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x76EE;&#x5F55;&#x3002;</p>
+<p>&#x8FD9;&#x6837;&#x7684;&#x76EE;&#x5F55;&#x8BBE;&#x8BA1;&#x8BA9;&#x4EE3;&#x7801;&#x7684;&#x9605;&#x8BFB;&#x6027;&#x548C;&#x53EF;&#x7EF4;&#x62A4;&#x6027;&#x90FD;&#x53D8;&#x5F3A;&#xFF0C;&#x662F;&#x975E;&#x5E38;&#x503C;&#x5F97;&#x5B66;&#x4E60;&#x548C;&#x63A8;&#x6572;&#x7684;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="flow.html" class="navigation navigation-prev " aria-label="Previous page: 认识 FLow">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="build.html" class="navigation navigation-next " aria-label="Next page: Vue.js 源码构建">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Vue.js 源码目录设计","level":"1.2.2","depth":2,"next":{"title":"Vue.js 源码构建","level":"1.2.3","depth":2,"path":"prepare/build.md","ref":"prepare/build.md","articles":[]},"previous":{"title":"认识 FLow","level":"1.2.1","depth":2,"path":"prepare/flow.md","ref":"prepare/flow.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"scripts":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"prepare/directory.md","mtime":"2018-04-05T19:39:21.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-05T19:33:42.517Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+
