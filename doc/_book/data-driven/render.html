@@ -1,0 +1,496 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>render · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="virtual-dom.html" />
+    
+    
+    <link rel="prev" href="mounted.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    准备
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../prepare/flow.html">
+            
+                <a href="../prepare/flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../prepare/directory.html">
+            
+                <a href="../prepare/directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../prepare/build.html">
+            
+                <a href="../prepare/build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../prepare/entrance.html">
+            
+                <a href="../prepare/entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="new-vue.html">
+            
+                <a href="new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="mounted.html">
+            
+                <a href="mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="render.html">
+            
+                <a href="render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="virtual-dom.html">
+            
+                <a href="virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="create-element.html">
+            
+                <a href="create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="update.html">
+            
+                <a href="update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >render</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="render">render</h1>
+<p>Vue &#x7684; <code>_render</code> &#x65B9;&#x6CD5;&#x662F;&#x5B9E;&#x4F8B;&#x7684;&#x4E00;&#x4E2A;&#x79C1;&#x6709;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x7528;&#x6765;&#x628A;&#x5B9E;&#x4F8B;&#x6E32;&#x67D3;&#x6210;&#x4E00;&#x4E2A;&#x865A;&#x62DF; Node&#x3002;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/instance/render.js</code> &#x6587;&#x4EF6;&#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js">Vue.prototype._render = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>): <span class="hljs-title">VNode</span> </span>{
+  <span class="hljs-keyword">const</span> vm: Component = <span class="hljs-keyword">this</span>
+  <span class="hljs-keyword">const</span> { render, _parentVnode } = vm.$options
+
+  <span class="hljs-comment">// reset _rendered flag on slots for duplicate slot check</span>
+  <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> key <span class="hljs-keyword">in</span> vm.$slots) {
+      <span class="hljs-comment">// $flow-disable-line</span>
+      vm.$slots[key]._rendered = <span class="hljs-literal">false</span>
+    }
+  }
+
+  <span class="hljs-keyword">if</span> (_parentVnode) {
+    vm.$scopedSlots = _parentVnode.data.scopedSlots || emptyObject
+  }
+
+  <span class="hljs-comment">// set parent vnode. this allows render functions to have access</span>
+  <span class="hljs-comment">// to the data on the placeholder node.</span>
+  vm.$vnode = _parentVnode
+  <span class="hljs-comment">// render self</span>
+  <span class="hljs-keyword">let</span> vnode
+  <span class="hljs-keyword">try</span> {
+    vnode = render.call(vm._renderProxy, vm.$createElement)
+  } <span class="hljs-keyword">catch</span> (e) {
+    handleError(e, vm, <span class="hljs-string">`render`</span>)
+    <span class="hljs-comment">// return error render result,</span>
+    <span class="hljs-comment">// or previous vnode to prevent render error causing blank component</span>
+    <span class="hljs-comment">/* istanbul ignore else */</span>
+    <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+      <span class="hljs-keyword">if</span> (vm.$options.renderError) {
+        <span class="hljs-keyword">try</span> {
+          vnode = vm.$options.renderError.call(vm._renderProxy, vm.$createElement, e)
+        } <span class="hljs-keyword">catch</span> (e) {
+          handleError(e, vm, <span class="hljs-string">`renderError`</span>)
+          vnode = vm._vnode
+        }
+      } <span class="hljs-keyword">else</span> {
+        vnode = vm._vnode
+      }
+    } <span class="hljs-keyword">else</span> {
+      vnode = vm._vnode
+    }
+  }
+  <span class="hljs-comment">// return empty vnode in case the render function errored out</span>
+  <span class="hljs-keyword">if</span> (!(vnode <span class="hljs-keyword">instanceof</span> VNode)) {
+    <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; <span class="hljs-built_in">Array</span>.isArray(vnode)) {
+      warn(
+        <span class="hljs-string">&apos;Multiple root nodes returned from render function. Render function &apos;</span> +
+        <span class="hljs-string">&apos;should return a single root node.&apos;</span>,
+        vm
+      )
+    }
+    vnode = createEmptyVNode()
+  }
+  <span class="hljs-comment">// set parent</span>
+  vnode.parent = _parentVnode
+  <span class="hljs-keyword">return</span> vnode
+}
+</code></pre>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x6700;&#x5173;&#x952E;&#x7684;&#x662F; <code>render</code> &#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x5E73;&#x65F6;&#x7684;&#x5F00;&#x53D1;&#x5DE5;&#x4F5C;&#x4E2D;&#x624B;&#x5199; <code>render</code> &#x65B9;&#x6CD5;&#x7684;&#x573A;&#x666F;&#x6BD4;&#x8F83;&#x5C11;&#xFF0C;&#x800C;&#x5199;&#x7684;&#x6BD4;&#x8F83;&#x591A;&#x7684;&#x662F; <code>template</code> &#x6A21;&#x677F;&#xFF0C;&#x5728;&#x4E4B;&#x524D;&#x7684; <code>mounted</code> &#x65B9;&#x6CD5;&#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x4F1A;&#x628A; <code>template</code> &#x7F16;&#x8BD1;&#x6210; <code>render</code> &#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x8FD9;&#x4E2A;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x662F;&#x975E;&#x5E38;&#x590D;&#x6742;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x6253;&#x7B97;&#x5728;&#x8FD9;&#x91CC;&#x5C55;&#x5F00;&#x8BB2;&#xFF0C;&#x4E4B;&#x540E;&#x4F1A;&#x4E13;&#x95E8;&#x82B1;&#x4E00;&#x4E2A;&#x7AE0;&#x8282;&#x6765;&#x5206;&#x6790; Vue &#x7684;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x3002; </p>
+<p>&#x5728; Vue &#x7684;&#x5B98;&#x65B9;&#x6587;&#x6863;&#x4E2D;&#x4ECB;&#x7ECD;&#x4E86; <code>render</code> &#x51FD;&#x6570;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F; <code>createElement</code>&#xFF0C;&#x90A3;&#x4E48;&#x7ED3;&#x5408;&#x4E4B;&#x524D;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  {{ message }}
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>&#x76F8;&#x5F53;&#x4E8E;&#x6211;&#x4EEC;&#x7F16;&#x5199;&#x5982;&#x4E0B; <code>render</code> &#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-js">render: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">createElement</span>) </span>{
+  <span class="hljs-keyword">return</span> createElement(<span class="hljs-string">&apos;div&apos;</span>, {
+     attrs: {
+        id: <span class="hljs-string">&apos;app&apos;</span>
+      },
+  }, <span class="hljs-keyword">this</span>.message)
+}
+</code></pre>
+<p>&#x518D;&#x56DE;&#x5230; <code>_render</code> &#x51FD;&#x6570;&#x4E2D;&#x7684; <code>render</code> &#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#xFF1A;</p>
+<pre><code class="lang-js">vnode = render.call(vm._renderProxy, vm.$createElement)
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;<code>render</code> &#x51FD;&#x6570;&#x4E2D;&#x7684; <code>createElement</code> &#x65B9;&#x6CD5;&#x5C31;&#x662F; <code>vm.$createElement</code> &#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initRender</span> (<span class="hljs-params">vm: Component</span>) </span>{
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-comment">// bind the createElement fn to this instance</span>
+  <span class="hljs-comment">// so that we get proper render context inside it.</span>
+  <span class="hljs-comment">// args order: tag, data, children, normalizationType, alwaysNormalize</span>
+  <span class="hljs-comment">// internal version is used by render functions compiled from templates</span>
+  vm._c = (a, b, c, d) =&gt; createElement(vm, a, b, c, d, <span class="hljs-literal">false</span>)
+  <span class="hljs-comment">// normalization is always applied for the public version, used in</span>
+  <span class="hljs-comment">// user-written render functions.</span>
+  vm.$createElement = (a, b, c, d) =&gt; createElement(vm, a, b, c, d, <span class="hljs-literal">true</span>)
+}
+</code></pre>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;<code>vm.$createElement</code> &#x65B9;&#x6CD5;&#x5B9A;&#x4E49;&#x662F;&#x5728;&#x6267;&#x884C; <code>initRender</code> &#x65B9;&#x6CD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x9664;&#x4E86; <code>vm.$createElement</code> &#x65B9;&#x6CD5;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x4E2A; <code>vm._c</code> &#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x662F;&#x88AB;&#x6A21;&#x677F;&#x7F16;&#x8BD1;&#x6210;&#x7684; <code>render</code> &#x51FD;&#x6570;&#x4F7F;&#x7528;&#xFF0C;&#x800C; <code>vm.$createElement</code> &#x662F;&#x7528;&#x6237;&#x624B;&#x5199; <code>render</code> &#x65B9;&#x6CD5;&#x4F7F;&#x7528;&#x7684;&#xFF0C; &#x8FD9;&#x4FE9;&#x4E2A;&#x65B9;&#x6CD5;&#x652F;&#x6301;&#x7684;&#x53C2;&#x6570;&#x76F8;&#x540C;&#xFF0C;&#x5E76;&#x4E14;&#x5185;&#x90E8;&#x90FD;&#x8C03;&#x7528;&#x4E86; <code>createElement</code> &#x65B9;&#x6CD5;&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p><code>vm._render</code> &#x6700;&#x7EC8;&#x662F;&#x901A;&#x8FC7;&#x6267;&#x884C; <code>createElement</code> &#x65B9;&#x6CD5;&#x5E76;&#x8FD4;&#x56DE;&#x7684;&#x662F; <code>vnode</code>&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x865A;&#x62DF; Node&#x3002;Vue 2.0 &#x76F8;&#x6BD4; Vue 1.0 &#x6700;&#x5927;&#x7684;&#x5347;&#x7EA7;&#x5C31;&#x662F;&#x5229;&#x7528;&#x4E86; Virtual DOM&#x3002;&#x56E0;&#x6B64;&#x5728;&#x5206;&#x6790; <code>createElement</code> &#x7684;&#x5B9E;&#x73B0;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x4E86;&#x89E3;&#x4E00;&#x4E0B; Virtual DOM &#x7684;&#x6982;&#x5FF5;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="mounted.html" class="navigation navigation-prev " aria-label="Previous page: Vue 实例挂载的实现">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="virtual-dom.html" class="navigation navigation-next " aria-label="Next page: Virtual DOM">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"render","level":"1.3.3","depth":2,"next":{"title":"Virtual DOM","level":"1.3.4","depth":2,"path":"data-driven/virtual-dom.md","ref":"data-driven/virtual-dom.md","articles":[]},"previous":{"title":"Vue 实例挂载的实现","level":"1.3.2","depth":2,"path":"data-driven/mounted.md","ref":"data-driven/mounted.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"scripts":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"data-driven/render.md","mtime":"2018-04-09T09:34:59.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-09T16:14:07.162Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

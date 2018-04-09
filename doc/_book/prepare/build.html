@@ -173,6 +173,103 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3" data-path="../data-driven/">
+            
+                <a href="../data-driven/">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../data-driven/new-vue.html">
+            
+                <a href="../data-driven/new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../data-driven/mounted.html">
+            
+                <a href="../data-driven/mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../data-driven/render.html">
+            
+                <a href="../data-driven/render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../data-driven/virtual-dom.html">
+            
+                <a href="../data-driven/virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../data-driven/create-element.html">
+            
+                <a href="../data-driven/create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../data-driven/update.html">
+            
+                <a href="../data-driven/update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
     
 
@@ -219,50 +316,49 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="vuejs-&#x6E90;&#x7801;&#x6784;&#x5EFA;">Vue.js &#x6E90;&#x7801;&#x6784;&#x5EFA;</h1>
-<p>Vue.js &#x6E90;&#x7801;&#x662F;&#x57FA;&#x4E8E; <a href="https://github.com/rollup/rollup" target="_blank">Rollup</a> &#x6784;&#x5EFA;&#x7684;&#xFF0C;&#x5B83;&#x7684;&#x6784;&#x5EFA;&#x76F8;&#x5173;&#x914D;&#x7F6E;&#x90FD;&#x5728; build &#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+<p>Vue.js &#x6E90;&#x7801;&#x662F;&#x57FA;&#x4E8E; <a href="https://github.com/rollup/rollup" target="_blank">Rollup</a> &#x6784;&#x5EFA;&#x7684;&#xFF0C;&#x5B83;&#x7684;&#x6784;&#x5EFA;&#x76F8;&#x5173;&#x914D;&#x7F6E;&#x90FD;&#x5728; scripts &#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
 <h2 id="&#x6784;&#x5EFA;&#x811A;&#x672C;">&#x6784;&#x5EFA;&#x811A;&#x672C;</h2>
 <p>&#x901A;&#x5E38;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E; NPM &#x6258;&#x7BA1;&#x7684;&#x9879;&#x76EE;&#x90FD;&#x4F1A;&#x6709;&#x4E00;&#x4E2A; package.json &#x6587;&#x4EF6;&#xFF0C;&#x5B83;&#x662F;&#x5BF9;&#x9879;&#x76EE;&#x7684;&#x63CF;&#x8FF0;&#x6587;&#x4EF6;&#xFF0C;&#x5B83;&#x7684;&#x5185;&#x5BB9;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4E00;&#x4E2A;&#x6807;&#x51C6;&#x7684; JSON &#x5BF9;&#x8C61;&#x3002;</p>
-<p>&#x8FD9;&#x4E2A; JSON &#x5BF9;&#x8C61;&#x4E00;&#x822C;&#x4F1A;&#x6709; <code>script</code> &#x5B57;&#x6BB5;&#xFF0C;&#x4F5C;&#x4E3A; NPM &#x7684;&#x6267;&#x884C;&#x811A;&#x672C;&#xFF0C;Vue.js &#x6E90;&#x7801;&#x6784;&#x5EFA;&#x7684;&#x811A;&#x672C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>&#x6211;&#x4EEC;&#x901A;&#x5E38;&#x4F1A;&#x914D;&#x7F6E; <code>script</code> &#x5B57;&#x6BB5;&#x4F5C;&#x4E3A; NPM &#x7684;&#x6267;&#x884C;&#x811A;&#x672C;&#xFF0C;Vue.js &#x6E90;&#x7801;&#x6784;&#x5EFA;&#x7684;&#x811A;&#x672C;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code class="lang-json">{
   <span class="hljs-string">&quot;script&quot;</span>: {
-      <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;node build/build.js&quot;</span>,
-      <span class="hljs-string">&quot;build:ssr&quot;</span>: <span class="hljs-string">&quot;npm run build -- vue.runtime.common.js,vue-server-renderer&quot;</span>,
-      <span class="hljs-string">&quot;build:weex&quot;</span>: <span class="hljs-string">&quot;npm run build -- weex-vue-framework,weex-template-compiler&quot;</span>
+    <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;node scripts/build.js&quot;</span>,
+    <span class="hljs-string">&quot;build:ssr&quot;</span>: <span class="hljs-string">&quot;npm run build -- web-runtime-cjs,web-server-renderer&quot;</span>,
+    <span class="hljs-string">&quot;build:weex&quot;</span>: <span class="hljs-string">&quot;npm run build --weex&quot;</span>
   }
 }
 </code></pre>
 <p>&#x8FD9;&#x91CC;&#x603B;&#x5171;&#x6709; 3 &#x6761;&#x547D;&#x4EE4;&#xFF0C;&#x4F5C;&#x7528;&#x90FD;&#x662F;&#x6784;&#x5EFA; Vue.js&#xFF0C;&#x540E;&#x9762; 2 &#x6761;&#x662F;&#x5728;&#x7B2C;&#x4E00;&#x6761;&#x547D;&#x4EE4;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x73AF;&#x5883;&#x53C2;&#x6570;&#x3002;</p>
-<p>&#x5F53;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x8FD0;&#x884C; <code>npm run build</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x4F1A;&#x6267;&#x884C; <code>node build/build.js</code>&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B;&#x5B83;&#x5B9E;&#x9645;&#x662F;&#x600E;&#x4E48;&#x6784;&#x5EFA;&#x7684;&#x3002;</p>
+<p>&#x5F53;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x8FD0;&#x884C; <code>npm run build</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x4F1A;&#x6267;&#x884C; <code>node scripts/build.js</code>&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B;&#x5B83;&#x5B9E;&#x9645;&#x662F;&#x600E;&#x4E48;&#x6784;&#x5EFA;&#x7684;&#x3002;</p>
 <h2 id="&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;">&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;</h2>
-<p>&#x6211;&#x4EEC;&#x5BF9;&#x4E8E;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x5206;&#x6790;&#x662F;&#x57FA;&#x4E8E;&#x6E90;&#x7801;&#x7684;&#xFF0C;&#x5148;&#x6253;&#x5F00;&#x6784;&#x5EFA;&#x7684;&#x5165;&#x53E3; JS &#x6587;&#x4EF6;&#x3002;</p>
-<p>&#x6E90;&#x7801;&#x76EE;&#x5F55;&#xFF1A;<code>build/build.js</code></p>
-<pre><code class="lang-js"><span class="hljs-comment">// &#x8BFB;&#x53D6; config.js &#x4E0B;&#x7684;&#x6784;&#x5EFA;&#x914D;&#x7F6E;</span>
-<span class="hljs-keyword">let</span> builds = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./config&apos;</span>).getAllBuilds()
+<p>&#x6211;&#x4EEC;&#x5BF9;&#x4E8E;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x5206;&#x6790;&#x662F;&#x57FA;&#x4E8E;&#x6E90;&#x7801;&#x7684;&#xFF0C;&#x5148;&#x6253;&#x5F00;&#x6784;&#x5EFA;&#x7684;&#x5165;&#x53E3; JS &#x6587;&#x4EF6;&#xFF0C;&#x5728; <code>scripts/build.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> builds = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./config&apos;</span>).getAllBuilds()
 
-<span class="hljs-comment">// &#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x5BF9;&#x6784;&#x5EFA;&#x914D;&#x7F6E;&#x505A;&#x8FC7;&#x6EE4;</span>
+<span class="hljs-comment">// filter builds via command line arg</span>
 <span class="hljs-keyword">if</span> (process.argv[<span class="hljs-number">2</span>]) {
   <span class="hljs-keyword">const</span> filters = process.argv[<span class="hljs-number">2</span>].split(<span class="hljs-string">&apos;,&apos;</span>)
   builds = builds.filter(b =&gt; {
-    <span class="hljs-keyword">return</span> filters.some(f =&gt; b.dest.indexOf(f) &gt; <span class="hljs-number">-1</span>)
+    <span class="hljs-keyword">return</span> filters.some(f =&gt; b.output.file.indexOf(f) &gt; <span class="hljs-number">-1</span> || b._name.indexOf(f) &gt; <span class="hljs-number">-1</span>)
   })
 } <span class="hljs-keyword">else</span> {
-  <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x6784;&#x5EFA;&#xFF08;&#x65E0;&#x53C2;&#x6570;&#xFF09;&#x4F1A;&#x8FC7;&#x6EE4;&#x6389; weex</span>
+  <span class="hljs-comment">// filter out weex builds by default</span>
   builds = builds.filter(b =&gt; {
-    <span class="hljs-keyword">return</span> b.dest.indexOf(<span class="hljs-string">&apos;weex&apos;</span>) === <span class="hljs-number">-1</span>
+    <span class="hljs-keyword">return</span> b.output.file.indexOf(<span class="hljs-string">&apos;weex&apos;</span>) === <span class="hljs-number">-1</span>
   })
 }
+
+build(builds)
 </code></pre>
-<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x903B;&#x8F91;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5148;&#x4ECE;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BFB;&#x53D6;&#x914D;&#x7F6E;&#xFF0C;&#x518D;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x5BF9;&#x6784;&#x5EFA;&#x914D;&#x7F6E;&#x505A;&#x8FC7;&#x6EE4;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x6784;&#x5EFA;&#x51FA;&#x4E0D;&#x540C;&#x7528;&#x9014;&#x7684; Vue.js &#x4E86;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x770B;&#x4E00;&#x4E0B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;</p>
-<p>&#x6E90;&#x7801;&#x76EE;&#x5F55;&#xFF1A;<code>build/config.js</code></p>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x903B;&#x8F91;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5148;&#x4ECE;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BFB;&#x53D6;&#x914D;&#x7F6E;&#xFF0C;&#x518D;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x5BF9;&#x6784;&#x5EFA;&#x914D;&#x7F6E;&#x505A;&#x8FC7;&#x6EE4;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x6784;&#x5EFA;&#x51FA;&#x4E0D;&#x540C;&#x7528;&#x9014;&#x7684; Vue.js &#x4E86;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x770B;&#x4E00;&#x4E0B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x5728; <code>scripts/config.js</code> &#x4E2D;&#xFF1A;</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> builds = {
-  <span class="hljs-comment">// &#x4EC5;&#x8FD0;&#x884C;&#x65F6;&#x7684;&#x6784;&#x5EFA; (CommonJS)&#xFF1B;&#x901A;&#x5E38;&#x9700;&#x8981;&#x501F;&#x52A9;&#x4E00;&#x4E9B;&#x5DE5;&#x5177;&#x5982; Webpack &#x548C; Browserify &#x4F7F;&#x7528;</span>
+  <span class="hljs-comment">// Runtime only (CommonJS). Used by bundlers e.g. Webpack &amp; Browserify</span>
   <span class="hljs-string">&apos;web-runtime-cjs&apos;</span>: {
     entry: resolve(<span class="hljs-string">&apos;web/entry-runtime.js&apos;</span>),
     dest: resolve(<span class="hljs-string">&apos;dist/vue.runtime.common.js&apos;</span>),
     format: <span class="hljs-string">&apos;cjs&apos;</span>,
     banner
   },
-  <span class="hljs-comment">// &#x57FA;&#x4E8E;&#x8FD0;&#x884C;&#x65F6;+&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x6784;&#x5EFA; (CommonJS)</span>
+  <span class="hljs-comment">// Runtime+compiler CommonJS build (CommonJS)</span>
   <span class="hljs-string">&apos;web-full-cjs&apos;</span>: {
     entry: resolve(<span class="hljs-string">&apos;web/entry-runtime-with-compiler.js&apos;</span>),
     dest: resolve(<span class="hljs-string">&apos;dist/vue.common.js&apos;</span>),
@@ -270,14 +366,15 @@
     alias: { he: <span class="hljs-string">&apos;./entity-decoder&apos;</span> },
     banner
   },
-  <span class="hljs-comment">// &#x4EC5;&#x8FD0;&#x884C;&#x65F6;&#x7684;&#x6784;&#x5EFA; (ES Modules). &#x901A;&#x5E38;&#x9700;&#x8981;&#x501F;&#x52A9;&#x4E00;&#x4E9B;&#x652F;&#x6301; ES Module &#x7684;&#x5DE5;&#x5177;&#x5982; Webpack &#x548C; Browserify &#x4F7F;&#x7528;</span>
+  <span class="hljs-comment">// Runtime only (ES Modules). Used by bundlers that support ES Modules,</span>
+  <span class="hljs-comment">// e.g. Rollup &amp; Webpack 2</span>
   <span class="hljs-string">&apos;web-runtime-esm&apos;</span>: {
     entry: resolve(<span class="hljs-string">&apos;web/entry-runtime.js&apos;</span>),
     dest: resolve(<span class="hljs-string">&apos;dist/vue.runtime.esm.js&apos;</span>),
     format: <span class="hljs-string">&apos;es&apos;</span>,
     banner
   },
-  <span class="hljs-comment">// &#x57FA;&#x4E8E;&#x8FD0;&#x884C;&#x65F6;+&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x6784;&#x5EFA; (ES Modules)</span>
+  <span class="hljs-comment">// Runtime+compiler CommonJS build (ES Modules)</span>
   <span class="hljs-string">&apos;web-full-esm&apos;</span>: {
     entry: resolve(<span class="hljs-string">&apos;web/entry-runtime-with-compiler.js&apos;</span>),
     dest: resolve(<span class="hljs-string">&apos;dist/vue.esm.js&apos;</span>),
@@ -285,7 +382,7 @@
     alias: { he: <span class="hljs-string">&apos;./entity-decoder&apos;</span> },
     banner
   },
-  <span class="hljs-comment">// &#x4EC5;&#x8FD0;&#x884C;&#x65F6;&#x57FA;&#x4E8E;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x7684;&#x6784;&#x5EFA; (Browser)</span>
+  <span class="hljs-comment">// runtime-only build (Browser)</span>
   <span class="hljs-string">&apos;web-runtime-dev&apos;</span>: {
     entry: resolve(<span class="hljs-string">&apos;web/entry-runtime.js&apos;</span>),
     dest: resolve(<span class="hljs-string">&apos;dist/vue.runtime.js&apos;</span>),
@@ -293,7 +390,7 @@
     env: <span class="hljs-string">&apos;development&apos;</span>,
     banner
   },
-  <span class="hljs-comment">// &#x4EC5;&#x8FD0;&#x884C;&#x65F6;&#x57FA;&#x4E8E;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x7684;&#x6784;&#x5EFA; (Browser)</span>
+  <span class="hljs-comment">// runtime-only production build (Browser)</span>
   <span class="hljs-string">&apos;web-runtime-prod&apos;</span>: {
     entry: resolve(<span class="hljs-string">&apos;web/entry-runtime.js&apos;</span>),
     dest: resolve(<span class="hljs-string">&apos;dist/vue.runtime.min.js&apos;</span>),
@@ -301,7 +398,7 @@
     env: <span class="hljs-string">&apos;production&apos;</span>,
     banner
   },
-  <span class="hljs-comment">// &#x8FD0;&#x884C;&#x65F6;+&#x7F16;&#x8BD1;&#x5668;&#x57FA;&#x4E8E;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x7684;&#x6784;&#x5EFA; (Browser)</span>
+  <span class="hljs-comment">// Runtime+compiler development build (Browser)</span>
   <span class="hljs-string">&apos;web-full-dev&apos;</span>: {
     entry: resolve(<span class="hljs-string">&apos;web/entry-runtime-with-compiler.js&apos;</span>),
     dest: resolve(<span class="hljs-string">&apos;dist/vue.js&apos;</span>),
@@ -310,7 +407,7 @@
     alias: { he: <span class="hljs-string">&apos;./entity-decoder&apos;</span> },
     banner
   },
-  <span class="hljs-comment">// &#x8FD0;&#x884C;&#x65F6;+&#x7F16;&#x8BD1;&#x5668;&#x57FA;&#x4E8E;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x7684;&#x6784;&#x5EFA; (Browser)</span>
+  <span class="hljs-comment">// Runtime+compiler production build  (Browser)</span>
   <span class="hljs-string">&apos;web-full-prod&apos;</span>: {
     entry: resolve(<span class="hljs-string">&apos;web/entry-runtime-with-compiler.js&apos;</span>),
     dest: resolve(<span class="hljs-string">&apos;dist/vue.min.js&apos;</span>),
@@ -319,30 +416,16 @@
     alias: { he: <span class="hljs-string">&apos;./entity-decoder&apos;</span> },
     banner
   },
-  <span class="hljs-comment">// Web &#x7F16;&#x8BD1;&#x5668;&#x6784;&#x5EFA; (CommonJS).</span>
-  <span class="hljs-string">&apos;web-compiler&apos;</span>: {
-    entry: resolve(<span class="hljs-string">&apos;web/entry-compiler.js&apos;</span>),
-    dest: resolve(<span class="hljs-string">&apos;packages/vue-template-compiler/build.js&apos;</span>),
-    format: <span class="hljs-string">&apos;cjs&apos;</span>,
-    external: <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;../packages/vue-template-compiler/package.json&apos;</span>).dependencies)
-  },
-  <span class="hljs-comment">// &#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3;&#x6784;&#x5EFA; (CommonJS).</span>
-  <span class="hljs-string">&apos;web-server-renderer&apos;</span>: {
-    entry: resolve(<span class="hljs-string">&apos;web/entry-server-renderer.js&apos;</span>),
-    dest: resolve(<span class="hljs-string">&apos;packages/vue-server-renderer/build.js&apos;</span>),
-    format: <span class="hljs-string">&apos;cjs&apos;</span>,
-    external: <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;../packages/vue-server-renderer/package.json&apos;</span>).dependencies)
-  }
   <span class="hljs-comment">// ...</span>
 }
-</code></pre>
+<span class="hljs-string">`
+</span></code></pre>
 <p>&#x8FD9;&#x91CC;&#x5217;&#x4E3E;&#x4E86;&#x4E00;&#x4E9B; Vue.js &#x6784;&#x5EFA;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5173;&#x4E8E;&#x8FD8;&#x6709;&#x4E00;&#x4E9B;&#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3; webpack &#x63D2;&#x4EF6;&#x4EE5;&#x53CA; weex &#x7684;&#x6253;&#x5305;&#x914D;&#x7F6E;&#x5C31;&#x4E0D;&#x5217;&#x4E3E;&#x4E86;&#x3002;</p>
 <p>&#x5BF9;&#x4E8E;&#x5355;&#x4E2A;&#x914D;&#x7F6E;&#xFF0C;&#x5B83;&#x662F;&#x9075;&#x5FAA; Rollup &#x7684;&#x6784;&#x5EFA;&#x89C4;&#x5219;&#x7684;&#x3002;&#x5176;&#x4E2D; <code>entry</code> &#x5C5E;&#x6027;&#x8868;&#x793A;&#x6784;&#x5EFA;&#x7684;&#x5165;&#x53E3; JS &#x6587;&#x4EF6;&#x5730;&#x5740;&#xFF0C;<code>dest</code> &#x5C5E;&#x6027;&#x8868;&#x793A;&#x6784;&#x5EFA;&#x540E;&#x7684; JS &#x6587;&#x4EF6;&#x5730;&#x5740;&#x3002;<code>format</code> &#x5C5E;&#x6027;&#x8868;&#x793A;&#x6784;&#x5EFA;&#x7684;&#x683C;&#x5F0F;&#xFF0C;<code>cjs</code> &#x8868;&#x793A;&#x6784;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#x6587;&#x4EF6;&#x9075;&#x5FAA; <a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank">CommonJS</a> &#x89C4;&#x8303;&#xFF0C;<code>es</code> &#x8868;&#x793A;&#x6784;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#x6587;&#x4EF6;&#x9075;&#x5FAA; <a href="http://exploringjs.com/es6/ch_modules.html" target="_blank">ES Module</a> &#x89C4;&#x8303;&#x3002; <code>umd</code> &#x8868;&#x793A;&#x6784;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#x6587;&#x4EF6;&#x9075;&#x5FAA; <a href="https://github.com/umdjs/umd" target="_blank">UMD</a> &#x89C4;&#x8303;&#x3002;</p>
 <p>&#x4EE5; <code>web-runtime-cjs</code> &#x914D;&#x7F6E;&#x4E3A;&#x4F8B;&#xFF0C;&#x5B83;&#x7684; <code>entry</code> &#x662F;
 <code>resolve(&apos;web/entry-runtime.js&apos;)</code>&#xFF0C;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E0B; <code>resolve</code> &#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#x3002;</p>
-<p>&#x6E90;&#x7801;&#x76EE;&#x5F55;&#xFF1A;<code>build/config.js</code></p>
-<pre><code class="lang-js"><span class="hljs-comment">// &#x522B;&#x540D;&#x914D;&#x7F6E;</span>
-<span class="hljs-keyword">const</span> aliases = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./alias&apos;</span>)
+<p>&#x6E90;&#x7801;&#x76EE;&#x5F55;&#xFF1A;<code>scripts/config.js</code></p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> aliases = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./alias&apos;</span>)
 <span class="hljs-keyword">const</span> resolve = p =&gt; {
   <span class="hljs-keyword">const</span> base = p.split(<span class="hljs-string">&apos;/&apos;</span>)[<span class="hljs-number">0</span>]
   <span class="hljs-keyword">if</span> (aliases[base]) {
@@ -352,8 +435,7 @@
   }
 }
 </code></pre>
-<p>&#x8FD9;&#x91CC;&#x7684; <code>resolve</code> &#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5B83;&#x5148;&#x628A; <code>resolve</code> &#x51FD;&#x6570;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570; <code>p</code> &#x901A;&#x8FC7; <code>/</code> &#x505A;&#x4E86;&#x5206;&#x5272;&#x6210;&#x6570;&#x7EC4;&#xFF0C;&#x7136;&#x540E;&#x53D6;&#x6570;&#x7EC4;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8BBE;&#x7F6E;&#x4E3A; <code>base</code>&#x3002;&#x5728;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x53C2;&#x6570; <code>p</code> &#x662F; <code>web/entry-runtime.js</code>&#xFF0C;&#x90A3;&#x4E48; <code>base</code> &#x5219;&#x4E3A; <code>web</code>&#x3002;<code>base</code> &#x5E76;&#x4E0D;&#x662F;&#x5B9E;&#x9645;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x5B83;&#x7684;&#x771F;&#x5B9E;&#x8DEF;&#x5F84;&#x501F;&#x52A9;&#x4E86;&#x522B;&#x540D;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x522B;&#x540D;&#x914D;&#x7F6E;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
-<p>&#x6E90;&#x7801;&#x76EE;&#x5F55;&#xFF1A;<code>build/alias</code></p>
+<p>&#x8FD9;&#x91CC;&#x7684; <code>resolve</code> &#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5B83;&#x5148;&#x628A; <code>resolve</code> &#x51FD;&#x6570;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570; <code>p</code> &#x901A;&#x8FC7; <code>/</code> &#x505A;&#x4E86;&#x5206;&#x5272;&#x6210;&#x6570;&#x7EC4;&#xFF0C;&#x7136;&#x540E;&#x53D6;&#x6570;&#x7EC4;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8BBE;&#x7F6E;&#x4E3A; <code>base</code>&#x3002;&#x5728;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x53C2;&#x6570; <code>p</code> &#x662F; <code>web/entry-runtime.js</code>&#xFF0C;&#x90A3;&#x4E48; <code>base</code> &#x5219;&#x4E3A; <code>web</code>&#x3002;<code>base</code> &#x5E76;&#x4E0D;&#x662F;&#x5B9E;&#x9645;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x5B83;&#x7684;&#x771F;&#x5B9E;&#x8DEF;&#x5F84;&#x501F;&#x52A9;&#x4E86;&#x522B;&#x540D;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x522B;&#x540D;&#x914D;&#x7F6E;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x5728; <code>scripts/alias</code> &#x4E2D;&#xFF1A;</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;path&apos;</span>)
 
 <span class="hljs-built_in">module</span>.exports = {
@@ -368,14 +450,14 @@
   sfc: path.resolve(__dirname, <span class="hljs-string">&apos;../src/sfc&apos;</span>)
 }
 </code></pre>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x8FD9;&#x91CC; <code>web</code> &#x5BF9;&#x5E94;&#x7684;&#x771F;&#x5B9E;&#x7684;&#x8DEF;&#x5F84;&#x662F; <code>path.resolve(__dirname, &apos;../src/platforms/web&apos;)</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x8DEF;&#x5F84;&#x5C31;&#x627E;&#x5230;&#x4E86; Vue.js &#x6E90;&#x7801;&#x7684; web &#x76EE;&#x5F55;&#x3002;&#x7136;&#x540E; <code>resolve</code> &#x51FD;&#x6570;&#x901A;&#x8FC7; <code>path.resolve(aliases[base], p.slice(base.length + 1))</code> &#x627E;&#x5230;&#x4E86;&#x6700;&#x7EC8;&#x8DEF;&#x5F84;&#xFF0C;&#x5B83;&#x5C31;&#x662F; Vue.js &#x6E90;&#x7801; web &#x76EE;&#x5F55;&#x4E0B;&#x7684; <code>entry-runtime.js</code>&#x3002;&#x56E0;&#x6B64;&#xFF0C;<code>web-runtime-cjs</code> &#x914D;&#x7F6E;&#x5BF9;&#x5E94;&#x7684;&#x5165;&#x53E3;&#x6587;&#x4EF6;&#x5C31;&#x627E;&#x5230;&#x4E86;&#x3002;
-&#x5B83;&#x7ECF;&#x8FC7; Rollup &#x7684;&#x6784;&#x5EFA;&#x6253;&#x5305;&#x540E;&#xFF0C;&#x6700;&#x7EC8;&#x4F1A;&#x5728; dist &#x76EE;&#x5F55;&#x4E0B;&#x751F;&#x6210; <code>vue.runtime.common.js</code>&#x3002;</p>
+<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x8FD9;&#x91CC; <code>web</code> &#x5BF9;&#x5E94;&#x7684;&#x771F;&#x5B9E;&#x7684;&#x8DEF;&#x5F84;&#x662F; <code>path.resolve(__dirname, &apos;../src/platforms/web&apos;)</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x8DEF;&#x5F84;&#x5C31;&#x627E;&#x5230;&#x4E86; Vue.js &#x6E90;&#x7801;&#x7684; web &#x76EE;&#x5F55;&#x3002;&#x7136;&#x540E; <code>resolve</code> &#x51FD;&#x6570;&#x901A;&#x8FC7; <code>path.resolve(aliases[base], p.slice(base.length + 1))</code> &#x627E;&#x5230;&#x4E86;&#x6700;&#x7EC8;&#x8DEF;&#x5F84;&#xFF0C;&#x5B83;&#x5C31;&#x662F; Vue.js &#x6E90;&#x7801; web &#x76EE;&#x5F55;&#x4E0B;&#x7684; <code>entry-runtime.js</code>&#x3002;&#x56E0;&#x6B64;&#xFF0C;<code>web-runtime-cjs</code> &#x914D;&#x7F6E;&#x5BF9;&#x5E94;&#x7684;&#x5165;&#x53E3;&#x6587;&#x4EF6;&#x5C31;&#x627E;&#x5230;&#x4E86;&#x3002;</p>
+<p>&#x5B83;&#x7ECF;&#x8FC7; Rollup &#x7684;&#x6784;&#x5EFA;&#x6253;&#x5305;&#x540E;&#xFF0C;&#x6700;&#x7EC8;&#x4F1A;&#x5728; dist &#x76EE;&#x5F55;&#x4E0B;&#x751F;&#x6210; <code>vue.runtime.common.js</code>&#x3002;</p>
 <h2 id="runtime-only-vs-runtimecompiler">Runtime Only VS Runtime+Compiler</h2>
 <p>&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x5229;&#x7528; vue-cli &#x53BB;&#x521D;&#x59CB;&#x5316;&#x6211;&#x4EEC;&#x7684; Vue.js &#x9879;&#x76EE;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0B;&#x8F7D; Vue.js &#x7684;&#x65F6;&#x5019;&#x4F1A;&#x8BE2;&#x95EE;&#x6211;&#x4EEC;&#x7528; Runtime Only &#x7248;&#x672C;&#x7684;&#x8FD8;&#x662F; Runtime+Compiler &#x7248;&#x672C;&#x3002;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x5BF9;&#x6BD4;&#x8FD9;&#x4E24;&#x4E2A;&#x7248;&#x672C;&#x3002;</p>
 <ul>
 <li>Runtime Only</li>
 </ul>
-<p>&#x6211;&#x4EEC;&#x5728;&#x4F7F;&#x7528; Runtime Only &#x7248;&#x672C;&#x7684; Vue.js &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x901A;&#x5E38;&#x9700;&#x8981;&#x501F;&#x52A9;&#x5982; webpack &#x7684; vue-loader &#x5DE5;&#x5177;&#x628A; .vue &#x6587;&#x4EF6;&#x7F16;&#x8BD1;&#x6210; Javascript&#xFF0C;&#x56E0;&#x4E3A;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#x662F;&#x5728;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#x505A;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x53EA;&#x5305;&#x542B;&#x8FD0;&#x884C;&#x65F6;&#x7684; Vue.js &#x4EE3;&#x7801;&#xFF0C;&#x56E0;&#x6B64;&#x4EE3;&#x7801;&#x4F53;&#x79EF;&#x4E5F;&#x4F1A;&#x66F4;&#x8F7B;&#x91CF;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5728;&#x4F7F;&#x7528; Runtime Only &#x7248;&#x672C;&#x7684; Vue.js &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x901A;&#x5E38;&#x9700;&#x8981;&#x501F;&#x52A9;&#x5982; webpack &#x7684; vue-loader &#x5DE5;&#x5177;&#x628A; .vue &#x6587;&#x4EF6;&#x7F16;&#x8BD1;&#x6210; JavaScript&#xFF0C;&#x56E0;&#x4E3A;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#x662F;&#x5728;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#x505A;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x53EA;&#x5305;&#x542B;&#x8FD0;&#x884C;&#x65F6;&#x7684; Vue.js &#x4EE3;&#x7801;&#xFF0C;&#x56E0;&#x6B64;&#x4EE3;&#x7801;&#x4F53;&#x79EF;&#x4E5F;&#x4F1A;&#x66F4;&#x8F7B;&#x91CF;&#x3002;</p>
 <ul>
 <li>Runtime+Compiler</li>
 </ul>
@@ -392,8 +474,10 @@
   }
 })
 </code></pre>
-<p>&#x56E0;&#x4E3A;&#x5728; Vue.js 2.0 &#x4E2D;&#xFF0C;&#x6700;&#x7EC8;&#x6E32;&#x67D3;&#x90FD;&#x662F;&#x901A;&#x8FC7; render &#x51FD;&#x6570;&#xFF0C;&#x5982;&#x679C;&#x5199; template &#x5C5E;&#x6027;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x7F16;&#x8BD1;&#x6210; render &#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4F1A;&#x53D1;&#x751F;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x5E26;&#x6709;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x7248;&#x672C;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;&#x5728; Vue.js 2.0 &#x4E2D;&#xFF0C;&#x6700;&#x7EC8;&#x6E32;&#x67D3;&#x90FD;&#x662F;&#x901A;&#x8FC7; <code>render</code> &#x51FD;&#x6570;&#xFF0C;&#x5982;&#x679C;&#x5199; <code>template</code> &#x5C5E;&#x6027;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x7F16;&#x8BD1;&#x6210; <code>render</code> &#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4F1A;&#x53D1;&#x751F;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x5E26;&#x6709;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x7248;&#x672C;&#x3002;</p>
 <p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x8FD9;&#x4E2A;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x5BF9;&#x6027;&#x80FD;&#x4F1A;&#x6709;&#x4E00;&#x5B9A;&#x635F;&#x8017;&#xFF0C;&#x6240;&#x4EE5;&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x66F4;&#x63A8;&#x8350;&#x4F7F;&#x7528; Runtime-Only &#x7684; Vue.js&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x901A;&#x8FC7;&#x8FD9;&#x4E00;&#x8282;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4E86;&#x89E3;&#x5230; Vue.js &#x7684;&#x6784;&#x5EFA;&#x6253;&#x5305;&#x8FC7;&#x7A0B;&#xFF0C;&#x4E5F;&#x77E5;&#x9053;&#x4E86;&#x4E0D;&#x540C;&#x4F5C;&#x7528;&#x548C;&#x529F;&#x80FD;&#x7684; Vue.js &#x5B83;&#x4EEC;&#x5BF9;&#x5E94;&#x7684;&#x5165;&#x53E3;&#x4EE5;&#x53CA;&#x6700;&#x7EC8;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x7684; JS &#x6587;&#x4EF6;&#x3002;&#x5C3D;&#x7BA1;&#x5728;&#x5B9E;&#x9645;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#x6211;&#x4EEC;&#x4F1A;&#x7528; Runtime Only &#x7248;&#x672C;&#x5F00;&#x53D1;&#x6BD4;&#x8F83;&#x591A;&#xFF0C;&#x4F46;&#x4E3A;&#x4E86;&#x5206;&#x6790; Vue &#x7684;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x95E8;&#x8BFE;&#x91CD;&#x70B9;&#x5206;&#x6790;&#x7684;&#x6E90;&#x7801;&#x662F; Runtime+Compiler &#x7684; Vue.js&#x3002;</p>
 
                                 
                                 </section>
@@ -437,7 +521,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Vue.js 源码构建","level":"1.2.3","depth":2,"next":{"title":"从入口开始","level":"1.2.4","depth":2,"path":"prepare/entrance.md","ref":"prepare/entrance.md","articles":[]},"previous":{"title":"Vue.js 源码目录设计","level":"1.2.2","depth":2,"path":"prepare/directory.md","ref":"prepare/directory.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"scripts":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"prepare/build.md","mtime":"2018-04-05T19:40:55.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-05T19:33:42.517Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Vue.js 源码构建","level":"1.2.3","depth":2,"next":{"title":"从入口开始","level":"1.2.4","depth":2,"path":"prepare/entrance.md","ref":"prepare/entrance.md","articles":[]},"previous":{"title":"Vue.js 源码目录设计","level":"1.2.2","depth":2,"path":"prepare/directory.md","ref":"prepare/directory.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"scripts":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"prepare/build.md","mtime":"2018-04-05T20:01:23.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-09T16:14:07.162Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

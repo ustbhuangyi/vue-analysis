@@ -31,9 +31,9 @@ export default class VNode {
   asyncMeta: Object | void;
   isAsyncPlaceholder: boolean;
   ssrContext: Object | void;
-  functionalContext: Component | void; // real context vm for functional nodes
-  functionalOptions: ?ComponentOptions; // for SSR caching
-  functionalScopeId: ?string; // functioanl scope id support
+  fnContext: Component | void; // real context vm for functional nodes
+  fnOptions: ?ComponentOptions; // for SSR caching
+  fnScopeId: ?string; // functional scope id support
 
   constructor (
     tag?: string,
@@ -52,9 +52,9 @@ export default class VNode {
     this.elm = elm
     this.ns = undefined
     this.context = context
-    this.functionalContext = undefined
-    this.functionalOptions = undefined
-    this.functionalScopeId = undefined
+    this.fnContext = undefined
+    this.fnOptions = undefined
+    this.fnScopeId = undefined
     this.key = data && data.key
     this.componentOptions = componentOptions
     this.componentInstance = undefined
@@ -70,7 +70,8 @@ export default class VNode {
     this.isAsyncPlaceholder = false
   }
 
-  // 废弃的方法:componentInstance 的别名，为了向后兼容所以保留
+  // DEPRECATED: alias for componentInstance for backwards compat.
+  /* istanbul ignore next */
   get child (): Component | void {
     return this.componentInstance
   }
@@ -78,6 +79,8 @@ export default class VNode {
 ```
 
 可以看到 Vue.js 中的 Virtual DOM 的定义还是略微复杂一些的，因为它这里包含了很多 Vue.js 的特性。这里千万不要被这些茫茫多的属性吓到，实际上 Vue.js 中 Virtual DOM 是借鉴了一个开源库 [snabbdom](https://github.com/snabbdom/snabbdom) 的实现，然后加入了一些 Vue.js 特色的东西。我建议大家如果想深入了解 Vue.js 的 Virtual DOM 前不妨先阅读这个库的源码，因为它更加简单和纯粹。
+
+## 总结
 
 其实 VNode 是对真实 DOM 的一种抽象描述，它的核心定义无非就几个关键属性，标签名、数据、子节点、键值等，其它属性都是都是用来扩展 VNode 的灵活性以及实现一些特殊 feature 的。由于 VNode 只是用来映射到真实 DOM 的渲染，不需要包含操作 DOM 的方法，因此它是非常轻量和简单的。
 

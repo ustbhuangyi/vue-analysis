@@ -1,0 +1,783 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>update · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="create-element.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    准备
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../prepare/flow.html">
+            
+                <a href="../prepare/flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../prepare/directory.html">
+            
+                <a href="../prepare/directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../prepare/build.html">
+            
+                <a href="../prepare/build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../prepare/entrance.html">
+            
+                <a href="../prepare/entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="new-vue.html">
+            
+                <a href="new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="mounted.html">
+            
+                <a href="mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="render.html">
+            
+                <a href="render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="virtual-dom.html">
+            
+                <a href="virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="create-element.html">
+            
+                <a href="create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.6" data-path="update.html">
+            
+                <a href="update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >update</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="update">update</h1>
+<p>Vue &#x7684; <code>_update</code> &#x662F;&#x5B9E;&#x4F8B;&#x7684;&#x4E00;&#x4E2A;&#x79C1;&#x6709;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x88AB;&#x8C03;&#x7528;&#x7684;&#x65F6;&#x673A;&#x6709; 2 &#x4E2A;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x9996;&#x6B21;&#x6E32;&#x67D3;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x6570;&#x636E;&#x66F4;&#x65B0;&#x7684;&#x65F6;&#x5019;&#xFF1B;&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x8FD9;&#x4E00;&#x7AE0;&#x8282;&#x53EA;&#x5206;&#x6790;&#x9996;&#x6B21;&#x6E32;&#x67D3;&#x90E8;&#x5206;&#xFF0C;&#x6570;&#x636E;&#x66F4;&#x65B0;&#x90E8;&#x5206;&#x4F1A;&#x5728;&#x4E4B;&#x540E;&#x5206;&#x6790;&#x54CD;&#x5E94;&#x5F0F;&#x539F;&#x7406;&#x7684;&#x65F6;&#x5019;&#x6D89;&#x53CA;&#x3002;<code>_update</code> &#x65B9;&#x6CD5;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x628A; VNode &#x6E32;&#x67D3;&#x6210;&#x771F;&#x5B9E;&#x7684; DOM&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/instance/lifecycle.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js">Vue.prototype._update = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">vnode: VNode, hydrating?: boolean</span>) </span>{
+  <span class="hljs-keyword">const</span> vm: Component = <span class="hljs-keyword">this</span>
+  <span class="hljs-keyword">const</span> prevEl = vm.$el
+  <span class="hljs-keyword">const</span> prevVnode = vm._vnode
+  <span class="hljs-keyword">const</span> prevActiveInstance = activeInstance
+  activeInstance = vm
+  vm._vnode = vnode
+  <span class="hljs-comment">// Vue.prototype.__patch__ is injected in entry points</span>
+  <span class="hljs-comment">// based on the rendering backend used.</span>
+  <span class="hljs-keyword">if</span> (!prevVnode) {
+    <span class="hljs-comment">// initial render</span>
+    vm.$el = vm.__patch__(vm.$el, vnode, hydrating, <span class="hljs-literal">false</span> <span class="hljs-comment">/* removeOnly */</span>)
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// updates</span>
+    vm.$el = vm.__patch__(prevVnode, vnode)
+  }
+  activeInstance = prevActiveInstance
+  <span class="hljs-comment">// update __vue__ reference</span>
+  <span class="hljs-keyword">if</span> (prevEl) {
+    prevEl.__vue__ = <span class="hljs-literal">null</span>
+  }
+  <span class="hljs-keyword">if</span> (vm.$el) {
+    vm.$el.__vue__ = vm
+  }
+  <span class="hljs-comment">// if parent is an HOC, update its $el as well</span>
+  <span class="hljs-keyword">if</span> (vm.$vnode &amp;&amp; vm.$parent &amp;&amp; vm.$vnode === vm.$parent._vnode) {
+    vm.$parent.$el = vm.$el
+  }
+  <span class="hljs-comment">// updated hook is called by the scheduler to ensure that children are</span>
+  <span class="hljs-comment">// updated in a parent&apos;s updated hook.</span>
+}
+</code></pre>
+<p><code>_update</code> &#x7684;&#x6838;&#x5FC3;&#x5C31;&#x662F;&#x8C03;&#x7528; <code>vm.__patch__</code> &#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5B9E;&#x9645;&#x4E0A;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5E73;&#x53F0;&#xFF0C;&#x6BD4;&#x5982; web &#x548C; weex &#x4E0A;&#x7684;&#x5B9A;&#x4E49;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x5728; web &#x5E73;&#x53F0;&#x4E2D;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/platforms/web/runtime/index.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js">Vue.prototype.__patch__ = inBrowser ? patch : noop
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x751A;&#x81F3;&#x5728; web &#x5E73;&#x53F0;&#x4E0A;&#xFF0C;&#x662F;&#x5426;&#x662F;&#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3;&#x4E5F;&#x4F1A;&#x5BF9;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4EA7;&#x751F;&#x5F71;&#x54CD;&#x3002;&#x56E0;&#x4E3A;&#x5728;&#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3;&#x4E2D;&#xFF0C;&#x6CA1;&#x6709;&#x771F;&#x5B9E;&#x7684;&#x6D4F;&#x89C8;&#x5668; DOM &#x73AF;&#x5883;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x9700;&#x8981;&#x628A; VNode &#x6700;&#x7EC8;&#x8F6C;&#x6362;&#x6210; DOM&#xFF0C;&#x56E0;&#x6B64;&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x51FD;&#x6570;&#xFF0C;&#x800C;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x7AEF;&#x6E32;&#x67D3;&#x4E2D;&#xFF0C;&#x5B83;&#x6307;&#x5411;&#x4E86; <code>patch</code> &#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/platforms/web/runtime/patch.js</code>&#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> nodeOps <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;web/runtime/node-ops&apos;</span>
+<span class="hljs-keyword">import</span> { createPatchFunction } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/vdom/patch&apos;</span>
+<span class="hljs-keyword">import</span> baseModules <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/vdom/modules/index&apos;</span>
+<span class="hljs-keyword">import</span> platformModules <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;web/runtime/modules/index&apos;</span>
+
+<span class="hljs-comment">// the directive module should be applied last, after all</span>
+<span class="hljs-comment">// built-in modules have been applied.</span>
+<span class="hljs-keyword">const</span> modules = platformModules.concat(baseModules)
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> patch: <span class="hljs-built_in">Function</span> = createPatchFunction({ nodeOps, modules })
+</code></pre>
+<p>&#x8BE5;&#x65B9;&#x6CD5;&#x7684;&#x5B9A;&#x4E49;&#x662F;&#x8C03;&#x7528; <code>createPatchFunction</code> &#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x8FD9;&#x91CC;&#x4F20;&#x5165;&#x4E86;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5305;&#x542B; <code>nodeOps</code> &#x53C2;&#x6570;&#x548C; <code>modules</code> &#x53C2;&#x6570;&#x3002;&#x5176;&#x4E2D;&#xFF0C;<code>nodeOps</code> &#x5C01;&#x88C5;&#x4E86;&#x4E00;&#x7CFB;&#x5217; DOM &#x64CD;&#x4F5C;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;<code>modules</code> &#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x6A21;&#x5757;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x5148;&#x4E0D;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#xFF0C;&#x6765;&#x770B;&#x4E00;&#x4E0B; <code>createPatchFunction</code> &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x5728; <code>src/core/vdom/patch.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> hooks = [<span class="hljs-string">&apos;create&apos;</span>, <span class="hljs-string">&apos;activate&apos;</span>, <span class="hljs-string">&apos;update&apos;</span>, <span class="hljs-string">&apos;remove&apos;</span>, <span class="hljs-string">&apos;destroy&apos;</span>]
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createPatchFunction</span> (<span class="hljs-params">backend</span>) </span>{
+  <span class="hljs-keyword">let</span> i, j
+  <span class="hljs-keyword">const</span> cbs = {}
+
+  <span class="hljs-keyword">const</span> { modules, nodeOps } = backend
+
+  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; hooks.length; ++i) {
+    cbs[hooks[i]] = []
+    <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; modules.length; ++j) {
+      <span class="hljs-keyword">if</span> (isDef(modules[j][hooks[i]])) {
+        cbs[hooks[i]].push(modules[j][hooks[i]])
+      }
+    }
+  }
+
+  <span class="hljs-comment">// ...</span>
+
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">patch</span> (<span class="hljs-params">oldVnode, vnode, hydrating, removeOnly</span>) </span>{
+    <span class="hljs-keyword">if</span> (isUndef(vnode)) {
+      <span class="hljs-keyword">if</span> (isDef(oldVnode)) invokeDestroyHook(oldVnode)
+      <span class="hljs-keyword">return</span>
+    }
+
+    <span class="hljs-keyword">let</span> isInitialPatch = <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">const</span> insertedVnodeQueue = []
+
+    <span class="hljs-keyword">if</span> (isUndef(oldVnode)) {
+      <span class="hljs-comment">// empty mount (likely as component), create new root element</span>
+      isInitialPatch = <span class="hljs-literal">true</span>
+      createElm(vnode, insertedVnodeQueue)
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">const</span> isRealElement = isDef(oldVnode.nodeType)
+      <span class="hljs-keyword">if</span> (!isRealElement &amp;&amp; sameVnode(oldVnode, vnode)) {
+        <span class="hljs-comment">// patch existing root node</span>
+        patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly)
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">if</span> (isRealElement) {
+          <span class="hljs-comment">// mounting to a real element</span>
+          <span class="hljs-comment">// check if this is server-rendered content and if we can perform</span>
+          <span class="hljs-comment">// a successful hydration.</span>
+          <span class="hljs-keyword">if</span> (oldVnode.nodeType === <span class="hljs-number">1</span> &amp;&amp; oldVnode.hasAttribute(SSR_ATTR)) {
+            oldVnode.removeAttribute(SSR_ATTR)
+            hydrating = <span class="hljs-literal">true</span>
+          }
+          <span class="hljs-keyword">if</span> (isTrue(hydrating)) {
+            <span class="hljs-keyword">if</span> (hydrate(oldVnode, vnode, insertedVnodeQueue)) {
+              invokeInsertHook(vnode, insertedVnodeQueue, <span class="hljs-literal">true</span>)
+              <span class="hljs-keyword">return</span> oldVnode
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+              warn(
+                <span class="hljs-string">&apos;The client-side rendered virtual DOM tree is not matching &apos;</span> +
+                <span class="hljs-string">&apos;server-rendered content. This is likely caused by incorrect &apos;</span> +
+                <span class="hljs-string">&apos;HTML markup, for example nesting block-level elements inside &apos;</span> +
+                <span class="hljs-string">&apos;&lt;p&gt;, or missing &lt;tbody&gt;. Bailing hydration and performing &apos;</span> +
+                <span class="hljs-string">&apos;full client-side render.&apos;</span>
+              )
+            }
+          }
+          <span class="hljs-comment">// either not server-rendered, or hydration failed.</span>
+          <span class="hljs-comment">// create an empty node and replace it</span>
+          oldVnode = emptyNodeAt(oldVnode)
+        }
+
+        <span class="hljs-comment">// replacing existing element</span>
+        <span class="hljs-keyword">const</span> oldElm = oldVnode.elm
+        <span class="hljs-keyword">const</span> parentElm = nodeOps.parentNode(oldElm)
+
+        <span class="hljs-comment">// create new node</span>
+        createElm(
+          vnode,
+          insertedVnodeQueue,
+          <span class="hljs-comment">// extremely rare edge case: do not insert if old element is in a</span>
+          <span class="hljs-comment">// leaving transition. Only happens when combining transition +</span>
+          <span class="hljs-comment">// keep-alive + HOCs. (#4590)</span>
+          oldElm._leaveCb ? <span class="hljs-literal">null</span> : parentElm,
+          nodeOps.nextSibling(oldElm)
+        )
+
+        <span class="hljs-comment">// update parent placeholder node element, recursively</span>
+        <span class="hljs-keyword">if</span> (isDef(vnode.parent)) {
+          <span class="hljs-keyword">let</span> ancestor = vnode.parent
+          <span class="hljs-keyword">const</span> patchable = isPatchable(vnode)
+          <span class="hljs-keyword">while</span> (ancestor) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; cbs.destroy.length; ++i) {
+              cbs.destroy[i](ancestor)
+            }
+            ancestor.elm = vnode.elm
+            <span class="hljs-keyword">if</span> (patchable) {
+              <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; cbs.create.length; ++i) {
+                cbs.create[i](emptyNode, ancestor)
+              }
+              <span class="hljs-comment">// #6513</span>
+              <span class="hljs-comment">// invoke insert hooks that may have been merged by create hooks.</span>
+              <span class="hljs-comment">// e.g. for directives that uses the &quot;inserted&quot; hook.</span>
+              <span class="hljs-keyword">const</span> insert = ancestor.data.hook.insert
+              <span class="hljs-keyword">if</span> (insert.merged) {
+                <span class="hljs-comment">// start at index 1 to avoid re-invoking component mounted hook</span>
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; insert.fns.length; i++) {
+                  insert.fns[i]()
+                }
+              }
+            } <span class="hljs-keyword">else</span> {
+              registerRef(ancestor)
+            }
+            ancestor = ancestor.parent
+          }
+        }
+
+        <span class="hljs-comment">// destroy old node</span>
+        <span class="hljs-keyword">if</span> (isDef(parentElm)) {
+          removeVnodes(parentElm, [oldVnode], <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isDef(oldVnode.tag)) {
+          invokeDestroyHook(oldVnode)
+        }
+      }
+    }
+
+    invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch)
+    <span class="hljs-keyword">return</span> vnode.elm
+  }
+}
+</code></pre>
+<p><code>createPatchFunction</code> &#x5185;&#x90E8;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x8F85;&#x52A9;&#x65B9;&#x6CD5;&#xFF0C;&#x6700;&#x7EC8;&#x8FD4;&#x56DE;&#x4E86;&#x4E00;&#x4E2A; <code>patch</code> &#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5C31;&#x8D4B;&#x503C;&#x7ED9;&#x4E86; <code>vm._update</code> &#x51FD;&#x6570;&#x91CC;&#x8C03;&#x7528;&#x7684; <code>vm.__patch__</code>&#x3002;</p>
+<p>&#x5728;&#x4ECB;&#x7ECD; <code>patch</code> &#x7684;&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x4E4B;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x601D;&#x8003;&#x4E00;&#x4E0B;&#x4E3A;&#x4F55; Vue.js &#x6E90;&#x7801;&#x7ED5;&#x4E86;&#x8FD9;&#x4E48;&#x4E00;&#x5927;&#x5708;&#xFF0C;&#x628A;&#x76F8;&#x5173;&#x4EE3;&#x7801;&#x5206;&#x6563;&#x5230;&#x5404;&#x4E2A;&#x76EE;&#x5F55;&#x3002;&#x56E0;&#x4E3A;&#x524D;&#x9762;&#x4ECB;&#x7ECD;&#x8FC7;&#xFF0C;<code>patch</code> &#x662F;&#x5E73;&#x53F0;&#x76F8;&#x5173;&#x7684;&#xFF0C;&#x5728; Web &#x548C; Weex &#x73AF;&#x5883;&#xFF0C;&#x5B83;&#x4EEC;&#x628A;&#x865A;&#x62DF; DOM &#x6620;&#x5C04;&#x5230; &#x201C;&#x5E73;&#x53F0; DOM&#x201D; &#x7684;&#x65B9;&#x6CD5;&#x662F;&#x4E0D;&#x540C;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9; &#x201C;DOM&#x201D; &#x5305;&#x62EC;&#x7684;&#x5C5E;&#x6027;&#x6A21;&#x5757;&#x521B;&#x5EFA;&#x548C;&#x66F4;&#x65B0;&#x4E5F;&#x4E0D;&#x5C3D;&#x76F8;&#x540C;&#x3002;&#x56E0;&#x6B64;&#x6BCF;&#x4E2A;&#x5E73;&#x53F0;&#x90FD;&#x6709;&#x5404;&#x81EA;&#x7684; <code>nodeOps</code> &#x548C; <code>modules</code>&#xFF0C;&#x5B83;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#x9700;&#x8981;&#x6258;&#x7BA1;&#x5728; <code>src/platforms</code> &#x8FD9;&#x4E2A;&#x5927;&#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+<p>&#x800C;&#x4E0D;&#x540C;&#x5E73;&#x53F0;&#x7684; <code>patch</code> &#x7684;&#x4E3B;&#x8981;&#x903B;&#x8F91;&#x90E8;&#x5206;&#x662F;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x90E8;&#x5206;&#x516C;&#x5171;&#x7684;&#x90E8;&#x5206;&#x6258;&#x7BA1;&#x5728; <code>core</code> &#x8FD9;&#x4E2A;&#x5927;&#x76EE;&#x5F55;&#x4E0B;&#x3002;&#x5DEE;&#x5F02;&#x5316;&#x90E8;&#x5206;&#x53EA;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x53C2;&#x6570;&#x6765;&#x533A;&#x522B;&#xFF0C;&#x8FD9;&#x91CC;&#x7528;&#x5230;&#x4E86;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x67EF;&#x91CC;&#x5316;&#x7684;&#x6280;&#x5DE7;&#xFF0C;&#x901A;&#x8FC7; <code>createPatchFunction</code> &#x628A;&#x5DEE;&#x5F02;&#x5316;&#x53C2;&#x6570;&#x63D0;&#x524D;&#x56FA;&#x5316;&#xFF0C;&#x8FD9;&#x6837;&#x4E0D;&#x7528;&#x6BCF;&#x6B21;&#x8C03;&#x7528; <code>patch</code> &#x7684;&#x65F6;&#x5019;&#x90FD;&#x4F20;&#x9012; <code>nodeOps</code> &#x548C; <code>modules</code> &#x4E86;&#xFF0C;&#x8FD9;&#x79CD;&#x7F16;&#x7A0B;&#x6280;&#x5DE7;&#x4E5F;&#x975E;&#x5E38;&#x503C;&#x5F97;&#x5B66;&#x4E60;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x91CC;&#xFF0C;<code>nodeOps</code> &#x8868;&#x793A;&#x5BF9; &#x201C;&#x5E73;&#x53F0; DOM&#x201D; &#x7684;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;&#x65B9;&#x6CD5;&#xFF0C;<code>modules</code> &#x8868;&#x793A;&#x5E73;&#x53F0;&#x7684;&#x4E00;&#x4E9B;&#x6A21;&#x5757;&#xFF0C;&#x5B83;&#x4EEC;&#x4F1A;&#x5728;&#x6574;&#x4E2A; <code>patch</code> &#x8FC7;&#x7A0B;&#x7684;&#x4E0D;&#x540C;&#x9636;&#x6BB5;&#x6267;&#x884C;&#x76F8;&#x5E94;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x3002;&#x8FD9;&#x4E9B;&#x4EE3;&#x7801;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x4F1A;&#x5728;&#x4E4B;&#x540E;&#x7684;&#x7AE0;&#x8282;&#x4ECB;&#x7ECD;&#x3002;</p>
+<p>&#x56DE;&#x5230; <code>patch</code> &#x65B9;&#x6CD5;&#x672C;&#x8EAB;&#xFF0C;&#x5B83;&#x63A5;&#x6536; 4&#x4E2A;&#x53C2;&#x6570;&#xFF0C;<code>oldVnode</code> &#x8868;&#x793A;&#x65E7;&#x7684; VNode &#x8282;&#x70B9;&#xFF0C;&#x5B83;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x5B58;&#x5728;&#x6216;&#x8005;&#x662F;&#x4E00;&#x4E2A; DOM &#x5BF9;&#x8C61;&#xFF1B;<code>vnode</code> &#x8868;&#x793A;&#x6267;&#x884C; <code>_render</code> &#x540E;&#x8FD4;&#x56DE;&#x7684; VNode &#x7684;&#x8282;&#x70B9;&#xFF1B;<code>hydrating</code> &#x8868;&#x793A;&#x662F;&#x5426;&#x662F;&#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3;&#xFF1B;<code>removeOnly</code> &#x662F;&#x7ED9; <code>transition-group</code> &#x7528;&#x7684;&#xFF0C;&#x4E4B;&#x540E;&#x4F1A;&#x4ECB;&#x7ECD;&#x3002;</p>
+<p><code>patch</code> &#x7684;&#x903B;&#x8F91;&#x770B;&#x4E0A;&#x53BB;&#x76F8;&#x5BF9;&#x590D;&#x6742;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x6709;&#x7740;&#x975E;&#x5E38;&#x591A;&#x7684;&#x5206;&#x652F;&#x903B;&#x8F91;&#xFF0C;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x7406;&#x89E3;&#xFF0C;&#x6211;&#x4EEC;&#x5E76;&#x4E0D;&#x4F1A;&#x5728;&#x8FD9;&#x91CC;&#x4ECB;&#x7ECD;&#x6240;&#x6709;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x4EC5;&#x4F1A;&#x9488;&#x5BF9;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x7684;&#x4F8B;&#x5B50;&#x5206;&#x6790;&#x5B83;&#x7684;&#x6267;&#x884C;&#x903B;&#x8F91;&#x3002;&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x5BF9;&#x5176;&#x5B83;&#x573A;&#x666F;&#x505A;&#x6E90;&#x7801;&#x5206;&#x6790;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x518D;&#x6B21;&#x56DE;&#x987E; <code>patch</code> &#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x5148;&#x6765;&#x56DE;&#x987E;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> app = <span class="hljs-keyword">new</span> Vue({
+  el: <span class="hljs-string">&apos;#app&apos;</span>,
+  render: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">createElement</span>) </span>{
+    <span class="hljs-keyword">return</span> createElement(<span class="hljs-string">&apos;div&apos;</span>, {
+      attrs: {
+        id: <span class="hljs-string">&apos;app&apos;</span>
+      },
+    }, <span class="hljs-keyword">this</span>.message)
+  },
+  data: {
+    message: <span class="hljs-string">&apos;Hello Vue!&apos;</span>
+  }
+})
+</code></pre>
+<p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5728; <code>vm._update</code> &#x7684;&#x65B9;&#x6CD5;&#x91CC;&#x662F;&#x8FD9;&#x4E48;&#x8C03;&#x7528; <code>patch</code> &#x65B9;&#x6CD5;&#x7684;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-comment">// initial render</span>
+vm.$el = vm.__patch__(vm.$el, vnode, hydrating, <span class="hljs-literal">false</span> <span class="hljs-comment">/* removeOnly */</span>)
+</code></pre>
+<p>&#x7ED3;&#x5408;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x573A;&#x666F;&#x662F;&#x9996;&#x6B21;&#x6E32;&#x67D3;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x6267;&#x884C; <code>patch</code> &#x51FD;&#x6570;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F20;&#x5165;&#x7684; <code>vm.$el</code> &#x5BF9;&#x5E94;&#x7684;&#x662F;&#x4F8B;&#x5B50;&#x4E2D; id &#x4E3A; <code>app</code> &#x7684; DOM &#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E5F;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x5728; index.html &#x6A21;&#x677F;&#x4E2D;&#x5199;&#x7684; <code>&lt;div id=&quot;app&quot;&gt;</code>&#xFF0C; <code>vm.$el</code> &#x7684;&#x8D4B;&#x503C;&#x662F;&#x5728;&#x4E4B;&#x524D; <code>mountComponent</code> &#x51FD;&#x6570;&#x505A;&#x7684;&#xFF0C;<code>vnode</code> &#x5BF9;&#x5E94;&#x7684;&#x662F;&#x8C03;&#x7528; <code>render</code> &#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;<code>hydrating</code> &#x5728;&#x975E;&#x670D;&#x52A1;&#x7AEF;&#x6E32;&#x67D3;&#x60C5;&#x51B5;&#x4E0B;&#x4E3A; false&#xFF0C;<code>removeOnly</code> &#x4E3A; false&#x3002;</p>
+<p>&#x786E;&#x5B9A;&#x4E86;&#x8FD9;&#x4E9B;&#x5165;&#x53C2;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x56DE;&#x5230; <code>patch</code> &#x51FD;&#x6570;&#x7684;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#xFF0C;&#x770B;&#x51E0;&#x4E2A;&#x5173;&#x952E;&#x6B65;&#x9AA4;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> isRealElement = isDef(oldVnode.nodeType)
+<span class="hljs-keyword">if</span> (!isRealElement &amp;&amp; sameVnode(oldVnode, vnode)) {
+  <span class="hljs-comment">// patch existing root node</span>
+  patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly)
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-keyword">if</span> (isRealElement) {
+    <span class="hljs-comment">// mounting to a real element</span>
+    <span class="hljs-comment">// check if this is server-rendered content and if we can perform</span>
+    <span class="hljs-comment">// a successful hydration.</span>
+    <span class="hljs-keyword">if</span> (oldVnode.nodeType === <span class="hljs-number">1</span> &amp;&amp; oldVnode.hasAttribute(SSR_ATTR)) {
+      oldVnode.removeAttribute(SSR_ATTR)
+      hydrating = <span class="hljs-literal">true</span>
+    }
+    <span class="hljs-keyword">if</span> (isTrue(hydrating)) {
+      <span class="hljs-keyword">if</span> (hydrate(oldVnode, vnode, insertedVnodeQueue)) {
+        invokeInsertHook(vnode, insertedVnodeQueue, <span class="hljs-literal">true</span>)
+        <span class="hljs-keyword">return</span> oldVnode
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+        warn(
+          <span class="hljs-string">&apos;The client-side rendered virtual DOM tree is not matching &apos;</span> +
+          <span class="hljs-string">&apos;server-rendered content. This is likely caused by incorrect &apos;</span> +
+          <span class="hljs-string">&apos;HTML markup, for example nesting block-level elements inside &apos;</span> +
+          <span class="hljs-string">&apos;&lt;p&gt;, or missing &lt;tbody&gt;. Bailing hydration and performing &apos;</span> +
+          <span class="hljs-string">&apos;full client-side render.&apos;</span>
+        )
+      }
+    }      
+    <span class="hljs-comment">// either not server-rendered, or hydration failed.</span>
+    <span class="hljs-comment">// create an empty node and replace it</span>
+    oldVnode = emptyNodeAt(oldVnode)
+  }
+
+  <span class="hljs-comment">// replacing existing element</span>
+  <span class="hljs-keyword">const</span> oldElm = oldVnode.elm
+  <span class="hljs-keyword">const</span> parentElm = nodeOps.parentNode(oldElm)
+
+  <span class="hljs-comment">// create new node</span>
+  createElm(
+    vnode,
+    insertedVnodeQueue,
+    <span class="hljs-comment">// extremely rare edge case: do not insert if old element is in a</span>
+    <span class="hljs-comment">// leaving transition. Only happens when combining transition +</span>
+    <span class="hljs-comment">// keep-alive + HOCs. (#4590)</span>
+    oldElm._leaveCb ? <span class="hljs-literal">null</span> : parentElm,
+    nodeOps.nextSibling(oldElm)
+  )
+}
+</code></pre>
+<p>&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x4F20;&#x5165;&#x7684; <code>oldVnode</code> &#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4E00;&#x4E2A; DOM container&#xFF0C;&#x6240;&#x4EE5; <code>isRealElement</code> &#x4E3A; true&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x53C8;&#x901A;&#x8FC7; <code>emptyNodeAt</code> &#x65B9;&#x6CD5;&#x628A; <code>oldVnode</code> &#x8F6C;&#x6362;&#x6210; <code>VNode</code> &#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8C03;&#x7528; <code>createElm</code> &#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5728;&#x8FD9;&#x91CC;&#x975E;&#x5E38;&#x91CD;&#x8981;&#xFF0C;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createElm</span> (<span class="hljs-params">
+  vnode,
+  insertedVnodeQueue,
+  parentElm,
+  refElm,
+  nested,
+  ownerArray,
+  index
+</span>) </span>{
+  <span class="hljs-keyword">if</span> (isDef(vnode.elm) &amp;&amp; isDef(ownerArray)) {
+    <span class="hljs-comment">// This vnode was used in a previous render!</span>
+    <span class="hljs-comment">// now it&apos;s used as a new node, overwriting its elm would cause</span>
+    <span class="hljs-comment">// potential patch errors down the road when it&apos;s used as an insertion</span>
+    <span class="hljs-comment">// reference node. Instead, we clone the node on-demand before creating</span>
+    <span class="hljs-comment">// associated DOM element for it.</span>
+    vnode = ownerArray[index] = cloneVNode(vnode)
+  }
+
+  vnode.isRootInsert = !nested <span class="hljs-comment">// for transition enter check</span>
+  <span class="hljs-keyword">if</span> (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-keyword">const</span> data = vnode.data
+  <span class="hljs-keyword">const</span> children = vnode.children
+  <span class="hljs-keyword">const</span> tag = vnode.tag
+  <span class="hljs-keyword">if</span> (isDef(tag)) {
+    <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+      <span class="hljs-keyword">if</span> (data &amp;&amp; data.pre) {
+        creatingElmInVPre++
+      }
+      <span class="hljs-keyword">if</span> (isUnknownElement(vnode, creatingElmInVPre)) {
+        warn(
+          <span class="hljs-string">&apos;Unknown custom element: &lt;&apos;</span> + tag + <span class="hljs-string">&apos;&gt; - did you &apos;</span> +
+          <span class="hljs-string">&apos;register the component correctly? For recursive components, &apos;</span> +
+          <span class="hljs-string">&apos;make sure to provide the &quot;name&quot; option.&apos;</span>,
+          vnode.context
+        )
+      }
+    }
+
+    vnode.elm = vnode.ns
+      ? nodeOps.createElementNS(vnode.ns, tag)
+      : nodeOps.createElement(tag, vnode)
+    setScope(vnode)
+
+    <span class="hljs-comment">/* istanbul ignore if */</span>
+    <span class="hljs-keyword">if</span> (__WEEX__) {
+      <span class="hljs-comment">// ...</span>
+    } <span class="hljs-keyword">else</span> {
+      createChildren(vnode, children, insertedVnodeQueue)
+      <span class="hljs-keyword">if</span> (isDef(data)) {
+        invokeCreateHooks(vnode, insertedVnodeQueue)
+      }
+      insert(parentElm, vnode.elm, refElm)
+    }
+
+    <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; data &amp;&amp; data.pre) {
+      creatingElmInVPre--
+    }
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isTrue(vnode.isComment)) {
+    vnode.elm = nodeOps.createComment(vnode.text)
+    insert(parentElm, vnode.elm, refElm)
+  } <span class="hljs-keyword">else</span> {
+    vnode.elm = nodeOps.createTextNode(vnode.text)
+    insert(parentElm, vnode.elm, refElm)
+  }
+}
+</code></pre>
+<p><code>createElm</code> &#x7684;&#x4F5C;&#x7528;&#x662F;&#x901A;&#x8FC7;&#x865A;&#x62DF;&#x8282;&#x70B9;&#x521B;&#x5EFA;&#x771F;&#x5B9E;&#x7684; DOM &#x5E76;&#x63D2;&#x5165;&#x5230;&#x5B83;&#x7684;&#x7236;&#x8282;&#x70B9;&#x4E2D;&#x3002; &#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x5B83;&#x7684;&#x4E00;&#x4E9B;&#x5173;&#x952E;&#x903B;&#x8F91;&#xFF0C;<code>createComponent</code> &#x65B9;&#x6CD5;&#x76EE;&#x7684;&#x662F;&#x5C1D;&#x8BD5;&#x521B;&#x5EFA;&#x5B50;&#x7EC4;&#x4EF6;&#xFF0C;&#x8FD9;&#x4E2A;&#x903B;&#x8F91;&#x5728;&#x4E4B;&#x540E;&#x7EC4;&#x4EF6;&#x7684;&#x7AE0;&#x8282;&#x4F1A;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#xFF0C;&#x5728;&#x5F53;&#x524D;&#x8FD9;&#x4E2A; case &#x4E0B;&#x5B83;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x4E3A; false&#xFF1B;&#x63A5;&#x4E0B;&#x6765;&#x5224;&#x65AD; <code>vnode</code> &#x662F;&#x5426;&#x5305;&#x542B; tag&#xFF0C;&#x5982;&#x679C;&#x5305;&#x542B;&#xFF0C;&#x5148;&#x7B80;&#x5355;&#x5BF9; tag &#x7684;&#x5408;&#x6CD5;&#x6027;&#x5728;&#x975E;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E0B;&#x505A;&#x6821;&#x9A8C;&#xFF0C;&#x770B;&#x662F;&#x5426;&#x662F;&#x4E00;&#x4E2A;&#x5408;&#x6CD5;&#x6807;&#x7B7E;&#xFF1B;&#x7136;&#x540E;&#x518D;&#x53BB;&#x8C03;&#x7528;&#x5E73;&#x53F0; DOM &#x7684;&#x64CD;&#x4F5C;&#x53BB;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5360;&#x4F4D;&#x7B26;&#x5143;&#x7D20;&#x3002;</p>
+<pre><code class="lang-js">vnode.elm = vnode.ns
+  ? nodeOps.createElementNS(vnode.ns, tag)
+  : nodeOps.createElement(tag, vnode)
+</code></pre>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x8C03;&#x7528; <code>createChildren</code> &#x65B9;&#x6CD5;&#x53BB;&#x521B;&#x5EFA;&#x5B50;&#x5143;&#x7D20;&#xFF1A;</p>
+<pre><code class="lang-js">createChildren(vnode, children, insertedVnodeQueue)
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createChildren</span> (<span class="hljs-params">vnode, children, insertedVnodeQueue</span>) </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(children)) {
+    <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+      checkDuplicateKeys(children)
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; children.length; ++i) {
+      createElm(children[i], insertedVnodeQueue, vnode.elm, <span class="hljs-literal">null</span>, <span class="hljs-literal">true</span>, children, i)
+    }
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isPrimitive(vnode.text)) {
+    nodeOps.appendChild(vnode.elm, nodeOps.createTextNode(<span class="hljs-built_in">String</span>(vnode.text)))
+  }
+}
+</code></pre>
+<p><code>createChildren</code> &#x7684;&#x903B;&#x8F91;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x904D;&#x5386;&#x5B50;&#x865A;&#x62DF;&#x8282;&#x70B9;&#xFF0C;&#x9012;&#x5F52;&#x8C03;&#x7528; <code>createElm</code>&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x5E38;&#x7528;&#x7684;&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x7684;&#x904D;&#x5386;&#x7B97;&#x6CD5;&#xFF0C;&#x8FD9;&#x91CC;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x4E00;&#x70B9;&#x662F;&#x5728;&#x904D;&#x5386;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F1A;&#x628A; <code>vnode.elm</code> &#x4F5C;&#x4E3A;&#x7236;&#x5BB9;&#x5668;&#x7684; DOM &#x8282;&#x70B9;&#x5360;&#x4F4D;&#x7B26;&#x4F20;&#x5165;&#x3002;</p>
+<p>&#x63A5;&#x7740;&#x518D;&#x8C03;&#x7528; <code>invokeCreateHooks</code> &#x65B9;&#x6CD5;&#x6267;&#x884C;&#x6240;&#x6709;&#x7684; create &#x7684;&#x94A9;&#x5B50;&#x5E76;&#x628A; <code>vnode</code> push &#x5230; <code>insertedVnodeQueue</code> &#x4E2D;&#x3002;</p>
+<pre><code class="lang-js"> <span class="hljs-keyword">if</span> (isDef(data)) {
+  invokeCreateHooks(vnode, insertedVnodeQueue)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">invokeCreateHooks</span> (<span class="hljs-params">vnode, insertedVnodeQueue</span>) </span>{
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; cbs.create.length; ++i) {
+    cbs.create[i](emptyNode, vnode)
+  }
+  i = vnode.data.hook <span class="hljs-comment">// Reuse variable</span>
+  <span class="hljs-keyword">if</span> (isDef(i)) {
+    <span class="hljs-keyword">if</span> (isDef(i.create)) i.create(emptyNode, vnode)
+    <span class="hljs-keyword">if</span> (isDef(i.insert)) insertedVnodeQueue.push(vnode)
+  }
+}
+</code></pre>
+<p>&#x6700;&#x540E;&#x8C03;&#x7528; <code>insert</code> &#x65B9;&#x6CD5;&#x628A; <code>DOM</code> &#x63D2;&#x5165;&#x5230;&#x7236;&#x8282;&#x70B9;&#x4E2D;&#xFF0C;&#x56E0;&#x4E3A;&#x662F;&#x9012;&#x5F52;&#x8C03;&#x7528;&#xFF0C;&#x5B50;&#x5143;&#x7D20;&#x4F1A;&#x4F18;&#x5148;&#x8C03;&#x7528; <code>insert</code>&#xFF0C;&#x6240;&#x4EE5;&#x6574;&#x4E2A; <code>vnode</code> &#x6811;&#x8282;&#x70B9;&#x7684;&#x63D2;&#x5165;&#x987A;&#x5E8F;&#x662F;&#x5148;&#x5B50;&#x540E;&#x7236;&#x3002;&#x6765;&#x770B;&#x4E00;&#x4E0B; <code>insert</code> &#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/vdom/patch.js</code> &#x4E0A;&#x3002;</p>
+<pre><code class="lang-js">insert(parentElm, vnode.elm, refElm)
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insert</span> (<span class="hljs-params">parent, elm, ref</span>) </span>{
+  <span class="hljs-keyword">if</span> (isDef(parent)) {
+    <span class="hljs-keyword">if</span> (isDef(ref)) {
+      <span class="hljs-keyword">if</span> (ref.parentNode === parent) {
+        nodeOps.insertBefore(parent, elm, ref)
+      }
+    } <span class="hljs-keyword">else</span> {
+      nodeOps.appendChild(parent, elm)
+    }
+  }
+}
+</code></pre>
+<p><code>insert</code> &#x903B;&#x8F91;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x8C03;&#x7528;&#x4E00;&#x4E9B; <code>nodeOps</code> &#x628A;&#x5B50;&#x8282;&#x70B9;&#x63D2;&#x5165;&#x5230;&#x7236;&#x8282;&#x70B9;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E9B;&#x8F85;&#x52A9;&#x65B9;&#x6CD5;&#x5B9A;&#x4E49;&#x5728; <code>src/platforms/web/runtime/node-ops.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insertBefore</span> (<span class="hljs-params">parentNode: Node, newNode: Node, referenceNode: Node</span>) </span>{
+  parentNode.insertBefore(newNode, referenceNode)
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">appendChild</span> (<span class="hljs-params">node: Node, child: Node</span>) </span>{
+  node.appendChild(child)
+}
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x8C03;&#x7528;&#x539F;&#x751F; DOM &#x7684; API &#x8FDB;&#x884C; DOM &#x64CD;&#x4F5C;&#xFF0C;&#x770B;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x5F88;&#x591A;&#x540C;&#x5B66;&#x604D;&#x7136;&#x5927;&#x609F;&#xFF0C;&#x539F;&#x6765; Vue &#x662F;&#x8FD9;&#x6837;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x7684; DOM&#x3002;</p>
+<p>&#x5728; <code>createElm</code> &#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5982;&#x679C; <code>vnode</code> &#x8282;&#x70B9;&#x5982;&#x679C;&#x4E0D;&#x5305;&#x542B; <code>tag</code>&#xFF0C;&#x5219;&#x5B83;&#x6709;&#x53EF;&#x80FD;&#x662F;&#x4E00;&#x4E2A;&#x6CE8;&#x91CA;&#x6216;&#x8005;&#x7EAF;&#x6587;&#x672C;&#x8282;&#x70B9;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x63D2;&#x5165;&#x5230;&#x7236;&#x5143;&#x7D20;&#x4E2D;&#x3002;&#x5728;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x6700;&#x5185;&#x5C42;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x6587;&#x672C; <code>vnode</code>&#xFF0C;&#x5B83;&#x7684; <code>text</code> &#x503C;&#x53D6;&#x7684;&#x5C31;&#x662F;&#x4E4B;&#x524D;&#x7684; <code>this.message</code> &#x7684;&#x503C; <code>Hello Vue!</code>&#x3002;</p>
+<p>&#x518D;&#x56DE;&#x5230; <code>patch</code> &#x65B9;&#x6CD5;&#xFF0C;&#x9996;&#x6B21;&#x6E32;&#x67D3;&#x6211;&#x4EEC;&#x8C03;&#x7528;&#x4E86; <code>createElm</code> &#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x91CC;&#x4F20;&#x5165;&#x7684; <code>parentElm</code> &#x662F; <code>oldVnode.elm</code> &#x7684;&#x7236;&#x5143;&#x7D20;&#xFF0C; &#x5728;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x662F; id &#x4E3A; <code>#app</code> div &#x7684;&#x7236;&#x5143;&#x7D20;&#xFF0C;&#x4E5F;&#x5C31;&#x662F; Body&#xFF1B;&#x5B9E;&#x9645;&#x4E0A;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x5C31;&#x662F;&#x9012;&#x5F52;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684; DOM &#x6811;&#x5E76;&#x63D2;&#x5165;&#x5230; Body &#x4E0A;&#x3002;</p>
+<p>&#x6700;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x6839;&#x636E;&#x4E4B;&#x524D;&#x9012;&#x5F52; <code>createElm</code> &#x751F;&#x6210;&#x7684; <code>vnode</code> &#x63D2;&#x5165;&#x987A;&#x5E8F;&#x961F;&#x5217;&#xFF0C;&#x6267;&#x884C;&#x76F8;&#x5173;&#x7684; <code>insert</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x6211;&#x4EEC;&#x4E4B;&#x540E;&#x4F1A;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x90A3;&#x4E48;&#x81F3;&#x6B64;&#x6211;&#x4EEC;&#x4ECE;&#x4E3B;&#x7EBF;&#x4E0A;&#x628A;&#x6A21;&#x677F;&#x548C;&#x6570;&#x636E;&#x5982;&#x4F55;&#x6E32;&#x67D3;&#x6210;&#x6700;&#x7EC8;&#x7684; DOM &#x7684;&#x8FC7;&#x7A0B;&#x5206;&#x6790;&#x5B8C;&#x6BD5;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E0B;&#x56FE;&#x66F4;&#x76F4;&#x89C2;&#x5730;&#x770B;&#x5230;&#x4ECE;&#x521D;&#x59CB;&#x5316; Vue &#x5230;&#x6700;&#x7EC8;&#x6E32;&#x67D3;&#x7684;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x3002; </p>
+<p>&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x53EA;&#x662F;&#x5206;&#x6790;&#x4E86;&#x6700;&#x7B80;&#x5355;&#x548C;&#x6700;&#x57FA;&#x7840;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x5728;&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x628A;&#x9875;&#x9762;&#x62C6;&#x6210;&#x5F88;&#x591A;&#x7EC4;&#x4EF6;&#x7684;&#xFF0C;Vue &#x53E6;&#x4E00;&#x4E2A;&#x6838;&#x5FC3;&#x601D;&#x60F3;&#x5C31;&#x662F;&#x7EC4;&#x4EF6;&#x5316;&#x3002;&#x90A3;&#x4E48;&#x4E0B;&#x4E00;&#x7AE0;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5206;&#x6790; Vue &#x7684;&#x7EC4;&#x4EF6;&#x5316;&#x8FC7;&#x7A0B;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="create-element.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: createElement">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"update","level":"1.3.6","depth":2,"previous":{"title":"createElement","level":"1.3.5","depth":2,"path":"data-driven/create-element.md","ref":"data-driven/create-element.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"scripts":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"data-driven/update.md","mtime":"2018-04-09T16:13:02.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-09T16:14:07.162Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+
