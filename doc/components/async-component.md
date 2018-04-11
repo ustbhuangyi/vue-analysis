@@ -15,7 +15,7 @@ Vue.component('async-example', function (resolve, reject) {
 
 在了解了异步组件如何注册后，我们从源码的角度来分析一下它的实现。
 
-上一节我们分析了组件的注册逻辑，由于组件的定义并不是一个普通对象，所以不会执行 `Vue.extend` 的逻辑把它变成一个组件的构造函数，但是它仍然可以执行到 `createComponent` 函数，我们再来对这个函数做回顾，它的定义在 `src/core/vdom/create-component/js` 中。
+上一节我们分析了组件的注册逻辑，由于组件的定义并不是一个普通对象，所以不会执行 `Vue.extend` 的逻辑把它变成一个组件的构造函数，但是它仍然可以执行到 `createComponent` 函数，我们再来对这个函数做回顾，它的定义在 `src/core/vdom/create-component/js` 中：
 
 ```js
 export function createComponent (
@@ -31,15 +31,22 @@ export function createComponent (
 
   const baseCtor = context.$options._base
 
+  // plain options object: turn it into a constructor
   if (isObject(Ctor)) {
     Ctor = baseCtor.extend(Ctor)
   }
+  
+  // ...
 
+  // async component
   let asyncFactory
   if (isUndef(Ctor.cid)) {
     asyncFactory = Ctor
     Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)
     if (Ctor === undefined) {
+      // return a placeholder node for async component, which is rendered
+      // as a comment node but preserves all the raw information for the node.
+      // the information will be used for async server-rendering and hydration.
       return createAsyncPlaceholder(
         asyncFactory,
         data,
@@ -49,11 +56,10 @@ export function createComponent (
       )
     }
   }
-  // ...
 }
 ```
 
-我们省略了不必要的逻辑，只保留关键逻辑，由于我们这个时候传入的 `Ctor` 是一个函数，那么它也并不会执行 `Vue.extend` 逻辑，因此它的 `cid` 是 `undefiend`，进入了异步组件创建的逻辑。这里首先执行了 `Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)` 方法，它的定义在 `src/core/vdom/helpers/resolve-async-component.js` 中。
+我们省略了不必要的逻辑，只保留关键逻辑，由于我们这个时候传入的 `Ctor` 是一个函数，那么它也并不会执行 `Vue.extend` 逻辑，因此它的 `cid` 是 `undefiend`，进入了异步组件创建的逻辑。这里首先执行了 `Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)` 方法，它的定义在 `src/core/vdom/helpers/resolve-async-component.js` 中：
 
 ```js
 export function resolveAsyncComponent (
@@ -74,6 +80,7 @@ export function resolveAsyncComponent (
   }
 
   if (isDef(factory.contexts)) {
+    // already pending
     factory.contexts.push(context)
   } else {
     const contexts = factory.contexts = [context]
@@ -190,9 +197,12 @@ Vue.component('async-example', AsyncComp)
 
 ## 普通函数异步组件
 
-针对普通函数的情况，前面几个 if 判断可以忽略，它们是为高级组件所用，对于 `factory.contexts` 的判断，是考虑到多个地方同时初始化一个异步组件，那么它的实际加载应该只有一次。接着进入实际加载逻辑，定义了 `forceRender`、`resolve` 和 `reject` 函数，注意 `resolve` 和 `reject` 函数用 `once` 函数做了一层包装，它的定义在 `src/shared/util.js` 中。
+针对普通函数的情况，前面几个 if 判断可以忽略，它们是为高级组件所用，对于 `factory.contexts` 的判断，是考虑到多个地方同时初始化一个异步组件，那么它的实际加载应该只有一次。接着进入实际加载逻辑，定义了 `forceRender`、`resolve` 和 `reject` 函数，注意 `resolve` 和 `reject` 函数用 `once` 函数做了一层包装，它的定义在 `src/shared/util.js` 中：
 
 ````js
+/**
+ * Ensure a function is called only once.
+ */
 export function once (fn: Function): Function {
   let called = false
   return function () {
@@ -205,7 +215,7 @@ export function once (fn: Function): Function {
 ````
 `once` 逻辑非常简单，传入一个函数，并返回一个新函数，它非常巧妙地利用闭包和一个标志位保证了它包装的函数只会执行一次，也就是确保 `resolve` 和 `reject` 函数只执行一次。
 
-接下来执行 `const res = factory(resolve, reject)` 逻辑，这块儿就是执行我们组件的工厂函数，同时把 `resolve` 和 `reject` 函数作为参数传入，组件的工厂函数通常会先发送请求去加载我们的异步组件的 JS 文件，拿到组件定义的对象 `res` 后，执行 `resolve(res)` 逻辑，它会先执行 `factory.resolved = ensureCtor(res, baseCtor)` ，它的定义在 `src/core/vdom/helpers/resolve-async-component.js` 中。
+接下来执行 `const res = factory(resolve, reject)` 逻辑，这块儿就是执行我们组件的工厂函数，同时把 `resolve` 和 `reject` 函数作为参数传入，组件的工厂函数通常会先发送请求去加载我们的异步组件的 JS 文件，拿到组件定义的对象 `res` 后，执行 `resolve(res)` 逻辑，它会先执行 `factory.resolved = ensureCtor(res, baseCtor)`：
 
 ```js
 function ensureCtor (comp: any, base) {
@@ -222,7 +232,7 @@ function ensureCtor (comp: any, base) {
 ```
 这个函数目的是为了保证能找到异步组件 JS 定义的组件对象，并且如果它是一个普通对象，则调用 `Vue.extend` 把它转换成一个组件的构造函数。
 
-`resolve` 逻辑最后判断了 `sync`，显然我们这个场景下 `sync` 为 false，那么就会执行 `forceRender` 函数，它会遍历 `factory.contexts`，拿到每一个调用异步组件的实例 `vm`, 执行 `vm.$forceUpdate()` 方法，它的定义在 `src/core/instance/lifecycle.js` 中。
+`resolve` 逻辑最后判断了 `sync`，显然我们这个场景下 `sync` 为 false，那么就会执行 `forceRender` 函数，它会遍历 `factory.contexts`，拿到每一个调用异步组件的实例 `vm`, 执行 `vm.$forceUpdate()` 方法，它的定义在 `src/core/instance/lifecycle.js` 中：
  
 ```js
 Vue.prototype.$forceUpdate = function () {
@@ -332,7 +342,7 @@ return factory.loading
 
 那么这时候我们有几种情况，按逻辑的执行顺序，对不同的情况做判断。
 
-- 异步组件加载失败
+### 异步组件加载失败
 当异步组件加载失败，会执行 `reject` 函数：
 
 ```js
@@ -357,7 +367,7 @@ if (isTrue(factory.error) && isDef(factory.errorComp)) {
 
 那么这个时候就返回 `factory.errorComp`，直接渲染 error 组件。
   
-- 异步组件加载成功
+### 异步组件加载成功
 
 当异步组件加载成功，会执行 `resolve` 函数：
 
@@ -378,7 +388,7 @@ if (isDef(factory.resolved)) {
 ```
 那么这个时候直接返回 `factory.resolved`，渲染成功加载的组件。
 
-- 异步组件加载中
+### 异步组件加载中
 
 如果异步组件加载中并未返回，这时候会走到这个逻辑：
 
@@ -390,7 +400,7 @@ if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
 
 那么则会返回 `factory.loadingComp`，渲染 loading 组件。
 
-- 异步组件加载超时
+### 异步组件加载超时
 
 如果超时，则走到了 `reject` 逻辑，之后逻辑和加载失败一样，渲染 error 组件。
 
@@ -399,7 +409,6 @@ if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
 回到 `createComponent` 的逻辑：
 
 ```js
-Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)
 Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)
 if (Ctor === undefined) {
   return createAsyncPlaceholder(
@@ -431,9 +440,9 @@ export function createAsyncPlaceholder (
 
 实际上就是就是创建了一个占位的注释 VNode，同时把 `asyncFactory` 和 `asyncMeta` 赋值给当前 `vnode`。
 
-然后再一次执行 `resolveAsyncComponent` 的时候，就会根据不同的情况，可能返回 loading、error 或成功加载的异步组件，返回值不为 `undefined`，因此就走正常的组件 `render`、`patch` 过程，与组件第一次渲染流程不一样，这个时候是存在新旧 `vnode` 的，下一章我会分析组件更新的 `patch` 过程。
+当执行 `forceRender` 的时候，会触发组件的重新渲染，那么会再一次执行 `resolveAsyncComponent`，这时候就会根据不同的情况，可能返回 loading、error 或成功加载的异步组件，返回值不为 `undefined`，因此就走正常的组件 `render`、`patch` 过程，与组件第一次渲染流程不一样，这个时候是存在新旧 `vnode` 的，下一章我会分析组件更新的 `patch` 过程。
 
 
 ## 总结
 
-通过以上代码分析，我们对 Vue 的异步组件的实现有了深入的了解，知道了 3 种异步组件的实现方式，并且看到高级异步组件的实现是非常巧妙的，它实现了 loading、resolve、reject、timeout 4 种状态，并通过 `forceRender` 强制重新渲染让它的几种状态按我们的期望方式呈现。
+通过以上代码分析，我们对 Vue 的异步组件的实现有了深入的了解，知道了 3 种异步组件的实现方式，并且看到高级异步组件的实现是非常巧妙的，它实现了 loading、resolve、reject、timeout 4 种状态。异步组件实现的本质是 2 次渲染，除了 0 delay 的高级异步组件第一次直接渲染成 loading 组件外，其它都是第一次渲染生成一个注释节点，当异步获取组件成功后，再通过 `forceRender` 强制重新渲染，这样就能正确渲染出我们异步加载的组件了。

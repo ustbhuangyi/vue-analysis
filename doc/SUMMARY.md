@@ -14,3 +14,11 @@
   - [createElement](data-driven/create-element.md)
   - [update](data-driven/update.md)  
   
+- [组件化](components/index.md)
+  - [createComponent](components/create-component.md)
+  - [patch](components/patch.md)
+  - [合并配置](components/merge-option.md)
+  - [生命周期](components/lifecycle.md)
+  - [组件注册](components/component-register.md)
+  - [异步组件](components/async-component.md)
+  
