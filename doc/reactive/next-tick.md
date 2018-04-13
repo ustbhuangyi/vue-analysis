@@ -35,7 +35,7 @@ for (macroTask of macroTaskQueue) {
 
 ## Vue 的实现
 
-在 Vue 源码 2.5+ 后，`nextTick` 的实现单独有一个 JS 文件来维护它，它的源码并不多，总共也就 100 多行。接下来我们来看一下它的实现，在 `src/core/util/next-tick.js` 中。
+在 Vue 源码 2.5+ 后，`nextTick` 的实现单独有一个 JS 文件来维护它，它的源码并不多，总共也就 100 多行。接下来我们来看一下它的实现，在 `src/core/util/next-tick.js` 中：
 
 ```js
 import { noop } from 'shared/util'
@@ -54,17 +54,30 @@ function flushCallbacks () {
   }
 }
 
+// Here we have async deferring wrappers using both microtasks and (macro) tasks.
+// In < 2.4 we used microtasks everywhere, but there are some scenarios where
+// microtasks have too high a priority and fire in between supposedly
+// sequential events (e.g. #4521, #6690) or even between bubbling of the same
+// event (#6566). However, using (macro) tasks everywhere also has subtle problems
+// when state is changed right before repaint (e.g. #6813, out-in transitions).
+// Here we use microtask by default, but expose a way to force (macro) task when
+// needed (e.g. in event handlers attached by v-on).
 let microTimerFunc
 let macroTimerFunc
 let useMacroTask = false
 
-// 定义 macroTask function
+// Determine (macro) task defer implementation.
+// Technically setImmediate should be the ideal choice, but it's only available
+// in IE. The only polyfill that consistently queues the callback after all DOM
+// events triggered in the same loop is by using MessageChannel.
+/* istanbul ignore if */
 if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
   macroTimerFunc = () => {
     setImmediate(flushCallbacks)
   }
 } else if (typeof MessageChannel !== 'undefined' && (
   isNative(MessageChannel) ||
+  // PhantomJS
   MessageChannel.toString() === '[object MessageChannelConstructor]'
 )) {
   const channel = new MessageChannel()
@@ -80,18 +93,28 @@ if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
   }
 }
 
-// 定义 microTask function
+// Determine microtask defer implementation.
+/* istanbul ignore next, $flow-disable-line */
 if (typeof Promise !== 'undefined' && isNative(Promise)) {
   const p = Promise.resolve()
   microTimerFunc = () => {
     p.then(flushCallbacks)
+    // in problematic UIWebViews, Promise.then doesn't completely break, but
+    // it can get stuck in a weird state where callbacks are pushed into the
+    // microtask queue but the queue isn't being flushed, until the browser
+    // needs to do some other work, e.g. handle a timer. Therefore we can
+    // "force" the microtask queue to be flushed by adding an empty timer.
     if (isIOS) setTimeout(noop)
   }
 } else {
+  // fallback to macro
   microTimerFunc = macroTimerFunc
 }
 
-// 对函数做包装，保证函数执行期间任何数据的修改走的都是 macroTask
+/**
+ * Wrap a function so that if any code inside triggers state change,
+ * the changes are queued using a (macro) task instead of a microtask.
+ */
 export function withMacroTask (fn: Function): Function {
   return fn._withTask || (fn._withTask = function () {
     useMacroTask = true
@@ -122,6 +145,7 @@ export function nextTick (cb?: Function, ctx?: Object) {
       microTimerFunc()
     }
   }
+  // $flow-disable-line
   if (!cb && typeof Promise !== 'undefined') {
     return new Promise(resolve => {
       _resolve = resolve

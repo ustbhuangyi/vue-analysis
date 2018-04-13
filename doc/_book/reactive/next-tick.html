@@ -1,0 +1,772 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>nextTick · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="questions.html" />
+    
+    
+    <link rel="prev" href="setters.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    准备
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../prepare/flow.html">
+            
+                <a href="../prepare/flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../prepare/directory.html">
+            
+                <a href="../prepare/directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../prepare/build.html">
+            
+                <a href="../prepare/build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../prepare/entrance.html">
+            
+                <a href="../prepare/entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../data-driven/">
+            
+                <a href="../data-driven/">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../data-driven/new-vue.html">
+            
+                <a href="../data-driven/new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../data-driven/mounted.html">
+            
+                <a href="../data-driven/mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../data-driven/render.html">
+            
+                <a href="../data-driven/render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../data-driven/virtual-dom.html">
+            
+                <a href="../data-driven/virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../data-driven/create-element.html">
+            
+                <a href="../data-driven/create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../data-driven/update.html">
+            
+                <a href="../data-driven/update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../components/">
+            
+                <a href="../components/">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../components/create-component.html">
+            
+                <a href="../components/create-component.html">
+            
+                    
+                    createComponent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../components/patch.html">
+            
+                <a href="../components/patch.html">
+            
+                    
+                    patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../components/merge-option.html">
+            
+                <a href="../components/merge-option.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../components/lifecycle.html">
+            
+                <a href="../components/lifecycle.html">
+            
+                    
+                    生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../components/component-register.html">
+            
+                <a href="../components/component-register.html">
+            
+                    
+                    组件注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../components/async-component.html">
+            
+                <a href="../components/async-component.html">
+            
+                    
+                    异步组件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    深入响应式原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="reactive-object.html">
+            
+                <a href="reactive-object.html">
+            
+                    
+                    响应式对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="getters.html">
+            
+                <a href="getters.html">
+            
+                    
+                    依赖收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="setters.html">
+            
+                <a href="setters.html">
+            
+                    
+                    派发更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.4" data-path="next-tick.html">
+            
+                <a href="next-tick.html">
+            
+                    
+                    nextTick
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="questions.html">
+            
+                <a href="questions.html">
+            
+                    
+                    检测变化的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="computed-watcher.html">
+            
+                <a href="computed-watcher.html">
+            
+                    
+                    计算属性 VS 侦听属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="component-update.html">
+            
+                <a href="component-update.html">
+            
+                    
+                    组件更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >nextTick</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="nexttick">nextTick</h1>
+<p><code>nextTick</code> &#x662F; Vue &#x7684;&#x4E00;&#x4E2A;&#x6838;&#x5FC3;&#x5B9E;&#x73B0;&#xFF0C;&#x5728;&#x4ECB;&#x7ECD; Vue &#x7684; nextTick &#x4E4B;&#x524D;&#xFF0C;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x5927;&#x5BB6;&#x7406;&#x89E3;&#xFF0C;&#x6211;&#x5148;&#x7B80;&#x5355;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B; JS &#x7684;&#x8FD0;&#x884C;&#x673A;&#x5236;&#x3002;</p>
+<h2 id="js-&#x8FD0;&#x884C;&#x673A;&#x5236;">JS &#x8FD0;&#x884C;&#x673A;&#x5236;</h2>
+<p>JS &#x6267;&#x884C;&#x662F;&#x5355;&#x7EBF;&#x7A0B;&#x7684;&#xFF0C;&#x5B83;&#x662F;&#x57FA;&#x4E8E;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x7684;&#x3002;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x5927;&#x81F4;&#x5206;&#x4E3A;&#x4EE5;&#x4E0B;&#x51E0;&#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<p>&#xFF08;1&#xFF09;&#x6240;&#x6709;&#x540C;&#x6B65;&#x4EFB;&#x52A1;&#x90FD;&#x5728;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E0A;&#x6267;&#x884C;&#xFF0C;&#x5F62;&#x6210;&#x4E00;&#x4E2A;&#x6267;&#x884C;&#x6808;&#xFF08;execution context stack&#xFF09;&#x3002;</p>
+<p>&#xFF08;2&#xFF09;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E4B;&#x5916;&#xFF0C;&#x8FD8;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&quot;&#x4EFB;&#x52A1;&#x961F;&#x5217;&quot;&#xFF08;task queue&#xFF09;&#x3002;&#x53EA;&#x8981;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x6709;&#x4E86;&#x8FD0;&#x884C;&#x7ED3;&#x679C;&#xFF0C;&#x5C31;&#x5728;&quot;&#x4EFB;&#x52A1;&#x961F;&#x5217;&quot;&#x4E4B;&#x4E2D;&#x653E;&#x7F6E;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x3002;</p>
+<p>&#xFF08;3&#xFF09;&#x4E00;&#x65E6;&quot;&#x6267;&#x884C;&#x6808;&quot;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x540C;&#x6B65;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#xFF0C;&#x7CFB;&#x7EDF;&#x5C31;&#x4F1A;&#x8BFB;&#x53D6;&quot;&#x4EFB;&#x52A1;&#x961F;&#x5217;&quot;&#xFF0C;&#x770B;&#x770B;&#x91CC;&#x9762;&#x6709;&#x54EA;&#x4E9B;&#x4E8B;&#x4EF6;&#x3002;&#x90A3;&#x4E9B;&#x5BF9;&#x5E94;&#x7684;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#xFF0C;&#x4E8E;&#x662F;&#x7ED3;&#x675F;&#x7B49;&#x5F85;&#x72B6;&#x6001;&#xFF0C;&#x8FDB;&#x5165;&#x6267;&#x884C;&#x6808;&#xFF0C;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x3002;</p>
+<p>&#xFF08;4&#xFF09;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E0D;&#x65AD;&#x91CD;&#x590D;&#x4E0A;&#x9762;&#x7684;&#x7B2C;&#x4E09;&#x6B65;&#x3002;</p>
+<p>// TODO &#x56FE;&#x7247;</p>
+<p>&#x4E3B;&#x7EBF;&#x7A0B;&#x7684;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x5C31;&#x662F;&#x4E00;&#x4E2A; tick&#xFF0C;&#x800C;&#x6240;&#x6709;&#x7684;&#x5F02;&#x6B65;&#x7ED3;&#x679C;&#x90FD;&#x662F;&#x901A;&#x8FC7; &#x201C;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x201D; &#x6765;&#x8C03;&#x5EA6;&#x88AB;&#x8C03;&#x5EA6;&#x3002; &#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x5B58;&#x653E;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x4E2A;&#x7684;&#x4EFB;&#x52A1;&#xFF08;task&#xFF09;&#x3002; &#x89C4;&#x8303;&#x4E2D;&#x89C4;&#x5B9A; task &#x5206;&#x4E3A;&#x4E24;&#x5927;&#x7C7B;&#xFF0C;&#x5206;&#x522B;&#x662F; macro task &#x548C; micro task&#xFF0C;&#x5E76;&#x4E14;&#x6BCF;&#x4E2A; macro task &#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x90FD;&#x8981;&#x6E05;&#x7A7A;&#x6240;&#x6709;&#x7684; micro task&#x3002;</p>
+<p>&#x5173;&#x4E8E; macro task &#x548C; micro task &#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x4F1A;&#x7EC6;&#x8BB2;&#xFF0C;&#x7B80;&#x5355;&#x901A;&#x8FC7;&#x4E00;&#x6BB5;&#x4EE3;&#x7801;&#x6F14;&#x793A;&#x4ED6;&#x4EEC;&#x7684;&#x6267;&#x884C;&#x987A;&#x5E8F;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">for</span> (macroTask <span class="hljs-keyword">of</span> macroTaskQueue) {
+    <span class="hljs-comment">// 1. Handle current MACRO-TASK</span>
+    handleMacroTask();
+
+    <span class="hljs-comment">// 2. Handle all MICRO-TASK</span>
+    <span class="hljs-keyword">for</span> (microTask <span class="hljs-keyword">of</span> microTaskQueue) {
+        handleMicroTask(microTask);
+    }
+}
+</code></pre>
+<p>&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x5E38;&#x89C1;&#x7684; macro task &#x6709; setTimeout&#x3001;MessageChannel&#x3001;postMessage&#x3001;setImmediate&#xFF1B;&#x5E38;&#x89C1;&#x7684; micro task &#x6709; MutationObsever &#x548C; Promise.then&#x3002;</p>
+<h2 id="vue-&#x7684;&#x5B9E;&#x73B0;">Vue &#x7684;&#x5B9E;&#x73B0;</h2>
+<p>&#x5728; Vue &#x6E90;&#x7801; 2.5+ &#x540E;&#xFF0C;<code>nextTick</code> &#x7684;&#x5B9E;&#x73B0;&#x5355;&#x72EC;&#x6709;&#x4E00;&#x4E2A; JS &#x6587;&#x4EF6;&#x6765;&#x7EF4;&#x62A4;&#x5B83;&#xFF0C;&#x5B83;&#x7684;&#x6E90;&#x7801;&#x5E76;&#x4E0D;&#x591A;&#xFF0C;&#x603B;&#x5171;&#x4E5F;&#x5C31; 100 &#x591A;&#x884C;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5728; <code>src/core/util/next-tick.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> { noop } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;shared/util&apos;</span>
+<span class="hljs-keyword">import</span> { handleError } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./error&apos;</span>
+<span class="hljs-keyword">import</span> { isIOS, isNative } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./env&apos;</span>
+
+<span class="hljs-keyword">const</span> callbacks = []
+<span class="hljs-keyword">let</span> pending = <span class="hljs-literal">false</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">flushCallbacks</span> (<span class="hljs-params"></span>) </span>{
+  pending = <span class="hljs-literal">false</span>
+  <span class="hljs-keyword">const</span> copies = callbacks.slice(<span class="hljs-number">0</span>)
+  callbacks.length = <span class="hljs-number">0</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; copies.length; i++) {
+    copies[i]()
+  }
+}
+
+<span class="hljs-comment">// Here we have async deferring wrappers using both microtasks and (macro) tasks.</span>
+<span class="hljs-comment">// In &lt; 2.4 we used microtasks everywhere, but there are some scenarios where</span>
+<span class="hljs-comment">// microtasks have too high a priority and fire in between supposedly</span>
+<span class="hljs-comment">// sequential events (e.g. #4521, #6690) or even between bubbling of the same</span>
+<span class="hljs-comment">// event (#6566). However, using (macro) tasks everywhere also has subtle problems</span>
+<span class="hljs-comment">// when state is changed right before repaint (e.g. #6813, out-in transitions).</span>
+<span class="hljs-comment">// Here we use microtask by default, but expose a way to force (macro) task when</span>
+<span class="hljs-comment">// needed (e.g. in event handlers attached by v-on).</span>
+<span class="hljs-keyword">let</span> microTimerFunc
+<span class="hljs-keyword">let</span> macroTimerFunc
+<span class="hljs-keyword">let</span> useMacroTask = <span class="hljs-literal">false</span>
+
+<span class="hljs-comment">// Determine (macro) task defer implementation.</span>
+<span class="hljs-comment">// Technically setImmediate should be the ideal choice, but it&apos;s only available</span>
+<span class="hljs-comment">// in IE. The only polyfill that consistently queues the callback after all DOM</span>
+<span class="hljs-comment">// events triggered in the same loop is by using MessageChannel.</span>
+<span class="hljs-comment">/* istanbul ignore if */</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> setImmediate !== <span class="hljs-string">&apos;undefined&apos;</span> &amp;&amp; isNative(setImmediate)) {
+  macroTimerFunc = () =&gt; {
+    setImmediate(flushCallbacks)
+  }
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> MessageChannel !== <span class="hljs-string">&apos;undefined&apos;</span> &amp;&amp; (
+  isNative(MessageChannel) ||
+  <span class="hljs-comment">// PhantomJS</span>
+  MessageChannel.toString() === <span class="hljs-string">&apos;[object MessageChannelConstructor]&apos;</span>
+)) {
+  <span class="hljs-keyword">const</span> channel = <span class="hljs-keyword">new</span> MessageChannel()
+  <span class="hljs-keyword">const</span> port = channel.port2
+  channel.port1.onmessage = flushCallbacks
+  macroTimerFunc = () =&gt; {
+    port.postMessage(<span class="hljs-number">1</span>)
+  }
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-comment">/* istanbul ignore next */</span>
+  macroTimerFunc = () =&gt; {
+    setTimeout(flushCallbacks, <span class="hljs-number">0</span>)
+  }
+}
+
+<span class="hljs-comment">// Determine microtask defer implementation.</span>
+<span class="hljs-comment">/* istanbul ignore next, $flow-disable-line */</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Promise</span> !== <span class="hljs-string">&apos;undefined&apos;</span> &amp;&amp; isNative(<span class="hljs-built_in">Promise</span>)) {
+  <span class="hljs-keyword">const</span> p = <span class="hljs-built_in">Promise</span>.resolve()
+  microTimerFunc = () =&gt; {
+    p.then(flushCallbacks)
+    <span class="hljs-comment">// in problematic UIWebViews, Promise.then doesn&apos;t completely break, but</span>
+    <span class="hljs-comment">// it can get stuck in a weird state where callbacks are pushed into the</span>
+    <span class="hljs-comment">// microtask queue but the queue isn&apos;t being flushed, until the browser</span>
+    <span class="hljs-comment">// needs to do some other work, e.g. handle a timer. Therefore we can</span>
+    <span class="hljs-comment">// &quot;force&quot; the microtask queue to be flushed by adding an empty timer.</span>
+    <span class="hljs-keyword">if</span> (isIOS) setTimeout(noop)
+  }
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-comment">// fallback to macro</span>
+  microTimerFunc = macroTimerFunc
+}
+
+<span class="hljs-comment">/**
+ * Wrap a function so that if any code inside triggers state change,
+ * the changes are queued using a (macro) task instead of a microtask.
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withMacroTask</span> (<span class="hljs-params">fn: Function</span>): <span class="hljs-title">Function</span> </span>{
+  <span class="hljs-keyword">return</span> fn._withTask || (fn._withTask = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    useMacroTask = <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">const</span> res = fn.apply(<span class="hljs-literal">null</span>, <span class="hljs-built_in">arguments</span>)
+    useMacroTask = <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">return</span> res
+  })
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nextTick</span> (<span class="hljs-params">cb?: Function, ctx?: Object</span>) </span>{
+  <span class="hljs-keyword">let</span> _resolve
+  callbacks.push(() =&gt; {
+    <span class="hljs-keyword">if</span> (cb) {
+      <span class="hljs-keyword">try</span> {
+        cb.call(ctx)
+      } <span class="hljs-keyword">catch</span> (e) {
+        handleError(e, ctx, <span class="hljs-string">&apos;nextTick&apos;</span>)
+      }
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (_resolve) {
+      _resolve(ctx)
+    }
+  })
+  <span class="hljs-keyword">if</span> (!pending) {
+    pending = <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">if</span> (useMacroTask) {
+      macroTimerFunc()
+    } <span class="hljs-keyword">else</span> {
+      microTimerFunc()
+    }
+  }
+  <span class="hljs-comment">// $flow-disable-line</span>
+  <span class="hljs-keyword">if</span> (!cb &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Promise</span> !== <span class="hljs-string">&apos;undefined&apos;</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(resolve =&gt; {
+      _resolve = resolve
+    })
+  }
+}
+</code></pre>
+<p><code>next-tick.js</code> &#x7533;&#x660E;&#x4E86; <code>microTimerFunc</code> &#x548C; <code>macroTimerFunc</code> 2 &#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x5B83;&#x4EEC;&#x5206;&#x522B;&#x5BF9;&#x5E94;&#x7684;&#x662F; micro task &#x7684;&#x51FD;&#x6570;&#x548C; macro task &#x7684;&#x51FD;&#x6570;&#x3002;&#x5BF9;&#x4E8E; macro task &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x4F18;&#x5148;&#x68C0;&#x6D4B;&#x662F;&#x5426;&#x652F;&#x6301;&#x539F;&#x751F; <code>setImmediate</code>&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x9AD8;&#x7248;&#x672C; IE &#x548C; Edge &#x624D;&#x652F;&#x6301;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x4E0D;&#x652F;&#x6301;&#x7684;&#x8BDD;&#x518D;&#x53BB;&#x68C0;&#x6D4B;&#x662F;&#x5426;&#x652F;&#x6301;&#x539F;&#x751F;&#x7684; <code>MessageChannel</code>&#xFF0C;&#x5982;&#x679C;&#x4E5F;&#x4E0D;&#x652F;&#x6301;&#x7684;&#x8BDD;&#x5C31;&#x4F1A;&#x964D;&#x7EA7;&#x4E3A; <code>setTimeout 0</code>&#xFF1B;&#x800C;&#x5BF9;&#x4E8E; micro task &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5219;&#x68C0;&#x6D4B;&#x6D4F;&#x89C8;&#x5668;&#x662F;&#x5426;&#x539F;&#x751F;&#x652F;&#x6301; Promise&#xFF0C;&#x4E0D;&#x652F;&#x6301;&#x7684;&#x8BDD;&#x76F4;&#x63A5;&#x6307;&#x5411; macro task &#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+<p><code>next-tick.js</code> &#x5BF9;&#x5916;&#x66B4;&#x9732;&#x4E86; 2 &#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5148;&#x6765;&#x770B; <code>nextTick</code>&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x5728;&#x4E0A;&#x4E00;&#x8282;&#x6267;&#x884C; <code>nextTick(flushSchedulerQueue)</code> &#x6240;&#x7528;&#x5230;&#x7684;&#x51FD;&#x6570;&#x3002;&#x5B83;&#x7684;&#x903B;&#x8F91;&#x4E5F;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x628A;&#x4F20;&#x5165;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570; <code>cb</code> &#x538B;&#x5165; <code>callbacks</code> &#x6570;&#x7EC4;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x6B21;&#x6027;&#x5730;&#x6839;&#x636E; <code>useMacroTask</code> &#x6761;&#x4EF6;&#x6267;&#x884C; <code>macroTimerFunc</code> &#x6216;&#x8005;&#x662F; <code>microTimerFunc</code>&#xFF0C;&#x800C;&#x5B83;&#x4EEC;&#x90FD;&#x4F1A;&#x5728;&#x4E0B;&#x4E00;&#x4E2A; tick &#x6267;&#x884C; <code>flushCallbacks</code>&#xFF0C;<code>flushCallbacks</code> &#x7684;&#x903B;&#x8F91;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5BF9; <code>callbacks</code> &#x904D;&#x5386;&#xFF0C;&#x7136;&#x540E;&#x6267;&#x884C;&#x76F8;&#x5E94;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x4F7F;&#x7528; <code>callbacks</code> &#x800C;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x5728; <code>nextTick</code> &#x4E2D;&#x6267;&#x884C;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x7684;&#x539F;&#x56E0;&#x662F;&#x4FDD;&#x8BC1;&#x5728;&#x540C;&#x4E00;&#x4E2A; tick &#x5185;&#x591A;&#x6B21;&#x6267;&#x884C; <code>nextTick</code>&#xFF0C;&#x4E0D;&#x4F1A;&#x5F00;&#x542F;&#x591A;&#x4E2A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#xFF0C;&#x800C;&#x628A;&#x8FD9;&#x4E9B;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x90FD;&#x538B;&#x6210;&#x4E00;&#x4E2A;&#x540C;&#x6B65;&#x4EFB;&#x52A1;&#xFF0C;&#x5728;&#x4E0B;&#x4E00;&#x4E2A; tick &#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x3002;</p>
+<p><code>nextTick</code> &#x51FD;&#x6570;&#x6700;&#x540E;&#x8FD8;&#x6709;&#x4E00;&#x6BB5;&#x903B;&#x8F91;&#xFF1A;</p>
+<pre><code class="lang-js"> <span class="hljs-keyword">if</span> (!cb &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Promise</span> !== <span class="hljs-string">&apos;undefined&apos;</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(resolve =&gt; {
+    _resolve = resolve
+  })
+}
+</code></pre>
+<p>&#x8FD9;&#x662F;&#x5F53; <code>nextTick</code> &#x4E0D;&#x4F20; <code>cb</code> &#x53C2;&#x6570;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A; Promise &#x5316;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-js">nextTick().then(() =&gt; {})
+</code></pre>
+<p>&#x5F53; <code>_resolve</code> &#x51FD;&#x6570;&#x6267;&#x884C;&#xFF0C;&#x5C31;&#x4F1A;&#x8DF3;&#x5230; <code>then</code> &#x7684;&#x903B;&#x8F91;&#x4E2D;&#x3002;</p>
+<p><code>next-tick.js</code> &#x8FD8;&#x5BF9;&#x5916;&#x66B4;&#x9732;&#x4E86; <code>withMacroTask</code> &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x662F;&#x5BF9;&#x51FD;&#x6570;&#x505A;&#x4E00;&#x5C42;&#x5305;&#x88C5;&#xFF0C;&#x786E;&#x4FDD;&#x51FD;&#x6570;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x5BF9;&#x6570;&#x636E;&#x4EFB;&#x610F;&#x7684;&#x4FEE;&#x6539;&#xFF0C;&#x89E6;&#x53D1;&#x53D8;&#x5316;&#x6267;&#x884C; <code>nextTick</code> &#x7684;&#x65F6;&#x5019;&#x5F3A;&#x5236;&#x8D70; <code>macroTimerFunc</code>&#x3002;&#x6BD4;&#x5982;&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B; DOM &#x4EA4;&#x4E92;&#x4E8B;&#x4EF6;&#xFF0C;&#x5982; <code>v-on</code> &#x7ED1;&#x5B9A;&#x7684;&#x4E8B;&#x4EF6;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x4F1A;&#x5F3A;&#x5236;&#x8D70; macro task&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x901A;&#x8FC7;&#x8FD9;&#x4E00;&#x8282;&#x5BF9; <code>nextTick</code> &#x7684;&#x5206;&#x6790;&#xFF0C;&#x5E76;&#x7ED3;&#x5408;&#x4E0A;&#x4E00;&#x8282;&#x7684; setter &#x5206;&#x6790;&#xFF0C;&#x6211;&#x4EEC;&#x4E86;&#x89E3;&#x5230;&#x6570;&#x636E;&#x7684;&#x53D8;&#x5316;&#x5230; DOM &#x7684;&#x91CD;&#x65B0;&#x6E32;&#x67D3;&#x662F;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x8FC7;&#x7A0B;&#xFF0C;&#x53D1;&#x751F;&#x5728;&#x4E0B;&#x4E00;&#x4E2A; tick&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x5E73;&#x65F6;&#x5728;&#x5F00;&#x53D1;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6BD4;&#x5982;&#x4ECE;&#x670D;&#x52A1;&#x7AEF;&#x63A5;&#x53E3;&#x53BB;&#x83B7;&#x53D6;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6570;&#x636E;&#x505A;&#x4E86;&#x4FEE;&#x6539;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x7684;&#x67D0;&#x4E9B;&#x65B9;&#x6CD5;&#x53BB;&#x4F9D;&#x8D56;&#x4E86;&#x6570;&#x636E;&#x4FEE;&#x6539;&#x540E;&#x7684; DOM &#x53D8;&#x5316;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x5FC5;&#x987B;&#x5728; <code>nextTick</code> &#x540E;&#x6267;&#x884C;&#x3002;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;&#x4F2A;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-js">getData(res).then(()=&gt;{
+  <span class="hljs-keyword">this</span>.xxx = res.data
+  <span class="hljs-keyword">this</span>.$nextTick(() =&gt; {
+    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x53D8;&#x5316;&#x540E;&#x7684; DOM</span>
+  })
+})
+</code></pre>
+<p>Vue.js &#x63D0;&#x4F9B;&#x4E86; 2 &#x79CD;&#x8C03;&#x7528; <code>nextTick</code> &#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x5168;&#x5C40; API <code>Vue.nextTick</code>&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x5B9E;&#x4F8B;&#x4E0A;&#x7684;&#x65B9;&#x6CD5; <code>vm.$nextTick</code>&#xFF0C;&#x65E0;&#x8BBA;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x54EA;&#x4E00;&#x79CD;&#xFF0C;&#x6700;&#x540E;&#x90FD;&#x662F;&#x8C03;&#x7528; <code>next-tick.js</code> &#x4E2D;&#x5B9E;&#x73B0;&#x7684; <code>nextTick</code> &#x65B9;&#x6CD5;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="setters.html" class="navigation navigation-prev " aria-label="Previous page: 派发更新">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="questions.html" class="navigation navigation-next " aria-label="Next page: 检测变化的注意事项">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"nextTick","level":"1.5.4","depth":2,"next":{"title":"检测变化的注意事项","level":"1.5.5","depth":2,"path":"reactive/questions.md","ref":"reactive/questions.md","articles":[]},"previous":{"title":"派发更新","level":"1.5.3","depth":2,"path":"reactive/setters.md","ref":"reactive/setters.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"scripts":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"reactive/next-tick.md","mtime":"2018-04-13T05:00:36.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-13T09:06:36.829Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

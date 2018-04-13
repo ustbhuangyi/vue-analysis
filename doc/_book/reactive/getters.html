@@ -1,0 +1,954 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>依赖收集 · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="setters.html" />
+    
+    
+    <link rel="prev" href="reactive-object.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    准备
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../prepare/flow.html">
+            
+                <a href="../prepare/flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../prepare/directory.html">
+            
+                <a href="../prepare/directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../prepare/build.html">
+            
+                <a href="../prepare/build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../prepare/entrance.html">
+            
+                <a href="../prepare/entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../data-driven/">
+            
+                <a href="../data-driven/">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../data-driven/new-vue.html">
+            
+                <a href="../data-driven/new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../data-driven/mounted.html">
+            
+                <a href="../data-driven/mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../data-driven/render.html">
+            
+                <a href="../data-driven/render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../data-driven/virtual-dom.html">
+            
+                <a href="../data-driven/virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../data-driven/create-element.html">
+            
+                <a href="../data-driven/create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../data-driven/update.html">
+            
+                <a href="../data-driven/update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../components/">
+            
+                <a href="../components/">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../components/create-component.html">
+            
+                <a href="../components/create-component.html">
+            
+                    
+                    createComponent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../components/patch.html">
+            
+                <a href="../components/patch.html">
+            
+                    
+                    patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../components/merge-option.html">
+            
+                <a href="../components/merge-option.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../components/lifecycle.html">
+            
+                <a href="../components/lifecycle.html">
+            
+                    
+                    生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../components/component-register.html">
+            
+                <a href="../components/component-register.html">
+            
+                    
+                    组件注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../components/async-component.html">
+            
+                <a href="../components/async-component.html">
+            
+                    
+                    异步组件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    深入响应式原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="reactive-object.html">
+            
+                <a href="reactive-object.html">
+            
+                    
+                    响应式对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="getters.html">
+            
+                <a href="getters.html">
+            
+                    
+                    依赖收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="setters.html">
+            
+                <a href="setters.html">
+            
+                    
+                    派发更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="next-tick.html">
+            
+                <a href="next-tick.html">
+            
+                    
+                    nextTick
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="questions.html">
+            
+                <a href="questions.html">
+            
+                    
+                    检测变化的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="computed-watcher.html">
+            
+                <a href="computed-watcher.html">
+            
+                    
+                    计算属性 VS 侦听属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="component-update.html">
+            
+                <a href="component-update.html">
+            
+                    
+                    组件更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >依赖收集</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x4F9D;&#x8D56;&#x6536;&#x96C6;">&#x4F9D;&#x8D56;&#x6536;&#x96C6;</h1>
+<p>&#x901A;&#x8FC7;&#x4E0A;&#x4E00;&#x8282;&#x7684;&#x5206;&#x6790;&#x6211;&#x4EEC;&#x4E86;&#x89E3; Vue &#x4F1A;&#x628A;&#x666E;&#x901A;&#x5BF9;&#x8C61;&#x53D8;&#x6210;&#x54CD;&#x5E94;&#x5F0F;&#x5BF9;&#x8C61;&#xFF0C;&#x54CD;&#x5E94;&#x5F0F;&#x5BF9;&#x8C61; getter &#x76F8;&#x5173;&#x7684;&#x903B;&#x8F91;&#x5C31;&#x662F;&#x505A;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#xFF0C;&#x8FD9;&#x4E00;&#x8282;&#x6211;&#x4EEC;&#x6765;&#x8BE6;&#x7EC6;&#x5206;&#x6790;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5148;&#x6765;&#x56DE;&#x987E;&#x4E00;&#x4E0B; getter &#x90E8;&#x5206;&#x7684;&#x903B;&#x8F91;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">defineReactive</span> (<span class="hljs-params">
+  obj: Object,
+  key: string,
+  val: any,
+  customSetter?: ?Function,
+  shallow?: boolean
+</span>) </span>{
+  <span class="hljs-keyword">const</span> dep = <span class="hljs-keyword">new</span> Dep()
+
+  <span class="hljs-keyword">const</span> property = <span class="hljs-built_in">Object</span>.getOwnPropertyDescriptor(obj, key)
+  <span class="hljs-keyword">if</span> (property &amp;&amp; property.configurable === <span class="hljs-literal">false</span>) {
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-comment">// cater for pre-defined getter/setters</span>
+  <span class="hljs-keyword">const</span> getter = property &amp;&amp; property.get
+  <span class="hljs-keyword">const</span> setter = property &amp;&amp; property.set
+  <span class="hljs-keyword">if</span> ((!getter || setter) &amp;&amp; <span class="hljs-built_in">arguments</span>.length === <span class="hljs-number">2</span>) {
+    val = obj[key]
+  }
+
+  <span class="hljs-keyword">let</span> childOb = !shallow &amp;&amp; observe(val)
+  <span class="hljs-built_in">Object</span>.defineProperty(obj, key, {
+    enumerable: <span class="hljs-literal">true</span>,
+    configurable: <span class="hljs-literal">true</span>,
+    get: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reactiveGetter</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">const</span> value = getter ? getter.call(obj) : val
+      <span class="hljs-keyword">if</span> (Dep.target) {
+        dep.depend()
+        <span class="hljs-keyword">if</span> (childOb) {
+          childOb.dep.depend()
+          <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(value)) {
+            dependArray(value)
+          }
+        }
+      }
+      <span class="hljs-keyword">return</span> value
+    },
+    <span class="hljs-comment">// ...</span>
+  })
+}
+</code></pre>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x5173;&#x6CE8; 2 &#x4E2A;&#x5730;&#x65B9;&#xFF0C;&#x4E00;&#x4E2A;&#x662F; <code>const dep = new Dep()</code> &#x5B9E;&#x4F8B;&#x5316;&#x4E00;&#x4E2A; <code>Dep</code> &#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x662F;&#x5728; <code>get</code> &#x51FD;&#x6570;&#x4E2D;&#x901A;&#x8FC7; <code>dep.depend</code> &#x505A;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#xFF0C;&#x8FD9;&#x91CC;&#x8FD8;&#x6709;&#x4E2A;&#x5BF9; <code>childObj</code> &#x5224;&#x65AD;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x6211;&#x4EEC;&#x4E4B;&#x540E;&#x4F1A;&#x4ECB;&#x7ECD;&#x5B83;&#x7684;&#x4F5C;&#x7528;&#x3002;</p>
+<h2 id="dep">Dep</h2>
+<p><code>Dep</code> &#x662F;&#x6574;&#x4E2A; getter &#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x7684;&#x6838;&#x5FC3;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/observer/dep.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> type Watcher <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./watcher&apos;</span>
+<span class="hljs-keyword">import</span> { remove } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../util/index&apos;</span>
+
+<span class="hljs-keyword">let</span> uid = <span class="hljs-number">0</span>
+
+<span class="hljs-comment">/**
+ * A dep is an observable that can have multiple
+ * directives subscribing to it.
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dep</span> </span>{
+  <span class="hljs-keyword">static</span> target: ?Watcher;
+  id: number;
+  subs: <span class="hljs-built_in">Array</span>&lt;Watcher&gt;;
+
+  <span class="hljs-keyword">constructor</span> () {
+    <span class="hljs-keyword">this</span>.id = uid++
+    <span class="hljs-keyword">this</span>.subs = []
+  }
+
+  addSub (sub: Watcher) {
+    <span class="hljs-keyword">this</span>.subs.push(sub)
+  }
+
+  removeSub (sub: Watcher) {
+    remove(<span class="hljs-keyword">this</span>.subs, sub)
+  }
+
+  depend () {
+    <span class="hljs-keyword">if</span> (Dep.target) {
+      Dep.target.addDep(<span class="hljs-keyword">this</span>)
+    }
+  }
+
+  notify () {
+    <span class="hljs-comment">// stabilize the subscriber list first</span>
+    <span class="hljs-keyword">const</span> subs = <span class="hljs-keyword">this</span>.subs.slice()
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, l = subs.length; i &lt; l; i++) {
+      subs[i].update()
+    }
+  }
+}
+
+<span class="hljs-comment">// the current target watcher being evaluated.</span>
+<span class="hljs-comment">// this is globally unique because there could be only one</span>
+<span class="hljs-comment">// watcher being evaluated at any time.</span>
+Dep.target = <span class="hljs-literal">null</span>
+<span class="hljs-keyword">const</span> targetStack = []
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pushTarget</span> (<span class="hljs-params">_target: ?Watcher</span>) </span>{
+  <span class="hljs-keyword">if</span> (Dep.target) targetStack.push(Dep.target)
+  Dep.target = _target
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">popTarget</span> (<span class="hljs-params"></span>) </span>{
+  Dep.target = targetStack.pop()
+}
+</code></pre>
+<p><code>Dep</code> &#x662F;&#x4E00;&#x4E2A; Class&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x7279;&#x522B;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x5B83;&#x6709;&#x4E00;&#x4E2A;&#x9759;&#x6001;&#x5C5E;&#x6027; <code>target</code>&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x552F;&#x4E00; <code>Watcher</code>&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x5DE7;&#x5999;&#x7684;&#x8BBE;&#x8BA1;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x540C;&#x4E00;&#x65F6;&#x95F4;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x7684; <code>Watcher</code> &#x88AB;&#x8BA1;&#x7B97;&#xFF0C;&#x53E6;&#x5916;&#x5B83;&#x7684;&#x81EA;&#x8EAB;&#x5C5E;&#x6027; <code>subs</code> &#x4E5F;&#x662F; <code>Watcher</code> &#x7684;&#x6570;&#x7EC4;&#x3002;</p>
+<p><code>Dep</code> &#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x5BF9; <code>Watcher</code> &#x7684;&#x4E00;&#x79CD;&#x7BA1;&#x7406;&#xFF0C;<code>Dep</code>  &#x8131;&#x79BB; <code>Watcher</code> &#x5355;&#x72EC;&#x5B58;&#x5728;&#x662F;&#x6CA1;&#x6709;&#x610F;&#x4E49;&#x7684;&#xFF0C;&#x4E3A;&#x4E86;&#x5B8C;&#x6574;&#x5730;&#x8BB2;&#x6E05;&#x695A;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x8FC7;&#x7A0B;&#xFF0C;&#x6211;&#x4EEC;&#x6709;&#x5FC5;&#x8981;&#x770B;&#x4E00;&#x4E0B; <code>Watcher</code> &#x7684;&#x4E00;&#x4E9B;&#x76F8;&#x5173;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/observer/watcher.js</code> &#x4E2D;&#xFF1A;</p>
+<h2 id="watcher"><code>Watcher</code></h2>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> uid = <span class="hljs-number">0</span>
+
+<span class="hljs-comment">/**
+ * A watcher parses an expression, collects dependencies,
+ * and fires callback when the expression value changes.
+ * This is used for both the $watch() api and directives.
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Watcher</span> </span>{
+  vm: Component;
+  expression: string;
+  cb: <span class="hljs-built_in">Function</span>;
+  id: number;
+  deep: boolean;
+  user: boolean;
+  computed: boolean;
+  sync: boolean;
+  dirty: boolean;
+  active: boolean;
+  dep: Dep;
+  deps: <span class="hljs-built_in">Array</span>&lt;Dep&gt;;
+  newDeps: <span class="hljs-built_in">Array</span>&lt;Dep&gt;;
+  depIds: SimpleSet;
+  newDepIds: SimpleSet;
+  before: ?<span class="hljs-built_in">Function</span>;
+  getter: <span class="hljs-built_in">Function</span>;
+  value: any;
+
+  <span class="hljs-keyword">constructor</span> (
+    vm: Component,
+    expOrFn: string | Function,
+    cb: Function,
+    options?: ?Object,
+    isRenderWatcher?: boolean
+  ) {
+    <span class="hljs-keyword">this</span>.vm = vm
+    <span class="hljs-keyword">if</span> (isRenderWatcher) {
+      vm._watcher = <span class="hljs-keyword">this</span>
+    }
+    vm._watchers.push(<span class="hljs-keyword">this</span>)
+    <span class="hljs-comment">// options</span>
+    <span class="hljs-keyword">if</span> (options) {
+      <span class="hljs-keyword">this</span>.deep = !!options.deep
+      <span class="hljs-keyword">this</span>.user = !!options.user
+      <span class="hljs-keyword">this</span>.computed = !!options.computed
+      <span class="hljs-keyword">this</span>.sync = !!options.sync
+      <span class="hljs-keyword">this</span>.before = options.before
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">this</span>.deep = <span class="hljs-keyword">this</span>.user = <span class="hljs-keyword">this</span>.computed = <span class="hljs-keyword">this</span>.sync = <span class="hljs-literal">false</span>
+    }
+    <span class="hljs-keyword">this</span>.cb = cb
+    <span class="hljs-keyword">this</span>.id = ++uid <span class="hljs-comment">// uid for batching</span>
+    <span class="hljs-keyword">this</span>.active = <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">this</span>.dirty = <span class="hljs-keyword">this</span>.computed <span class="hljs-comment">// for computed watchers</span>
+    <span class="hljs-keyword">this</span>.deps = []
+    <span class="hljs-keyword">this</span>.newDeps = []
+    <span class="hljs-keyword">this</span>.depIds = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>()
+    <span class="hljs-keyword">this</span>.newDepIds = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>()
+    <span class="hljs-keyword">this</span>.expression = process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>
+      ? expOrFn.toString()
+      : <span class="hljs-string">&apos;&apos;</span>
+    <span class="hljs-comment">// parse expression for getter</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> expOrFn === <span class="hljs-string">&apos;function&apos;</span>) {
+      <span class="hljs-keyword">this</span>.getter = expOrFn
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">this</span>.getter = parsePath(expOrFn)
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.getter) {
+        <span class="hljs-keyword">this</span>.getter = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{}
+        process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; warn(
+          <span class="hljs-string">`Failed watching path: &quot;<span class="hljs-subst">${expOrFn}</span>&quot; `</span> +
+          <span class="hljs-string">&apos;Watcher only accepts simple dot-delimited paths. &apos;</span> +
+          <span class="hljs-string">&apos;For full control, use a function instead.&apos;</span>,
+          vm
+        )
+      }
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.computed) {
+      <span class="hljs-keyword">this</span>.value = <span class="hljs-literal">undefined</span>
+      <span class="hljs-keyword">this</span>.dep = <span class="hljs-keyword">new</span> Dep()
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">this</span>.value = <span class="hljs-keyword">this</span>.get()
+    }
+  }
+
+  <span class="hljs-comment">/**
+   * Evaluate the getter, and re-collect dependencies.
+   */</span>
+  get () {
+    pushTarget(<span class="hljs-keyword">this</span>)
+    <span class="hljs-keyword">let</span> value
+    <span class="hljs-keyword">const</span> vm = <span class="hljs-keyword">this</span>.vm
+    <span class="hljs-keyword">try</span> {
+      value = <span class="hljs-keyword">this</span>.getter.call(vm, vm)
+    } <span class="hljs-keyword">catch</span> (e) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.user) {
+        handleError(e, vm, <span class="hljs-string">`getter for watcher &quot;<span class="hljs-subst">${this.expression}</span>&quot;`</span>)
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">throw</span> e
+      }
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-comment">// &quot;touch&quot; every property so they are all tracked as</span>
+      <span class="hljs-comment">// dependencies for deep watching</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.deep) {
+        traverse(value)
+      }
+      popTarget()
+      <span class="hljs-keyword">this</span>.cleanupDeps()
+    }
+    <span class="hljs-keyword">return</span> value
+  }
+
+  <span class="hljs-comment">/**
+   * Add a dependency to this directive.
+   */</span>
+  addDep (dep: Dep) {
+    <span class="hljs-keyword">const</span> id = dep.id
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.newDepIds.has(id)) {
+      <span class="hljs-keyword">this</span>.newDepIds.add(id)
+      <span class="hljs-keyword">this</span>.newDeps.push(dep)
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.depIds.has(id)) {
+        dep.addSub(<span class="hljs-keyword">this</span>)
+      }
+    }
+  }
+
+  <span class="hljs-comment">/**
+   * Clean up for dependency collection.
+   */</span>
+  cleanupDeps () {
+    <span class="hljs-keyword">let</span> i = <span class="hljs-keyword">this</span>.deps.length
+    <span class="hljs-keyword">while</span> (i--) {
+      <span class="hljs-keyword">const</span> dep = <span class="hljs-keyword">this</span>.deps[i]
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.newDepIds.has(dep.id)) {
+        dep.removeSub(<span class="hljs-keyword">this</span>)
+      }
+    }
+    <span class="hljs-keyword">let</span> tmp = <span class="hljs-keyword">this</span>.depIds
+    <span class="hljs-keyword">this</span>.depIds = <span class="hljs-keyword">this</span>.newDepIds
+    <span class="hljs-keyword">this</span>.newDepIds = tmp
+    <span class="hljs-keyword">this</span>.newDepIds.clear()
+    tmp = <span class="hljs-keyword">this</span>.deps
+    <span class="hljs-keyword">this</span>.deps = <span class="hljs-keyword">this</span>.newDeps
+    <span class="hljs-keyword">this</span>.newDeps = tmp
+    <span class="hljs-keyword">this</span>.newDeps.length = <span class="hljs-number">0</span>
+  }
+  <span class="hljs-comment">// ...</span>
+}
+</code></pre>
+<p><code>Watcher</code> &#x662F;&#x4E00;&#x4E2A; Class&#xFF0C;&#x5728;&#x5B83;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x548C; <code>Dep</code> &#x76F8;&#x5173;&#x7684;&#x5C5E;&#x6027;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">this</span>.deps = []
+<span class="hljs-keyword">this</span>.newDeps = []
+<span class="hljs-keyword">this</span>.depIds = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>()
+<span class="hljs-keyword">this</span>.newDepIds = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>()
+</code></pre>
+<p>&#x5176;&#x4E2D;&#xFF0C;<code>this.deps</code> &#x548C; <code>this.newDeps</code> &#x8868;&#x793A; <code>Watcher</code> &#x5B9E;&#x4F8B;&#x6301;&#x6709;&#x7684; <code>Dep</code> &#x5B9E;&#x4F8B;&#x7684;&#x6570;&#x7EC4;&#xFF1B;&#x800C; <code>this.depIds</code> &#x548C; <code>this.newDepIds</code> &#x5206;&#x522B;&#x4EE3;&#x8868; <code>this.deps</code> &#x548C; <code>this.newDeps</code> &#x7684; <code>id</code> Set&#xFF08;&#x8FD9;&#x4E2A; Set &#x662F; ES6 &#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x5728; <code>src/core/util/env.js</code> &#x4E2D;&#xFF09;&#x3002;&#x90A3;&#x4E48;&#x8FD9;&#x91CC;&#x4E3A;&#x4F55;&#x9700;&#x8981;&#x6709; 2 &#x4E2A; <code>Dep</code> &#x5B9E;&#x4F8B;&#x6570;&#x7EC4;&#x5462;&#xFF0C;&#x7A0D;&#x540E;&#x6211;&#x4EEC;&#x4F1A;&#x89E3;&#x91CA;&#x3002;</p>
+<p><code>Watcher</code> &#x8FD8;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x539F;&#x578B;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x548C;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x76F8;&#x5173;&#x7684;&#x6709; <code>get</code>&#x3001;<code>addDep</code> &#x548C; <code>cleanupDeps</code> &#x65B9;&#x6CD5;&#xFF0C;&#x5355;&#x4E2A;&#x4ECB;&#x7ECD;&#x5B83;&#x4EEC;&#x7684;&#x5B9E;&#x73B0;&#x4E0D;&#x65B9;&#x4FBF;&#x7406;&#x89E3;&#xFF0C;&#x6211;&#x4F1A;&#x7ED3;&#x5408;&#x6574;&#x4E2A;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x7684;&#x8FC7;&#x7A0B;&#x628A;&#x8FD9;&#x51E0;&#x4E2A;&#x65B9;&#x6CD5;&#x8BB2;&#x6E05;&#x695A;&#x3002;</p>
+<h2 id="&#x8FC7;&#x7A0B;&#x5206;&#x6790;">&#x8FC7;&#x7A0B;&#x5206;&#x6790;</h2>
+<p>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x4ECB;&#x7ECD;&#x5F53;&#x5BF9;&#x6570;&#x636E;&#x5BF9;&#x8C61;&#x7684;&#x8BBF;&#x95EE;&#x4F1A;&#x89E6;&#x53D1;&#x4ED6;&#x4EEC;&#x7684; getter &#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x88AB;&#x8BBF;&#x95EE;&#x5462;&#xFF1F;&#x8FD8;&#x8BB0;&#x5F97;&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x4ECB;&#x7ECD;&#x8FC7; Vue &#x7684; mount &#x8FC7;&#x7A0B;&#x662F;&#x901A;&#x8FC7; <code>mountComponent</code> &#x51FD;&#x6570;&#xFF0C;&#x5176;&#x4E2D;&#x6709;&#x4E00;&#x6BB5;&#x6BD4;&#x8F83;&#x91CD;&#x8981;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x5927;&#x81F4;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js">updateComponent = () =&gt; {
+  vm._update(vm._render(), hydrating)
+}
+<span class="hljs-keyword">new</span> Watcher(vm, updateComponent, noop, {
+  before () {
+    <span class="hljs-keyword">if</span> (vm._isMounted) {
+      callHook(vm, <span class="hljs-string">&apos;beforeUpdate&apos;</span>)
+    }
+  }
+}, <span class="hljs-literal">true</span> <span class="hljs-comment">/* isRenderWatcher */</span>)
+</code></pre>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x53BB;&#x5B9E;&#x4F8B;&#x5316;&#x4E00;&#x4E2A;&#x6E32;&#x67D3; <code>watcher</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9996;&#x5148;&#x8FDB;&#x5165; <code>watcher</code> &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x903B;&#x8F91;&#xFF0C;&#x7136;&#x540E;&#x4F1A;&#x6267;&#x884C;&#x5B83;&#x7684; <code>this.get()</code> &#x65B9;&#x6CD5;&#xFF0C;&#x8FDB;&#x5165; <code>get</code> &#x51FD;&#x6570;&#xFF0C;&#x9996;&#x5148;&#x4F1A;&#x6267;&#x884C;&#xFF1A;</p>
+<pre><code class="lang-js">pushTarget(<span class="hljs-keyword">this</span>)
+</code></pre>
+<p><code>pushTarget</code> &#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/observer/dep.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pushTarget</span> (<span class="hljs-params">_target: Watcher</span>) </span>{
+  <span class="hljs-keyword">if</span> (Dep.target) targetStack.push(Dep.target)
+  Dep.target = _target
+}
+</code></pre>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x628A; <code>Dep.target</code> &#x8D4B;&#x503C;&#x4E3A;&#x5F53;&#x524D;&#x7684;&#x6E32;&#x67D3; <code>watcher</code> &#x5E76;&#x538B;&#x6808;&#xFF08;&#x4E3A;&#x4E86;&#x6062;&#x590D;&#x7528;&#xFF09;&#x3002;&#x63A5;&#x7740;&#x53C8;&#x6267;&#x884C;&#x4E86;&#xFF1A;</p>
+<pre><code class="lang-js">value = <span class="hljs-keyword">this</span>.getter.call(vm, vm)
+</code></pre>
+<p><code>this.getter</code> &#x5BF9;&#x5E94;&#x5C31;&#x662F; <code>updateComponent</code> &#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x5728;&#x6267;&#x884C;&#xFF1A;</p>
+<pre><code class="lang-js">vm._update(vm._render(), hydrating)
+</code></pre>
+<p>&#x5B83;&#x4F1A;&#x5148;&#x6267;&#x884C; <code>vm._render()</code> &#x65B9;&#x6CD5;&#xFF0C;&#x56E0;&#x4E3A;&#x4E4B;&#x524D;&#x5206;&#x6790;&#x8FC7;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x751F;&#x6210; &#x6E32;&#x67D3; VNode&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F1A;&#x5BF9; <code>vm</code> &#x4E0A;&#x7684;&#x6570;&#x636E;&#x8BBF;&#x95EE;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5C31;&#x89E6;&#x53D1;&#x4E86;&#x6570;&#x636E;&#x5BF9;&#x8C61;&#x7684; getter&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#x6BCF;&#x4E2A;&#x5BF9;&#x8C61;&#x503C;&#x7684; getter &#x90FD;&#x6301;&#x6709;&#x4E00;&#x4E2A; <code>dep</code>&#xFF0C;&#x5728;&#x89E6;&#x53D1; getter &#x7684;&#x65F6;&#x5019;&#x4F1A;&#x8C03;&#x7528; <code>dep.depend()</code> &#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x5C31;&#x4F1A;&#x6267;&#x884C; <code>Dep.target.addDep(this)</code>&#x3002;</p>
+<p>&#x521A;&#x624D;&#x6211;&#x4EEC;&#x63D0;&#x5230;&#x8FD9;&#x4E2A;&#x65F6;&#x5019; <code>Dep.target</code> &#x5DF2;&#x7ECF;&#x88AB;&#x8D4B;&#x503C;&#x4E3A;&#x6E32;&#x67D3; <code>watcher</code>&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x6267;&#x884C;&#x5230; <code>addDep</code> &#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-js">addDep (dep: Dep) {
+  <span class="hljs-keyword">const</span> id = dep.id
+  <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.newDepIds.has(id)) {
+    <span class="hljs-keyword">this</span>.newDepIds.add(id)
+    <span class="hljs-keyword">this</span>.newDeps.push(dep)
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.depIds.has(id)) {
+      dep.addSub(<span class="hljs-keyword">this</span>)
+    }
+  }
+}
+</code></pre>
+<p>&#x8FD9;&#x65F6;&#x5019;&#x4F1A;&#x505A;&#x4E00;&#x4E9B;&#x903B;&#x8F91;&#x5224;&#x65AD;&#xFF08;&#x4FDD;&#x8BC1;&#x540C;&#x4E00;&#x6570;&#x636E;&#x4E0D;&#x4F1A;&#x88AB;&#x6DFB;&#x52A0;&#x591A;&#x6B21;&#xFF09;&#x540E;&#x6267;&#x884C; <code>dep.addSub(this)</code>&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x6267;&#x884C; <code>this.subs.push(sub)</code>&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x628A;&#x5F53;&#x524D;&#x7684; <code>watcher</code> &#x8BA2;&#x9605;&#x5230;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x6301;&#x6709;&#x7684; <code>dep</code> &#x7684; <code>subs</code> &#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x76EE;&#x7684;&#x662F;&#x4E3A;&#x540E;&#x7EED;&#x6570;&#x636E;&#x53D8;&#x5316;&#x65F6;&#x5019;&#x80FD;&#x901A;&#x77E5;&#x5230;&#x54EA;&#x4E9B; <code>subs</code> &#x505A;&#x51C6;&#x5907;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x5728; <code>vm._render()</code> &#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4F1A;&#x89E6;&#x53D1;&#x6240;&#x6709;&#x6570;&#x636E;&#x7684; getter&#xFF0C;&#x8FD9;&#x6837;&#x5B9E;&#x9645;&#x4E0A;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x7684;&#x8FC7;&#x7A0B;&#x3002;&#x90A3;&#x4E48;&#x5230;&#x8FD9;&#x91CC;&#x5C31;&#x7ED3;&#x675F;&#x4E86;&#x4E48;&#xFF0C;&#x5176;&#x5B9E;&#x5E76;&#x6CA1;&#x6709;&#xFF0C;&#x518D;&#x5B8C;&#x6210;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x540E;&#xFF0C;&#x8FD8;&#x6709;&#x51E0;&#x4E2A;&#x903B;&#x8F91;&#x8981;&#x6267;&#x884C;&#xFF0C;&#x9996;&#x5148;&#x662F;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.deep) {
+  traverse(value)
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x662F;&#x8981;&#x9012;&#x5F52;&#x53BB;&#x8BBF;&#x95EE; <code>value</code>&#xFF0C;&#x89E6;&#x53D1;&#x5B83;&#x6240;&#x6709;&#x5B50;&#x9879;&#x7684; <code>getter</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x4E4B;&#x540E;&#x4F1A;&#x8BE6;&#x7EC6;&#x8BB2;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6267;&#x884C;&#xFF1A;</p>
+<pre><code class="lang-js">popTarget()
+</code></pre>
+<p><code>popTarget</code> &#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/observer/dep.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js">Dep.target = targetStack.pop()
+</code></pre>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x628A; <code>Dep.target</code> &#x6062;&#x590D;&#x6210;&#x4E0A;&#x4E00;&#x4E2A;&#x72B6;&#x6001;&#xFF0C;&#x56E0;&#x4E3A;&#x5F53;&#x524D; vm &#x7684;&#x6570;&#x636E;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#xFF0C;&#x90A3;&#x4E48;&#x5BF9;&#x5E94;&#x7684;&#x6E32;&#x67D3;<code>Dep.target</code> &#x4E5F;&#x9700;&#x8981;&#x6539;&#x53D8;&#x3002;&#x6700;&#x540E;&#x6267;&#x884C;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">this</span>.cleanupDeps()
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x5F88;&#x591A;&#x4EBA;&#x90FD;&#x5206;&#x6790;&#x8FC7;&#x5E76;&#x4E86;&#x89E3;&#x5230; Vue &#x6709;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x4F46;&#x6211;&#x51E0;&#x4E4E;&#x6CA1;&#x6709;&#x770B;&#x5230;&#x6709;&#x4EBA;&#x5206;&#x6790;&#x4F9D;&#x8D56;&#x6E05;&#x7A7A;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x5176;&#x5B9E;&#x8FD9;&#x662F;&#x5927;&#x90E8;&#x5206;&#x540C;&#x5B66;&#x4F1A;&#x5FFD;&#x89C6;&#x7684;&#x4E00;&#x70B9;&#xFF0C;&#x4E5F;&#x662F; Vue &#x8003;&#x8651;&#x7279;&#x522B;&#x7EC6;&#x7684;&#x4E00;&#x70B9;&#x3002;</p>
+<pre><code class="lang-js">cleanupDeps () {
+  <span class="hljs-keyword">let</span> i = <span class="hljs-keyword">this</span>.deps.length
+  <span class="hljs-keyword">while</span> (i--) {
+    <span class="hljs-keyword">const</span> dep = <span class="hljs-keyword">this</span>.deps[i]
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.newDepIds.has(dep.id)) {
+      dep.removeSub(<span class="hljs-keyword">this</span>)
+    }
+  }
+  <span class="hljs-keyword">let</span> tmp = <span class="hljs-keyword">this</span>.depIds
+  <span class="hljs-keyword">this</span>.depIds = <span class="hljs-keyword">this</span>.newDepIds
+  <span class="hljs-keyword">this</span>.newDepIds = tmp
+  <span class="hljs-keyword">this</span>.newDepIds.clear()
+  tmp = <span class="hljs-keyword">this</span>.deps
+  <span class="hljs-keyword">this</span>.deps = <span class="hljs-keyword">this</span>.newDeps
+  <span class="hljs-keyword">this</span>.newDeps = tmp
+  <span class="hljs-keyword">this</span>.newDeps.length = <span class="hljs-number">0</span>
+}
+</code></pre>
+<p>&#x8003;&#x8651;&#x5230; Vue &#x662F;&#x6570;&#x636E;&#x9A71;&#x52A8;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6BCF;&#x6B21;&#x6570;&#x636E;&#x53D8;&#x5316;&#x90FD;&#x4F1A;&#x91CD;&#x65B0; render&#xFF0C;&#x90A3;&#x4E48; <code>vm._render()</code> &#x65B9;&#x6CD5;&#x53C8;&#x4F1A;&#x518D;&#x6B21;&#x6267;&#x884C;&#xFF0C;&#x5E76;&#x518D;&#x6B21;&#x89E6;&#x53D1;&#x6570;&#x636E;&#x7684; getters&#xFF0C;&#x6240;&#x4EE5; <code>Wathcer</code> &#x5728;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x4F1A;&#x521D;&#x59CB;&#x5316; 2 &#x4E2A; <code>Dep</code> &#x5B9E;&#x4F8B;&#x6570;&#x7EC4;&#xFF0C;<code>newDeps</code> &#x8868;&#x793A;&#x65B0;&#x6DFB;&#x52A0;&#x7684; <code>Dep</code> &#x5B9E;&#x4F8B;&#x6570;&#x7EC4;&#xFF0C;&#x800C; <code>deps</code> &#x8868;&#x793A;&#x4E0A;&#x4E00;&#x6B21;&#x6DFB;&#x52A0;&#x7684; <code>Dep</code> &#x5B9E;&#x4F8B;&#x6570;&#x7EC4;&#x3002;</p>
+<p>&#x5728;&#x6267;&#x884C; <code>cleanupDeps</code> &#x51FD;&#x6570;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x9996;&#x5148;&#x904D;&#x5386; <code>deps</code>&#xFF0C;&#x79FB;&#x9664;&#x5BF9; <code>dep</code> &#x7684;&#x8BA2;&#x9605;&#xFF0C;&#x7136;&#x540E;&#x628A; <code>newDepIds</code> &#x548C; <code>depIds</code> &#x4EA4;&#x6362;&#xFF0C;<code>newDeps</code> &#x548C; <code>deps</code> &#x4EA4;&#x6362;&#xFF0C;&#x5E76;&#x628A; <code>newDepIds</code> &#x548C; <code>newDeps</code> &#x6E05;&#x7A7A;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x505A; <code>deps</code> &#x8BA2;&#x9605;&#x7684;&#x79FB;&#x9664;&#x5462;&#xFF0C;&#x5728;&#x6DFB;&#x52A0; <code>deps</code> &#x7684;&#x8BA2;&#x9605;&#x8FC7;&#x7A0B;&#xFF0C;&#x5DF2;&#x7ECF;&#x80FD;&#x901A;&#x8FC7; <code>id</code> &#x53BB;&#x91CD;&#x907F;&#x514D;&#x91CD;&#x590D;&#x8BA2;&#x9605;&#x4E86;&#x3002;</p>
+<p>&#x8003;&#x8651;&#x5230;&#x4E00;&#x79CD;&#x573A;&#x666F;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x6A21;&#x677F;&#x4F1A;&#x6839;&#x636E; <code>v-if</code> &#x53BB;&#x6E32;&#x67D3;&#x4E0D;&#x540C;&#x5B50;&#x6A21;&#x677F; a &#x548C; b&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x6EE1;&#x8DB3;&#x67D0;&#x79CD;&#x6761;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x6E32;&#x67D3; a &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x8BBF;&#x95EE;&#x5230; a &#x4E2D;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x5BF9; a &#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x6DFB;&#x52A0;&#x4E86; getter&#xFF0C;&#x505A;&#x4E86;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x6211;&#x4EEC;&#x53BB;&#x4FEE;&#x6539; a &#x7684;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7406;&#x5E94;&#x901A;&#x77E5;&#x5230;&#x8FD9;&#x4E9B;&#x8BA2;&#x9605;&#x8005;&#x3002;&#x90A3;&#x4E48;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x4E00;&#x65E6;&#x6539;&#x53D8;&#x4E86;&#x6761;&#x4EF6;&#x6E32;&#x67D3;&#x4E86; b &#x6A21;&#x677F;&#xFF0C;&#x53C8;&#x4F1A;&#x5BF9; b &#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x6DFB;&#x52A0;&#x4E86; getter&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x4F9D;&#x8D56;&#x79FB;&#x9664;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x65F6;&#x5019;&#x6211;&#x53BB;&#x4FEE;&#x6539; a &#x6A21;&#x677F;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F1A;&#x901A;&#x77E5; a &#x6570;&#x636E;&#x7684;&#x8BA2;&#x9605;&#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x8FD9;&#x663E;&#x7136;&#x662F;&#x6709;&#x6D6A;&#x8D39;&#x7684;&#x3002;</p>
+<p>&#x56E0;&#x6B64; Vue &#x8BBE;&#x8BA1;&#x4E86;&#x5728;&#x6BCF;&#x6B21;&#x6DFB;&#x52A0;&#x5B8C;&#x65B0;&#x7684;&#x8BA2;&#x9605;&#xFF0C;&#x4F1A;&#x79FB;&#x9664;&#x6389;&#x65E7;&#x7684;&#x8BA2;&#x9605;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x4FDD;&#x8BC1;&#x4E86;&#x5728;&#x6211;&#x4EEC;&#x521A;&#x624D;&#x7684;&#x573A;&#x666F;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x6E32;&#x67D3; b &#x6A21;&#x677F;&#x7684;&#x65F6;&#x5019;&#x53BB;&#x4FEE;&#x6539; a &#x6A21;&#x677F;&#x7684;&#x6570;&#x636E;&#xFF0C;a &#x6570;&#x636E;&#x8BA2;&#x9605;&#x56DE;&#x8C03;&#x5DF2;&#x7ECF;&#x88AB;&#x79FB;&#x9664;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x4F1A;&#x6709;&#x4EFB;&#x4F55;&#x6D6A;&#x8D39;&#xFF0C;&#x771F;&#x7684;&#x662F;&#x975E;&#x5E38;&#x8D5E;&#x53F9; Vue &#x5BF9;&#x4E00;&#x4E9B;&#x7EC6;&#x8282;&#x4E0A;&#x7684;&#x5904;&#x7406;&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x901A;&#x8FC7;&#x8FD9;&#x4E00;&#x8282;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x6211;&#x4EEC;&#x5BF9; Vue &#x6570;&#x636E;&#x7684;&#x4F9D;&#x8D56;&#x6536;&#x96C6;&#x8FC7;&#x7A0B;&#x5DF2;&#x7ECF;&#x6709;&#x4E86;&#x8BA4;&#x8BC6;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x8FD9;&#x5176;&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x7EC6;&#x8282;&#x505A;&#x4E86;&#x5206;&#x6790;&#x3002;&#x6536;&#x96C6;&#x4F9D;&#x8D56;&#x7684;&#x76EE;&#x7684;&#x662F;&#x4E3A;&#x4E86;&#x5F53;&#x8FD9;&#x4E9B;&#x54CD;&#x5E94;&#x5F0F;&#x6570;&#x636E;&#x53D1;&#x9001;&#x53D8;&#x5316;&#xFF0C;&#x89E6;&#x53D1;&#x5B83;&#x4EEC;&#x7684; setter &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x80FD;&#x77E5;&#x9053;&#x5E94;&#x8BE5;&#x901A;&#x77E5;&#x54EA;&#x4E9B;&#x8BA2;&#x9605;&#x8005;&#x53BB;&#x505A;&#x76F8;&#x5E94;&#x7684;&#x903B;&#x8F91;&#x5904;&#x7406;&#xFF0C;&#x6211;&#x4EEC;&#x628A;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x53EB;&#x6D3E;&#x53D1;&#x66F4;&#x65B0;&#xFF0C;&#x5176;&#x5B9E; <code>Watcher</code> &#x548C; <code>Dep</code> &#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x7ECF;&#x5178;&#x7684;&#x89C2;&#x5BDF;&#x8005;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x4E0B;&#x4E00;&#x8282;&#x6211;&#x4EEC;&#x6765;&#x8BE6;&#x7EC6;&#x5206;&#x6790;&#x4E00;&#x4E0B;&#x6D3E;&#x53D1;&#x66F4;&#x65B0;&#x7684;&#x8FC7;&#x7A0B;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="reactive-object.html" class="navigation navigation-prev " aria-label="Previous page: 响应式对象">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="setters.html" class="navigation navigation-next " aria-label="Next page: 派发更新">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"依赖收集","level":"1.5.2","depth":2,"next":{"title":"派发更新","level":"1.5.3","depth":2,"path":"reactive/setters.md","ref":"reactive/setters.md","articles":[]},"previous":{"title":"响应式对象","level":"1.5.1","depth":2,"path":"reactive/reactive-object.md","ref":"reactive/reactive-object.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"scripts":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"reactive/getters.md","mtime":"2018-04-12T12:41:41.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-13T09:06:36.829Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+
