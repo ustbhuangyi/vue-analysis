@@ -30,3 +30,9 @@
   - [检测变化的注意事项](reactive/questions.md)
   - [计算属性 VS 侦听属性](reactive/computed-watcher.md)
   - [组件更新](reactive/component-update.md)
+  
+- [编译](compile/index.md)
+  - [编译入口](compile/entrance.md)
+  - [parse](compile/parse.md)
+  - [optimize](compile/optimize.md)
+  - [codegen](compile/codegen.md)

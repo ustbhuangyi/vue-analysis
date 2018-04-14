@@ -39,7 +39,7 @@ with(this){
 vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false)
 ```
 
-而 `_l`、`_v` 定义在 `src/core/instance/render-helpers/index.js` 中。
+而 `_l`、`_v` 定义在 `src/core/instance/render-helpers/index.js` 中：
 
 ```js
 export function installRenderHelpers (target: any) {
@@ -78,7 +78,7 @@ function createFunction (code, errors) {
 }
 ```
 
-实际上就是把 `render` 代码串通过 `new Function` 的方式转换成函数，赋值给 `vm.options.render`，这样当组件通过 `vm._render` 的时候，就会执行这个 `render` 函数。那么接下来我们就重点关注一下这个 `render` 代码串的生成过程。
+实际上就是把 `render` 代码串通过 `new Function` 的方式转换成可执行的函数，赋值给 `vm.options.render`，这样当组件通过 `vm._render` 的时候，就会执行这个 `render` 函数。那么接下来我们就重点关注一下这个 `render` 代码串的生成过程。
 
 ## generate
 
@@ -118,7 +118,8 @@ export function genElement (el: ASTElement, state: CodegenState): string {
     return genChildren(el, state) || 'void 0'
   } else if (el.tag === 'slot') {
     return genSlot(el, state)
-  } else { 
+  } else {
+    // component or element
     let code
     if (el.component) {
       code = genComponent(el.component, el, state)
@@ -127,11 +128,12 @@ export function genElement (el: ASTElement, state: CodegenState): string {
 
       const children = el.inlineTemplate ? null : genChildren(el, state, true)
       code = `_c('${el.tag}'${
-        data ? `,${data}` : '' 
+        data ? `,${data}` : '' // data
       }${
-        children ? `,${children}` : '' 
+        children ? `,${children}` : '' // children
       })`
     }
+    // module transforms
     for (let i = 0; i < state.transforms.length; i++) {
       code = state.transforms[i](el, code)
     }
@@ -150,7 +152,7 @@ export function genIf (
   altGen?: Function,
   altEmpty?: string
 ): string {
-  el.ifProcessed = true 
+  el.ifProcessed = true // avoid recursion
   return genIfConditions(el.ifConditions.slice(), state, altGen, altEmpty)
 }
 
@@ -219,11 +221,11 @@ export function genFor (
       `<${el.tag} v-for="${alias} in ${exp}">: component lists rendered with ` +
       `v-for should have explicit keys. ` +
       `See https://vuejs.org/guide/list.html#key for more info.`,
-      true
+      true /* tip */
     )
   }
 
-  el.forProcessed = true 
+  el.forProcessed = true // avoid recursion
   return `${altHelper || '_l'}((${exp}),` +
     `function(${alias}${iterator1}${iterator2}){` +
       `return ${(altGen || genElement)(el, state)}` +
@@ -246,6 +248,7 @@ _l((data), function(item, index) {
 再次回顾我们的例子，它的最外层是 `ul`，首先执行 `genIf`，它最终调用了 `genElement(el, state)` 去生成子节点，注意，这里的 `el` 仍然指向的是 `ul` 对应的 AST 节点，但是此时的 `el.ifProcessed` 为 true，所以命中最后一个 else 逻辑：
 
 ```js
+// component or element
 let code
 if (el.component) {
   code = genComponent(el.component, el, state)
@@ -254,72 +257,79 @@ if (el.component) {
 
   const children = el.inlineTemplate ? null : genChildren(el, state, true)
   code = `_c('${el.tag}'${
-    data ? `,${data}` : '' 
+    data ? `,${data}` : '' // data
   }${
-    children ? `,${children}` : '' 
+    children ? `,${children}` : '' // children
   })`
 }
+// module transforms
 for (let i = 0; i < state.transforms.length; i++) {
   code = state.transforms[i](el, code)
 }
 return code
 ```
 
-这里我们只关注 2 个逻辑，`genData` 和 `genChildren`。
+这里我们只关注 2 个逻辑，`genData` 和 `genChildren`：
+
+- genData
 
 ```js
 export function genData (el: ASTElement, state: CodegenState): string {
   let data = '{'
 
+  // directives first.
+  // directives may mutate the el's other properties before they are generated.
   const dirs = genDirectives(el, state)
   if (dirs) data += dirs + ','
 
+  // key
   if (el.key) {
     data += `key:${el.key},`
   }
-
+  // ref
   if (el.ref) {
     data += `ref:${el.ref},`
   }
   if (el.refInFor) {
     data += `refInFor:true,`
   }
-
+  // pre
   if (el.pre) {
     data += `pre:true,`
   }
-
+  // record original tag name for components using "is" attribute
   if (el.component) {
     data += `tag:"${el.tag}",`
   }
-
+  // module data generation functions
   for (let i = 0; i < state.dataGenFns.length; i++) {
     data += state.dataGenFns[i](el)
   }
-
+  // attributes
   if (el.attrs) {
     data += `attrs:{${genProps(el.attrs)}},`
   }
-
+  // DOM props
   if (el.props) {
     data += `domProps:{${genProps(el.props)}},`
   }
-
+  // event handlers
   if (el.events) {
     data += `${genHandlers(el.events, false, state.warn)},`
   }
   if (el.nativeEvents) {
     data += `${genHandlers(el.nativeEvents, true, state.warn)},`
   }
-
+  // slot target
+  // only for non-scoped slots
   if (el.slotTarget && !el.slotScope) {
     data += `slot:${el.slotTarget},`
   }
-
+  // scoped slots
   if (el.scopedSlots) {
     data += `${genScopedSlots(el.scopedSlots, state)},`
   }
-
+  // component v-model
   if (el.model) {
     data += `model:{value:${
       el.model.value
@@ -329,7 +339,7 @@ export function genData (el: ASTElement, state: CodegenState): string {
       el.model.expression
     }},`
   }
-
+  // inline-template
   if (el.inlineTemplate) {
     const inlineTemplate = genInlineTemplate(el, state)
     if (inlineTemplate) {
@@ -337,11 +347,11 @@ export function genData (el: ASTElement, state: CodegenState): string {
     }
   }
   data = data.replace(/,$/, '') + '}'
-
+  // v-bind data wrap
   if (el.wrapData) {
     data = el.wrapData(data)
   }
-
+  // v-on data wrap
   if (el.wrapListeners) {
     data = el.wrapListeners(data)
   }
@@ -394,6 +404,8 @@ function genData (el: ASTElement): string {
   class: bindCls
 }
 ```
+
+- genChildren
 
 接下来我们再来看一下 `genChildren`，它的定义在 `src/compiler/codegen/index.js` 中：
 
@@ -485,15 +497,14 @@ export function genChildren (
   altGenElement?: Function,
   altGenNode?: Function
 ): string | void {
-    // ...
-     const normalizationType = checkSkip
-          ? getNormalizationType(children, state.maybeComponent)
-          : 0
-    const gen = altGenNode || genNode
-    return `[${children.map(c => gen(c, state)).join(',')}]${
-      normalizationType ? `,${normalizationType}` : ''
-    }`
-  }
+  // ...
+  const normalizationType = checkSkip
+    ? getNormalizationType(children, state.maybeComponent)
+    : 0
+  const gen = altGenNode || genNode
+  return `[${children.map(c => gen(c, state)).join(',')}]${
+    normalizationType ? `,${normalizationType}` : ''
+  }`
 }
 
 function genNode (node: ASTNode, state: CodegenState): string {
@@ -546,6 +557,6 @@ export function genText (text: ASTText | ASTExpression): string {
 
 ## 总结
 
-这一节通过例子配合解析，我们对从 `ast -> code ` 这一步有了一些了解，编译后生成的代码就是在运行时执行的代码。由于 `genCode` 的内容有很多，所以我对大家的建议是没必要把所有的细节都一次性扣完，我们应该根据具体一个 case，走完一条主线即可。
+这一节通过例子配合解析，我们对从 `ast -> code ` 这一步有了一些了解，编译后生成的代码就是在运行时执行的代码。由于 `genCode` 的内容有很多，所以我对大家的建议是没必要把所有的细节都一次性看完，我们应该根据具体一个 case，走完一条主线即可。
 
 在之后的章节我们会对 `slot` 的实现做解析，我们会重新复习编译的章节，针对具体问题做具体分析，有利于我们排除干扰，对编译过程的学习有更深入的理解。

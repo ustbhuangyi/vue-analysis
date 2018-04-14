@@ -71,7 +71,7 @@ ast = {
 
 ## 整体流程
 
-首先来看一下 `parse` 的定义，在 `src/compiler/parser/index.js` 中。
+首先来看一下 `parse` 的定义，在 `src/compiler/parser/index.js` 中：
 
 ```js
 export function parse (
@@ -107,9 +107,15 @@ export function parse (
 
 `parse` 函数的代码很长，贴一遍对同学的理解没有好处，我先把它拆成伪代码的形式，方便同学们对整体流程先有一个大致的了解。接下来我们就来分解分析每段伪代码的作用。
 
-## 从 `options` 中获取方法和配置
+### 从 options 中获取方法和配置
 
-`parse` 函数的输入是 `template` 和 `options`，输出是 AST 的根节点。`template` 就是我们的模板字符串，而 `options` 实际上是和平台相关的一些配置，它的定义在 `src/platforms/web/compiler/options` 中。
+对应伪代码：
+
+```js
+getFnsAndConfigFromOptions(options)
+```
+
+`parse` 函数的输入是 `template` 和 `options`，输出是 AST 的根节点。`template` 就是我们的模板字符串，而 `options` 实际上是和平台相关的一些配置，它的定义在 `src/platforms/web/compiler/options` 中：
 
 ```js
 import {
@@ -123,6 +129,7 @@ import modules from './modules/index'
 import directives from './directives/index'
 import { genStaticKeys } from 'shared/util'
 import { isUnaryTag, canBeLeftOpenTag } from './util'
+
 export const baseOptions: CompilerOptions = {
   expectHTML: true,
   modules,
@@ -156,9 +163,15 @@ delimiters = options.delimiters
 
 这些方法和配置都是后续解析时候需要的，可以不用去管它们的具体作用，我们先往后看。
 
-## 解析 HTML 模板
+### 解析 HTML 模板
 
-对于 `template` 模板的解析主要是通过 `parseHTML` 函数，它的定义在 `src/compiler/parser/html-parser` 中。
+对应伪代码：
+
+```js
+parseHTML(template, options)
+```
+
+对于 `template` 模板的解析主要是通过 `parseHTML` 函数，它的定义在 `src/compiler/parser/html-parser` 中：
 
 ```js
 export function parseHTML (html, options) {
@@ -226,7 +239,7 @@ const conditionalComment = /^<!\[/
 
 - 注释节点、文档类型节点
 
-对于注释节点和文档类型节点的匹配，如果匹配到我们仅仅做的是做前进即可：
+对于注释节点和文档类型节点的匹配，如果匹配到我们仅仅做的是做前进即可。
 
 ```js
 if (comment.test(html)) {
@@ -298,7 +311,7 @@ function parseStartTag () {
   }
 }
 ```
-对于开始标签，除了标签名之外，还有一些标签相关的属性。函数先通过正则表达式 `startTagOpen` 匹配到开始标签，然后设计了 `match` 对象，接着循环去匹配开始标签中的属性并添加到 `match.attrs` 中，直到匹配的开始标签的闭合符结束。如果匹配到闭合符，则获取一元斜线，前进到闭合符尾，并把当前索引赋值给 `match.end`。
+对于开始标签，除了标签名之外，还有一些标签相关的属性。函数先通过正则表达式 `startTagOpen` 匹配到开始标签，然后定义了 `match` 对象，接着循环去匹配开始标签中的属性并添加到 `match.attrs` 中，直到匹配的开始标签的闭合符结束。如果匹配到闭合符，则获取一元斜线符，前进到闭合符尾，并把当前索引赋值给 `match.end`。
 
 `parseStartTag` 对开始标签解析拿到 `match` 后，紧接着会执行 `` 对 `match` 做处理：
 
@@ -348,7 +361,7 @@ function handleStartTag (match) {
 }
 ```
 
-`handleStartTag` 的核心逻辑很简单，先判断开始标签是否是一元标签，类似 `<img>、<br/>` 这样，如果非一元标签，往 `stack` 里 push 一个对象，并且把 `tagName` 赋值给 `lastTag`。至于 `stack` 的作用，稍后我会介绍。
+`handleStartTag` 的核心逻辑很简单，先判断开始标签是否是一元标签，类似 `<img>、<br/>` 这样，接着对 `match.attrs` 遍历并做了一些处理，最后判断如果非一元标签，则往 `stack` 里 push 一个对象，并且把 `tagName` 赋值给 `lastTag`。至于 `stack` 的作用，稍后我会介绍。
 
 最后调用了 `options.start` 回调函数，并传入一些参数，这个回调函数的作用稍后我会详细介绍。
  
@@ -470,14 +483,37 @@ if (options.chars && text) {
 
 因此，在循环解析整个 `template` 的过程中，会根据不同的情况，去执行不同的回调函数，下面我们来看看这些回调函数的作用。
 
-## 处理开始标签 
+### 处理开始标签 
+
+对应伪代码：
+
+```js
+start (tag, attrs, unary) {
+  let element = createASTElement(tag, attrs)
+  processElement(element)
+  treeManagement()
+}
+```
 
 当解析到开始标签的时候，最后会执行 `start` 回调函数，函数主要就做 3 件事情，创建 AST 元素，处理 AST 元素，AST 树管理。下面我们来分别来看这几个过程。
 
 - 创建 AST 元素
 
 ```js
+// check namespace.
+// inherit parent ns if there is one
+const ns = (currentParent && currentParent.ns) || platformGetTagNamespace(tag)
+
+// handle IE svg bug
+/* istanbul ignore if */
+if (isIE && ns === 'svg') {
+  attrs = guardIESVGBug(attrs)
+}
+
 let element: ASTElement = createASTElement(tag, attrs, currentParent)
+if (ns) {
+  element.ns = ns
+}
 
 export function createASTElement (
   tag: string,
@@ -495,11 +531,21 @@ export function createASTElement (
 }
 ```
 
-可以看到，每一个 AST 元素就是一个普通的 JavaScript 对象，其中，`type` 表示 AST 元素类型，`tag` 表示标签名，`attrsList` 表示属性列表，`attrsMap` 表示属性映射表，`parent` 表示父的 AST 元素，`children` 表示子 AST 元素集合。
+通过 `createASTElement` 方法去创建一个 AST 元素，并添加了 namespace。可以看到，每一个 AST 元素就是一个普通的 JavaScript 对象，其中，`type` 表示 AST 元素类型，`tag` 表示标签名，`attrsList` 表示属性列表，`attrsMap` 表示属性映射表，`parent` 表示父的 AST 元素，`children` 表示子 AST 元素集合。
 
 - 处理 AST 元素
 
 ```js
+if (isForbiddenTag(element) && !isServerRendering()) {
+  element.forbidden = true
+  process.env.NODE_ENV !== 'production' && warn(
+    'Templates should only be responsible for mapping the state to the ' +
+    'UI. Avoid placing tags with side-effects in your templates, such as ' +
+    `<${tag}>` + ', as they will not be parsed.'
+  )
+}
+
+// apply pre-transforms
 for (let i = 0; i < preTransforms.length; i++) {
   element = preTransforms[i](element, options) || element
 }
@@ -510,7 +556,6 @@ if (!inVPre) {
     inVPre = true
   }
 }
-
 if (platformIsPreTag(element.tag)) {
   inPre = true
 }
@@ -525,7 +570,7 @@ if (inVPre) {
   processElement(element, options)
 }
 ```
-首先是对模块 `preTransforms` 的调用，其实所有模块的 `preTransforms`、 `transforms` 和 `postTransforms` 的定义都在 `src/platforms/web/compiler/modules` 目录中，这部分我们暂时不会介绍，之后会结合具体的例子说。接着就判断 `element` 是否包含各种指令通过 `processXXX` 做相应的处理，处理的结果就是扩展 AST 元素的属性。这里我并不会一一介绍所有的指令处理，而是结合我们当前的例子，我们来看一下 `processFor` 和 `processIf`
+首先是对模块 `preTransforms` 的调用，其实所有模块的 `preTransforms`、 `transforms` 和 `postTransforms` 的定义都在 `src/platforms/web/compiler/modules` 目录中，这部分我们暂时不会介绍，之后会结合具体的例子说。接着判断 `element` 是否包含各种指令通过 `processXXX` 做相应的处理，处理的结果就是扩展 AST 元素的属性。这里我并不会一一介绍所有的指令处理，而是结合我们当前的例子，我们来看一下 `processFor` 和 `processIf`：
 
 ```js
 export function processFor (el: ASTElement) {
@@ -565,7 +610,7 @@ export function parseFor (exp: string): ?ForParseResult {
 }
 ```
 
-`processFor` 就是从元素中拿到 `v-for` 指令的内容，然后分别解析出 `for`、`alias`、`iterator1`、`iterator2` 等属性的值添加到 AST 的元素上。就我们的示例而言，解析出的的 `for` 是 `data`，`alias` 是 `item`，`iterator1` 是 `index`，没有 `iterator2`。
+`processFor` 就是从元素中拿到 `v-for` 指令的内容，然后分别解析出 `for`、`alias`、`iterator1`、`iterator2` 等属性的值添加到 AST 的元素上。就我们的示例 `v-for="(item,index) in data"` 而言，解析出的的 `for` 是 `data`，`alias` 是 `item`，`iterator1` 是 `index`，没有 `iterator2`。
 
 ```js
 function processIf (el) {
@@ -603,10 +648,48 @@ export function addIfCondition (el: ASTElement, condition: ASTIfCondition) {
 AST 树管理相关代码如下：
 
 ```js
+function checkRootConstraints (el) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (el.tag === 'slot' || el.tag === 'template') {
+      warnOnce(
+        `Cannot use <${el.tag}> as component root element because it may ` +
+        'contain multiple nodes.'
+      )
+    }
+    if (el.attrsMap.hasOwnProperty('v-for')) {
+      warnOnce(
+        'Cannot use v-for on stateful component root element because ' +
+        'it renders multiple elements.'
+      )
+    }
+  }
+}
+
+
+// tree management
+if (!root) {
+  root = element
+  checkRootConstraints(root)
+} else if (!stack.length) {
+  // allow root elements with v-if, v-else-if and v-else
+  if (root.if && (element.elseif || element.else)) {
+    checkRootConstraints(element)
+    addIfCondition(root, {
+      exp: element.elseif,
+      block: element
+    })
+  } else if (process.env.NODE_ENV !== 'production') {
+    warnOnce(
+      `Component template should contain exactly one root element. ` +
+      `If you are using v-if on multiple elements, ` +
+      `use v-else-if to chain them instead.`
+    )
+  }
+}
 if (currentParent && !element.forbidden) {
   if (element.elseif || element.else) {
     processIfConditions(element, currentParent)
-  } else if (element.slotScope) {
+  } else if (element.slotScope) { // scoped slot
     currentParent.plain = false
     const name = element.slotTarget || '"default"'
     ;(currentParent.scopedSlots || (currentParent.scopedSlots = {}))[name] = element
@@ -623,24 +706,35 @@ if (!unary) {
 }
 ```
 
-其实对于 AST 树管理而言，在遍历过程中利用了 2 个变量，一个是 `stack`，一个是 `currentParent`。对于根元素而言，它的 `currentParent` 是空；`stack` 和我们之前解析模板时用到的 `stack` 类似。
+AST 树管理的目标是构建一颗 AST 树，本质上它要维护 `root` 根节点和当前父节点 `currentParent`。为了保证元素可以正确闭合，这里也利用了 `stack` 栈的数据结构，和我们之前解析模板时用到的 `stack` 类似。
 
-当我们在处理开始标签的时候，判断如果有 `currentParent`，会把当前 AST 元素 push 到 `currentParent.chilren` 中，同时把 AST 元素的 `parent` 指向 `currentParent`。
+当我们在处理开始标签的时候，判断如果有 `currentParent`，会把当前 AST 元素 push 到 `currentParent.chilldren` 中，同时把 AST 元素的 `parent` 指向 `currentParent`。
 
  接着就是更新 `currentParent` 和 `stack` ，判断当前如果不是一个一元标签，我们要把它生成的 AST 元素 push 到 `stack` 中，并且把当前的 AST 元素赋值给 `currentParent`。
 
 `stack` 和 `currentParent` 除了在处理开始标签的时候会变化，在处理闭合标签的时候也会变化，因此整个 AST 树管理要结合闭合标签的处理逻辑看。
 
-## 处理闭合标签
+### 处理闭合标签
+
+对应伪代码：
+
+```js
+end () {
+  treeManagement()
+  closeElement()
+}
+```
 
 当解析到闭合标签的时候，最后会执行 `end` 回调函数：
 
 ```js
+// remove trailing whitespace
 const element = stack[stack.length - 1]
 const lastNode = element.children[element.children.length - 1]
 if (lastNode && lastNode.type === 3 && lastNode.text === ' ' && !inPre) {
   element.children.pop()
 }
+// pop stack
 stack.length -= 1
 currentParent = stack[stack.length - 1]
 closeElement(element)
@@ -652,12 +746,14 @@ closeElement(element)
 
 ```js
 function closeElement (element) {
+  // check pre state
   if (element.pre) {
     inVPre = false
   }
   if (platformIsPreTag(element.tag)) {
     inPre = false
   }
+  // apply post-transforms
   for (let i = 0; i < postTransforms.length; i++) {
     postTransforms[i](element, options)
   }
@@ -665,15 +761,25 @@ function closeElement (element) {
 ```
 `closeElement` 逻辑很简单，就是更新一下 `inVPre` 和 `inPre` 的状态，以及执行 `postTransforms` 函数，这些我们暂时都不必了解。
 
-## 处理文本内容
+### 处理文本内容
+
+对应伪代码：
+
+```js
+chars (text: string) {
+  handleText()
+  createChildrenASTOfText()
+}
+```
 
 除了处理开始标签和闭合标签，我们还会在解析模板的过程中去处理一些文本内容：
 
 ```js
 const children = currentParent.children
 text = inPre || text.trim()
-? isTextTag(currentParent) ? text : decodeHTMLCached(text)
-    : preserveWhitespace && children.length ? ' ' : ''
+  ? isTextTag(currentParent) ? text : decodeHTMLCached(text)
+  // only preserve whitespace if its not right after a starting tag
+  : preserveWhitespace && children.length ? ' ' : ''
 if (text) {
   let res
   if (!inVPre && text !== ' ' && (res = parseText(text, delimiters))) {
@@ -717,10 +823,12 @@ export function parseText (
   let match, index, tokenValue
   while ((match = tagRE.exec(text))) {
     index = match.index
+    // push text token
     if (index > lastIndex) {
       rawTokens.push(tokenValue = text.slice(lastIndex, index))
       tokens.push(JSON.stringify(tokenValue))
-    } 
+    }
+    // tag token
     const exp = parseFilters(match[1].trim())
     tokens.push(`_s(${exp})`)
     rawTokens.push({ '@binding': exp })
