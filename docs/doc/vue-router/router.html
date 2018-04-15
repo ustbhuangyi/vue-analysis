@@ -1,0 +1,1204 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>VueRouter 对象 · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="matcher.html" />
+    
+    
+    <link rel="prev" href="install.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../prepare/">
+            
+                <a href="../prepare/">
+            
+                    
+                    准备工作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../prepare/flow.html">
+            
+                <a href="../prepare/flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../prepare/directory.html">
+            
+                <a href="../prepare/directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../prepare/build.html">
+            
+                <a href="../prepare/build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../prepare/entrance.html">
+            
+                <a href="../prepare/entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../data-driven/">
+            
+                <a href="../data-driven/">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../data-driven/new-vue.html">
+            
+                <a href="../data-driven/new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../data-driven/mounted.html">
+            
+                <a href="../data-driven/mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../data-driven/render.html">
+            
+                <a href="../data-driven/render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../data-driven/virtual-dom.html">
+            
+                <a href="../data-driven/virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../data-driven/create-element.html">
+            
+                <a href="../data-driven/create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../data-driven/update.html">
+            
+                <a href="../data-driven/update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../components/">
+            
+                <a href="../components/">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../components/create-component.html">
+            
+                <a href="../components/create-component.html">
+            
+                    
+                    createComponent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../components/patch.html">
+            
+                <a href="../components/patch.html">
+            
+                    
+                    patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../components/merge-option.html">
+            
+                <a href="../components/merge-option.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../components/lifecycle.html">
+            
+                <a href="../components/lifecycle.html">
+            
+                    
+                    生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../components/component-register.html">
+            
+                <a href="../components/component-register.html">
+            
+                    
+                    组件注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../components/async-component.html">
+            
+                <a href="../components/async-component.html">
+            
+                    
+                    异步组件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../reactive/">
+            
+                <a href="../reactive/">
+            
+                    
+                    深入响应式原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../reactive/reactive-object.html">
+            
+                <a href="../reactive/reactive-object.html">
+            
+                    
+                    响应式对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../reactive/getters.html">
+            
+                <a href="../reactive/getters.html">
+            
+                    
+                    依赖收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../reactive/setters.html">
+            
+                <a href="../reactive/setters.html">
+            
+                    
+                    派发更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../reactive/next-tick.html">
+            
+                <a href="../reactive/next-tick.html">
+            
+                    
+                    nextTick
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../reactive/questions.html">
+            
+                <a href="../reactive/questions.html">
+            
+                    
+                    检测变化的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../reactive/computed-watcher.html">
+            
+                <a href="../reactive/computed-watcher.html">
+            
+                    
+                    计算属性 VS 侦听属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../reactive/component-update.html">
+            
+                <a href="../reactive/component-update.html">
+            
+                    
+                    组件更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../compile/">
+            
+                <a href="../compile/">
+            
+                    
+                    编译
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../compile/entrance.html">
+            
+                <a href="../compile/entrance.html">
+            
+                    
+                    编译入口
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../compile/parse.html">
+            
+                <a href="../compile/parse.html">
+            
+                    
+                    parse
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../compile/optimize.html">
+            
+                <a href="../compile/optimize.html">
+            
+                    
+                    optimize
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../compile/codegen.html">
+            
+                <a href="../compile/codegen.html">
+            
+                    
+                    codegen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../extend/">
+            
+                <a href="../extend/">
+            
+                    
+                    扩展
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../extend/event.html">
+            
+                <a href="../extend/event.html">
+            
+                    
+                    event
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../extend/v-model.html">
+            
+                <a href="../extend/v-model.html">
+            
+                    
+                    v-model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../extend/slot.html">
+            
+                <a href="../extend/slot.html">
+            
+                    
+                    slot
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../extend/keep-alive.html">
+            
+                <a href="../extend/keep-alive.html">
+            
+                    
+                    keep-alive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../extend/tansition.html">
+            
+                <a href="../extend/tansition.html">
+            
+                    
+                    transition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../extend/tansition-group.html">
+            
+                <a href="../extend/tansition-group.html">
+            
+                    
+                    transition-group
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Vue-Router
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="install.html">
+            
+                <a href="install.html">
+            
+                    
+                    路由注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8.2" data-path="router.html">
+            
+                <a href="router.html">
+            
+                    
+                    VueRouter 对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="matcher.html">
+            
+                <a href="matcher.html">
+            
+                    
+                    matcher
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="transition-to.html">
+            
+                <a href="transition-to.html">
+            
+                    
+                    路径切换
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../vuex/">
+            
+                <a href="../vuex/">
+            
+                    
+                    Vuex
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../vuex/init.html">
+            
+                <a href="../vuex/init.html">
+            
+                    
+                    Vuex 初始化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../vuex/api.html">
+            
+                <a href="../vuex/api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../vuex/plugin.html">
+            
+                <a href="../vuex/plugin.html">
+            
+                    
+                    插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >VueRouter 对象</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="vuerouter-&#x5BF9;&#x8C61;">VueRouter &#x5BF9;&#x8C61;</h1>
+<p>VueRouter &#x7684;&#x5B9E;&#x73B0;&#x662F;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x5BF9;&#x5B83;&#x505A;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x5730;&#x5206;&#x6790;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/index.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VueRouter</span> </span>{
+  <span class="hljs-keyword">static</span> install: () =&gt; <span class="hljs-keyword">void</span>;
+  <span class="hljs-keyword">static</span> version: string;
+
+  app: any;
+  apps: <span class="hljs-built_in">Array</span>&lt;any&gt;;
+  ready: boolean;
+  readyCbs: <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">Function</span>&gt;;
+  options: RouterOptions;
+  mode: string;
+  history: HashHistory | HTML5History | AbstractHistory;
+  matcher: Matcher;
+  fallback: boolean;
+  beforeHooks: <span class="hljs-built_in">Array</span>&lt;?NavigationGuard&gt;;
+  resolveHooks: <span class="hljs-built_in">Array</span>&lt;?NavigationGuard&gt;;
+  afterHooks: <span class="hljs-built_in">Array</span>&lt;?AfterNavigationHook&gt;;
+
+  <span class="hljs-keyword">constructor</span> (options: RouterOptions = {}) {
+    <span class="hljs-keyword">this</span>.app = <span class="hljs-literal">null</span>
+    <span class="hljs-keyword">this</span>.apps = []
+    <span class="hljs-keyword">this</span>.options = options
+    <span class="hljs-keyword">this</span>.beforeHooks = []
+    <span class="hljs-keyword">this</span>.resolveHooks = []
+    <span class="hljs-keyword">this</span>.afterHooks = []
+    <span class="hljs-keyword">this</span>.matcher = createMatcher(options.routes || [], <span class="hljs-keyword">this</span>)
+
+    <span class="hljs-keyword">let</span> mode = options.mode || <span class="hljs-string">&apos;hash&apos;</span>
+    <span class="hljs-keyword">this</span>.fallback = mode === <span class="hljs-string">&apos;history&apos;</span> &amp;&amp; !supportsPushState &amp;&amp; options.fallback !== <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.fallback) {
+      mode = <span class="hljs-string">&apos;hash&apos;</span>
+    }
+    <span class="hljs-keyword">if</span> (!inBrowser) {
+      mode = <span class="hljs-string">&apos;abstract&apos;</span>
+    }
+    <span class="hljs-keyword">this</span>.mode = mode
+
+    <span class="hljs-keyword">switch</span> (mode) {
+      <span class="hljs-keyword">case</span> <span class="hljs-string">&apos;history&apos;</span>:
+        <span class="hljs-keyword">this</span>.history = <span class="hljs-keyword">new</span> HTML5History(<span class="hljs-keyword">this</span>, options.base)
+        <span class="hljs-keyword">break</span>
+      <span class="hljs-keyword">case</span> <span class="hljs-string">&apos;hash&apos;</span>:
+        <span class="hljs-keyword">this</span>.history = <span class="hljs-keyword">new</span> HashHistory(<span class="hljs-keyword">this</span>, options.base, <span class="hljs-keyword">this</span>.fallback)
+        <span class="hljs-keyword">break</span>
+      <span class="hljs-keyword">case</span> <span class="hljs-string">&apos;abstract&apos;</span>:
+        <span class="hljs-keyword">this</span>.history = <span class="hljs-keyword">new</span> AbstractHistory(<span class="hljs-keyword">this</span>, options.base)
+        <span class="hljs-keyword">break</span>
+      <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+          assert(<span class="hljs-literal">false</span>, <span class="hljs-string">`invalid mode: <span class="hljs-subst">${mode}</span>`</span>)
+        }
+    }
+  }
+
+  match (
+    raw: RawLocation,
+    current?: Route,
+    redirectedFrom?: Location
+  ): Route {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.matcher.match(raw, current, redirectedFrom)
+  }
+
+  get currentRoute (): ?Route {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.history &amp;&amp; <span class="hljs-keyword">this</span>.history.current
+  }
+
+  init (app: any) {
+    process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; assert(
+      install.installed,
+      <span class="hljs-string">`not installed. Make sure to call \`Vue.use(VueRouter)\` `</span> +
+      <span class="hljs-string">`before creating root instance.`</span>
+    )
+
+    <span class="hljs-keyword">this</span>.apps.push(app)
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.app) {
+      <span class="hljs-keyword">return</span>
+    }
+
+    <span class="hljs-keyword">this</span>.app = app
+
+    <span class="hljs-keyword">const</span> history = <span class="hljs-keyword">this</span>.history
+
+    <span class="hljs-keyword">if</span> (history <span class="hljs-keyword">instanceof</span> HTML5History) {
+      history.transitionTo(history.getCurrentLocation())
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (history <span class="hljs-keyword">instanceof</span> HashHistory) {
+      <span class="hljs-keyword">const</span> setupHashListener = () =&gt; {
+        history.setupListeners()
+      }
+      history.transitionTo(
+        history.getCurrentLocation(),
+        setupHashListener,
+        setupHashListener
+      )
+    }
+
+    history.listen(route =&gt; {
+      <span class="hljs-keyword">this</span>.apps.forEach((app) =&gt; {
+        app._route = route
+      })
+    })
+  }
+
+  beforeEach (fn: <span class="hljs-built_in">Function</span>): <span class="hljs-built_in">Function</span> {
+    <span class="hljs-keyword">return</span> registerHook(<span class="hljs-keyword">this</span>.beforeHooks, fn)
+  }
+
+  beforeResolve (fn: <span class="hljs-built_in">Function</span>): <span class="hljs-built_in">Function</span> {
+    <span class="hljs-keyword">return</span> registerHook(<span class="hljs-keyword">this</span>.resolveHooks, fn)
+  }
+
+  afterEach (fn: <span class="hljs-built_in">Function</span>): <span class="hljs-built_in">Function</span> {
+    <span class="hljs-keyword">return</span> registerHook(<span class="hljs-keyword">this</span>.afterHooks, fn)
+  }
+
+  onReady (cb: <span class="hljs-built_in">Function</span>, errorCb?: <span class="hljs-built_in">Function</span>) {
+    <span class="hljs-keyword">this</span>.history.onReady(cb, errorCb)
+  }
+
+  onError (errorCb: <span class="hljs-built_in">Function</span>) {
+    <span class="hljs-keyword">this</span>.history.onError(errorCb)
+  }
+
+  push (location: RawLocation, onComplete?: <span class="hljs-built_in">Function</span>, onAbort?: <span class="hljs-built_in">Function</span>) {
+    <span class="hljs-keyword">this</span>.history.push(location, onComplete, onAbort)
+  }
+
+  replace (location: RawLocation, onComplete?: <span class="hljs-built_in">Function</span>, onAbort?: <span class="hljs-built_in">Function</span>) {
+    <span class="hljs-keyword">this</span>.history.replace(location, onComplete, onAbort)
+  }
+
+  go (n: number) {
+    <span class="hljs-keyword">this</span>.history.go(n)
+  }
+
+  back () {
+    <span class="hljs-keyword">this</span>.go(<span class="hljs-number">-1</span>)
+  }
+
+  forward () {
+    <span class="hljs-keyword">this</span>.go(<span class="hljs-number">1</span>)
+  }
+
+  getMatchedComponents (to?: RawLocation | Route): <span class="hljs-built_in">Array</span>&lt;any&gt; {
+    <span class="hljs-keyword">const</span> route: any = to
+      ? to.matched
+        ? to
+        : <span class="hljs-keyword">this</span>.resolve(to).route
+      : <span class="hljs-keyword">this</span>.currentRoute
+    <span class="hljs-keyword">if</span> (!route) {
+      <span class="hljs-keyword">return</span> []
+    }
+    <span class="hljs-keyword">return</span> [].concat.apply([], route.matched.map(m =&gt; {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.keys(m.components).map(key =&gt; {
+        <span class="hljs-keyword">return</span> m.components[key]
+      })
+    }))
+  }
+
+  resolve (
+    to: RawLocation,
+    current?: Route,
+    append?: boolean
+  ): {
+    location: Location,
+    route: Route,
+    href: string,
+    normalizedTo: Location,
+    resolved: Route
+  } {
+    <span class="hljs-keyword">const</span> location = normalizeLocation(
+      to,
+      current || <span class="hljs-keyword">this</span>.history.current,
+      append,
+      <span class="hljs-keyword">this</span>
+    )
+    <span class="hljs-keyword">const</span> route = <span class="hljs-keyword">this</span>.match(location, current)
+    <span class="hljs-keyword">const</span> fullPath = route.redirectedFrom || route.fullPath
+    <span class="hljs-keyword">const</span> base = <span class="hljs-keyword">this</span>.history.base
+    <span class="hljs-keyword">const</span> href = createHref(base, fullPath, <span class="hljs-keyword">this</span>.mode)
+    <span class="hljs-keyword">return</span> {
+      location,
+      route,
+      href,
+      normalizedTo: location,
+      resolved: route
+    }
+  }
+
+  addRoutes (routes: <span class="hljs-built_in">Array</span>&lt;RouteConfig&gt;) {
+    <span class="hljs-keyword">this</span>.matcher.addRoutes(routes)
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.history.current !== START) {
+      <span class="hljs-keyword">this</span>.history.transitionTo(<span class="hljs-keyword">this</span>.history.getCurrentLocation())
+    }
+  }
+}
+</code></pre>
+<p><code>VueRouter</code> &#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x4ECE;&#x5B83;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x770B;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x6267;&#x884C; <code>new VueRouter</code> &#x7684;&#x65F6;&#x5019;&#x505A;&#x4E86;&#x54EA;&#x4E9B;&#x4E8B;&#x60C5;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">constructor</span> (options: RouterOptions = {}) {
+  <span class="hljs-keyword">this</span>.app = <span class="hljs-literal">null</span>
+  <span class="hljs-keyword">this</span>.apps = []
+  <span class="hljs-keyword">this</span>.options = options
+  <span class="hljs-keyword">this</span>.beforeHooks = []
+  <span class="hljs-keyword">this</span>.resolveHooks = []
+  <span class="hljs-keyword">this</span>.afterHooks = []
+  <span class="hljs-keyword">this</span>.matcher = createMatcher(options.routes || [], <span class="hljs-keyword">this</span>)
+
+  <span class="hljs-keyword">let</span> mode = options.mode || <span class="hljs-string">&apos;hash&apos;</span>
+  <span class="hljs-keyword">this</span>.fallback = mode === <span class="hljs-string">&apos;history&apos;</span> &amp;&amp; !supportsPushState &amp;&amp; options.fallback !== <span class="hljs-literal">false</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.fallback) {
+    mode = <span class="hljs-string">&apos;hash&apos;</span>
+  }
+  <span class="hljs-keyword">if</span> (!inBrowser) {
+    mode = <span class="hljs-string">&apos;abstract&apos;</span>
+  }
+  <span class="hljs-keyword">this</span>.mode = mode
+
+  <span class="hljs-keyword">switch</span> (mode) {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&apos;history&apos;</span>:
+      <span class="hljs-keyword">this</span>.history = <span class="hljs-keyword">new</span> HTML5History(<span class="hljs-keyword">this</span>, options.base)
+      <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&apos;hash&apos;</span>:
+      <span class="hljs-keyword">this</span>.history = <span class="hljs-keyword">new</span> HashHistory(<span class="hljs-keyword">this</span>, options.base, <span class="hljs-keyword">this</span>.fallback)
+      <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&apos;abstract&apos;</span>:
+      <span class="hljs-keyword">this</span>.history = <span class="hljs-keyword">new</span> AbstractHistory(<span class="hljs-keyword">this</span>, options.base)
+      <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">default</span>:
+      <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+        assert(<span class="hljs-literal">false</span>, <span class="hljs-string">`invalid mode: <span class="hljs-subst">${mode}</span>`</span>)
+      }
+  }
+}
+</code></pre>
+<p>&#x6784;&#x9020;&#x51FD;&#x6570;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x5C5E;&#x6027;&#xFF0C;&#x5176;&#x4E2D; <code>this.app</code> &#x8868;&#x793A;&#x6839; <code>Vue</code> &#x5B9E;&#x4F8B;&#xFF0C;<code>this.apps</code> &#x4FDD;&#x5B58;&#x6240;&#x6709;&#x5B50;&#x7EC4;&#x4EF6;&#x7684; <code>Vue</code> &#x5B9E;&#x4F8B;&#xFF0C;<code>this.options</code> &#x4FDD;&#x5B58;&#x4F20;&#x5165;&#x7684;&#x8DEF;&#x7531;&#x914D;&#x7F6E;&#xFF0C;<code>this.beforeHooks</code>&#x3001;
+<code>this.resolveHooks</code>&#x3001;<code>this.afterHooks</code> &#x8868;&#x793A;&#x4E00;&#x4E9B;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x6211;&#x4EEC;&#x4E4B;&#x540E;&#x4F1A;&#x4ECB;&#x7ECD;&#xFF0C;<code>this.matcher</code> &#x8868;&#x793A;&#x8DEF;&#x7531;&#x5339;&#x914D;&#x5668;&#xFF0C;&#x6211;&#x4EEC;&#x4E4B;&#x540E;&#x4F1A;&#x4ECB;&#x7ECD;&#xFF0C;<code>this.fallback</code> &#x8868;&#x793A;&#x8DEF;&#x7531;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;<code>this.mode</code> &#x8868;&#x793A;&#x8DEF;&#x7531;&#x521B;&#x5EFA;&#x7684;&#x6A21;&#x5F0F;&#xFF0C;<code>this.history</code> &#x8868;&#x793A;&#x8DEF;&#x7531;&#x5386;&#x53F2;&#x7684;&#x5177;&#x4F53;&#x7684;&#x5B9E;&#x73B0;&#x5B9E;&#x4F8B;&#xFF0C;&#x5B83;&#x662F;&#x6839;&#x636E; <code>this.mode</code> &#x7684;&#x4E0D;&#x540C;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#xFF0C;&#x5B83;&#x6709; <code>History</code> &#x57FA;&#x7C7B;&#xFF0C;&#x7136;&#x540E;&#x4E0D;&#x540C;&#x7684; <code>history</code> &#x5B9E;&#x73B0;&#x90FD;&#x662F;&#x7EE7;&#x627F; <code>History</code>&#xFF0C;&#x8FD9;&#x5757;&#x6211;&#x4EEC;&#x4E4B;&#x540E;&#x4F1A;&#x91CD;&#x70B9;&#x8BB2;&#x3002;</p>
+<p>&#x5B9E;&#x4F8B;&#x5316; <code>VueRouter</code> &#x540E;&#x4F1A;&#x8FD4;&#x56DE;&#x5B83;&#x7684;&#x5B9E;&#x4F8B; <code>router</code>&#xFF0C;&#x6211;&#x4EEC;&#x5728; <code>new Vue</code> &#x7684;&#x65F6;&#x5019;&#x4F1A;&#x628A; <code>router</code> &#x4F5C;&#x4E3A;&#x914D;&#x7F6E;&#x7684;&#x5C5E;&#x6027;&#x4F20;&#x5165;&#xFF0C;&#x56DE;&#x987E;&#x4E00;&#x4E0B;&#x4E0A;&#x4E00;&#x8282;&#x6211;&#x4EEC;&#x8BB2; <code>beforeCreated</code> &#x6DF7;&#x5165;&#x7684;&#x65F6;&#x5019;&#x6709;&#x8FD9;&#x4E48;&#x4E00;&#x6BB5;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-js">beforeCreated() {
+  <span class="hljs-keyword">if</span> (isDef(<span class="hljs-keyword">this</span>.$options.router)) {
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-keyword">this</span>._router = <span class="hljs-keyword">this</span>.$options.router
+    <span class="hljs-keyword">this</span>._router.init(<span class="hljs-keyword">this</span>)
+    <span class="hljs-comment">// ...</span>
+  }
+}
+</code></pre>
+<p>&#x6240;&#x4EE5;&#x6BCF;&#x4E2A;&#x7EC4;&#x4EF6;&#x5728;&#x6267;&#x884C; <code>beforeCreated</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x90FD;&#x4F1A;&#x6267;&#x884C; <code>router.init</code> &#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-js">init (app: any) {
+  process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; assert(
+    install.installed,
+    <span class="hljs-string">`not installed. Make sure to call \`Vue.use(VueRouter)\` `</span> +
+    <span class="hljs-string">`before creating root instance.`</span>
+  )
+
+  <span class="hljs-keyword">this</span>.apps.push(app)
+
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.app) {
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-keyword">this</span>.app = app
+
+  <span class="hljs-keyword">const</span> history = <span class="hljs-keyword">this</span>.history
+
+  <span class="hljs-keyword">if</span> (history <span class="hljs-keyword">instanceof</span> HTML5History) {
+    history.transitionTo(history.getCurrentLocation())
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (history <span class="hljs-keyword">instanceof</span> HashHistory) {
+    <span class="hljs-keyword">const</span> setupHashListener = () =&gt; {
+      history.setupListeners()
+    }
+    history.transitionTo(
+      history.getCurrentLocation(),
+      setupHashListener,
+      setupHashListener
+    )
+  }
+
+  history.listen(route =&gt; {
+    <span class="hljs-keyword">this</span>.apps.forEach((app) =&gt; {
+      app._route = route
+    })
+  })
+}
+</code></pre>
+<p><code>init</code> &#x7684;&#x903B;&#x8F91;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5B83;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x662F; <code>Vue</code> &#x5B9E;&#x4F8B;&#xFF0C;&#x7136;&#x540E;&#x5B58;&#x50A8;&#x5230; <code>this.apps</code> &#x4E2D;&#xFF1B;&#x53EA;&#x6709;&#x6839; <code>Vue</code> &#x5B9E;&#x4F8B;&#x4F1A;&#x4FDD;&#x5B58;&#x5230; <code>this.app</code> &#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x62FF;&#x5230;&#x5F53;&#x524D;&#x7684; <code>this.history</code>&#xFF0C;&#x6839;&#x636E;&#x5B83;&#x7684;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x6765;&#x6267;&#x884C;&#x4E0D;&#x540C;&#x903B;&#x8F91;&#xFF0C;&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x5E73;&#x65F6;&#x4F7F;&#x7528; <code>hash</code> &#x8DEF;&#x7531;&#x591A;&#x4E00;&#x4E9B;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5148;&#x770B;&#x8FD9;&#x90E8;&#x5206;&#x903B;&#x8F91;&#xFF0C;&#x5148;&#x5B9A;&#x4E49;&#x4E86; <code>setupHashListener</code> &#x51FD;&#x6570;&#xFF0C;&#x63A5;&#x7740;&#x6267;&#x884C;&#x4E86; <code>history.transitionTo</code> &#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x662F;&#x5B9A;&#x4E49;&#x5728; <code>History</code> &#x57FA;&#x7C7B;&#x4E2D;&#xFF0C;&#x4EE3;&#x7801;&#x5728; <code>src/history/base.js</code>&#xFF1A;</p>
+<pre><code class="lang-js">transitionTo (location: RawLocation, onComplete?: <span class="hljs-built_in">Function</span>, onAbort?: <span class="hljs-built_in">Function</span>) {
+  <span class="hljs-keyword">const</span> route = <span class="hljs-keyword">this</span>.router.match(location, <span class="hljs-keyword">this</span>.current)
+  <span class="hljs-comment">// ...</span>
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x5148;&#x4E0D;&#x7740;&#x6025;&#x53BB;&#x770B; <code>transitionTo</code> &#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#xFF0C;&#x5148;&#x770B;&#x7B2C;&#x4E00;&#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x5B83;&#x8C03;&#x7528;&#x4E86; <code>this.router.match</code> &#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-js">match (
+  raw: RawLocation,
+  current?: Route,
+  redirectedFrom?: Location
+): Route {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.matcher.match(raw, current, redirectedFrom)
+}
+</code></pre>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x8C03;&#x7528;&#x4E86; <code>this.matcher.match</code> &#x65B9;&#x6CD5;&#x53BB;&#x505A;&#x5339;&#x914D;&#xFF0C;&#x6240;&#x4EE5;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x4E86;&#x89E3;&#x4E00;&#x4E0B; <code>matcher</code> &#x7684;&#x76F8;&#x5173;&#x5B9E;&#x73B0;&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x901A;&#x8FC7;&#x8FD9;&#x4E00;&#x8282;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x6211;&#x4EEC;&#x5927;&#x81F4;&#x5BF9; <code>VueRouter</code> &#x7C7B;&#x6709;&#x4E86;&#x5927;&#x81F4;&#x4E86;&#x89E3;&#xFF0C;&#x77E5;&#x9053;&#x4E86;&#x5B83;&#x7684;&#x4E00;&#x4E9B;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#xFF0C;&#x540C;&#x65F6;&#x4E86;&#x4E86;&#x89E3;&#x5230;&#x5728;&#x7EC4;&#x4EF6;&#x7684;&#x521D;&#x59CB;&#x5316;&#x9636;&#x6BB5;&#xFF0C;&#x6267;&#x884C;&#x5230; <code>beforeCreated</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x6267;&#x884C; <code>router.init</code> &#x65B9;&#x6CD5;&#xFF0C;&#x7136;&#x540E;&#x53C8;&#x4F1A;&#x6267;&#x884C; <code>history.transitionTo</code> &#x65B9;&#x6CD5;&#x505A;&#x8DEF;&#x7531;&#x8FC7;&#x6E21;&#xFF0C;&#x8FDB;&#x800C;&#x5F15;&#x51FA;&#x4E86; <code>matcher</code> &#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5148;&#x7814;&#x7A76;&#x4E00;&#x4E0B; <code>matcher</code> &#x7684;&#x76F8;&#x5173;&#x5B9E;&#x73B0;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="install.html" class="navigation navigation-prev " aria-label="Previous page: 路由注册">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="matcher.html" class="navigation navigation-next " aria-label="Next page: matcher">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"VueRouter 对象","level":"1.8.2","depth":2,"next":{"title":"matcher","level":"1.8.3","depth":2,"path":"vue-router/matcher.md","ref":"vue-router/matcher.md","articles":[]},"previous":{"title":"路由注册","level":"1.8.1","depth":2,"path":"vue-router/install.md","ref":"vue-router/install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"scripts":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"vue-router/router.md","mtime":"2018-04-14T08:21:06.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-15T11:13:48.684Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

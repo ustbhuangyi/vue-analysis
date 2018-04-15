@@ -1,0 +1,1159 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>从入口开始 · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../data-driven/" />
+    
+    
+    <link rel="prev" href="build.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    准备工作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="flow.html">
+            
+                <a href="flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="directory.html">
+            
+                <a href="directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="build.html">
+            
+                <a href="build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.4" data-path="entrance.html">
+            
+                <a href="entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../data-driven/">
+            
+                <a href="../data-driven/">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../data-driven/new-vue.html">
+            
+                <a href="../data-driven/new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../data-driven/mounted.html">
+            
+                <a href="../data-driven/mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../data-driven/render.html">
+            
+                <a href="../data-driven/render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../data-driven/virtual-dom.html">
+            
+                <a href="../data-driven/virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../data-driven/create-element.html">
+            
+                <a href="../data-driven/create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../data-driven/update.html">
+            
+                <a href="../data-driven/update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../components/">
+            
+                <a href="../components/">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../components/create-component.html">
+            
+                <a href="../components/create-component.html">
+            
+                    
+                    createComponent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../components/patch.html">
+            
+                <a href="../components/patch.html">
+            
+                    
+                    patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../components/merge-option.html">
+            
+                <a href="../components/merge-option.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../components/lifecycle.html">
+            
+                <a href="../components/lifecycle.html">
+            
+                    
+                    生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../components/component-register.html">
+            
+                <a href="../components/component-register.html">
+            
+                    
+                    组件注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../components/async-component.html">
+            
+                <a href="../components/async-component.html">
+            
+                    
+                    异步组件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../reactive/">
+            
+                <a href="../reactive/">
+            
+                    
+                    深入响应式原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../reactive/reactive-object.html">
+            
+                <a href="../reactive/reactive-object.html">
+            
+                    
+                    响应式对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../reactive/getters.html">
+            
+                <a href="../reactive/getters.html">
+            
+                    
+                    依赖收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../reactive/setters.html">
+            
+                <a href="../reactive/setters.html">
+            
+                    
+                    派发更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../reactive/next-tick.html">
+            
+                <a href="../reactive/next-tick.html">
+            
+                    
+                    nextTick
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../reactive/questions.html">
+            
+                <a href="../reactive/questions.html">
+            
+                    
+                    检测变化的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../reactive/computed-watcher.html">
+            
+                <a href="../reactive/computed-watcher.html">
+            
+                    
+                    计算属性 VS 侦听属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../reactive/component-update.html">
+            
+                <a href="../reactive/component-update.html">
+            
+                    
+                    组件更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../compile/">
+            
+                <a href="../compile/">
+            
+                    
+                    编译
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../compile/entrance.html">
+            
+                <a href="../compile/entrance.html">
+            
+                    
+                    编译入口
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../compile/parse.html">
+            
+                <a href="../compile/parse.html">
+            
+                    
+                    parse
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../compile/optimize.html">
+            
+                <a href="../compile/optimize.html">
+            
+                    
+                    optimize
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../compile/codegen.html">
+            
+                <a href="../compile/codegen.html">
+            
+                    
+                    codegen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../extend/">
+            
+                <a href="../extend/">
+            
+                    
+                    扩展
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../extend/event.html">
+            
+                <a href="../extend/event.html">
+            
+                    
+                    event
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../extend/v-model.html">
+            
+                <a href="../extend/v-model.html">
+            
+                    
+                    v-model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../extend/slot.html">
+            
+                <a href="../extend/slot.html">
+            
+                    
+                    slot
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../extend/keep-alive.html">
+            
+                <a href="../extend/keep-alive.html">
+            
+                    
+                    keep-alive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../extend/tansition.html">
+            
+                <a href="../extend/tansition.html">
+            
+                    
+                    transition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../extend/tansition-group.html">
+            
+                <a href="../extend/tansition-group.html">
+            
+                    
+                    transition-group
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../vue-router/">
+            
+                <a href="../vue-router/">
+            
+                    
+                    Vue-Router
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../vue-router/install.html">
+            
+                <a href="../vue-router/install.html">
+            
+                    
+                    路由注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../vue-router/router.html">
+            
+                <a href="../vue-router/router.html">
+            
+                    
+                    VueRouter 对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../vue-router/matcher.html">
+            
+                <a href="../vue-router/matcher.html">
+            
+                    
+                    matcher
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../vue-router/transition-to.html">
+            
+                <a href="../vue-router/transition-to.html">
+            
+                    
+                    路径切换
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../vuex/">
+            
+                <a href="../vuex/">
+            
+                    
+                    Vuex
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../vuex/init.html">
+            
+                <a href="../vuex/init.html">
+            
+                    
+                    Vuex 初始化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../vuex/api.html">
+            
+                <a href="../vuex/api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../vuex/plugin.html">
+            
+                <a href="../vuex/plugin.html">
+            
+                    
+                    插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >从入口开始</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x4ECE;&#x5165;&#x53E3;&#x5F00;&#x59CB;">&#x4ECE;&#x5165;&#x53E3;&#x5F00;&#x59CB;</h1>
+<p>&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x63D0;&#x5230;&#x8FC7; Vue.js &#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#xFF0C;&#x5728; web &#x5E94;&#x7528;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x5206;&#x6790; Runtime + Compiler &#x6784;&#x5EFA;&#x51FA;&#x6765;&#x7684; Vue.js&#xFF0C;&#x5B83;&#x7684;&#x5165;&#x53E3;&#x662F; <code>src/platforms/web/entry-runtime-with-compiler.js</code>&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-comment">/* @flow */</span>
+
+<span class="hljs-keyword">import</span> config <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/config&apos;</span>
+<span class="hljs-keyword">import</span> { warn, cached } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/util/index&apos;</span>
+<span class="hljs-keyword">import</span> { mark, measure } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/util/perf&apos;</span>
+
+<span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./runtime/index&apos;</span>
+<span class="hljs-keyword">import</span> { query } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./util/index&apos;</span>
+<span class="hljs-keyword">import</span> { compileToFunctions } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./compiler/index&apos;</span>
+<span class="hljs-keyword">import</span> { shouldDecodeNewlines, shouldDecodeNewlinesForHref } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./util/compat&apos;</span>
+
+<span class="hljs-keyword">const</span> idToTemplate = cached(id =&gt; {
+  <span class="hljs-keyword">const</span> el = query(id)
+  <span class="hljs-keyword">return</span> el &amp;&amp; el.innerHTML
+})
+
+<span class="hljs-keyword">const</span> mount = Vue.prototype.$mount
+Vue.prototype.$mount = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
+  el?: string | Element,
+  hydrating?: boolean
+</span>): <span class="hljs-title">Component</span> </span>{
+  el = el &amp;&amp; query(el)
+
+  <span class="hljs-comment">/* istanbul ignore if */</span>
+  <span class="hljs-keyword">if</span> (el === <span class="hljs-built_in">document</span>.body || el === <span class="hljs-built_in">document</span>.documentElement) {
+    process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; warn(
+      <span class="hljs-string">`Do not mount Vue to &lt;html&gt; or &lt;body&gt; - mount to normal elements instead.`</span>
+    )
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>
+  }
+
+  <span class="hljs-keyword">const</span> options = <span class="hljs-keyword">this</span>.$options
+  <span class="hljs-comment">// resolve template/el and convert to render function</span>
+  <span class="hljs-keyword">if</span> (!options.render) {
+    <span class="hljs-keyword">let</span> template = options.template
+    <span class="hljs-keyword">if</span> (template) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> template === <span class="hljs-string">&apos;string&apos;</span>) {
+        <span class="hljs-keyword">if</span> (template.charAt(<span class="hljs-number">0</span>) === <span class="hljs-string">&apos;#&apos;</span>) {
+          template = idToTemplate(template)
+          <span class="hljs-comment">/* istanbul ignore if */</span>
+          <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; !template) {
+            warn(
+              <span class="hljs-string">`Template element not found or is empty: <span class="hljs-subst">${options.template}</span>`</span>,
+              <span class="hljs-keyword">this</span>
+            )
+          }
+        }
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (template.nodeType) {
+        template = template.innerHTML
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+          warn(<span class="hljs-string">&apos;invalid template option:&apos;</span> + template, <span class="hljs-keyword">this</span>)
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>
+      }
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (el) {
+      template = getOuterHTML(el)
+    }
+    <span class="hljs-keyword">if</span> (template) {
+      <span class="hljs-comment">/* istanbul ignore if */</span>
+      <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; config.performance &amp;&amp; mark) {
+        mark(<span class="hljs-string">&apos;compile&apos;</span>)
+      }
+
+      <span class="hljs-keyword">const</span> { render, staticRenderFns } = compileToFunctions(template, {
+        shouldDecodeNewlines,
+        shouldDecodeNewlinesForHref,
+        delimiters: options.delimiters,
+        comments: options.comments
+      }, <span class="hljs-keyword">this</span>)
+      options.render = render
+      options.staticRenderFns = staticRenderFns
+
+      <span class="hljs-comment">/* istanbul ignore if */</span>
+      <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; config.performance &amp;&amp; mark) {
+        mark(<span class="hljs-string">&apos;compile end&apos;</span>)
+        measure(<span class="hljs-string">`vue <span class="hljs-subst">${this._name}</span> compile`</span>, <span class="hljs-string">&apos;compile&apos;</span>, <span class="hljs-string">&apos;compile end&apos;</span>)
+      }
+    }
+  }
+  <span class="hljs-keyword">return</span> mount.call(<span class="hljs-keyword">this</span>, el, hydrating)
+}
+
+<span class="hljs-comment">/**
+ * Get outerHTML of elements, taking care
+ * of SVG elements in IE as well.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getOuterHTML</span> (<span class="hljs-params">el: Element</span>): <span class="hljs-title">string</span> </span>{
+  <span class="hljs-keyword">if</span> (el.outerHTML) {
+    <span class="hljs-keyword">return</span> el.outerHTML
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">const</span> container = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&apos;div&apos;</span>)
+    container.appendChild(el.cloneNode(<span class="hljs-literal">true</span>))
+    <span class="hljs-keyword">return</span> container.innerHTML
+  }
+}
+
+Vue.compile = compileToFunctions
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Vue
+</code></pre>
+<p>&#x90A3;&#x4E48;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#x6267;&#x884C; <code>import Vue from &apos;vue&apos;</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x662F;&#x4ECE;&#x8FD9;&#x4E2A;&#x5165;&#x53E3;&#x6267;&#x884C;&#x4EE3;&#x7801;&#x6765;&#x521D;&#x59CB;&#x5316; Vue&#xFF0C;
+&#x90A3;&#x4E48; Vue &#x5230;&#x5E95;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x521D;&#x59CB;&#x5316;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x4E00;&#x63A2;&#x7A76;&#x7ADF;&#x3002;</p>
+<h2 id="vue-&#x7684;&#x5165;&#x53E3;">Vue &#x7684;&#x5165;&#x53E3;</h2>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x5165;&#x53E3; JS &#x7684;&#x4E0A;&#x65B9;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x627E;&#x5230; <code>Vue</code> &#x7684;&#x6765;&#x6E90;&#xFF1A;<code>import Vue from &apos;./runtime/index&apos;</code>&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x8FD9;&#x5757;&#x513F;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x5728; <code>src/platforms/web/runtime/index.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/index&apos;</span>
+<span class="hljs-keyword">import</span> config <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/config&apos;</span>
+<span class="hljs-keyword">import</span> { extend, noop } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;shared/util&apos;</span>
+<span class="hljs-keyword">import</span> { mountComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/instance/lifecycle&apos;</span>
+<span class="hljs-keyword">import</span> { devtools, inBrowser, isChrome } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/util/index&apos;</span>
+
+<span class="hljs-keyword">import</span> {
+  query,
+  mustUseProp,
+  isReservedTag,
+  isReservedAttr,
+  getTagNamespace,
+  isUnknownElement
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;web/util/index&apos;</span>
+
+<span class="hljs-keyword">import</span> { patch } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./patch&apos;</span>
+<span class="hljs-keyword">import</span> platformDirectives <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./directives/index&apos;</span>
+<span class="hljs-keyword">import</span> platformComponents <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./components/index&apos;</span>
+
+<span class="hljs-comment">// install platform specific utils</span>
+Vue.config.mustUseProp = mustUseProp
+Vue.config.isReservedTag = isReservedTag
+Vue.config.isReservedAttr = isReservedAttr
+Vue.config.getTagNamespace = getTagNamespace
+Vue.config.isUnknownElement = isUnknownElement
+
+<span class="hljs-comment">// install platform runtime directives &amp; components</span>
+extend(Vue.options.directives, platformDirectives)
+extend(Vue.options.components, platformComponents)
+
+<span class="hljs-comment">// install platform patch function</span>
+Vue.prototype.__patch__ = inBrowser ? patch : noop
+
+<span class="hljs-comment">// public mount method</span>
+Vue.prototype.$mount = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
+  el?: string | Element,
+  hydrating?: boolean
+</span>): <span class="hljs-title">Component</span> </span>{
+  el = el &amp;&amp; inBrowser ? query(el) : <span class="hljs-literal">undefined</span>
+  <span class="hljs-keyword">return</span> mountComponent(<span class="hljs-keyword">this</span>, el, hydrating)
+}
+
+<span class="hljs-comment">// ...</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Vue
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x5173;&#x952E;&#x7684;&#x4EE3;&#x7801;&#x662F; <code>import Vue from &apos;core/index&apos;</code>&#xFF0C;&#x4E4B;&#x540E;&#x7684;&#x903B;&#x8F91;&#x90FD;&#x662F;&#x5BF9; Vue &#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x505A;&#x4E00;&#x4E9B;&#x6269;&#x5C55;&#xFF0C;&#x53EF;&#x4EE5;&#x5148;&#x4E0D;&#x7528;&#x770B;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x771F;&#x6B63;&#x521D;&#x59CB;&#x5316; Vue &#x7684;&#x5730;&#x65B9;&#xFF0C;&#x5728; <code>src/core/index.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./instance/index&apos;</span>
+<span class="hljs-keyword">import</span> { initGlobalAPI } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./global-api/index&apos;</span>
+<span class="hljs-keyword">import</span> { isServerRendering } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/util/env&apos;</span>
+<span class="hljs-keyword">import</span> { FunctionalRenderContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;core/vdom/create-functional-component&apos;</span>
+
+initGlobalAPI(Vue)
+
+<span class="hljs-built_in">Object</span>.defineProperty(Vue.prototype, <span class="hljs-string">&apos;$isServer&apos;</span>, {
+  get: isServerRendering
+})
+
+<span class="hljs-built_in">Object</span>.defineProperty(Vue.prototype, <span class="hljs-string">&apos;$ssrContext&apos;</span>, {
+  get () {
+    <span class="hljs-comment">/* istanbul ignore next */</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.$vnode &amp;&amp; <span class="hljs-keyword">this</span>.$vnode.ssrContext
+  }
+})
+
+<span class="hljs-comment">// expose FunctionalRenderContext for ssr runtime helper installation</span>
+<span class="hljs-built_in">Object</span>.defineProperty(Vue, <span class="hljs-string">&apos;FunctionalRenderContext&apos;</span>, {
+  value: FunctionalRenderContext
+})
+
+Vue.version = <span class="hljs-string">&apos;__VERSION__&apos;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Vue
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x6709; 2 &#x5904;&#x5173;&#x952E;&#x7684;&#x4EE3;&#x7801;&#xFF0C;<code>import Vue from &apos;./instance/index&apos;</code> &#x548C; <code>initGlobalAPI(Vue)</code>&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x5168;&#x5C40; Vue API&#xFF08;&#x6211;&#x4EEC;&#x7A0D;&#x540E;&#x4ECB;&#x7ECD;&#xFF09;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x770B;&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x5728; <code>src/core/instance/index.js</code> &#x4E2D;&#xFF1A;</p>
+<h3 id="vue-&#x7684;&#x5B9A;&#x4E49;">Vue &#x7684;&#x5B9A;&#x4E49;</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> { initMixin } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./init&apos;</span>
+<span class="hljs-keyword">import</span> { stateMixin } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./state&apos;</span>
+<span class="hljs-keyword">import</span> { renderMixin } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./render&apos;</span>
+<span class="hljs-keyword">import</span> { eventsMixin } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./events&apos;</span>
+<span class="hljs-keyword">import</span> { lifecycleMixin } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./lifecycle&apos;</span>
+<span class="hljs-keyword">import</span> { warn } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../util/index&apos;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vue</span> (<span class="hljs-params">options</span>) </span>{
+  <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp;
+    !(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Vue)
+  ) {
+    warn(<span class="hljs-string">&apos;Vue is a constructor and should be called with the `new` keyword&apos;</span>)
+  }
+  <span class="hljs-keyword">this</span>._init(options)
+}
+
+initMixin(Vue)
+stateMixin(Vue)
+eventsMixin(Vue)
+lifecycleMixin(Vue)
+renderMixin(Vue)
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Vue
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x7EC8;&#x4E8E;&#x770B;&#x5230;&#x4E86; Vue &#x7684;&#x5E90;&#x5C71;&#x771F;&#x9762;&#x76EE;&#xFF0C;&#x5B83;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x7528; Function &#x5B9E;&#x73B0;&#x7684;&#x7C7B;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x80FD;&#x901A;&#x8FC7; <code>new Vue</code> &#x53BB;&#x5B9E;&#x4F8B;&#x5316;&#x5B83;&#x3002;</p>
+<p>&#x6709;&#x4E9B;&#x540C;&#x5B66;&#x770B;&#x5230;&#x8FD9;&#x4E0D;&#x7981;&#x60F3;&#x95EE;&#xFF0C;&#x4E3A;&#x4F55; Vue &#x4E0D;&#x7528; ES6 &#x7684; Class &#x53BB;&#x5B9E;&#x73B0;&#x5462;&#xFF1F;&#x6211;&#x4EEC;&#x5F80;&#x540E;&#x770B;&#x8FD9;&#x91CC;&#x6709;&#x5F88;&#x591A; <code>xxxMixin</code> &#x7684;&#x51FD;&#x6570;&#x8C03;&#x7528;&#xFF0C;&#x5E76;&#x628A; <code>Vue</code> &#x5F53;&#x53C2;&#x6570;&#x4F20;&#x5165;&#xFF0C;&#x5B83;&#x4EEC;&#x7684;&#x529F;&#x80FD;&#x90FD;&#x662F;&#x7ED9; Vue &#x7684; prototype &#x4E0A;&#x6269;&#x5C55;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#xFF08;&#x8FD9;&#x91CC;&#x5177;&#x4F53;&#x7684;&#x7EC6;&#x8282;&#x4F1A;&#x5728;&#x4E4B;&#x540E;&#x7684;&#x6587;&#x7AE0;&#x4ECB;&#x7ECD;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x5C55;&#x5F00;&#xFF09;&#xFF0C;Vue &#x6309;&#x529F;&#x80FD;&#x628A;&#x8FD9;&#x4E9B;&#x6269;&#x5C55;&#x5206;&#x6563;&#x5230;&#x591A;&#x4E2A;&#x6A21;&#x5757;&#x4E2D;&#x53BB;&#x5B9E;&#x73B0;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5728;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x91CC;&#x5B9E;&#x73B0;&#x6240;&#x6709;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x662F;&#x7528; Class &#x96BE;&#x4EE5;&#x5B9E;&#x73B0;&#x7684;&#x3002;&#x8FD9;&#x4E48;&#x505A;&#x7684;&#x597D;&#x5904;&#x662F;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#x4EE3;&#x7801;&#x7684;&#x7EF4;&#x62A4;&#x548C;&#x7BA1;&#x7406;&#xFF0C;&#x8FD9;&#x79CD;&#x7F16;&#x7A0B;&#x6280;&#x5DE7;&#x4E5F;&#x975E;&#x5E38;&#x503C;&#x5F97;&#x6211;&#x4EEC;&#x53BB;&#x5B66;&#x4E60;&#x3002;</p>
+<h3 id="initglobalapi"><code>initGlobalAPI</code></h3>
+<p>Vue.js &#x5728;&#x6574;&#x4E2A;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x9664;&#x4E86;&#x7ED9;&#x5B83;&#x7684;&#x539F;&#x578B; prototype &#x4E0A;&#x6269;&#x5C55;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD8;&#x4F1A;&#x7ED9; <code>Vue</code> &#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x672C;&#x8EAB;&#x6269;&#x5C55;&#x5168;&#x5C40;&#x7684;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/global-api/index.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initGlobalAPI</span> (<span class="hljs-params">Vue: GlobalAPI</span>) </span>{
+  <span class="hljs-comment">// config</span>
+  <span class="hljs-keyword">const</span> configDef = {}
+  configDef.get = () =&gt; config
+  <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+    configDef.set = () =&gt; {
+      warn(
+        <span class="hljs-string">&apos;Do not replace the Vue.config object, set individual fields instead.&apos;</span>
+      )
+    }
+  }
+  <span class="hljs-built_in">Object</span>.defineProperty(Vue, <span class="hljs-string">&apos;config&apos;</span>, configDef)
+
+  <span class="hljs-comment">// exposed util methods.</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> these are not considered part of the public API - avoid relying on</span>
+  <span class="hljs-comment">// them unless you are aware of the risk.</span>
+  Vue.util = {
+    warn,
+    extend,
+    mergeOptions,
+    defineReactive
+  }
+
+  Vue.set = set
+  Vue.delete = del
+  Vue.nextTick = nextTick
+
+  Vue.options = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>)
+  ASSET_TYPES.forEach(type =&gt; {
+    Vue.options[type + <span class="hljs-string">&apos;s&apos;</span>] = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>)
+  })
+
+  <span class="hljs-comment">// this is used to identify the &quot;base&quot; constructor to extend all plain-object</span>
+  <span class="hljs-comment">// components with in Weex&apos;s multi-instance scenarios.</span>
+  Vue.options._base = Vue
+
+  extend(Vue.options.components, builtInComponents)
+
+  initUse(Vue)
+  initMixin(Vue)
+  initExtend(Vue)
+  initAssetRegisters(Vue)
+}
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x5C31;&#x662F;&#x5728; Vue &#x4E0A;&#x6269;&#x5C55;&#x7684;&#x4E00;&#x4E9B;&#x5168;&#x5C40;&#x65B9;&#x6CD5;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;Vue &#x5B98;&#x7F51;&#x4E2D;&#x5173;&#x4E8E;&#x5168;&#x5C40; API &#x90FD;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x627E;&#x5230;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x4F1A;&#x4ECB;&#x7ECD;&#x7EC6;&#x8282;&#xFF0C;&#x4F1A;&#x5728;&#x4E4B;&#x540E;&#x7684;&#x7AE0;&#x8282;&#x6211;&#x4EEC;&#x5177;&#x4F53;&#x4ECB;&#x7ECD;&#x5230;&#x67D0;&#x4E2A; API &#x7684;&#x65F6;&#x5019;&#x4F1A;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x3002;&#x6709;&#x4E00;&#x70B9;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;<code>Vue.util</code> &#x66B4;&#x9732;&#x7684;&#x65B9;&#x6CD5;&#x6700;&#x597D;&#x4E0D;&#x8981;&#x4F9D;&#x8D56;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x53EF;&#x80FD;&#x7ECF;&#x5E38;&#x4F1A;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x662F;&#x4E0D;&#x7A33;&#x5B9A;&#x7684;&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x90A3;&#x4E48;&#x81F3;&#x6B64;&#xFF0C;Vue &#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#x57FA;&#x672C;&#x4ECB;&#x7ECD;&#x5B8C;&#x6BD5;&#x3002;&#x8FD9;&#x4E00;&#x8282;&#x7684;&#x76EE;&#x7684;&#x662F;&#x8BA9;&#x540C;&#x5B66;&#x4EEC;&#x5BF9; Vue &#x662F;&#x4EC0;&#x4E48;&#x6709;&#x4E00;&#x4E2A;&#x76F4;&#x89C2;&#x7684;&#x8BA4;&#x8BC6;&#xFF0C;&#x5B83;&#x672C;&#x8D28;&#x4E0A;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x7528; Function &#x5B9E;&#x73B0;&#x7684; Class&#xFF0C;&#x7136;&#x540E;&#x5B83;&#x7684;&#x539F;&#x578B; prototype &#x4EE5;&#x53CA;&#x5B83;&#x672C;&#x8EAB;&#x90FD;&#x6269;&#x5C55;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x65B9;&#x6CD5;&#x548C;&#x5C5E;&#x6027;&#xFF0C;&#x90A3;&#x4E48; Vue &#x80FD;&#x505A;&#x4EC0;&#x4E48;&#xFF0C;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x505A;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x5728;&#x540E;&#x9762;&#x7684;&#x7AE0;&#x8282;&#x4E00;&#x5C42;&#x5C42;&#x5E2E;&#x5927;&#x5BB6;&#x63ED;&#x5F00; Vue &#x7684;&#x795E;&#x79D8;&#x9762;&#x7EB1;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="build.html" class="navigation navigation-prev " aria-label="Previous page: Vue.js 源码构建">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../data-driven/" class="navigation navigation-next " aria-label="Next page: 数据驱动">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"从入口开始","level":"1.2.4","depth":2,"next":{"title":"数据驱动","level":"1.3","depth":1,"path":"data-driven/index.md","ref":"data-driven/index.md","articles":[{"title":"new Vue 发生了什么","level":"1.3.1","depth":2,"path":"data-driven/new-vue.md","ref":"data-driven/new-vue.md","articles":[]},{"title":"Vue 实例挂载的实现","level":"1.3.2","depth":2,"path":"data-driven/mounted.md","ref":"data-driven/mounted.md","articles":[]},{"title":"render","level":"1.3.3","depth":2,"path":"data-driven/render.md","ref":"data-driven/render.md","articles":[]},{"title":"Virtual DOM","level":"1.3.4","depth":2,"path":"data-driven/virtual-dom.md","ref":"data-driven/virtual-dom.md","articles":[]},{"title":"createElement","level":"1.3.5","depth":2,"path":"data-driven/create-element.md","ref":"data-driven/create-element.md","articles":[]},{"title":"update","level":"1.3.6","depth":2,"path":"data-driven/update.md","ref":"data-driven/update.md","articles":[]}]},"previous":{"title":"Vue.js 源码构建","level":"1.2.3","depth":2,"path":"prepare/build.md","ref":"prepare/build.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"scripts":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"prepare/entrance.md","mtime":"2018-04-05T20:15:43.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-15T11:13:48.684Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

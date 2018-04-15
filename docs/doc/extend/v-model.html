@@ -1,0 +1,1351 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>v-model · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="slot.html" />
+    
+    
+    <link rel="prev" href="event.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../prepare/">
+            
+                <a href="../prepare/">
+            
+                    
+                    准备工作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../prepare/flow.html">
+            
+                <a href="../prepare/flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../prepare/directory.html">
+            
+                <a href="../prepare/directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../prepare/build.html">
+            
+                <a href="../prepare/build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../prepare/entrance.html">
+            
+                <a href="../prepare/entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../data-driven/">
+            
+                <a href="../data-driven/">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../data-driven/new-vue.html">
+            
+                <a href="../data-driven/new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../data-driven/mounted.html">
+            
+                <a href="../data-driven/mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../data-driven/render.html">
+            
+                <a href="../data-driven/render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../data-driven/virtual-dom.html">
+            
+                <a href="../data-driven/virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../data-driven/create-element.html">
+            
+                <a href="../data-driven/create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../data-driven/update.html">
+            
+                <a href="../data-driven/update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../components/">
+            
+                <a href="../components/">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../components/create-component.html">
+            
+                <a href="../components/create-component.html">
+            
+                    
+                    createComponent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../components/patch.html">
+            
+                <a href="../components/patch.html">
+            
+                    
+                    patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../components/merge-option.html">
+            
+                <a href="../components/merge-option.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../components/lifecycle.html">
+            
+                <a href="../components/lifecycle.html">
+            
+                    
+                    生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../components/component-register.html">
+            
+                <a href="../components/component-register.html">
+            
+                    
+                    组件注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../components/async-component.html">
+            
+                <a href="../components/async-component.html">
+            
+                    
+                    异步组件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../reactive/">
+            
+                <a href="../reactive/">
+            
+                    
+                    深入响应式原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../reactive/reactive-object.html">
+            
+                <a href="../reactive/reactive-object.html">
+            
+                    
+                    响应式对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../reactive/getters.html">
+            
+                <a href="../reactive/getters.html">
+            
+                    
+                    依赖收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../reactive/setters.html">
+            
+                <a href="../reactive/setters.html">
+            
+                    
+                    派发更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../reactive/next-tick.html">
+            
+                <a href="../reactive/next-tick.html">
+            
+                    
+                    nextTick
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../reactive/questions.html">
+            
+                <a href="../reactive/questions.html">
+            
+                    
+                    检测变化的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../reactive/computed-watcher.html">
+            
+                <a href="../reactive/computed-watcher.html">
+            
+                    
+                    计算属性 VS 侦听属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../reactive/component-update.html">
+            
+                <a href="../reactive/component-update.html">
+            
+                    
+                    组件更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../compile/">
+            
+                <a href="../compile/">
+            
+                    
+                    编译
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../compile/entrance.html">
+            
+                <a href="../compile/entrance.html">
+            
+                    
+                    编译入口
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../compile/parse.html">
+            
+                <a href="../compile/parse.html">
+            
+                    
+                    parse
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../compile/optimize.html">
+            
+                <a href="../compile/optimize.html">
+            
+                    
+                    optimize
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../compile/codegen.html">
+            
+                <a href="../compile/codegen.html">
+            
+                    
+                    codegen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    扩展
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="event.html">
+            
+                <a href="event.html">
+            
+                    
+                    event
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.2" data-path="v-model.html">
+            
+                <a href="v-model.html">
+            
+                    
+                    v-model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="slot.html">
+            
+                <a href="slot.html">
+            
+                    
+                    slot
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="keep-alive.html">
+            
+                <a href="keep-alive.html">
+            
+                    
+                    keep-alive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="tansition.html">
+            
+                <a href="tansition.html">
+            
+                    
+                    transition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="tansition-group.html">
+            
+                <a href="tansition-group.html">
+            
+                    
+                    transition-group
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../vue-router/">
+            
+                <a href="../vue-router/">
+            
+                    
+                    Vue-Router
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../vue-router/install.html">
+            
+                <a href="../vue-router/install.html">
+            
+                    
+                    路由注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../vue-router/router.html">
+            
+                <a href="../vue-router/router.html">
+            
+                    
+                    VueRouter 对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../vue-router/matcher.html">
+            
+                <a href="../vue-router/matcher.html">
+            
+                    
+                    matcher
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../vue-router/transition-to.html">
+            
+                <a href="../vue-router/transition-to.html">
+            
+                    
+                    路径切换
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../vuex/">
+            
+                <a href="../vuex/">
+            
+                    
+                    Vuex
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../vuex/init.html">
+            
+                <a href="../vuex/init.html">
+            
+                    
+                    Vuex 初始化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../vuex/api.html">
+            
+                <a href="../vuex/api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../vuex/plugin.html">
+            
+                <a href="../vuex/plugin.html">
+            
+                    
+                    插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >v-model</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="v-model">v-model</h1>
+<p>&#x5F88;&#x591A;&#x540C;&#x5B66;&#x5728;&#x7406;&#x89E3; Vue &#x7684;&#x65F6;&#x5019;&#x90FD;&#x628A; Vue &#x7684;&#x6570;&#x636E;&#x54CD;&#x5E94;&#x539F;&#x7406;&#x7406;&#x89E3;&#x4E3A;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#xFF0C;&#x4F46;&#x5B9E;&#x9645;&#x4E0A;&#x8FD9;&#x662F;&#x4E0D;&#x51C6;&#x786E;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x63D0;&#x5230;&#x7684;&#x6570;&#x636E;&#x54CD;&#x5E94;&#xFF0C;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x6570;&#x636E;&#x7684;&#x6539;&#x53D8;&#x53BB;&#x9A71;&#x52A8; DOM &#x89C6;&#x56FE;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x800C;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x9664;&#x4E86;&#x6570;&#x636E;&#x9A71;&#x52A8; DOM &#x5916;&#xFF0C; DOM &#x7684;&#x53D8;&#x5316;&#x53CD;&#x8FC7;&#x6765;&#x5F71;&#x54CD;&#x6570;&#x636E;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x53CC;&#x5411;&#x5173;&#x7CFB;&#xFF0C;&#x5728; Vue &#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>v-model</code> &#x6765;&#x5B9E;&#x73B0;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x3002;</p>
+<p><code>v-model</code> &#x5373;&#x53EF;&#x4EE5;&#x4F5C;&#x7528;&#x5728;&#x666E;&#x901A;&#x8868;&#x5355;&#x5143;&#x7D20;&#x4E0A;&#xFF0C;&#x53C8;&#x53EF;&#x4EE5;&#x4F5C;&#x7528;&#x5728;&#x7EC4;&#x4EF6;&#x4E0A;&#xFF0C;&#x5B83;&#x5176;&#x5B9E;&#x662F;&#x4E00;&#x4E2A;&#x8BED;&#x6CD5;&#x7CD6;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5206;&#x6790; <code>v-model</code> &#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x3002;</p>
+<h2 id="&#x8868;&#x5355;&#x5143;&#x7D20;">&#x8868;&#x5355;&#x5143;&#x7D20;</h2>
+<p>&#x4E3A;&#x4E86;&#x66F4;&#x52A0;&#x76F4;&#x89C2;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x7ED3;&#x5408;&#x793A;&#x4F8B;&#x6765;&#x5206;&#x6790;:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> vm = <span class="hljs-keyword">new</span> Vue({
+  el: <span class="hljs-string">&apos;#app&apos;</span>,
+  template: <span class="hljs-string">&apos;&lt;div&gt;&apos;</span>
+  + <span class="hljs-string">&apos;&lt;input v-model=&quot;message&quot; placeholder=&quot;edit me&quot;&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;p&gt;Message is: {{ message }}&lt;/p&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/div&gt;&apos;</span>,
+  data() {
+    <span class="hljs-keyword">return</span> {
+      message: <span class="hljs-string">&apos;&apos;</span>
+    }
+  }
+})
+</code></pre>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x7B80;&#x5355; demo&#xFF0C;&#x6211;&#x4EEC;&#x5728; <code>input</code> &#x5143;&#x7D20;&#x4E0A;&#x8BBE;&#x7F6E;&#x4E86; <code>v-model</code> &#x5C5E;&#x6027;&#xFF0C;&#x7ED1;&#x5B9A;&#x4E86; <code>message</code>&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x5728; <code>input</code> &#x4E0A;&#x8F93;&#x5165;&#x4E86;&#x5185;&#x5BB9;&#xFF0C;<code>message</code> &#x4E5F;&#x4F1A;&#x540C;&#x6B65;&#x53D8;&#x5316;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5206;&#x6790; Vue &#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x8FD9;&#x4E00;&#x6548;&#x679C;&#x7684;&#xFF0C;&#x5176;&#x5B9E;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x3002;</p>
+<p>&#x4E5F;&#x662F;&#x5148;&#x4ECE;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#x5206;&#x6790;&#xFF0C;&#x9996;&#x5148;&#x662F; <code>parse</code> &#x9636;&#x6BB5;&#xFF0C; <code>v-model</code> &#x88AB;&#x5F53;&#x505A;&#x666E;&#x901A;&#x7684;&#x6307;&#x4EE4;&#x89E3;&#x6790;&#x5230; <code>el.directives</code> &#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x5728; <code>codegen</code> &#x9636;&#x6BB5;&#xFF0C;&#x6267;&#x884C; <code>genData</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x6267;&#x884C; <code>const dirs = genDirectives(el, state)</code>&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/compiler/codegen/index.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">genDirectives</span> (<span class="hljs-params">el: ASTElement, state: CodegenState</span>): <span class="hljs-title">string</span> | <span class="hljs-title">void</span> </span>{
+  <span class="hljs-keyword">const</span> dirs = el.directives
+  <span class="hljs-keyword">if</span> (!dirs) <span class="hljs-keyword">return</span>
+  <span class="hljs-keyword">let</span> res = <span class="hljs-string">&apos;directives:[&apos;</span>
+  <span class="hljs-keyword">let</span> hasRuntime = <span class="hljs-literal">false</span>
+  <span class="hljs-keyword">let</span> i, l, dir, needRuntime
+  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, l = dirs.length; i &lt; l; i++) {
+    dir = dirs[i]
+    needRuntime = <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">const</span> gen: DirectiveFunction = state.directives[dir.name]
+    <span class="hljs-keyword">if</span> (gen) {
+      <span class="hljs-comment">// compile-time directive that manipulates AST.</span>
+      <span class="hljs-comment">// returns true if it also needs a runtime counterpart.</span>
+      needRuntime = !!gen(el, dir, state.warn)
+    }
+    <span class="hljs-keyword">if</span> (needRuntime) {
+      hasRuntime = <span class="hljs-literal">true</span>
+      res += <span class="hljs-string">`{name:&quot;<span class="hljs-subst">${dir.name}</span>&quot;,rawName:&quot;<span class="hljs-subst">${dir.rawName}</span>&quot;<span class="hljs-subst">${
+        dir.value ? `,value:(${dir.value}</span>),expression:<span class="hljs-subst">${JSON.stringify(dir.value)}</span>`</span> : <span class="hljs-string">&apos;&apos;</span>
+      }${
+        dir.arg ? <span class="hljs-string">`,arg:&quot;<span class="hljs-subst">${dir.arg}</span>&quot;`</span> : <span class="hljs-string">&apos;&apos;</span>
+      }${
+        dir.modifiers ? <span class="hljs-string">`,modifiers:<span class="hljs-subst">${JSON.stringify(dir.modifiers)}</span>`</span> : <span class="hljs-string">&apos;&apos;</span>
+      }},<span class="hljs-string">`
+    }
+  }
+  if (hasRuntime) {
+    return res.slice(0, -1) + &apos;]&apos;
+  }
+}
+</span></code></pre>
+<p><code>genDrirectives</code> &#x65B9;&#x6CD5;&#x5C31;&#x662F;&#x904D;&#x5386; <code>el.directives</code>&#xFF0C;&#x7136;&#x540E;&#x83B7;&#x53D6;&#x6BCF;&#x4E00;&#x4E2A;&#x6307;&#x4EE4;&#x5BF9;&#x5E94;&#x7684;&#x65B9;&#x6CD5; <code>const gen: DirectiveFunction = state.directives[dir.name]</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x6307;&#x4EE4;&#x65B9;&#x6CD5;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x5728;&#x5B9E;&#x4F8B;&#x5316; <code>CodegenState</code> &#x7684;&#x65F6;&#x5019;&#x901A;&#x8FC7; <code>option</code>
+&#x4F20;&#x5165;&#x7684;&#xFF0C;&#x8FD9;&#x4E2A; <code>option</code> &#x5C31;&#x662F;&#x7F16;&#x8BD1;&#x76F8;&#x5173;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5B83;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5E73;&#x53F0;&#x4E0B;&#x914D;&#x7F6E;&#x4E0D;&#x540C;&#xFF0C;&#x5728; <code>web</code> &#x73AF;&#x5883;&#x4E0B;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/platforms/web/compiler/options.js</code> &#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> baseOptions: CompilerOptions = {
+  expectHTML: <span class="hljs-literal">true</span>,
+  modules,
+  directives,
+  isPreTag,
+  isUnaryTag,
+  mustUseProp,
+  canBeLeftOpenTag,
+  isReservedTag,
+  getTagNamespace,
+  staticKeys: genStaticKeys(modules)
+}
+</code></pre>
+<p><code>directives</code> &#x5B9A;&#x4E49;&#x5728; <code>src/platforms/web/compiler/directives/index.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  model,
+  text,
+  html
+}
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x5BF9;&#x4E8E; <code>v-model</code> &#x800C;&#x8A00;&#xFF0C;&#x5BF9;&#x5E94;&#x7684; <code>directive</code> &#x51FD;&#x6570;&#x662F;&#x5728; <code>src/platforms/web/compiler/directives/model.js</code> &#x4E2D;&#x5B9A;&#x4E49;&#x7684; <code>model</code> &#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">model</span> (<span class="hljs-params">
+  el: ASTElement,
+  dir: ASTDirective,
+  _warn: Function
+</span>): ?<span class="hljs-title">boolean</span> </span>{
+  warn = _warn
+  <span class="hljs-keyword">const</span> value = dir.value
+  <span class="hljs-keyword">const</span> modifiers = dir.modifiers
+  <span class="hljs-keyword">const</span> tag = el.tag
+  <span class="hljs-keyword">const</span> type = el.attrsMap.type
+
+  <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+    <span class="hljs-comment">// inputs with type=&quot;file&quot; are read only and setting the input&apos;s</span>
+    <span class="hljs-comment">// value will throw an error.</span>
+    <span class="hljs-keyword">if</span> (tag === <span class="hljs-string">&apos;input&apos;</span> &amp;&amp; type === <span class="hljs-string">&apos;file&apos;</span>) {
+      warn(
+        <span class="hljs-string">`&lt;<span class="hljs-subst">${el.tag}</span> v-model=&quot;<span class="hljs-subst">${value}</span>&quot; type=&quot;file&quot;&gt;:\n`</span> +
+        <span class="hljs-string">`File inputs are read only. Use a v-on:change listener instead.`</span>
+      )
+    }
+  }
+
+  <span class="hljs-keyword">if</span> (el.component) {
+    genComponentModel(el, value, modifiers)
+    <span class="hljs-comment">// component v-model doesn&apos;t need extra runtime</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (tag === <span class="hljs-string">&apos;select&apos;</span>) {
+    genSelect(el, value, modifiers)
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (tag === <span class="hljs-string">&apos;input&apos;</span> &amp;&amp; type === <span class="hljs-string">&apos;checkbox&apos;</span>) {
+    genCheckboxModel(el, value, modifiers)
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (tag === <span class="hljs-string">&apos;input&apos;</span> &amp;&amp; type === <span class="hljs-string">&apos;radio&apos;</span>) {
+    genRadioModel(el, value, modifiers)
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (tag === <span class="hljs-string">&apos;input&apos;</span> || tag === <span class="hljs-string">&apos;textarea&apos;</span>) {
+    genDefaultModel(el, value, modifiers)
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!config.isReservedTag(tag)) {
+    genComponentModel(el, value, modifiers)
+    <span class="hljs-comment">// component v-model doesn&apos;t need extra runtime</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+    warn(
+      <span class="hljs-string">`&lt;<span class="hljs-subst">${el.tag}</span> v-model=&quot;<span class="hljs-subst">${value}</span>&quot;&gt;: `</span> +
+      <span class="hljs-string">`v-model is not supported on this element type. `</span> +
+      <span class="hljs-string">&apos;If you are working with contenteditable, it\&apos;s recommended to &apos;</span> +
+      <span class="hljs-string">&apos;wrap a library dedicated for that purpose inside a custom component.&apos;</span>
+    )
+  }
+
+  <span class="hljs-comment">// ensure runtime directive metadata</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+}
+</code></pre>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x6211;&#x4EEC;&#x6267;&#x884C; <code>needRuntime = !!gen(el, dir, state.warn)</code> &#x5C31;&#x662F;&#x5728;&#x6267;&#x884C; <code>model</code> &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4F1A;&#x6839;&#x636E; AST &#x5143;&#x7D20;&#x8282;&#x70B9;&#x7684;&#x4E0D;&#x540C;&#x60C5;&#x51B5;&#x53BB;&#x6267;&#x884C;&#x4E0D;&#x540C;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x5BF9;&#x4E8E;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A; case &#x800C;&#x8A00;&#xFF0C;&#x5B83;&#x4F1A;&#x547D;&#x4E2D; <code>genDefaultModel(el, value, modifiers)</code> &#x7684;&#x903B;&#x8F91;&#xFF0C;&#x7A0D;&#x540E;&#x6211;&#x4EEC;&#x4E5F;&#x4F1A;&#x4ECB;&#x7ECD;&#x7EC4;&#x4EF6;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x5176;&#x5B83;&#x5206;&#x652F;&#x540C;&#x5B66;&#x4EEC;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x53BB;&#x770B;&#x3002;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B; <code>genDefaultModel</code> &#x7684;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">genDefaultModel</span> (<span class="hljs-params">
+  el: ASTElement,
+  value: string,
+  modifiers: ?ASTModifiers
+</span>): ?<span class="hljs-title">boolean</span> </span>{
+  <span class="hljs-keyword">const</span> type = el.attrsMap.type
+
+  <span class="hljs-comment">// warn if v-bind:value conflicts with v-model</span>
+  <span class="hljs-comment">// except for inputs with v-bind:type</span>
+  <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+    <span class="hljs-keyword">const</span> value = el.attrsMap[<span class="hljs-string">&apos;v-bind:value&apos;</span>] || el.attrsMap[<span class="hljs-string">&apos;:value&apos;</span>]
+    <span class="hljs-keyword">const</span> typeBinding = el.attrsMap[<span class="hljs-string">&apos;v-bind:type&apos;</span>] || el.attrsMap[<span class="hljs-string">&apos;:type&apos;</span>]
+    <span class="hljs-keyword">if</span> (value &amp;&amp; !typeBinding) {
+      <span class="hljs-keyword">const</span> binding = el.attrsMap[<span class="hljs-string">&apos;v-bind:value&apos;</span>] ? <span class="hljs-string">&apos;v-bind:value&apos;</span> : <span class="hljs-string">&apos;:value&apos;</span>
+      warn(
+        <span class="hljs-string">`<span class="hljs-subst">${binding}</span>=&quot;<span class="hljs-subst">${value}</span>&quot; conflicts with v-model on the same element `</span> +
+        <span class="hljs-string">&apos;because the latter already expands to a value binding internally&apos;</span>
+      )
+    }
+  }
+
+  <span class="hljs-keyword">const</span> { lazy, number, trim } = modifiers || {}
+  <span class="hljs-keyword">const</span> needCompositionGuard = !lazy &amp;&amp; type !== <span class="hljs-string">&apos;range&apos;</span>
+  <span class="hljs-keyword">const</span> event = lazy
+    ? <span class="hljs-string">&apos;change&apos;</span>
+    : type === <span class="hljs-string">&apos;range&apos;</span>
+      ? RANGE_TOKEN
+      : <span class="hljs-string">&apos;input&apos;</span>
+
+  <span class="hljs-keyword">let</span> valueExpression = <span class="hljs-string">&apos;$event.target.value&apos;</span>
+  <span class="hljs-keyword">if</span> (trim) {
+    valueExpression = <span class="hljs-string">`$event.target.value.trim()`</span>
+  }
+  <span class="hljs-keyword">if</span> (number) {
+    valueExpression = <span class="hljs-string">`_n(<span class="hljs-subst">${valueExpression}</span>)`</span>
+  }
+
+  <span class="hljs-keyword">let</span> code = genAssignmentCode(value, valueExpression)
+  <span class="hljs-keyword">if</span> (needCompositionGuard) {
+    code = <span class="hljs-string">`if($event.target.composing)return;<span class="hljs-subst">${code}</span>`</span>
+  }
+
+  addProp(el, <span class="hljs-string">&apos;value&apos;</span>, <span class="hljs-string">`(<span class="hljs-subst">${value}</span>)`</span>)
+  addHandler(el, event, code, <span class="hljs-literal">null</span>, <span class="hljs-literal">true</span>)
+  <span class="hljs-keyword">if</span> (trim || number) {
+    addHandler(el, <span class="hljs-string">&apos;blur&apos;</span>, <span class="hljs-string">&apos;$forceUpdate()&apos;</span>)
+  }
+}
+</code></pre>
+<p><code>genDefaultModel</code> &#x51FD;&#x6570;&#x5148;&#x5904;&#x7406;&#x4E86; <code>modifiers</code>&#xFF0C;&#x5B83;&#x7684;&#x4E0D;&#x540C;&#x4E3B;&#x8981;&#x5F71;&#x54CD;&#x7684;&#x662F; <code>event</code> &#x548C; <code>valueExpression</code> &#x7684;&#x503C;&#xFF0C;&#x5BF9;&#x4E8E;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;<code>event</code> &#x4E3A; <code>input</code>&#xFF0C;<code>valueExpression</code> &#x4E3A; <code>$event.target.value</code>&#x3002;&#x7136;&#x540E;&#x53BB;&#x6267;&#x884C; <code>genAssignmentCode</code> &#x53BB;&#x751F;&#x6210;&#x4EE3;&#x7801;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/compiler/directives/model.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-comment">/**
+ * Cross-platform codegen helper for generating v-model value assignment code.
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">genAssignmentCode</span> (<span class="hljs-params">
+  value: string,
+  assignment: string
+</span>): <span class="hljs-title">string</span> </span>{
+  <span class="hljs-keyword">const</span> res = parseModel(value)
+  <span class="hljs-keyword">if</span> (res.key === <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${value}</span>=<span class="hljs-subst">${assignment}</span>`</span>
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`$set(<span class="hljs-subst">${res.exp}</span>, <span class="hljs-subst">${res.key}</span>, <span class="hljs-subst">${assignment}</span>)`</span>
+  }
+}
+</code></pre>
+<p>&#x8BE5;&#x65B9;&#x6CD5;&#x9996;&#x5148;&#x5BF9; <code>v-model</code> &#x5BF9;&#x5E94;&#x7684; <code>value</code> &#x505A;&#x4E86;&#x89E3;&#x6790;&#xFF0C;&#x5B83;&#x5904;&#x7406;&#x4E86;&#x975E;&#x5E38;&#x591A;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5BF9;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;<code>value</code> &#x5C31;&#x662F; <code>messgae</code>&#xFF0C;&#x6240;&#x4EE5;&#x8FD4;&#x56DE;&#x7684; <code>res.key</code> &#x4E3A; <code>null</code>&#xFF0C;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5C31;&#x5F97;&#x5230; <code>${value}=${assignment}</code>&#xFF0C;&#x4E5F;&#x5C31;&#x662F; <code>message=$event.target.value</code>&#x3002;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x53C8;&#x547D;&#x4E2D;&#x4E86; <code>needCompositionGuard</code> &#x4E3A; true &#x7684;&#x903B;&#x8F91;&#xFF0C;&#x6240;&#x4EE5;&#x6700;&#x7EC8;&#x7684; <code>code</code> &#x4E3A; <code>if($event.target.composing)return;message=$event.target.value</code>&#x3002;</p>
+<p><code>code</code> &#x751F;&#x6210;&#x5B8C;&#x540E;&#xFF0C;&#x53C8;&#x6267;&#x884C;&#x4E86; 2 &#x53E5;&#x975E;&#x5E38;&#x5173;&#x952E;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-js">addProp(el, <span class="hljs-string">&apos;value&apos;</span>, <span class="hljs-string">`(<span class="hljs-subst">${value}</span>)`</span>)
+addHandler(el, event, code, <span class="hljs-literal">null</span>, <span class="hljs-literal">true</span>)
+</code></pre>
+<p>&#x8FD9;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F; <code>input</code> &#x5B9E;&#x73B0; <code>v-model</code> &#x7684;&#x7CBE;&#x9AD3;&#xFF0C;&#x901A;&#x8FC7;&#x4FEE;&#x6539; AST &#x5143;&#x7D20;&#xFF0C;&#x7ED9; <code>el</code> &#x6DFB;&#x52A0;&#x4E00;&#x4E2A; <code>prop</code>&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x6211;&#x4EEC;&#x5728; <code>input</code> &#x4E0A;&#x52A8;&#x6001;&#x7ED1;&#x5B9A;&#x4E86; <code>value</code>&#xFF0C;&#x53C8;&#x7ED9; <code>el</code> &#x6DFB;&#x52A0;&#x4E86;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x5728; <code>input</code> &#x4E0A;&#x7ED1;&#x5B9A;&#x4E86; <code>input</code> &#x4E8B;&#x4EF6;&#xFF0C;&#x5176;&#x5B9E;&#x8F6C;&#x6362;&#x6210;&#x6A21;&#x677F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js">&lt;input
+  v-bind:value=<span class="hljs-string">&quot;message&quot;</span>
+  v-on:input=<span class="hljs-string">&quot;message=$event.target.value&quot;</span>&gt;
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x52A8;&#x6001;&#x7ED1;&#x5B9A;&#x4E86; <code>input</code> &#x7684; <code>value</code> &#x6307;&#x5411;&#x4E86; <code>messgae</code> &#x53D8;&#x91CF;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x89E6;&#x53D1; <code>input</code> &#x4E8B;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x53BB;&#x52A8;&#x6001;&#x628A; <code>message</code> &#x8BBE;&#x7F6E;&#x4E3A;&#x76EE;&#x6807;&#x503C;&#xFF0C;&#x8FD9;&#x6837;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x5B8C;&#x6210;&#x4E86;&#x6570;&#x636E;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x8BF4; <code>v-model</code> &#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x8BED;&#x6CD5;&#x7CD6;&#x3002;</p>
+<p>&#x518D;&#x56DE;&#x5230; <code>genDirectives</code>&#xFF0C;&#x5B83;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x903B;&#x8F91;&#x5C31;&#x662F;&#x6839;&#x636E;&#x6307;&#x4EE4;&#x751F;&#x6210;&#x4E00;&#x4E9B; <code>data</code> &#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">if</span> (needRuntime) {
+  hasRuntime = <span class="hljs-literal">true</span>
+  res += <span class="hljs-string">`{name:&quot;<span class="hljs-subst">${dir.name}</span>&quot;,rawName:&quot;<span class="hljs-subst">${dir.rawName}</span>&quot;<span class="hljs-subst">${
+    dir.value ? `,value:(${dir.value}</span>),expression:<span class="hljs-subst">${JSON.stringify(dir.value)}</span>`</span> : <span class="hljs-string">&apos;&apos;</span>
+  }${
+    dir.arg ? <span class="hljs-string">`,arg:&quot;<span class="hljs-subst">${dir.arg}</span>&quot;`</span> : <span class="hljs-string">&apos;&apos;</span>
+  }${
+    dir.modifiers ? <span class="hljs-string">`,modifiers:<span class="hljs-subst">${JSON.stringify(dir.modifiers)}</span>`</span> : <span class="hljs-string">&apos;&apos;</span>
+  }},<span class="hljs-string">`
+}
+</span></code></pre>
+<p>&#x5BF9;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x800C;&#x8A00;&#xFF0C;&#x6700;&#x7EC8;&#x751F;&#x6210;&#x7684; <code>render</code> &#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">with</span>(<span class="hljs-keyword">this</span>) {
+  <span class="hljs-keyword">return</span> _c(<span class="hljs-string">&apos;div&apos;</span>,[_c(<span class="hljs-string">&apos;input&apos;</span>,{
+    directives:[{
+      name:<span class="hljs-string">&quot;model&quot;</span>,
+      rawName:<span class="hljs-string">&quot;v-model&quot;</span>,
+      value:(message),
+      expression:<span class="hljs-string">&quot;message&quot;</span>
+    }],
+    attrs:{<span class="hljs-string">&quot;placeholder&quot;</span>:<span class="hljs-string">&quot;edit me&quot;</span>},
+    domProps:{<span class="hljs-string">&quot;value&quot;</span>:(message)},
+    on:{<span class="hljs-string">&quot;input&quot;</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$event</span>)</span>{
+      <span class="hljs-keyword">if</span>($event.target.composing)
+        <span class="hljs-keyword">return</span>;
+      message=$event.target.value
+    }}}),_c(<span class="hljs-string">&apos;p&apos;</span>,[_v(<span class="hljs-string">&quot;Message is: &quot;</span>+_s(message))])
+    ])
+}
+</code></pre>
+<p>&#x5173;&#x4E8E;&#x4E8B;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x7684;&#x7AE0;&#x8282;&#x5DF2;&#x7ECF;&#x5206;&#x6790;&#x8FC7;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x5BF9;&#x4E8E; <code>input</code> &#x7684; <code>v-model</code> &#x800C;&#x8A00;&#xFF0C;&#x5B8C;&#x5168;&#x5C31;&#x662F;&#x8BED;&#x6CD5;&#x7CD6;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x4E8E;&#x5176;&#x5B83;&#x8868;&#x5355;&#x5143;&#x7D20;&#x5957;&#x8DEF;&#x90FD;&#x662F;&#x4E00;&#x6837;&#xFF0C;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x751F;&#x6210;&#x7684;&#x4E8B;&#x4EF6;&#x4EE3;&#x7801;&#x4F1A;&#x7565;&#x6709;&#x4E0D;&#x540C;&#x3002;</p>
+<p><code>v-model</code> &#x9664;&#x4E86;&#x4F5C;&#x7528;&#x5728;&#x8868;&#x5355;&#x5143;&#x7D20;&#x4E0A;&#xFF0C;&#x65B0;&#x7248;&#x7684; Vue &#x8FD8;&#x628A;&#x8FD9;&#x4E00;&#x8BED;&#x6CD5;&#x7CD6;&#x7528;&#x5728;&#x4E86;&#x7EC4;&#x4EF6;&#x4E0A;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x6765;&#x5206;&#x6790;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+<h2 id="&#x7EC4;&#x4EF6;">&#x7EC4;&#x4EF6;</h2>
+<p>&#x4E3A;&#x4E86;&#x66F4;&#x52A0;&#x76F4;&#x89C2;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x662F;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x5206;&#x6790;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> Child = {
+  template: <span class="hljs-string">&apos;&lt;div&gt;&apos;</span>
+  + <span class="hljs-string">&apos;&lt;input :value=&quot;value&quot; @input=&quot;updateValue&quot; placeholder=&quot;edit me&quot;&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/div&gt;&apos;</span>,
+  props: [<span class="hljs-string">&apos;value&apos;</span>],
+  methods: {
+    updateValue(e) {
+      <span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">&apos;input&apos;</span>, e.target.value)
+    }
+  }
+}
+
+<span class="hljs-keyword">let</span> vm = <span class="hljs-keyword">new</span> Vue({
+  el: <span class="hljs-string">&apos;#app&apos;</span>,
+  template: <span class="hljs-string">&apos;&lt;div&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;child v-model=&quot;message&quot;&gt;&lt;/child&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;p&gt;Message is: {{ message }}&lt;/p&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/div&gt;&apos;</span>,
+  data() {
+    <span class="hljs-keyword">return</span> {
+      message: <span class="hljs-string">&apos;&apos;</span>
+    }
+  },
+  components: {
+    Child
+  }
+})
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x7236;&#x7EC4;&#x4EF6;&#x5F15;&#x7528; <code>child</code> &#x5B50;&#x7EC4;&#x4EF6;&#x7684;&#x5730;&#x65B9;&#x4F7F;&#x7528;&#x4E86; <code>v-model</code> &#x5173;&#x8054;&#x4E86;&#x6570;&#x636E; <code>message</code>&#xFF1B;&#x800C;&#x5B50;&#x7EC4;&#x4EF6;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A; <code>value</code> &#x7684; <code>prop</code>&#xFF0C;&#x5E76;&#x4E14;&#x5728; <code>input</code> &#x4E8B;&#x4EF6;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x901A;&#x8FC7; <code>this.$emit(&apos;input&apos;, e.target.value)</code> &#x6D3E;&#x53D1;&#x4E86;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#xFF0C;&#x4E3A;&#x4E86;&#x8BA9; <code>v-model</code> &#x751F;&#x6548;&#xFF0C;&#x8FD9;&#x4E24;&#x70B9;&#x662F;&#x5FC5;&#x987B;&#x7684;&#x3002;</p>
+<p>&#x63A5;&#x7740;&#x6211;&#x4EEC;&#x4ECE;&#x6E90;&#x7801;&#x89D2;&#x5EA6;&#x5206;&#x6790;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF0C;&#x8FD8;&#x662F;&#x4ECE;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#x8BF4;&#x8D77;&#xFF0C;&#x5BF9;&#x4E8E;&#x7236;&#x7EC4;&#x4EF6;&#x800C;&#x8A00;&#xFF0C;&#x5728;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#x4F1A;&#x89E3;&#x6790; <code>v-modle</code> &#x6307;&#x4EE4;&#xFF0C;&#x4F9D;&#x7136;&#x4F1A;&#x6267;&#x884C; <code>genData</code> &#x51FD;&#x6570;&#x4E2D;&#x7684; <code>genDirectives</code> &#x51FD;&#x6570;&#xFF0C;&#x63A5;&#x7740;&#x6267;&#x884C; <code>src/platforms/web/compiler/directives/model.js</code> &#x4E2D;&#x5B9A;&#x4E49;&#x7684; <code>model</code> &#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x547D;&#x4E2D;&#x5982;&#x4E0B;&#x903B;&#x8F91;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!config.isReservedTag(tag)) {
+  genComponentModel(el, value, modifiers);
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+}
+</code></pre>
+<p><code>genComponentModel</code> &#x51FD;&#x6570;&#x5B9A;&#x4E49;&#x5728; <code>src/compiler/directives/model.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">genComponentModel</span> (<span class="hljs-params">
+  el: ASTElement,
+  value: string,
+  modifiers: ?ASTModifiers
+</span>): ?<span class="hljs-title">boolean</span> </span>{
+  <span class="hljs-keyword">const</span> { number, trim } = modifiers || {}
+
+  <span class="hljs-keyword">const</span> baseValueExpression = <span class="hljs-string">&apos;$$v&apos;</span>
+  <span class="hljs-keyword">let</span> valueExpression = baseValueExpression
+  <span class="hljs-keyword">if</span> (trim) {
+    valueExpression =
+      <span class="hljs-string">`(typeof <span class="hljs-subst">${baseValueExpression}</span> === &apos;string&apos;`</span> +
+        <span class="hljs-string">`? <span class="hljs-subst">${baseValueExpression}</span>.trim()`</span> +
+        <span class="hljs-string">`: <span class="hljs-subst">${baseValueExpression}</span>)`</span>
+  }
+  <span class="hljs-keyword">if</span> (number) {
+    valueExpression = <span class="hljs-string">`_n(<span class="hljs-subst">${valueExpression}</span>)`</span>
+  }
+  <span class="hljs-keyword">const</span> assignment = genAssignmentCode(value, valueExpression)
+
+  el.model = {
+    value: <span class="hljs-string">`(<span class="hljs-subst">${value}</span>)`</span>,
+    expression: <span class="hljs-string">`&quot;<span class="hljs-subst">${value}</span>&quot;`</span>,
+    callback: <span class="hljs-string">`function (<span class="hljs-subst">${baseValueExpression}</span>) {<span class="hljs-subst">${assignment}</span>}`</span>
+  }
+}
+</code></pre>
+<p><code>genComponentModel</code> &#x7684;&#x903B;&#x8F91;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5BF9;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x800C;&#x8A00;&#xFF0C;&#x751F;&#x6210;&#x7684; <code>el.model</code> &#x7684;&#x503C;&#x4E3A;&#xFF1A;</p>
+<pre><code class="lang-js">el.model = {
+  callback:<span class="hljs-string">&apos;function ($$v) {message=$$v}&apos;</span>,
+  expression:<span class="hljs-string">&apos;&quot;message&quot;&apos;</span>,
+  value:<span class="hljs-string">&apos;(message)&apos;</span>
+}
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x5728; <code>genDirectives</code> &#x4E4B;&#x540E;&#xFF0C;<code>genData</code> &#x51FD;&#x6570;&#x4E2D;&#x6709;&#x4E00;&#x6BB5;&#x903B;&#x8F91;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">if</span> (el.model) {
+  data += <span class="hljs-string">`model:{value:<span class="hljs-subst">${
+    el.model.value
+  }</span>,callback:<span class="hljs-subst">${
+    el.model.callback
+  }</span>,expression:<span class="hljs-subst">${
+    el.model.expression
+  }</span>},`</span>
+}
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x7236;&#x7EC4;&#x4EF6;&#x6700;&#x7EC8;&#x751F;&#x6210;&#x7684; <code>render</code> &#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">with</span>(<span class="hljs-keyword">this</span>){
+  <span class="hljs-keyword">return</span> _c(<span class="hljs-string">&apos;div&apos;</span>,[_c(<span class="hljs-string">&apos;child&apos;</span>,{
+    model:{
+      value:(message),
+      callback:<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">$$v</span>) </span>{
+        message=$$v
+      },
+      expression:<span class="hljs-string">&quot;message&quot;</span>
+    }
+  }),
+  _c(<span class="hljs-string">&apos;p&apos;</span>,[_v(<span class="hljs-string">&quot;Message is: &quot;</span>+_s(message))])],<span class="hljs-number">1</span>)
+}
+</code></pre>
+<p>&#x7136;&#x540E;&#x5728;&#x521B;&#x5EFA;&#x5B50;&#x7EC4;&#x4EF6; <code>vnode</code> &#x9636;&#x6BB5;&#xFF0C;&#x4F1A;&#x6267;&#x884C; <code>createComponent</code> &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/vdom/create-component.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createComponent</span> (<span class="hljs-params">
+  Ctor: Class&lt;Component&gt; | Function | Object | void,
+  data: ?VNodeData,
+  context: Component,
+  children: ?Array&lt;VNode&gt;,
+  tag?: string
+</span>): <span class="hljs-title">VNode</span> | <span class="hljs-title">Array</span>&lt;<span class="hljs-title">VNode</span>&gt; | <span class="hljs-title">void</span> </span>{
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-comment">// transform component v-model data into props &amp; events</span>
+  <span class="hljs-keyword">if</span> (isDef(data.model)) {
+    transformModel(Ctor.options, data)
+  }
+
+  <span class="hljs-comment">// extract props</span>
+  <span class="hljs-keyword">const</span> propsData = extractPropsFromVNodeData(data, Ctor, tag)
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-comment">// extract listeners, since these needs to be treated as</span>
+  <span class="hljs-comment">// child component listeners instead of DOM listeners</span>
+  <span class="hljs-keyword">const</span> listeners = data.on
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-keyword">const</span> vnode = <span class="hljs-keyword">new</span> VNode(
+    <span class="hljs-string">`vue-component-<span class="hljs-subst">${Ctor.cid}</span><span class="hljs-subst">${name ? `-${name}</span>`</span> : <span class="hljs-string">&apos;&apos;</span>}<span class="hljs-string">`,
+    data, undefined, undefined, undefined, context,
+    { Ctor, propsData, listeners, tag, children },
+    asyncFactory
+  )
+
+  return vnode
+}
+</span></code></pre>
+<p>&#x5176;&#x4E2D;&#x4F1A;&#x5BF9; <code>data.model</code> &#x7684;&#x60C5;&#x51B5;&#x505A;&#x5904;&#x7406;&#xFF0C;&#x6267;&#x884C; <code>transformModel(Ctor.options, data)</code> &#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-comment">// transform component v-model info (value and callback) into</span>
+<span class="hljs-comment">// prop and event handler respectively.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">transformModel</span> (<span class="hljs-params">options, data: any</span>) </span>{
+  <span class="hljs-keyword">const</span> prop = (options.model &amp;&amp; options.model.prop) || <span class="hljs-string">&apos;value&apos;</span>
+  <span class="hljs-keyword">const</span> event = (options.model &amp;&amp; options.model.event) || <span class="hljs-string">&apos;input&apos;</span>
+  ;(data.props || (data.props = {}))[prop] = data.model.value
+  <span class="hljs-keyword">const</span> on = data.on || (data.on = {})
+  <span class="hljs-keyword">if</span> (isDef(on[event])) {
+    on[event] = [data.model.callback].concat(on[event])
+  } <span class="hljs-keyword">else</span> {
+    on[event] = data.model.callback
+  }
+}
+</code></pre>
+<p><code>transformModel</code> &#x903B;&#x8F91;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x7ED9; <code>data.props</code> &#x6DFB;&#x52A0; <code>data.model.value</code>&#xFF0C;&#x5E76;&#x4E14;&#x7ED9;<code>data.on</code> &#x6DFB;&#x52A0; <code>data.model.callback</code>&#xFF0C;&#x5BF9;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x800C;&#x8A00;&#xFF0C;&#x6269;&#x5C55;&#x7ED3;&#x679C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js">data.props = {
+  value: (message),
+}
+data.on = {
+  input: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">$$v</span>) </span>{
+    message=$$v
+  }
+}
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x5C31;&#x76F8;&#x5F53;&#x4E8E;&#x6211;&#x4EEC;&#x5728;&#x8FD9;&#x6837;&#x7F16;&#x5199;&#x7236;&#x7EC4;&#x4EF6;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> vm = <span class="hljs-keyword">new</span> Vue({
+  el: <span class="hljs-string">&apos;#app&apos;</span>,
+  template: <span class="hljs-string">&apos;&lt;div&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;child :value=&quot;message&quot; @input=&quot;message=arguments[0]&quot;&gt;&lt;/child&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;p&gt;Message is: {{ message }}&lt;/p&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/div&gt;&apos;</span>,
+  data() {
+    <span class="hljs-keyword">return</span> {
+      message: <span class="hljs-string">&apos;&apos;</span>
+    }
+  },
+  components: {
+    Child
+  }
+})
+</code></pre>
+<p>&#x5B50;&#x7EC4;&#x4EF6;&#x4F20;&#x9012;&#x7684; <code>value</code> &#x7ED1;&#x5B9A;&#x5230;&#x5F53;&#x524D;&#x7236;&#x7EC4;&#x4EF6;&#x7684; <code>message</code>&#xFF0C;&#x540C;&#x65F6;&#x76D1;&#x542C;&#x81EA;&#x5B9A;&#x4E49; <code>input</code> &#x4E8B;&#x4EF6;&#xFF0C;&#x5F53;&#x5B50;&#x7EC4;&#x4EF6;&#x6D3E;&#x53D1; <code>input</code> &#x4E8B;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7236;&#x7EC4;&#x4EF6;&#x4F1A;&#x5728;&#x4E8B;&#x4EF6;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4E2D;&#x4FEE;&#x6539; <code>message</code> &#x7684;&#x503C;&#xFF0C;&#x540C;&#x65F6; <code>value</code> &#x4E5F;&#x4F1A;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x5B50;&#x7EC4;&#x4EF6;&#x7684; <code>input</code> &#x503C;&#x88AB;&#x66F4;&#x65B0;&#x3002;</p>
+<p>&#x8FD9;&#x5C31;&#x662F;&#x5178;&#x578B;&#x7684; Vue &#x7684;&#x7236;&#x5B50;&#x7EC4;&#x4EF6;&#x901A;&#x8BAF;&#x6A21;&#x5F0F;&#xFF0C;&#x7236;&#x7EC4;&#x4EF6;&#x901A;&#x8FC7; <code>prop</code> &#x628A;&#x6570;&#x636E;&#x4F20;&#x9012;&#x5230;&#x5B50;&#x7EC4;&#x4EF6;&#xFF0C;&#x5B50;&#x7EC4;&#x4EF6;&#x4FEE;&#x6539;&#x4E86;&#x6570;&#x636E;&#x540E;&#x628A;&#x6539;&#x53D8;&#x901A;&#x8FC7; <code>$emit</code> &#x4E8B;&#x4EF6;&#x7684;&#x65B9;&#x5F0F;&#x901A;&#x77E5;&#x7236;&#x7EC4;&#x4EF6;&#xFF0C;&#x6240;&#x4EE5;&#x8BF4;&#x7EC4;&#x4EF6;&#x4E0A;&#x7684; <code>v-model</code> &#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x8BED;&#x6CD5;&#x7CD6;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#x6211;&#x4EEC;&#x6CE8;&#x610F;&#x5230;&#x7EC4;&#x4EF6; <code>v-model</code> &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B50;&#x7EC4;&#x4EF6;&#x7684; <code>value prop</code> &#x4EE5;&#x53CA;&#x6D3E;&#x53D1;&#x7684; <code>input</code> &#x4E8B;&#x4EF6;&#x540D;&#x662F;&#x53EF;&#x914D;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230; <code>transformModel</code> &#x4E2D;&#x5BF9;&#x8FD9;&#x90E8;&#x5206;&#x7684;&#x5904;&#x7406;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">transformModel</span> (<span class="hljs-params">options, data: any</span>) </span>{
+  <span class="hljs-keyword">const</span> prop = (options.model &amp;&amp; options.model.prop) || <span class="hljs-string">&apos;value&apos;</span>
+  <span class="hljs-keyword">const</span> event = (options.model &amp;&amp; options.model.event) || <span class="hljs-string">&apos;input&apos;</span>
+  <span class="hljs-comment">// ...</span>
+}
+</code></pre>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x53EF;&#x4EE5;&#x5728;&#x5B9A;&#x4E49;&#x5B50;&#x7EC4;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x901A;&#x8FC7; <code>model</code> &#x9009;&#x9879;&#x914D;&#x7F6E;&#x5B50;&#x7EC4;&#x4EF6;&#x63A5;&#x6536;&#x7684; <code>prop</code> &#x540D;&#x4EE5;&#x53CA;&#x6D3E;&#x53D1;&#x7684;&#x4E8B;&#x4EF6;&#x540D;&#xFF0C;&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> Child = {
+  template: <span class="hljs-string">&apos;&lt;div&gt;&apos;</span>
+  + <span class="hljs-string">&apos;&lt;input :value=&quot;msg&quot; @input=&quot;updateValue&quot; placeholder=&quot;edit me&quot;&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/div&gt;&apos;</span>,
+  props: [<span class="hljs-string">&apos;msg&apos;</span>],
+  model: {
+    prop: <span class="hljs-string">&apos;msg&apos;</span>,
+    event: <span class="hljs-string">&apos;change&apos;</span>
+  },
+  methods: {
+    updateValue(e) {
+      <span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">&apos;change&apos;</span>, e.target.value)
+    }
+  }
+}
+
+<span class="hljs-keyword">let</span> vm = <span class="hljs-keyword">new</span> Vue({
+  el: <span class="hljs-string">&apos;#app&apos;</span>,
+  template: <span class="hljs-string">&apos;&lt;div&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;child v-model=&quot;message&quot;&gt;&lt;/child&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;p&gt;Message is: {{ message }}&lt;/p&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/div&gt;&apos;</span>,
+  data() {
+    <span class="hljs-keyword">return</span> {
+      message: <span class="hljs-string">&apos;&apos;</span>
+    }
+  },
+  components: {
+    Child
+  }
+})
+</code></pre>
+<p>&#x5B50;&#x7EC4;&#x4EF6;&#x4FEE;&#x6539;&#x4E86;&#x63A5;&#x6536;&#x7684; <code>prop</code> &#x540D;&#x4EE5;&#x53CA;&#x6D3E;&#x53D1;&#x7684;&#x4E8B;&#x4EF6;&#x540D;&#xFF0C;&#x7136;&#x800C;&#x8FD9;&#x4E00;&#x5207;&#x7236;&#x7EC4;&#x4EF6;&#x4F5C;&#x4E3A;&#x8C03;&#x7528;&#x65B9;&#x662F;&#x4E0D;&#x7528;&#x5173;&#x5FC3;&#x7684;&#xFF0C;&#x8FD9;&#x6837;&#x505A;&#x7684;&#x597D;&#x5904;&#x662F;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x628A; <code>value</code> &#x8FD9;&#x4E2A; <code>prop</code> &#x4F5C;&#x4E3A;&#x5176;&#x5B83;&#x7684;&#x7528;&#x9014;&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x90A3;&#x4E48;&#x81F3;&#x6B64;&#xFF0C;<code>v-model</code> &#x7684;&#x5B9E;&#x73B0;&#x5C31;&#x5206;&#x6790;&#x5B8C;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x4E86;&#x89E3;&#x5230;&#x5B83;&#x662F; Vue &#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x7684;&#x771F;&#x6B63;&#x5B9E;&#x73B0;&#xFF0C;&#x4F46;&#x672C;&#x8D28;&#x4E0A;&#x5C31;&#x662F;&#x4E00;&#x79CD;&#x8BED;&#x6CD5;&#x7CD6;&#xFF0C;&#x5B83;&#x5373;&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x539F;&#x751F;&#x8868;&#x5355;&#x5143;&#x7D20;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x81EA;&#x5B9A;&#x4E49;&#x7EC4;&#x4EF6;&#x3002;&#x5728;&#x7EC4;&#x4EF6;&#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x5B50;&#x7EC4;&#x4EF6;&#x63A5;&#x6536;&#x7684; <code>prop</code> &#x540D;&#x79F0;&#xFF0C;&#x4EE5;&#x53CA;&#x6D3E;&#x53D1;&#x7684;&#x4E8B;&#x4EF6;&#x540D;&#x79F0;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="event.html" class="navigation navigation-prev " aria-label="Previous page: event">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="slot.html" class="navigation navigation-next " aria-label="Next page: slot">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"v-model","level":"1.7.2","depth":2,"next":{"title":"slot","level":"1.7.3","depth":2,"path":"extend/slot.md","ref":"extend/slot.md","articles":[]},"previous":{"title":"event","level":"1.7.1","depth":2,"path":"extend/event.md","ref":"extend/event.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"scripts":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"extend/v-model.md","mtime":"2018-04-15T06:14:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-15T11:13:48.684Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

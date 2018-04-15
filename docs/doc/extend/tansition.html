@@ -1,0 +1,1805 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>transition · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="tansition-group.html" />
+    
+    
+    <link rel="prev" href="keep-alive.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../prepare/">
+            
+                <a href="../prepare/">
+            
+                    
+                    准备工作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../prepare/flow.html">
+            
+                <a href="../prepare/flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../prepare/directory.html">
+            
+                <a href="../prepare/directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../prepare/build.html">
+            
+                <a href="../prepare/build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../prepare/entrance.html">
+            
+                <a href="../prepare/entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../data-driven/">
+            
+                <a href="../data-driven/">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../data-driven/new-vue.html">
+            
+                <a href="../data-driven/new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../data-driven/mounted.html">
+            
+                <a href="../data-driven/mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../data-driven/render.html">
+            
+                <a href="../data-driven/render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../data-driven/virtual-dom.html">
+            
+                <a href="../data-driven/virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../data-driven/create-element.html">
+            
+                <a href="../data-driven/create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../data-driven/update.html">
+            
+                <a href="../data-driven/update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../components/">
+            
+                <a href="../components/">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../components/create-component.html">
+            
+                <a href="../components/create-component.html">
+            
+                    
+                    createComponent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../components/patch.html">
+            
+                <a href="../components/patch.html">
+            
+                    
+                    patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../components/merge-option.html">
+            
+                <a href="../components/merge-option.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../components/lifecycle.html">
+            
+                <a href="../components/lifecycle.html">
+            
+                    
+                    生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../components/component-register.html">
+            
+                <a href="../components/component-register.html">
+            
+                    
+                    组件注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../components/async-component.html">
+            
+                <a href="../components/async-component.html">
+            
+                    
+                    异步组件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../reactive/">
+            
+                <a href="../reactive/">
+            
+                    
+                    深入响应式原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../reactive/reactive-object.html">
+            
+                <a href="../reactive/reactive-object.html">
+            
+                    
+                    响应式对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../reactive/getters.html">
+            
+                <a href="../reactive/getters.html">
+            
+                    
+                    依赖收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../reactive/setters.html">
+            
+                <a href="../reactive/setters.html">
+            
+                    
+                    派发更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../reactive/next-tick.html">
+            
+                <a href="../reactive/next-tick.html">
+            
+                    
+                    nextTick
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../reactive/questions.html">
+            
+                <a href="../reactive/questions.html">
+            
+                    
+                    检测变化的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../reactive/computed-watcher.html">
+            
+                <a href="../reactive/computed-watcher.html">
+            
+                    
+                    计算属性 VS 侦听属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../reactive/component-update.html">
+            
+                <a href="../reactive/component-update.html">
+            
+                    
+                    组件更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../compile/">
+            
+                <a href="../compile/">
+            
+                    
+                    编译
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../compile/entrance.html">
+            
+                <a href="../compile/entrance.html">
+            
+                    
+                    编译入口
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../compile/parse.html">
+            
+                <a href="../compile/parse.html">
+            
+                    
+                    parse
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../compile/optimize.html">
+            
+                <a href="../compile/optimize.html">
+            
+                    
+                    optimize
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../compile/codegen.html">
+            
+                <a href="../compile/codegen.html">
+            
+                    
+                    codegen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    扩展
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="event.html">
+            
+                <a href="event.html">
+            
+                    
+                    event
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="v-model.html">
+            
+                <a href="v-model.html">
+            
+                    
+                    v-model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="slot.html">
+            
+                <a href="slot.html">
+            
+                    
+                    slot
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="keep-alive.html">
+            
+                <a href="keep-alive.html">
+            
+                    
+                    keep-alive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.5" data-path="tansition.html">
+            
+                <a href="tansition.html">
+            
+                    
+                    transition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="tansition-group.html">
+            
+                <a href="tansition-group.html">
+            
+                    
+                    transition-group
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../vue-router/">
+            
+                <a href="../vue-router/">
+            
+                    
+                    Vue-Router
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../vue-router/install.html">
+            
+                <a href="../vue-router/install.html">
+            
+                    
+                    路由注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../vue-router/router.html">
+            
+                <a href="../vue-router/router.html">
+            
+                    
+                    VueRouter 对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../vue-router/matcher.html">
+            
+                <a href="../vue-router/matcher.html">
+            
+                    
+                    matcher
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../vue-router/transition-to.html">
+            
+                <a href="../vue-router/transition-to.html">
+            
+                    
+                    路径切换
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../vuex/">
+            
+                <a href="../vuex/">
+            
+                    
+                    Vuex
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../vuex/init.html">
+            
+                <a href="../vuex/init.html">
+            
+                    
+                    Vuex 初始化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../vuex/api.html">
+            
+                <a href="../vuex/api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../vuex/plugin.html">
+            
+                <a href="../vuex/plugin.html">
+            
+                    
+                    插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >transition</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="transition">transition</h1>
+<p>&#x5728;&#x6211;&#x4EEC;&#x5E73;&#x65F6;&#x7684;&#x524D;&#x7AEF;&#x9879;&#x76EE;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x7ECF;&#x5E38;&#x4F1A;&#x9047;&#x5230;&#x5982;&#x4E0B;&#x9700;&#x6C42;&#xFF0C;&#x4E00;&#x4E2A; DOM &#x8282;&#x70B9;&#x7684;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x6216;&#x8005;&#x662F;&#x663E;&#x793A;&#x548C;&#x9690;&#x85CF;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x60F3;&#x8BA9;&#x5B83;&#x7279;&#x522B;&#x751F;&#x786C;&#xFF0C;&#x901A;&#x5E38;&#x4F1A;&#x8003;&#x8651;&#x52A0;&#x4E00;&#x4E9B;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#x3002;</p>
+<p>Vue.js &#x9664;&#x4E86;&#x5B9E;&#x73B0;&#x4E86;&#x5F3A;&#x5927;&#x7684;&#x6570;&#x636E;&#x9A71;&#x52A8;&#xFF0C;&#x7EC4;&#x4EF6;&#x5316;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x4E5F;&#x7ED9;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x6574;&#x5957;&#x8FC7;&#x6E21;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;&#x5B83;&#x5185;&#x7F6E;&#x4E86; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x5B83;&#x914D;&#x5408;&#x4E00;&#x4E9B; CSS3 &#x6837;&#x5F0F;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x5B9E;&#x73B0;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x5B83;&#x914D;&#x5408; JavaScript &#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#xFF0C;&#x5728;&#x4E0B;&#x5217;&#x60C5;&#x5F62;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x7ED9;&#x4EFB;&#x4F55;&#x5143;&#x7D20;&#x548C;&#x7EC4;&#x4EF6;&#x6DFB;&#x52A0; entering/leaving &#x8FC7;&#x6E21;&#xFF1A;</p>
+<ul>
+<li>&#x6761;&#x4EF6;&#x6E32;&#x67D3; (&#x4F7F;&#x7528; <code>v-if</code>)</li>
+<li>&#x6761;&#x4EF6;&#x5C55;&#x793A; (&#x4F7F;&#x7528; <code>v-show</code>)</li>
+<li>&#x52A8;&#x6001;&#x7EC4;&#x4EF6;</li>
+<li>&#x7EC4;&#x4EF6;&#x6839;&#x8282;&#x70B9;</li>
+</ul>
+<p>&#x90A3;&#x4E48;&#x4E3E;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> vm = <span class="hljs-keyword">new</span> Vue({
+  el: <span class="hljs-string">&apos;#app&apos;</span>,
+  template: <span class="hljs-string">&apos;&lt;div id=&quot;demo&quot;&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;button v-on:click=&quot;show = !show&quot;&gt;&apos;</span> +
+  <span class="hljs-string">&apos;Toggle&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/button&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;transition appear=&quot;&quot; name=&quot;fade&quot;&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;p v-if=&quot;show&quot;&gt;hello&lt;/p&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/transition&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/div&gt;&apos;</span>,
+  data() {
+    <span class="hljs-keyword">return</span> {
+      show: <span class="hljs-literal">true</span>
+    }
+  }
+})
+</code></pre>
+<pre><code class="lang-css"><span class="hljs-selector-class">.fade-enter-active</span>, <span class="hljs-selector-class">.fade-leave-active</span> {
+  <span class="hljs-attribute">transition</span>: opacity .<span class="hljs-number">5s</span>;
+}
+<span class="hljs-selector-class">.fade-enter</span>, <span class="hljs-selector-class">.fade-leave-to</span> {
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x70B9;&#x51FB;&#x6309;&#x94AE;&#x5207;&#x6362;&#x663E;&#x793A;&#x72B6;&#x6001;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x88AB; <code>&lt;transition&gt;</code> &#x5305;&#x88F9;&#x7684;&#x5185;&#x5BB9;&#x4F1A;&#x6709;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x3002;&#x90A3;&#x4E48;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x4ECE;&#x6E90;&#x7801;&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x5206;&#x6790;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x3002;</p>
+<h2 id="&#x5185;&#x7F6E;&#x7EC4;&#x4EF6;">&#x5185;&#x7F6E;&#x7EC4;&#x4EF6;</h2>
+<p><code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x548C; <code>&lt;keep-alive&gt;</code> &#x7EC4;&#x4EF6;&#x4E00;&#x6837;&#xFF0C;&#x90FD;&#x662F; Vue &#x7684;&#x5185;&#x7F6E;&#x7EC4;&#x4EF6;&#xFF0C;&#x800C; <code>&lt;transition&gt;</code> &#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/platforms/web/runtime/component/transtion.js</code> &#x4E2D;&#xFF0C;&#x4E4B;&#x6240;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;&#xFF0C;&#x662F;&#x56E0;&#x4E3A; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x662F; web &#x5E73;&#x53F0;&#x72EC;&#x6709;&#x7684;&#xFF0C;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  name: <span class="hljs-string">&apos;transition&apos;</span>,
+  props: transitionProps,
+  abstract: <span class="hljs-literal">true</span>,
+
+  render (h: <span class="hljs-built_in">Function</span>) {
+    <span class="hljs-keyword">let</span> children: any = <span class="hljs-keyword">this</span>.$slots.default
+    <span class="hljs-keyword">if</span> (!children) {
+      <span class="hljs-keyword">return</span>
+    }
+
+    <span class="hljs-comment">// filter out text nodes (possible whitespaces)</span>
+    children = children.filter((c: VNode) =&gt; c.tag || isAsyncPlaceholder(c))
+    <span class="hljs-comment">/* istanbul ignore if */</span>
+    <span class="hljs-keyword">if</span> (!children.length) {
+      <span class="hljs-keyword">return</span>
+    }
+
+    <span class="hljs-comment">// warn multiple elements</span>
+    <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; children.length &gt; <span class="hljs-number">1</span>) {
+      warn(
+        <span class="hljs-string">&apos;&lt;transition&gt; can only be used on a single element. Use &apos;</span> +
+        <span class="hljs-string">&apos;&lt;transition-group&gt; for lists.&apos;</span>,
+        <span class="hljs-keyword">this</span>.$parent
+      )
+    }
+
+    <span class="hljs-keyword">const</span> mode: string = <span class="hljs-keyword">this</span>.mode
+
+    <span class="hljs-comment">// warn invalid mode</span>
+    <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp;
+      mode &amp;&amp; mode !== <span class="hljs-string">&apos;in-out&apos;</span> &amp;&amp; mode !== <span class="hljs-string">&apos;out-in&apos;</span>
+    ) {
+      warn(
+        <span class="hljs-string">&apos;invalid &lt;transition&gt; mode: &apos;</span> + mode,
+        <span class="hljs-keyword">this</span>.$parent
+      )
+    }
+
+    <span class="hljs-keyword">const</span> rawChild: VNode = children[<span class="hljs-number">0</span>]
+
+    <span class="hljs-comment">// if this is a component root node and the component&apos;s</span>
+    <span class="hljs-comment">// parent container node also has transition, skip.</span>
+    <span class="hljs-keyword">if</span> (hasParentTransition(<span class="hljs-keyword">this</span>.$vnode)) {
+      <span class="hljs-keyword">return</span> rawChild
+    }
+
+    <span class="hljs-comment">// apply transition data to child</span>
+    <span class="hljs-comment">// use getRealChild() to ignore abstract components e.g. keep-alive</span>
+    <span class="hljs-keyword">const</span> child: ?VNode = getRealChild(rawChild)
+    <span class="hljs-comment">/* istanbul ignore if */</span>
+    <span class="hljs-keyword">if</span> (!child) {
+      <span class="hljs-keyword">return</span> rawChild
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._leaving) {
+      <span class="hljs-keyword">return</span> placeholder(h, rawChild)
+    }
+
+    <span class="hljs-comment">// ensure a key that is unique to the vnode type and to this transition</span>
+    <span class="hljs-comment">// component instance. This key will be used to remove pending leaving nodes</span>
+    <span class="hljs-comment">// during entering.</span>
+    <span class="hljs-keyword">const</span> id: string = <span class="hljs-string">`__transition-<span class="hljs-subst">${this._uid}</span>-`</span>
+    child.key = child.key == <span class="hljs-literal">null</span>
+      ? child.isComment
+        ? id + <span class="hljs-string">&apos;comment&apos;</span>
+        : id + child.tag
+      : isPrimitive(child.key)
+        ? (<span class="hljs-built_in">String</span>(child.key).indexOf(id) === <span class="hljs-number">0</span> ? child.key : id + child.key)
+        : child.key
+
+    <span class="hljs-keyword">const</span> data: <span class="hljs-built_in">Object</span> = (child.data || (child.data = {})).transition = extractTransitionData(<span class="hljs-keyword">this</span>)
+    <span class="hljs-keyword">const</span> oldRawChild: VNode = <span class="hljs-keyword">this</span>._vnode
+    <span class="hljs-keyword">const</span> oldChild: VNode = getRealChild(oldRawChild)
+
+    <span class="hljs-comment">// mark v-show</span>
+    <span class="hljs-comment">// so that the transition module can hand over the control to the directive</span>
+    <span class="hljs-keyword">if</span> (child.data.directives &amp;&amp; child.data.directives.some(d =&gt; d.name === <span class="hljs-string">&apos;show&apos;</span>)) {
+      child.data.show = <span class="hljs-literal">true</span>
+    }
+
+    <span class="hljs-keyword">if</span> (
+      oldChild &amp;&amp;
+      oldChild.data &amp;&amp;
+      !isSameChild(child, oldChild) &amp;&amp;
+      !isAsyncPlaceholder(oldChild) &amp;&amp;
+      <span class="hljs-comment">// #6687 component root is a comment node</span>
+      !(oldChild.componentInstance &amp;&amp; oldChild.componentInstance._vnode.isComment)
+    ) {
+      <span class="hljs-comment">// replace old child transition data with fresh one</span>
+      <span class="hljs-comment">// important for dynamic transitions!</span>
+      <span class="hljs-keyword">const</span> oldData: <span class="hljs-built_in">Object</span> = oldChild.data.transition = extend({}, data)
+      <span class="hljs-comment">// handle transition mode</span>
+      <span class="hljs-keyword">if</span> (mode === <span class="hljs-string">&apos;out-in&apos;</span>) {
+        <span class="hljs-comment">// return placeholder node and queue update when leave finishes</span>
+        <span class="hljs-keyword">this</span>._leaving = <span class="hljs-literal">true</span>
+        mergeVNodeHook(oldData, <span class="hljs-string">&apos;afterLeave&apos;</span>, () =&gt; {
+          <span class="hljs-keyword">this</span>._leaving = <span class="hljs-literal">false</span>
+          <span class="hljs-keyword">this</span>.$forceUpdate()
+        })
+        <span class="hljs-keyword">return</span> placeholder(h, rawChild)
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mode === <span class="hljs-string">&apos;in-out&apos;</span>) {
+        <span class="hljs-keyword">if</span> (isAsyncPlaceholder(child)) {
+          <span class="hljs-keyword">return</span> oldRawChild
+        }
+        <span class="hljs-keyword">let</span> delayedLeave
+        <span class="hljs-keyword">const</span> performLeave = () =&gt; { delayedLeave() }
+        mergeVNodeHook(data, <span class="hljs-string">&apos;afterEnter&apos;</span>, performLeave)
+        mergeVNodeHook(data, <span class="hljs-string">&apos;enterCancelled&apos;</span>, performLeave)
+        mergeVNodeHook(oldData, <span class="hljs-string">&apos;delayLeave&apos;</span>, leave =&gt; { delayedLeave = leave })
+      }
+    }
+
+    <span class="hljs-keyword">return</span> rawChild
+  }
+}
+</code></pre>
+<p><code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x548C; <code>&lt;keep-alive&gt;</code> &#x7EC4;&#x4EF6;&#x6709;&#x51E0;&#x70B9;&#x5B9E;&#x73B0;&#x7C7B;&#x4F3C;&#xFF0C;&#x540C;&#x6837;&#x662F;&#x62BD;&#x8C61;&#x7EC4;&#x4EF6;&#xFF0C;&#x540C;&#x6837;&#x76F4;&#x63A5;&#x5B9E;&#x73B0; <code>render</code> &#x51FD;&#x6570;&#xFF0C;&#x540C;&#x6837;&#x5229;&#x7528;&#x4E86;&#x9ED8;&#x8BA4;&#x63D2;&#x69FD;&#x3002;<code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x975E;&#x5E38;&#x7075;&#x6D3B;&#xFF0C;&#x652F;&#x6301;&#x7684; <code>props</code> &#x975E;&#x5E38;&#x591A;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> transitionProps = {
+  name: <span class="hljs-built_in">String</span>,
+  appear: <span class="hljs-built_in">Boolean</span>,
+  css: <span class="hljs-built_in">Boolean</span>,
+  mode: <span class="hljs-built_in">String</span>,
+  type: <span class="hljs-built_in">String</span>,
+  enterClass: <span class="hljs-built_in">String</span>,
+  leaveClass: <span class="hljs-built_in">String</span>,
+  enterToClass: <span class="hljs-built_in">String</span>,
+  leaveToClass: <span class="hljs-built_in">String</span>,
+  enterActiveClass: <span class="hljs-built_in">String</span>,
+  leaveActiveClass: <span class="hljs-built_in">String</span>,
+  appearClass: <span class="hljs-built_in">String</span>,
+  appearActiveClass: <span class="hljs-built_in">String</span>,
+  appearToClass: <span class="hljs-built_in">String</span>,
+  duration: [<span class="hljs-built_in">Number</span>, <span class="hljs-built_in">String</span>, <span class="hljs-built_in">Object</span>]
+}
+</code></pre>
+<p>&#x8FD9;&#x4E9B;&#x914D;&#x7F6E;&#x6211;&#x4EEC;&#x7A0D;&#x540E;&#x4F1A;&#x5206;&#x6790;&#x5B83;&#x4EEC;&#x7684;&#x4F5C;&#x7528;&#xFF0C;<code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x53E6;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x5C31;&#x662F; <code>render</code> &#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;<code>render</code> &#x51FD;&#x6570;&#x4E3B;&#x8981;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x6E32;&#x67D3;&#x751F;&#x6210; <code>vnode</code>&#xFF0C;&#x4E0B;&#x9762;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x8FD9;&#x90E8;&#x5206;&#x7684;&#x903B;&#x8F91;&#x3002;</p>
+<ul>
+<li>&#x5904;&#x7406; <code>children</code></li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> children: any = <span class="hljs-keyword">this</span>.$slots.default
+<span class="hljs-keyword">if</span> (!children) {
+  <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-comment">// filter out text nodes (possible whitespaces)</span>
+children = children.filter((c: VNode) =&gt; c.tag || isAsyncPlaceholder(c))
+<span class="hljs-comment">/* istanbul ignore if */</span>
+<span class="hljs-keyword">if</span> (!children.length) {
+  <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-comment">// warn multiple elements</span>
+<span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; children.length &gt; <span class="hljs-number">1</span>) {
+  warn(
+    <span class="hljs-string">&apos;&lt;transition&gt; can only be used on a single element. Use &apos;</span> +
+    <span class="hljs-string">&apos;&lt;transition-group&gt; for lists.&apos;</span>,
+    <span class="hljs-keyword">this</span>.$parent
+  )
+}
+</code></pre>
+<p>&#x5148;&#x4ECE;&#x9ED8;&#x8BA4;&#x63D2;&#x69FD;&#x4E2D;&#x83B7;&#x53D6; <code>&lt;transition&gt;</code> &#x5305;&#x88F9;&#x7684;&#x5B50;&#x8282;&#x70B9;&#xFF0C;&#x5E76;&#x4E14;&#x5224;&#x65AD;&#x4E86;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x5982;&#x679C;&#x957F;&#x5EA6;&#x4E3A; 0&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#xFF0C;&#x5426;&#x5219;&#x5224;&#x65AD;&#x957F;&#x5EA6;&#x5982;&#x679C;&#x5927;&#x4E8E; 1&#xFF0C;&#x4E5F;&#x4F1A;&#x5728;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x62A5;&#x8B66;&#x544A;&#xFF0C;&#x56E0;&#x4E3A; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x662F;&#x53EA;&#x80FD;&#x5305;&#x88F9;&#x4E00;&#x4E2A;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x3002;</p>
+<ul>
+<li>&#x5904;&#x7406; <code>model</code></li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> mode: string = <span class="hljs-keyword">this</span>.mode
+
+<span class="hljs-comment">// warn invalid mode</span>
+<span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp;
+  mode &amp;&amp; mode !== <span class="hljs-string">&apos;in-out&apos;</span> &amp;&amp; mode !== <span class="hljs-string">&apos;out-in&apos;</span>
+) {
+  warn(
+    <span class="hljs-string">&apos;invalid &lt;transition&gt; mode: &apos;</span> + mode,
+    <span class="hljs-keyword">this</span>.$parent
+  )
+}
+</code></pre>
+<p>&#x8FC7;&#x6E21;&#x7EC4;&#x4EF6;&#x7684;&#x5BF9; <code>mode</code> &#x7684;&#x652F;&#x6301;&#x53EA;&#x6709; 2 &#x79CD;&#xFF0C;<code>in-out</code> &#x6216;&#x8005;&#x662F; <code>out-in</code>&#x3002;</p>
+<ul>
+<li>&#x83B7;&#x53D6; <code>rawChild</code> &amp; <code>child</code></li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> rawChild: VNode = children[<span class="hljs-number">0</span>]
+
+<span class="hljs-comment">// if this is a component root node and the component&apos;s</span>
+<span class="hljs-comment">// parent container node also has transition, skip.</span>
+<span class="hljs-keyword">if</span> (hasParentTransition(<span class="hljs-keyword">this</span>.$vnode)) {
+  <span class="hljs-keyword">return</span> rawChild
+}
+
+<span class="hljs-comment">// apply transition data to child</span>
+<span class="hljs-comment">// use getRealChild() to ignore abstract components e.g. keep-alive</span>
+<span class="hljs-keyword">const</span> child: ?VNode = getRealChild(rawChild)
+<span class="hljs-comment">/* istanbul ignore if */</span>
+<span class="hljs-keyword">if</span> (!child) {
+  <span class="hljs-keyword">return</span> rawChild
+}
+</code></pre>
+<p><code>rawChild</code> &#x5C31;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x5B50;&#x8282;&#x70B9; <code>vnode</code>&#xFF0C;&#x63A5;&#x7740;&#x5224;&#x65AD;&#x5F53;&#x524D; <code>&lt;transition&gt;</code> &#x5982;&#x679C;&#x662F;&#x7EC4;&#x4EF6;&#x6839;&#x8282;&#x70B9;&#x5E76;&#x4E14;&#x5916;&#x9762;&#x5305;&#x88F9;&#x8BE5;&#x7EC4;&#x4EF6;&#x7684;&#x5BB9;&#x5668;&#x4E5F;&#x662F; <code>&lt;transition&gt;</code> &#x7684;&#x65F6;&#x5019;&#x8981;&#x8DF3;&#x8FC7;&#x3002;&#x6765;&#x770B;&#x4E00;&#x4E0B; <code>hasParentTransition</code> &#x7684;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hasParentTransition</span> (<span class="hljs-params">vnode: VNode</span>): ?<span class="hljs-title">boolean</span> </span>{
+  <span class="hljs-keyword">while</span> ((vnode = vnode.parent)) {
+    <span class="hljs-keyword">if</span> (vnode.data.transition) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+    }
+  }
+}
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x4F20;&#x5165;&#x7684;&#x662F; <code>this.$vnode</code>&#xFF0C;&#x4E5F;&#x5C31;&#x662F; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x7684; &#x5360;&#x4F4D; <code>vnode</code>&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x5B83;&#x53C8;&#x540C;&#x65F6;&#x4F5C;&#x4E3A;&#x6E32;&#x67D3; <code>vnode</code>&#xFF0C;&#x4E5F;&#x5C31;&#x662F; <code>vm._vnode</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x7684; <code>parent</code> &#x624D;&#x4E0D;&#x4F1A;&#x4E3A;&#x7A7A;&#xFF0C;&#x5E76;&#x4E14;&#x5224;&#x65AD; <code>parent</code> &#x4E5F;&#x662F; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#xFF0C;&#x624D;&#x8FD4;&#x56DE; true&#xFF0C;<code>vnode.data.transition</code> &#x6211;&#x4EEC;&#x7A0D;&#x540E;&#x4F1A;&#x4ECB;&#x7ECD;&#x3002;</p>
+<p><code>getRealChild</code> &#x7684;&#x76EE;&#x7684;&#x662F;&#x83B7;&#x53D6;&#x7EC4;&#x4EF6;&#x7684;&#x975E;&#x62BD;&#x8C61;&#x5B50;&#x8282;&#x70B9;&#xFF0C;&#x56E0;&#x4E3A; <code>&lt;transition&gt;</code> &#x5F88;&#x53EF;&#x80FD;&#x4F1A;&#x5305;&#x88F9;&#x4E00;&#x4E2A; <code>keep-alive</code>&#xFF0C;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-comment">// in case the child is also an abstract component, e.g. &lt;keep-alive&gt;</span>
+<span class="hljs-comment">// we want to recursively retrieve the real component to be rendered</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRealChild</span> (<span class="hljs-params">vnode: ?VNode</span>): ?<span class="hljs-title">VNode</span> </span>{
+  <span class="hljs-keyword">const</span> compOptions: ?VNodeComponentOptions = vnode &amp;&amp; vnode.componentOptions
+  <span class="hljs-keyword">if</span> (compOptions &amp;&amp; compOptions.Ctor.options.abstract) {
+    <span class="hljs-keyword">return</span> getRealChild(getFirstComponentChild(compOptions.children))
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> vnode
+  }
+}
+</code></pre>
+<p>&#x4F1A;&#x9012;&#x5F52;&#x627E;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x975E;&#x62BD;&#x8C61;&#x7EC4;&#x4EF6;&#x7684; <code>vnode</code> &#x5E76;&#x8FD4;&#x56DE;&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A; case &#x4E0B;&#xFF0C;<code>rawChild === child</code>&#x3002;</p>
+<ul>
+<li>&#x5904;&#x7406; <code>id</code> &amp; <code>data</code></li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// ensure a key that is unique to the vnode type and to this transition</span>
+<span class="hljs-comment">// component instance. This key will be used to remove pending leaving nodes</span>
+<span class="hljs-comment">// during entering.</span>
+<span class="hljs-keyword">const</span> id: string = <span class="hljs-string">`__transition-<span class="hljs-subst">${this._uid}</span>-`</span>
+child.key = child.key == <span class="hljs-literal">null</span>
+  ? child.isComment
+    ? id + <span class="hljs-string">&apos;comment&apos;</span>
+    : id + child.tag
+  : isPrimitive(child.key)
+    ? (<span class="hljs-built_in">String</span>(child.key).indexOf(id) === <span class="hljs-number">0</span> ? child.key : id + child.key)
+    : child.key
+
+<span class="hljs-keyword">const</span> data: <span class="hljs-built_in">Object</span> = (child.data || (child.data = {})).transition = extractTransitionData(<span class="hljs-keyword">this</span>)
+<span class="hljs-keyword">const</span> oldRawChild: VNode = <span class="hljs-keyword">this</span>._vnode
+<span class="hljs-keyword">const</span> oldChild: VNode = getRealChild(oldRawChild)
+
+<span class="hljs-comment">// mark v-show</span>
+<span class="hljs-comment">// so that the transition module can hand over the control to the directive</span>
+<span class="hljs-keyword">if</span> (child.data.directives &amp;&amp; child.data.directives.some(d =&gt; d.name === <span class="hljs-string">&apos;show&apos;</span>)) {
+  child.data.show = <span class="hljs-literal">true</span>
+}
+</code></pre>
+<p>&#x5148;&#x6839;&#x636E; <code>key</code> &#x7B49;&#x4E00;&#x7CFB;&#x5217;&#x6761;&#x4EF6;&#x83B7;&#x53D6; <code>id</code>&#xFF0C;&#x63A5;&#x7740;&#x4ECE;&#x5F53;&#x524D;&#x901A;&#x8FC7; <code>extractTransitionData</code> &#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#x4E0A;&#x63D0;&#x53D6;&#x51FA;&#x8FC7;&#x6E21;&#x6240;&#x9700;&#x8981;&#x7684;&#x6570;&#x636E;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extractTransitionData</span> (<span class="hljs-params">comp: Component</span>): <span class="hljs-title">Object</span> </span>{
+  <span class="hljs-keyword">const</span> data = {}
+  <span class="hljs-keyword">const</span> options: ComponentOptions = comp.$options
+  <span class="hljs-comment">// props</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> key <span class="hljs-keyword">in</span> options.propsData) {
+    data[key] = comp[key]
+  }
+  <span class="hljs-comment">// events.</span>
+  <span class="hljs-comment">// extract listeners and pass them directly to the transition methods</span>
+  <span class="hljs-keyword">const</span> listeners: ?<span class="hljs-built_in">Object</span> = options._parentListeners
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> key <span class="hljs-keyword">in</span> listeners) {
+    data[camelize(key)] = listeners[key]
+  }
+  <span class="hljs-keyword">return</span> data
+}
+</code></pre>
+<p>&#x9996;&#x5148;&#x662F;&#x904D;&#x5386; <code>props</code> &#x8D4B;&#x503C;&#x5230; <code>data</code> &#x4E2D;&#xFF0C;&#x63A5;&#x7740;&#x662F;&#x904D;&#x5386;&#x6240;&#x6709;&#x7236;&#x7EC4;&#x4EF6;&#x7684;&#x4E8B;&#x4EF6;&#x4E5F;&#x628A;&#x4E8B;&#x4EF6;&#x56DE;&#x8C03;&#x8D4B;&#x503C;&#x5230; <code>data</code> &#x4E2D;&#x3002;</p>
+<p>&#x8FD9;&#x6837; <code>child.data.transition</code> &#x4E2D;&#x5C31;&#x5305;&#x542B;&#x4E86;&#x8FC7;&#x6E21;&#x6240;&#x9700;&#x7684;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x4E9B;&#x7A0D;&#x540E;&#x90FD;&#x4F1A;&#x7528;&#x5230;&#xFF0C;&#x5BF9;&#x4E8E; <code>child</code> &#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E86; <code>v-show</code> &#x6307;&#x4EE4;&#xFF0C;&#x4E5F;&#x4F1A;&#x628A; <code>child.data.show</code> &#x8BBE;&#x7F6E;&#x4E3A; true&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x5F97;&#x5230;&#x7684; <code>child.data</code> &#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-js">{
+  transition: {
+    name: <span class="hljs-string">&apos;fade&apos;</span>
+  }
+}
+</code></pre>
+<p>&#x81F3;&#x4E8E; <code>oldRawChild</code> &#x548C; <code>oldChild</code> &#x662F;&#x4E0E;&#x540E;&#x9762;&#x7684;&#x5224;&#x65AD;&#x903B;&#x8F91;&#x76F8;&#x5173;&#xFF0C;&#x8FD9;&#x4E9B;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x5148;&#x4E0D;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h2 id="transition-module">transition module</h2>
+<p>&#x521A;&#x521A;&#x6211;&#x4EEC;&#x4ECB;&#x7ECD;&#x5B8C; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x7684; <code>render</code> &#x9636;&#x6BB5;&#x53EA;&#x83B7;&#x53D6;&#x4E86;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x4E86;&#x6E32;&#x67D3;&#x7684; <code>vnode</code>&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x548C;&#x52A8;&#x753B;&#x76F8;&#x5173;&#xFF0C;&#x800C;&#x52A8;&#x753B;&#x76F8;&#x5173;&#x7684;&#x903B;&#x8F91;&#x5168;&#x90E8;&#x5728; <code>src/platforms/web/modules/transition.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_enter</span> (<span class="hljs-params">_: any, vnode: VNodeWithData</span>) </span>{
+  <span class="hljs-keyword">if</span> (vnode.data.show !== <span class="hljs-literal">true</span>) {
+    enter(vnode)
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> inBrowser ? {
+  create: _enter,
+  activate: _enter,
+  remove (vnode: VNode, rm: <span class="hljs-built_in">Function</span>) {
+    <span class="hljs-comment">/* istanbul ignore else */</span>
+    <span class="hljs-keyword">if</span> (vnode.data.show !== <span class="hljs-literal">true</span>) {
+      leave(vnode, rm)
+    } <span class="hljs-keyword">else</span> {
+      rm()
+    }
+  }
+} : {}
+</code></pre>
+<p>&#x5728;&#x4E4B;&#x524D;&#x4ECB;&#x7ECD;&#x4E8B;&#x4EF6;&#x5B9E;&#x73B0;&#x7684;&#x7AE0;&#x8282;&#x4E2D;&#x6211;&#x4EEC;&#x63D0;&#x5230;&#x8FC7;&#x5728; <code>vnode patch</code> &#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4F1A;&#x6267;&#x884C;&#x5F88;&#x591A;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x5BF9;&#x4E8E;&#x8FC7;&#x6E21;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x53EA;&#x63A5;&#x6536;&#x4E86; <code>create</code> &#x548C; <code>activate</code> 2 &#x4E2A;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x6211;&#x4EEC;&#x77E5;&#x9053; <code>create</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#x53EA;&#x6709;&#x5F53;&#x8282;&#x70B9;&#x7684;&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;&#x624D;&#x4F1A;&#x6267;&#x884C;&#xFF0C;&#x800C; <code>remove</code> &#x4F1A;&#x5728;&#x8282;&#x70B9;&#x9500;&#x6BC1;&#x7684;&#x65F6;&#x5019;&#x6267;&#x884C;&#xFF0C;&#x8FD9;&#x4E5F;&#x5C31;&#x5370;&#x8BC1;&#x4E86; <code>&lt;transition&gt;</code> &#x5FC5;&#x987B;&#x8981;&#x6EE1;&#x8DB3; <code>v-if</code> &#x3001;&#x52A8;&#x6001;&#x7EC4;&#x4EF6;&#x3001;&#x7EC4;&#x4EF6;&#x6839;&#x8282;&#x70B9;&#x6761;&#x4EF6;&#x4E4B;&#x4E00;&#x4E86;&#xFF0C;&#x5BF9;&#x4E8E; <code>v-show</code> &#x5728;&#x5B83;&#x7684;&#x6307;&#x4EE4;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x4E2D;&#x4E5F;&#x4F1A;&#x6267;&#x884C;&#x76F8;&#x5173;&#x903B;&#x8F91;&#xFF0C;&#x8FD9;&#x5757;&#x513F;&#x5148;&#x4E0D;&#x4ECB;&#x7ECD;&#x3002;</p>
+<p>&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x63D0;&#x4F9B;&#x4E86; 2 &#x4E2A;&#x65F6;&#x673A;&#xFF0C;&#x4E00;&#x4E2A;&#x662F; <code>create</code> &#x548C; <code>activate</code> &#x7684;&#x65F6;&#x5019;&#x63D0;&#x4F9B;&#x4E86; entering &#x8FDB;&#x5165;&#x52A8;&#x753B;&#xFF0C;&#x4E00;&#x4E2A;&#x662F; <code>remove</code> &#x7684;&#x65F6;&#x5019;&#x63D0;&#x4F9B;&#x4E86; leaving &#x79BB;&#x5F00;&#x52A8;&#x753B;&#xFF0C;&#x90A3;&#x4E48;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5206;&#x522B;&#x53BB;&#x5206;&#x6790;&#x8FD9;&#x4E24;&#x4E2A;&#x8FC7;&#x7A0B;&#x3002;</p>
+<h2 id="entering">entering</h2>
+<p>&#x6574;&#x4E2A; entering &#x8FC7;&#x7A0B;&#x7684;&#x5B9E;&#x73B0;&#x662F; <code>enter</code> &#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">enter</span> (<span class="hljs-params">vnode: VNodeWithData, toggleDisplay: ?(</span>) =&gt; <span class="hljs-title">void</span>) </span>{
+  <span class="hljs-keyword">const</span> el: any = vnode.elm
+
+  <span class="hljs-comment">// call leave callback now</span>
+  <span class="hljs-keyword">if</span> (isDef(el._leaveCb)) {
+    el._leaveCb.cancelled = <span class="hljs-literal">true</span>
+    el._leaveCb()
+  }
+
+  <span class="hljs-keyword">const</span> data = resolveTransition(vnode.data.transition)
+  <span class="hljs-keyword">if</span> (isUndef(data)) {
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-comment">/* istanbul ignore if */</span>
+  <span class="hljs-keyword">if</span> (isDef(el._enterCb) || el.nodeType !== <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-keyword">const</span> {
+    css,
+    type,
+    enterClass,
+    enterToClass,
+    enterActiveClass,
+    appearClass,
+    appearToClass,
+    appearActiveClass,
+    beforeEnter,
+    enter,
+    afterEnter,
+    enterCancelled,
+    beforeAppear,
+    appear,
+    afterAppear,
+    appearCancelled,
+    duration
+  } = data
+
+  <span class="hljs-comment">// activeInstance will always be the &lt;transition&gt; component managing this</span>
+  <span class="hljs-comment">// transition. One edge case to check is when the &lt;transition&gt; is placed</span>
+  <span class="hljs-comment">// as the root node of a child component. In that case we need to check</span>
+  <span class="hljs-comment">// &lt;transition&gt;&apos;s parent for appear check.</span>
+  <span class="hljs-keyword">let</span> context = activeInstance
+  <span class="hljs-keyword">let</span> transitionNode = activeInstance.$vnode
+  <span class="hljs-keyword">while</span> (transitionNode &amp;&amp; transitionNode.parent) {
+    transitionNode = transitionNode.parent
+    context = transitionNode.context
+  }
+
+  <span class="hljs-keyword">const</span> isAppear = !context._isMounted || !vnode.isRootInsert
+
+  <span class="hljs-keyword">if</span> (isAppear &amp;&amp; !appear &amp;&amp; appear !== <span class="hljs-string">&apos;&apos;</span>) {
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-keyword">const</span> startClass = isAppear &amp;&amp; appearClass
+    ? appearClass
+    : enterClass
+  <span class="hljs-keyword">const</span> activeClass = isAppear &amp;&amp; appearActiveClass
+    ? appearActiveClass
+    : enterActiveClass
+  <span class="hljs-keyword">const</span> toClass = isAppear &amp;&amp; appearToClass
+    ? appearToClass
+    : enterToClass
+
+  <span class="hljs-keyword">const</span> beforeEnterHook = isAppear
+    ? (beforeAppear || beforeEnter)
+    : beforeEnter
+  <span class="hljs-keyword">const</span> enterHook = isAppear
+    ? (<span class="hljs-keyword">typeof</span> appear === <span class="hljs-string">&apos;function&apos;</span> ? appear : enter)
+    : enter
+  <span class="hljs-keyword">const</span> afterEnterHook = isAppear
+    ? (afterAppear || afterEnter)
+    : afterEnter
+  <span class="hljs-keyword">const</span> enterCancelledHook = isAppear
+    ? (appearCancelled || enterCancelled)
+    : enterCancelled
+
+  <span class="hljs-keyword">const</span> explicitEnterDuration: any = toNumber(
+    isObject(duration)
+      ? duration.enter
+      : duration
+  )
+
+  <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; explicitEnterDuration != <span class="hljs-literal">null</span>) {
+    checkDuration(explicitEnterDuration, <span class="hljs-string">&apos;enter&apos;</span>, vnode)
+  }
+
+  <span class="hljs-keyword">const</span> expectsCSS = css !== <span class="hljs-literal">false</span> &amp;&amp; !isIE9
+  <span class="hljs-keyword">const</span> userWantsControl = getHookArgumentsLength(enterHook)
+
+  <span class="hljs-keyword">const</span> cb = el._enterCb = once(() =&gt; {
+    <span class="hljs-keyword">if</span> (expectsCSS) {
+      removeTransitionClass(el, toClass)
+      removeTransitionClass(el, activeClass)
+    }
+    <span class="hljs-keyword">if</span> (cb.cancelled) {
+      <span class="hljs-keyword">if</span> (expectsCSS) {
+        removeTransitionClass(el, startClass)
+      }
+      enterCancelledHook &amp;&amp; enterCancelledHook(el)
+    } <span class="hljs-keyword">else</span> {
+      afterEnterHook &amp;&amp; afterEnterHook(el)
+    }
+    el._enterCb = <span class="hljs-literal">null</span>
+  })
+
+  <span class="hljs-keyword">if</span> (!vnode.data.show) {
+    <span class="hljs-comment">// remove pending leave element on enter by injecting an insert hook</span>
+    mergeVNodeHook(vnode, <span class="hljs-string">&apos;insert&apos;</span>, () =&gt; {
+      <span class="hljs-keyword">const</span> parent = el.parentNode
+      <span class="hljs-keyword">const</span> pendingNode = parent &amp;&amp; parent._pending &amp;&amp; parent._pending[vnode.key]
+      <span class="hljs-keyword">if</span> (pendingNode &amp;&amp;
+        pendingNode.tag === vnode.tag &amp;&amp;
+        pendingNode.elm._leaveCb
+      ) {
+        pendingNode.elm._leaveCb()
+      }
+      enterHook &amp;&amp; enterHook(el, cb)
+    })
+  }
+
+  <span class="hljs-comment">// start enter transition</span>
+  beforeEnterHook &amp;&amp; beforeEnterHook(el)
+  <span class="hljs-keyword">if</span> (expectsCSS) {
+    addTransitionClass(el, startClass)
+    addTransitionClass(el, activeClass)
+    nextFrame(() =&gt; {
+      removeTransitionClass(el, startClass)
+      <span class="hljs-keyword">if</span> (!cb.cancelled) {
+        addTransitionClass(el, toClass)
+        <span class="hljs-keyword">if</span> (!userWantsControl) {
+          <span class="hljs-keyword">if</span> (isValidDuration(explicitEnterDuration)) {
+            setTimeout(cb, explicitEnterDuration)
+          } <span class="hljs-keyword">else</span> {
+            whenTransitionEnds(el, type, cb)
+          }
+        }
+      }
+    })
+  }
+
+  <span class="hljs-keyword">if</span> (vnode.data.show) {
+    toggleDisplay &amp;&amp; toggleDisplay()
+    enterHook &amp;&amp; enterHook(el, cb)
+  }
+
+  <span class="hljs-keyword">if</span> (!expectsCSS &amp;&amp; !userWantsControl) {
+    cb()
+  }
+}
+</code></pre>
+<p><code>enter</code> &#x7684;&#x4EE3;&#x7801;&#x5F88;&#x957F;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x5206;&#x6790;&#x5176;&#x4E2D;&#x7684;&#x6838;&#x5FC3;&#x903B;&#x8F91;&#x3002;</p>
+<ul>
+<li>&#x89E3;&#x6790;&#x8FC7;&#x6E21;&#x6570;&#x636E;</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> data = resolveTransition(vnode.data.transition)
+  <span class="hljs-keyword">if</span> (isUndef(data)) {
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">const</span> {
+  css,
+  type,
+  enterClass,
+  enterToClass,
+  enterActiveClass,
+  appearClass,
+  appearToClass,
+  appearActiveClass,
+  beforeEnter,
+  enter,
+  afterEnter,
+  enterCancelled,
+  beforeAppear,
+  appear,
+  afterAppear,
+  appearCancelled,
+  duration
+} = data
+</code></pre>
+<p>&#x4ECE; <code>vnode.data.transition</code> &#x4E2D;&#x89E3;&#x6790;&#x51FA;&#x8FC7;&#x6E21;&#x76F8;&#x5173;&#x7684;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#xFF0C;<code>resolveTransition</code> &#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/platforms/web/transition-util.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolveTransition</span> (<span class="hljs-params">def?: string | Object</span>): ?<span class="hljs-title">Object</span> </span>{
+  <span class="hljs-keyword">if</span> (!def) {
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-comment">/* istanbul ignore else */</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> def === <span class="hljs-string">&apos;object&apos;</span>) {
+    <span class="hljs-keyword">const</span> res = {}
+    <span class="hljs-keyword">if</span> (def.css !== <span class="hljs-literal">false</span>) {
+      extend(res, autoCssTransition(def.name || <span class="hljs-string">&apos;v&apos;</span>))
+    }
+    extend(res, def)
+    <span class="hljs-keyword">return</span> res
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> def === <span class="hljs-string">&apos;string&apos;</span>) {
+    <span class="hljs-keyword">return</span> autoCssTransition(def)
+  }
+}
+
+<span class="hljs-keyword">const</span> autoCssTransition: (name: string) =&gt; <span class="hljs-built_in">Object</span> = cached(name =&gt; {
+  <span class="hljs-keyword">return</span> {
+    enterClass: <span class="hljs-string">`<span class="hljs-subst">${name}</span>-enter`</span>,
+    enterToClass: <span class="hljs-string">`<span class="hljs-subst">${name}</span>-enter-to`</span>,
+    enterActiveClass: <span class="hljs-string">`<span class="hljs-subst">${name}</span>-enter-active`</span>,
+    leaveClass: <span class="hljs-string">`<span class="hljs-subst">${name}</span>-leave`</span>,
+    leaveToClass: <span class="hljs-string">`<span class="hljs-subst">${name}</span>-leave-to`</span>,
+    leaveActiveClass: <span class="hljs-string">`<span class="hljs-subst">${name}</span>-leave-active`</span>
+  }
+})
+</code></pre>
+<p><code>resolveTransition</code> &#x4F1A;&#x901A;&#x8FC7; <code>autoCssTransition</code> &#x5904;&#x7406; <code>name</code> &#x5C5E;&#x6027;&#xFF0C;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x63CF;&#x8FF0;&#x5404;&#x4E2A;&#x9636;&#x6BB5;&#x7684; <code>Class</code> &#x540D;&#x79F0;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x6269;&#x5C55;&#x5230; <code>def</code> &#x4E2D;&#x5E76;&#x8FD4;&#x56DE;&#x7ED9; <code>data</code>&#xFF0C;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x4ECE; <code>data</code> &#x4E2D;&#x83B7;&#x53D6;&#x5230;&#x8FC7;&#x6E21;&#x76F8;&#x5173;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#x3002;</p>
+<ul>
+<li>&#x5904;&#x7406;&#x8FB9;&#x754C;&#x60C5;&#x51B5;</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// activeInstance will always be the &lt;transition&gt; component managing this</span>
+<span class="hljs-comment">// transition. One edge case to check is when the &lt;transition&gt; is placed</span>
+<span class="hljs-comment">// as the root node of a child component. In that case we need to check</span>
+<span class="hljs-comment">// &lt;transition&gt;&apos;s parent for appear check.</span>
+<span class="hljs-keyword">let</span> context = activeInstance
+<span class="hljs-keyword">let</span> transitionNode = activeInstance.$vnode
+<span class="hljs-keyword">while</span> (transitionNode &amp;&amp; transitionNode.parent) {
+  transitionNode = transitionNode.parent
+  context = transitionNode.context
+}
+
+<span class="hljs-keyword">const</span> isAppear = !context._isMounted || !vnode.isRootInsert
+
+<span class="hljs-keyword">if</span> (isAppear &amp;&amp; !appear &amp;&amp; appear !== <span class="hljs-string">&apos;&apos;</span>) {
+  <span class="hljs-keyword">return</span>
+}
+</code></pre>
+<p>&#x8FD9;&#x662F;&#x4E3A;&#x4E86;&#x5904;&#x7406;&#x5F53; <code>&lt;transition&gt;</code> &#x4F5C;&#x4E3A;&#x5B50;&#x7EC4;&#x4EF6;&#x7684;&#x6839;&#x7EC4;&#x4EF6;&#xFF0C;&#x5E76;&#x4E14;&#x5916;&#x90E8;&#x5305;&#x88F9;&#x8BE5;&#x5B50;&#x7EC4;&#x4EF6;&#x4E5F;&#x662F; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#xFF0C;&#x90A3;&#x4E48;&#x5B50;&#x7EC4;&#x4EF6;&#x7684; <code>&lt;transition&gt;</code> &#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4E5F;&#x5207;&#x5230;&#x7236;&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#x3002;</p>
+<p><code>isAppear</code> &#x8868;&#x793A;&#x5F53;&#x524D;&#x4E0A;&#x4E0B;&#x6587;&#x5B9E;&#x4F8B;&#x8FD8;&#x6CA1;&#x6709; <code>mounted</code>&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x65F6;&#x673A;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x7B2C;&#x4E00;&#x6B21;&#x5E76;&#x4E14; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x6CA1;&#x6709;&#x914D;&#x7F6E; <code>appear</code> &#x7684;&#x8BDD;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x3002;</p>
+<ul>
+<li>&#x5B9A;&#x4E49;&#x8FC7;&#x6E21;&#x7C7B;&#x540D;&#x3001;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x548C;&#x5176;&#x5B83;&#x914D;&#x7F6E;</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> startClass = isAppear &amp;&amp; appearClass
+    ? appearClass
+    : enterClass
+<span class="hljs-keyword">const</span> activeClass = isAppear &amp;&amp; appearActiveClass
+  ? appearActiveClass
+  : enterActiveClass
+<span class="hljs-keyword">const</span> toClass = isAppear &amp;&amp; appearToClass
+  ? appearToClass
+  : enterToClass
+
+<span class="hljs-keyword">const</span> beforeEnterHook = isAppear
+  ? (beforeAppear || beforeEnter)
+  : beforeEnter
+<span class="hljs-keyword">const</span> enterHook = isAppear
+  ? (<span class="hljs-keyword">typeof</span> appear === <span class="hljs-string">&apos;function&apos;</span> ? appear : enter)
+  : enter
+<span class="hljs-keyword">const</span> afterEnterHook = isAppear
+  ? (afterAppear || afterEnter)
+  : afterEnter
+<span class="hljs-keyword">const</span> enterCancelledHook = isAppear
+  ? (appearCancelled || enterCancelled)
+  : enterCancelled
+
+<span class="hljs-keyword">const</span> explicitEnterDuration: any = toNumber(
+  isObject(duration)
+    ? duration.enter
+    : duration
+)
+
+<span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; explicitEnterDuration != <span class="hljs-literal">null</span>) {
+  checkDuration(explicitEnterDuration, <span class="hljs-string">&apos;enter&apos;</span>, vnode)
+}
+
+<span class="hljs-keyword">const</span> expectsCSS = css !== <span class="hljs-literal">false</span> &amp;&amp; !isIE9
+<span class="hljs-keyword">const</span> userWantsControl = getHookArgumentsLength(enterHook)
+
+<span class="hljs-keyword">const</span> cb = el._enterCb = once(() =&gt; {
+  <span class="hljs-keyword">if</span> (expectsCSS) {
+    removeTransitionClass(el, toClass)
+    removeTransitionClass(el, activeClass)
+  }
+  <span class="hljs-keyword">if</span> (cb.cancelled) {
+    <span class="hljs-keyword">if</span> (expectsCSS) {
+      removeTransitionClass(el, startClass)
+    }
+    enterCancelledHook &amp;&amp; enterCancelledHook(el)
+  } <span class="hljs-keyword">else</span> {
+    afterEnterHook &amp;&amp; afterEnterHook(el)
+  }
+  el._enterCb = <span class="hljs-literal">null</span>
+})
+</code></pre>
+<p>&#x5BF9;&#x4E8E;&#x8FC7;&#x6E21;&#x7C7B;&#x540D;&#x65B9;&#x9762;&#xFF0C;<code>startClass</code> &#x5B9A;&#x4E49;&#x8FDB;&#x5165;&#x8FC7;&#x6E21;&#x7684;&#x5F00;&#x59CB;&#x72B6;&#x6001;&#xFF0C;&#x5728;&#x5143;&#x7D20;&#x88AB;&#x63D2;&#x5165;&#x65F6;&#x751F;&#x6548;&#xFF0C;&#x5728;&#x4E0B;&#x4E00;&#x4E2A;&#x5E27;&#x79FB;&#x9664;&#xFF1B;<code>activeClass</code> &#x5B9A;&#x4E49;&#x8FC7;&#x6E21;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5728;&#x5143;&#x7D20;&#x6574;&#x4E2A;&#x8FC7;&#x6E21;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F5C;&#x7528;&#xFF0C;&#x5728;&#x5143;&#x7D20;&#x88AB;&#x63D2;&#x5165;&#x65F6;&#x751F;&#x6548;&#xFF0C;&#x5728; <code>transition/animation</code> &#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x79FB;&#x9664;&#xFF1B;<code>toClass</code> &#x5B9A;&#x4E49;&#x8FDB;&#x5165;&#x8FC7;&#x6E21;&#x7684;&#x7ED3;&#x675F;&#x72B6;&#x6001;&#xFF0C;&#x5728;&#x5143;&#x7D20;&#x88AB;&#x63D2;&#x5165;&#x4E00;&#x5E27;&#x540E;&#x751F;&#x6548; (&#x4E0E;&#x6B64;&#x540C;&#x65F6; <code>startClass</code> &#x88AB;&#x5220;&#x9664;)&#xFF0C;&#x5728; <code>&lt;transition&gt;/animation</code> &#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x79FB;&#x9664;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x8FC7;&#x6E21;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x65B9;&#x9762;&#xFF0C;<code>beforeEnterHook</code> &#x662F;&#x8FC7;&#x6E21;&#x5F00;&#x59CB;&#x524D;&#x6267;&#x884C;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;<code>enterHook</code> &#x662F;&#x5728;&#x5143;&#x7D20;&#x63D2;&#x5165;&#x540E;&#x6216;&#x8005;&#x662F; <code>v-show</code> &#x663E;&#x793A;&#x5207;&#x6362;&#x540E;&#x6267;&#x884C;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x3002;<code>afterEnterHook</code> &#x662F;&#x5728;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x6267;&#x884C;&#x5B8C;&#x540E;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x3002;</p>
+<p><code>explicitEnterDuration</code> &#x8868;&#x793A; enter &#x52A8;&#x753B;&#x6267;&#x884C;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p><code>expectsCSS</code> &#x8868;&#x793A;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x662F;&#x53D7; CSS &#x7684;&#x5F71;&#x54CD;&#x3002;</p>
+<p><code>cb</code> &#x5B9A;&#x4E49;&#x7684;&#x662F;&#x8FC7;&#x6E21;&#x5B8C;&#x6210;&#x6267;&#x884C;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
+<ul>
+<li>&#x5408;&#x5E76; <code>insert</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">if</span> (!vnode.data.show) {
+  <span class="hljs-comment">// remove pending leave element on enter by injecting an insert hook</span>
+  mergeVNodeHook(vnode, <span class="hljs-string">&apos;insert&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">const</span> parent = el.parentNode
+    <span class="hljs-keyword">const</span> pendingNode = parent &amp;&amp; parent._pending &amp;&amp; parent._pending[vnode.key]
+    <span class="hljs-keyword">if</span> (pendingNode &amp;&amp;
+      pendingNode.tag === vnode.tag &amp;&amp;
+      pendingNode.elm._leaveCb
+    ) {
+      pendingNode.elm._leaveCb()
+    }
+    enterHook &amp;&amp; enterHook(el, cb)
+  })
+}
+</code></pre>
+<p><code>mergeVNodeHook</code> &#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/core/vdom/helpers/merge-hook.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mergeVNodeHook</span> (<span class="hljs-params">def: Object, hookKey: string, hook: Function</span>) </span>{
+  <span class="hljs-keyword">if</span> (def <span class="hljs-keyword">instanceof</span> VNode) {
+    def = def.data.hook || (def.data.hook = {})
+  }
+  <span class="hljs-keyword">let</span> invoker
+  <span class="hljs-keyword">const</span> oldHook = def[hookKey]
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wrappedHook</span> (<span class="hljs-params"></span>) </span>{
+    hook.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>)
+    <span class="hljs-comment">// important: remove merged hook to ensure it&apos;s called only once</span>
+    <span class="hljs-comment">// and prevent memory leak</span>
+    remove(invoker.fns, wrappedHook)
+  }
+
+  <span class="hljs-keyword">if</span> (isUndef(oldHook)) {
+    <span class="hljs-comment">// no existing hook</span>
+    invoker = createFnInvoker([wrappedHook])
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">/* istanbul ignore if */</span>
+    <span class="hljs-keyword">if</span> (isDef(oldHook.fns) &amp;&amp; isTrue(oldHook.merged)) {
+      <span class="hljs-comment">// already a merged invoker</span>
+      invoker = oldHook
+      invoker.fns.push(wrappedHook)
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// existing plain hook</span>
+      invoker = createFnInvoker([oldHook, wrappedHook])
+    }
+  }
+
+  invoker.merged = <span class="hljs-literal">true</span>
+  def[hookKey] = invoker
+}
+</code></pre>
+<p><code>mergeVNodeHook</code> &#x7684;&#x903B;&#x8F91;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x662F;&#x628A; <code>hook</code> &#x51FD;&#x6570;&#x5408;&#x5E76;&#x5230; <code>def.data.hook[hookey]</code> &#x4E2D;&#xFF0C;&#x751F;&#x6210;&#x65B0;&#x7684; <code>invoker</code>&#xFF0C;<code>createFnInvoker</code> &#x65B9;&#x6CD5;&#x6211;&#x4EEC;&#x5728;&#x5206;&#x6790;&#x4E8B;&#x4EF6;&#x7AE0;&#x8282;&#x7684;&#x65F6;&#x5019;&#x5DF2;&#x7ECF;&#x4ECB;&#x7ECD;&#x8FC7;&#x4E86;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x77E5;&#x9053;&#x7EC4;&#x4EF6;&#x7684; <code>vnode</code> &#x539F;&#x672C;&#x5B9A;&#x4E49;&#x4E86; <code>init</code>&#x3001;<code>prepatch</code>&#x3001;<code>insert</code>&#x3001;<code>destroy</code> &#x56DB;&#x4E2A;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x800C; <code>mergeVNodeHook</code> &#x51FD;&#x6570;&#x5C31;&#x662F;&#x628A;&#x4E00;&#x4E9B;&#x65B0;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x5408;&#x5E76;&#x8FDB;&#x6765;&#xFF0C;&#x4F8B;&#x5982;&#x5728; <code>&lt;transition&gt;</code> &#x8FC7;&#x7A0B;&#x4E2D;&#x5408;&#x5E76;&#x7684; <code>insert</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x5C31;&#x4F1A;&#x5408;&#x5E76;&#x5230;&#x7EC4;&#x4EF6; <code>vnode</code> &#x7684; <code>insert</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x8FD9;&#x6837;&#x5F53;&#x7EC4;&#x4EF6;&#x63D2;&#x5165;&#x540E;&#xFF0C;&#x5C31;&#x4F1A;&#x6267;&#x884C;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x7684; <code>enterHook</code> &#x4E86;&#x3002;</p>
+<ul>
+<li>&#x5F00;&#x59CB;&#x6267;&#x884C;&#x8FC7;&#x6E21;&#x52A8;&#x753B;</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// start enter transition</span>
+beforeEnterHook &amp;&amp; beforeEnterHook(el)
+<span class="hljs-keyword">if</span> (expectsCSS) {
+  addTransitionClass(el, startClass)
+  addTransitionClass(el, activeClass)
+  nextFrame(() =&gt; {
+    removeTransitionClass(el, startClass)
+    <span class="hljs-keyword">if</span> (!cb.cancelled) {
+      addTransitionClass(el, toClass)
+      <span class="hljs-keyword">if</span> (!userWantsControl) {
+        <span class="hljs-keyword">if</span> (isValidDuration(explicitEnterDuration)) {
+          setTimeout(cb, explicitEnterDuration)
+        } <span class="hljs-keyword">else</span> {
+          whenTransitionEnds(el, type, cb)
+        }
+      }
+    }
+  })
+}
+</code></pre>
+<p>&#x9996;&#x5148;&#x6267;&#x884C; <code>beforeEnterHook</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x628A;&#x5F53;&#x524D;&#x5143;&#x7D20;&#x7684; DOM &#x8282;&#x70B9; <code>el</code> &#x4F20;&#x5165;&#xFF0C;&#x7136;&#x540E;&#x5224;&#x65AD; <code>expectsCSS</code>&#xFF0C;&#x5982;&#x679C;&#x4E3A; true &#x5219;&#x8868;&#x660E;&#x5E0C;&#x671B;&#x7528; CSS &#x6765;&#x63A7;&#x5236;&#x52A8;&#x753B;&#xFF0C;&#x90A3;&#x4E48;&#x4F1A;&#x6267;&#x884C; <code>addTransitionClass(el, startClass)</code> &#x548C; <code>addTransitionClass(el, activeClass)</code>&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/platforms/runtime/transition-util.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addTransitionClass</span> (<span class="hljs-params">el: any, cls: string</span>) </span>{
+  <span class="hljs-keyword">const</span> transitionClasses = el._transitionClasses || (el._transitionClasses = [])
+  <span class="hljs-keyword">if</span> (transitionClasses.indexOf(cls) &lt; <span class="hljs-number">0</span>) {
+    transitionClasses.push(cls)
+    addClass(el, cls)
+  }
+}
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x662F;&#x7ED9;&#x5F53;&#x524D; DOM &#x5143;&#x7D20; <code>el</code> &#x6DFB;&#x52A0;&#x6837;&#x5F0F; <code>cls</code>&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x6DFB;&#x52A0;&#x4E86; <code>startClass</code> &#x548C; <code>activeClass</code>&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#x5C31;&#x662F;&#x7ED9; <code>p</code> &#x6807;&#x7B7E;&#x6DFB;&#x52A0;&#x4E86; <code>fade-enter</code> &#x548C; <code>fade-enter-active</code> 2 &#x4E2A;&#x6837;&#x5F0F;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6267;&#x884C;&#x4E86; <code>nextFrame</code>&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> raf = inBrowser
+  ? <span class="hljs-built_in">window</span>.requestAnimationFrame
+    ? <span class="hljs-built_in">window</span>.requestAnimationFrame.bind(<span class="hljs-built_in">window</span>)
+    : setTimeout
+  : fn =&gt; fn()
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nextFrame</span> (<span class="hljs-params">fn: Function</span>) </span>{
+  raf(() =&gt; {
+    raf(fn)
+  })
+}
+</code></pre>
+<p>&#x5B83;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684; <code>requestAnimationFrame</code> &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x7684;&#x53C2;&#x6570; fn &#x4F1A;&#x5728;&#x4E0B;&#x4E00;&#x5E27;&#x6267;&#x884C;&#xFF0C;&#x56E0;&#x6B64;&#x4E0B;&#x4E00;&#x5E27;&#x6267;&#x884C;&#x4E86; <code>removeTransitionClass(el, startClass)</code>&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeTransitionClass</span> (<span class="hljs-params">el: any, cls: string</span>) </span>{
+  <span class="hljs-keyword">if</span> (el._transitionClasses) {
+    remove(el._transitionClasses, cls)
+  }
+  removeClass(el, cls)
+}
+</code></pre>
+<p>&#x628A; <code>startClass</code> &#x79FB;&#x9664;&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x7B49;&#x4F8B;&#x5B50;&#x4E2D;&#x5C31;&#x662F;&#x79FB;&#x9664; <code>fade-enter</code> &#x6837;&#x5F0F;&#x3002;&#x7136;&#x540E;&#x5224;&#x65AD;&#x6B64;&#x65F6;&#x8FC7;&#x6E21;&#x6CA1;&#x6709;&#x88AB;&#x53D6;&#x6D88;&#xFF0C;&#x5219;&#x6267;&#x884C; <code>addTransitionClass(el, toClass)</code> &#x6DFB;&#x52A0; <code>toClass</code>&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#x5C31;&#x662F;&#x6DFB;&#x52A0;&#x4E86; <code>fade-enter-to</code>&#x3002;&#x7136;&#x540E;&#x5224;&#x65AD; <code>!userWantsControl</code>&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x7528;&#x6237;&#x4E0D;&#x901A;&#x8FC7; <code>enterHook</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#x63A7;&#x5236;&#x52A8;&#x753B;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x5982;&#x679C;&#x7528;&#x6237;&#x6307;&#x5B9A;&#x4E86; <code>explicitEnterDuration</code>&#xFF0C;&#x5219;&#x5EF6;&#x65F6;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x6267;&#x884C; <code>cb</code>&#xFF0C;&#x5426;&#x5219;&#x901A;&#x8FC7; <code>whenTransitionEnds(el, type, cb)</code> &#x51B3;&#x5B9A;&#x6267;&#x884C; <code>cb</code> &#x7684;&#x65F6;&#x673A;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">whenTransitionEnds</span> (<span class="hljs-params">
+  el: Element,
+  expectedType: ?string,
+  cb: Function
+</span>) </span>{
+  <span class="hljs-keyword">const</span> { type, timeout, propCount } = getTransitionInfo(el, expectedType)
+  <span class="hljs-keyword">if</span> (!type) <span class="hljs-keyword">return</span> cb()
+  <span class="hljs-keyword">const</span> event: string = type === <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span>&gt;</span> ? transitionEndEvent : animationEndEvent
+  let ended = 0
+  const end = () =&gt; {
+    el.removeEventListener(event, onEnd)
+    cb()
+  }
+  const onEnd = e =&gt; {
+    if (e.target === el) {
+      if (++ended &gt;= propCount) {
+        end()
+      }
+    }
+  }
+  setTimeout(() =&gt; {
+    if (ended <span class="hljs-tag">&lt; <span class="hljs-attr">propCount</span>) {
+      <span class="hljs-attr">end</span>()
+    }
+  }, <span class="hljs-attr">timeout</span> + <span class="hljs-attr">1</span>)
+  <span class="hljs-attr">el.addEventListener</span>(<span class="hljs-attr">event</span>, <span class="hljs-attr">onEnd</span>)
+}
+</span></span></code></pre>
+<p><code>whenTransitionEnds</code> &#x7684;&#x903B;&#x8F91;&#x5177;&#x4F53;&#x4E0D;&#x6DF1;&#x8BB2;&#x4E86;&#xFF0C;&#x672C;&#x8D28;&#x4E0A;&#x5C31;&#x5229;&#x7528;&#x4E86;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x7684;&#x7ED3;&#x675F;&#x4E8B;&#x4EF6;&#x6765;&#x51B3;&#x5B9A; <code>cb</code> &#x51FD;&#x6570;&#x7684;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x6700;&#x540E;&#x518D;&#x56DE;&#x5230; <code>cb</code> &#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> cb = el._enterCb = once(() =&gt; {
+  <span class="hljs-keyword">if</span> (expectsCSS) {
+    removeTransitionClass(el, toClass)
+    removeTransitionClass(el, activeClass)
+  }
+  <span class="hljs-keyword">if</span> (cb.cancelled) {
+    <span class="hljs-keyword">if</span> (expectsCSS) {
+      removeTransitionClass(el, startClass)
+    }
+    enterCancelledHook &amp;&amp; enterCancelledHook(el)
+  } <span class="hljs-keyword">else</span> {
+    afterEnterHook &amp;&amp; afterEnterHook(el)
+  }
+  el._enterCb = <span class="hljs-literal">null</span>
+})
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x6267;&#x884C;&#x4E86; <code>removeTransitionClass(el, toClass)</code> &#x548C; <code>removeTransitionClass(el, activeClass)</code> &#x628A; <code>toClass</code> &#x548C; <code>activeClass</code> &#x79FB;&#x9664;&#xFF0C;&#x7136;&#x540E;&#x5224;&#x65AD;&#x5982;&#x679C;&#x6709;&#x6CA1;&#x6709;&#x53D6;&#x6D88;&#xFF0C;&#x5982;&#x679C;&#x53D6;&#x6D88;&#x5219;&#x79FB;&#x9664; <code>startClass</code> &#x5E76;&#x6267;&#x884C; <code>enterCancelledHook</code>&#xFF0C;&#x5426;&#x5219;&#x6267;&#x884C; <code>afterEnterHook(el)</code>&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;<code>entering</code> &#x7684;&#x8FC7;&#x7A0B;&#x5C31;&#x4ECB;&#x7ECD;&#x5B8C;&#x4E86;&#x3002;</p>
+<h2 id="leaving">leaving</h2>
+<p>&#x4E0E; <code>entering</code> &#x76F8;&#x5BF9;&#x7684;&#x5C31;&#x662F; <code>leaving</code> &#x9636;&#x6BB5;&#x4E86;&#xFF0C;<code>entering</code> &#x4E3B;&#x8981;&#x53D1;&#x751F;&#x5728;&#x7EC4;&#x4EF6;&#x63D2;&#x5165;&#x540E;&#xFF0C;&#x800C; <code>leaving</code> &#x4E3B;&#x8981;&#x53D1;&#x751F;&#x5728;&#x7EC4;&#x4EF6;&#x9500;&#x6BC1;&#x524D;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">leave</span> (<span class="hljs-params">vnode: VNodeWithData, rm: Function</span>) </span>{
+  <span class="hljs-keyword">const</span> el: any = vnode.elm
+
+  <span class="hljs-comment">// call enter callback now</span>
+  <span class="hljs-keyword">if</span> (isDef(el._enterCb)) {
+    el._enterCb.cancelled = <span class="hljs-literal">true</span>
+    el._enterCb()
+  }
+
+  <span class="hljs-keyword">const</span> data = resolveTransition(vnode.data.transition)
+  <span class="hljs-keyword">if</span> (isUndef(data) || el.nodeType !== <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> rm()
+  }
+
+  <span class="hljs-comment">/* istanbul ignore if */</span>
+  <span class="hljs-keyword">if</span> (isDef(el._leaveCb)) {
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-keyword">const</span> {
+    css,
+    type,
+    leaveClass,
+    leaveToClass,
+    leaveActiveClass,
+    beforeLeave,
+    leave,
+    afterLeave,
+    leaveCancelled,
+    delayLeave,
+    duration
+  } = data
+
+  <span class="hljs-keyword">const</span> expectsCSS = css !== <span class="hljs-literal">false</span> &amp;&amp; !isIE9
+  <span class="hljs-keyword">const</span> userWantsControl = getHookArgumentsLength(leave)
+
+  <span class="hljs-keyword">const</span> explicitLeaveDuration: any = toNumber(
+    isObject(duration)
+      ? duration.leave
+      : duration
+  )
+
+  <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span> &amp;&amp; isDef(explicitLeaveDuration)) {
+    checkDuration(explicitLeaveDuration, <span class="hljs-string">&apos;leave&apos;</span>, vnode)
+  }
+
+  <span class="hljs-keyword">const</span> cb = el._leaveCb = once(() =&gt; {
+    <span class="hljs-keyword">if</span> (el.parentNode &amp;&amp; el.parentNode._pending) {
+      el.parentNode._pending[vnode.key] = <span class="hljs-literal">null</span>
+    }
+    <span class="hljs-keyword">if</span> (expectsCSS) {
+      removeTransitionClass(el, leaveToClass)
+      removeTransitionClass(el, leaveActiveClass)
+    }
+    <span class="hljs-keyword">if</span> (cb.cancelled) {
+      <span class="hljs-keyword">if</span> (expectsCSS) {
+        removeTransitionClass(el, leaveClass)
+      }
+      leaveCancelled &amp;&amp; leaveCancelled(el)
+    } <span class="hljs-keyword">else</span> {
+      rm()
+      afterLeave &amp;&amp; afterLeave(el)
+    }
+    el._leaveCb = <span class="hljs-literal">null</span>
+  })
+
+  <span class="hljs-keyword">if</span> (delayLeave) {
+    delayLeave(performLeave)
+  } <span class="hljs-keyword">else</span> {
+    performLeave()
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">performLeave</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// the delayed leave may have already been cancelled</span>
+    <span class="hljs-keyword">if</span> (cb.cancelled) {
+      <span class="hljs-keyword">return</span>
+    }
+    <span class="hljs-comment">// record leaving element</span>
+    <span class="hljs-keyword">if</span> (!vnode.data.show) {
+      (el.parentNode._pending || (el.parentNode._pending = {}))[(vnode.key: any)] = vnode
+    }
+    beforeLeave &amp;&amp; beforeLeave(el)
+    <span class="hljs-keyword">if</span> (expectsCSS) {
+      addTransitionClass(el, leaveClass)
+      addTransitionClass(el, leaveActiveClass)
+      nextFrame(() =&gt; {
+        removeTransitionClass(el, leaveClass)
+        <span class="hljs-keyword">if</span> (!cb.cancelled) {
+          addTransitionClass(el, leaveToClass)
+          <span class="hljs-keyword">if</span> (!userWantsControl) {
+            <span class="hljs-keyword">if</span> (isValidDuration(explicitLeaveDuration)) {
+              setTimeout(cb, explicitLeaveDuration)
+            } <span class="hljs-keyword">else</span> {
+              whenTransitionEnds(el, type, cb)
+            }
+          }
+        }
+      })
+    }
+    leave &amp;&amp; leave(el, cb)
+    <span class="hljs-keyword">if</span> (!expectsCSS &amp;&amp; !userWantsControl) {
+      cb()
+    }
+  }
+}
+</code></pre>
+<p>&#x7EB5;&#x89C2; <code>leave</code> &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x548C; <code>enter</code> &#x7684;&#x5B9E;&#x73B0;&#x51E0;&#x4E4E;&#x662F;&#x4E00;&#x4E2A;&#x955C;&#x50CF;&#x8FC7;&#x7A0B;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x662F;&#x4ECE; <code>data</code> &#x4E2D;&#x89E3;&#x6790;&#x51FA;&#x6765;&#x7684;&#x662F; <code>leave</code> &#x76F8;&#x5173;&#x7684;&#x6837;&#x5F0F;&#x7C7B;&#x540D;&#x548C;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x3002;&#x8FD8;&#x6709;&#x4E00;&#x70B9;&#x4E0D;&#x540C;&#x662F;&#x53EF;&#x4EE5;&#x914D;&#x7F6E; <code>delayLeave</code>&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x5EF6;&#x65F6;&#x6267;&#x884C; <code>leave</code> &#x7684;&#x76F8;&#x5173;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#xFF0C;&#x5728; <code>leave</code> &#x52A8;&#x753B;&#x6267;&#x884C;&#x5B8C;&#x540E;&#xFF0C;&#x5B83;&#x4F1A;&#x6267;&#x884C; <code>rm</code> &#x51FD;&#x6570;&#x628A;&#x8282;&#x70B9;&#x4ECE; DOM &#x4E2D;&#x771F;&#x6B63;&#x505A;&#x79FB;&#x9664;&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x90A3;&#x4E48;&#x5230;&#x6B64;&#x4E3A;&#x6B62;&#x57FA;&#x672C;&#x7684; <code>&lt;transition&gt;</code> &#x8FC7;&#x6E21;&#x7684;&#x5B9E;&#x73B0;&#x5206;&#x6790;&#x5B8C;&#x6BD5;&#x4E86;&#xFF0C;&#x603B;&#x7ED3;&#x8D77;&#x6765;&#xFF0C;Vue &#x7684;&#x8FC7;&#x6E21;&#x5B9E;&#x73B0;&#x5206;&#x4E3A;&#x4EE5;&#x4E0B;&#x51E0;&#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ol>
+<li><p>&#x81EA;&#x52A8;&#x55C5;&#x63A2;&#x76EE;&#x6807;&#x5143;&#x7D20;&#x662F;&#x5426;&#x5E94;&#x7528;&#x4E86; CSS &#x8FC7;&#x6E21;&#x6216;&#x52A8;&#x753B;&#xFF0C;&#x5982;&#x679C;&#x662F;&#xFF0C;&#x5728;&#x6070;&#x5F53;&#x7684;&#x65F6;&#x673A;&#x6DFB;&#x52A0;/&#x5220;&#x9664; CSS &#x7C7B;&#x540D;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x679C;&#x8FC7;&#x6E21;&#x7EC4;&#x4EF6;&#x63D0;&#x4F9B;&#x4E86; JavaScript &#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x4E9B;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x5C06;&#x5728;&#x6070;&#x5F53;&#x7684;&#x65F6;&#x673A;&#x88AB;&#x8C03;&#x7528;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x627E;&#x5230; JavaScript &#x94A9;&#x5B50;&#x5E76;&#x4E14;&#x4E5F;&#x6CA1;&#x6709;&#x68C0;&#x6D4B;&#x5230; CSS &#x8FC7;&#x6E21;/&#x52A8;&#x753B;&#xFF0C;DOM &#x64CD;&#x4F5C; (&#x63D2;&#x5165;/&#x5220;&#x9664;) &#x5728;&#x4E0B;&#x4E00;&#x5E27;&#x4E2D;&#x7ACB;&#x5373;&#x6267;&#x884C;&#x3002;</p>
+</li>
+</ol>
+<p>&#x6240;&#x4EE5;&#x771F;&#x6B63;&#x6267;&#x884C;&#x52A8;&#x753B;&#x7684;&#x662F;&#x6211;&#x4EEC;&#x5199;&#x7684; CSS &#x6216;&#x8005;&#x662F; JavaScript &#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x800C; Vue &#x7684; <code>&lt;transition&gt;</code> &#x53EA;&#x662F;&#x5E2E;&#x6211;&#x4EEC;&#x5F88;&#x597D;&#x5730;&#x7BA1;&#x7406;&#x4E86;&#x8FD9;&#x4E9B; CSS &#x7684;&#x6DFB;&#x52A0;/&#x5220;&#x9664; &#x4EE5;&#x53CA;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x7684;&#x6267;&#x884C;&#x65F6;&#x673A;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="keep-alive.html" class="navigation navigation-prev " aria-label="Previous page: keep-alive">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="tansition-group.html" class="navigation navigation-next " aria-label="Next page: transition-group">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"transition","level":"1.7.5","depth":2,"next":{"title":"transition-group","level":"1.7.6","depth":2,"path":"extend/tansition-group.md","ref":"extend/tansition-group.md","articles":[]},"previous":{"title":"keep-alive","level":"1.7.4","depth":2,"path":"extend/keep-alive.md","ref":"extend/keep-alive.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"scripts":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"extend/tansition.md","mtime":"2018-04-15T09:26:40.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-15T11:13:48.684Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+
