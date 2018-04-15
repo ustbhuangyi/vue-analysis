@@ -70,6 +70,21 @@ delete props.mode
 export default {
   props,
 
+  beforeMount () {
+    const update = this._update
+    this._update = (vnode, hydrating) => {
+      // force removing pass
+      this.__patch__(
+        this._vnode,
+        this.kept,
+        false, // hydrating
+        true // removeOnly (!important, avoids unnecessary moves)
+      )
+      this._vnode = this.kept
+      update.call(this, vnode, hydrating)
+    }
+  },
+
   render (h: Function) {
     const tag: string = this.tag || this.$vnode.data.tag || 'span'
     const map: Object = Object.create(null)
@@ -113,16 +128,6 @@ export default {
     return h(tag, null, children)
   },
 
-  beforeUpdate () {
-    this.__patch__(
-      this._vnode,
-      this.kept,
-      false,
-      true
-    )
-    this._vnode = this.kept
-  },
-
   updated () {
     const children: Array<VNode> = this.prevChildren
     const moveClass: string = this.moveClass || ((this.name || 'v') + '-move')
@@ -130,10 +135,15 @@ export default {
       return
     }
 
+    // we divide the work into three loops to avoid mixing DOM reads and writes
+    // in each iteration - which helps prevent layout thrashing.
     children.forEach(callPendingCbs)
     children.forEach(recordPosition)
     children.forEach(applyTranslation)
 
+    // force reflow to put everything in position
+    // assign to this to avoid being removed in tree-shaking
+    // $flow-disable-line
     this._reflow = document.body.offsetHeight
 
     children.forEach((c: VNode) => {
@@ -155,12 +165,19 @@ export default {
 
   methods: {
     hasMove (el: any, moveClass: string): boolean {
+      /* istanbul ignore if */
       if (!hasTransition) {
         return false
       }
+      /* istanbul ignore if */
       if (this._hasMove) {
         return this._hasMove
       }
+      // Detect whether an element with the move class applied has
+      // CSS transitions. Since the element may be inside an entering
+      // transition at this very moment, we make a clone of it and remove
+      // all other transition classes applied to ensure only the move class
+      // is applied.
       const clone: HTMLElement = el.cloneNode()
       if (el._transitionClasses) {
         el._transitionClasses.forEach((cls: string) => { removeClass(clone, cls) })
@@ -213,7 +230,7 @@ for (let i = 0; i < rawChildren.length; i++) {
 
 其实就是对 `rawChildren` 遍历，拿到每个 `vnode`，然后会判断每个 `vnode` 是否设置了 `key`，这个是 `<transition-group>` 对列表元素的要求。然后把 `vnode` 添加到 `children` 中，然后把刚刚提取的过渡数据 `transitionData` 添加的 `vnode.data.transition` 中，这点很关键，只有这样才能实现列表中单个元素的过渡动画。
 
-- 处理 `prevChildren`
+- 处理 prevChildren
 
 ```js
 if (prevChildren) {
@@ -254,13 +271,19 @@ if (!children.length || !this.hasMove(children[0].elm, moveClass)) {
 }
 
 hasMove (el: any, moveClass: string): boolean {
+  /* istanbul ignore if */
   if (!hasTransition) {
     return false
   }
- 
+  /* istanbul ignore if */
   if (this._hasMove) {
     return this._hasMove
   }
+  // Detect whether an element with the move class applied has
+  // CSS transitions. Since the element may be inside an entering
+  // transition at this very moment, we make a clone of it and remove
+  // all other transition classes applied to ensure only the move class
+  // is applied.
   const clone: HTMLElement = el.cloneNode()
   if (el._transitionClasses) {
     el._transitionClasses.forEach((cls: string) => { removeClass(clone, cls) })
@@ -317,7 +340,7 @@ function applyTranslation (c: VNode) {
 
 `recordPosition` 的作用是记录节点的新位置。
 
-`applyTranslation` 的作用是先计算节点新位置和旧位置的差值，如果差值不为 0，则说明这些节点是需要移动的，所以记录 `vnode.data.moved` 为 true，并且通过设置 `transform` 把需要移动的节点的位置又偏移到之前的旧位置，目的 是为了做 move 缓动做准备。
+`applyTranslation` 的作用是先计算节点新位置和旧位置的差值，如果差值不为 0，则说明这些节点是需要移动的，所以记录 `vnode.data.moved` 为 true，并且通过设置 `transform` 把需要移动的节点的位置又偏移到之前的旧位置，目的是为了做 `move` 缓动做准备。
 
 - 遍历子元素实现 move 过渡
 
@@ -341,7 +364,7 @@ children.forEach((c: VNode) => {
 })
 ```
 
-首先通过 `document.body.offsetHeight` 强制触发重绘，接着再次对 `children` 遍历，先给子节点添加 `moveClass`，在我们的例子中，`moveClass` 定义了 `transition: all 1s;` 缓动；接着把子节点的 `style.transform` 设置为空，由于我们前面把这些节点偏移到之前的旧位置，所以它就会从旧位置按照 `1s` 的缓动时间过渡偏移到它的当前目标位置，这样就实现了 move 的过渡动画。并且接下来会监听 `transitionEndEvent` 过渡结束的事件，做一些清理的操作。
+首先通过 `document.body.offsetHeight` 强制触发浏览器重绘，接着再次对 `children` 遍历，先给子节点添加 `moveClass`，在我们的例子中，`moveClass` 定义了 `transition: all 1s;` 缓动；接着把子节点的 `style.transform` 设置为空，由于我们前面把这些节点偏移到之前的旧位置，所以它就会从旧位置按照 `1s` 的缓动时间过渡偏移到它的当前目标位置，这样就实现了 move 的过渡动画。并且接下来会监听 `transitionEndEvent` 过渡结束的事件，做一些清理的操作。
 
 另外，由于虚拟 DOM 的子元素更新算法是不稳定的，它不能保证被移除元素的相对位置，所以我们强制 `<transition-group>` 组件更新子节点通过 2 个步骤：第一步我们移除需要移除的 `vnode`，同时触发它们的 `leaving` 过渡；第二步我们需要把插入和移动的节点达到它们的最终态，同时还要保证移除的节点保留在应该的位置，而这个是通过 `beforeUpdate` 钩子函数来实现的：
 

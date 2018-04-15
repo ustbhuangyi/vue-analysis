@@ -1,6 +1,6 @@
 # slot
 
-Vue 的组件提供了一个非常有用的特性 —— `slot` 插槽，它让组件的实现变的更加灵活。我们平时在开发组件库的时候，为了让组件更加灵活可定制，经常用插槽的方式让用户可以自定义内容。插槽看起来很神奇，但它是怎么实现的呢，下面我们就从源码的角度来分析插槽的实现原理。
+Vue 的组件提供了一个非常有用的特性 —— `slot` 插槽，它让组件的实现变的更加灵活。我们平时在开发组件库的时候，为了让组件更加灵活可定制，经常用插槽的方式让用户可以自定义内容。插槽分为普通插槽和作用域插槽，它们可以解决不同的场景，但它是怎么实现的呢，下面我们就从源码的角度来分析插槽的实现原理。
 
 ## 普通插槽
 
@@ -52,19 +52,60 @@ let vm = new Vue({
 
 还是先从编译说起，我们知道编译是发生在调用 `vm.$mount` 的时候，所以编译的顺序是先编译父组件，再编译子组件。
 
-首先编译父组件，在 `parse` 阶段，当解析到标签上有 `slot` 属性的时候，会给对应的 AST
-元素节点添加 `slotTarget` 属性，相关代码在 `src/compiler/parser/index.js` 中：
+首先编译父组件，在 `parse` 阶段，会执行 `processSlot` 处理 `slot`，它的定义在 `src/compiler/parser/index.js` 中：
 
 ```js
-const slotTarget = getBindingAttr(el, 'slot')
-if (slotTarget) {
-  el.slotTarget = slotTarget === '""' ? '"default"' : slotTarget
-  if (el.tag !== 'template' && !el.slotScope) {
-    addAttr(el, 'slot', slotTarget)
+function processSlot (el) {
+  if (el.tag === 'slot') {
+    el.slotName = getBindingAttr(el, 'name')
+    if (process.env.NODE_ENV !== 'production' && el.key) {
+      warn(
+        `\`key\` does not work on <slot> because slots are abstract outlets ` +
+        `and can possibly expand into multiple elements. ` +
+        `Use the key on a wrapping element instead.`
+      )
+    }
+  } else {
+    let slotScope
+    if (el.tag === 'template') {
+      slotScope = getAndRemoveAttr(el, 'scope')
+      /* istanbul ignore if */
+      if (process.env.NODE_ENV !== 'production' && slotScope) {
+        warn(
+          `the "scope" attribute for scoped slots have been deprecated and ` +
+          `replaced by "slot-scope" since 2.5. The new "slot-scope" attribute ` +
+          `can also be used on plain elements in addition to <template> to ` +
+          `denote scoped slots.`,
+          true
+        )
+      }
+      el.slotScope = slotScope || getAndRemoveAttr(el, 'slot-scope')
+    } else if ((slotScope = getAndRemoveAttr(el, 'slot-scope'))) {
+      /* istanbul ignore if */
+      if (process.env.NODE_ENV !== 'production' && el.attrsMap['v-for']) {
+        warn(
+          `Ambiguous combined usage of slot-scope and v-for on <${el.tag}> ` +
+          `(v-for takes higher priority). Use a wrapper <template> for the ` +
+          `scoped slot to make it clearer.`,
+          true
+        )
+      }
+      el.slotScope = slotScope
+    }
+    const slotTarget = getBindingAttr(el, 'slot')
+    if (slotTarget) {
+      el.slotTarget = slotTarget === '""' ? '"default"' : slotTarget
+      // preserve slot as an attribute for native shadow DOM compat
+      // only for non-scoped slots.
+      if (el.tag !== 'template' && !el.slotScope) {
+        addAttr(el, 'slot', slotTarget)
+      }
+    }
   }
 }
 ```
-然后在 `codegen` 阶段，在 `genData` 中会处理 `slotTarget`，相关代码在 `src/compiler/codegen/index.js` 中：
+当解析到标签上有 `slot` 属性的时候，会给对应的 AST
+元素节点添加 `slotTarget` 属性，然后在 `codegen` 阶段，在 `genData` 中会处理 `slotTarget`，相关代码在 `src/compiler/codegen/index.js` 中：
 
 ```js
 if (el.slotTarget && !el.slotScope) {
@@ -88,15 +129,17 @@ with(this){
    1)}
 ```
 
-接下来编译子组件，同样在 `parser` 阶段遇到 `slot` 标签的时候会给对应的 AST 元素节点添加 `slotName` 属性，相关代码在 `src/compiler/parser/index.js` 中：
+接下来编译子组件，同样在 `parser` 阶段会执行 `processSlot` 处理函数，它的定义在 `src/compiler/parser/index.js` 中：
 
 ```js
-if (el.tag === 'slot') {
-  el.slotName = getBindingAttr(el, 'name')
+function processSlot (el) {
+  if (el.tag === 'slot') {
+    el.slotName = getBindingAttr(el, 'name')
+  }
+  // ...
 }
 ```
-
-然后在 `codegen` 阶段，会判断如果当前 AST 元素节点是 `slot` 标签，则执行 `genSlot` 函数，它的定义在 `src/compiler/codegen/index.js` 中：
+当遇到 `slot` 标签的时候会给对应的 AST 元素节点添加 `slotName` 属性，然后在 `codegen` 阶段，会判断如果当前 AST 元素节点是 `slot` 标签，则执行 `genSlot` 函数，它的定义在 `src/compiler/codegen/index.js` 中：
 
 ```js
 function genSlot (el: ASTElement, state: CodegenState): string {
@@ -122,6 +165,7 @@ function genSlot (el: ASTElement, state: CodegenState): string {
 
 ```js
 const slotName = el.slotName || '"default"'
+const children = genChildren(el, state)
 let res = `_t(${slotName}${children ? `,${children}` : ''}`
 ```
 
@@ -142,6 +186,9 @@ with(this) {
 在编译章节我们了解到，`_t` 函数对应的就是 `renderSlot` 方法，它的定义在 `src/core/instance/render-heplpers/render-slot.js` 中：
 
 ```js
+/**
+ * Runtime helper for rendering <slot>
+ */
 export function renderSlot (
   name: string,
   fallback: ?Array<VNode>,
@@ -150,10 +197,21 @@ export function renderSlot (
 ): ?Array<VNode> {
   const scopedSlotFn = this.$scopedSlots[name]
   let nodes
-  if (scopedSlotFn) {
-   // ...
+  if (scopedSlotFn) { // scoped slot
+    props = props || {}
+    if (bindObject) {
+      if (process.env.NODE_ENV !== 'production' && !isObject(bindObject)) {
+        warn(
+          'slot v-bind without argument expects an Object',
+          this
+        )
+      }
+      props = extend(extend({}, bindObject), props)
+    }
+    nodes = scopedSlotFn(props) || fallback
   } else {
     const slotNodes = this.$slots[name]
+    // warn duplicate slot usage
     if (slotNodes) {
       if (process.env.NODE_ENV !== 'production' && slotNodes._rendered) {
         warn(
@@ -176,20 +234,23 @@ export function renderSlot (
 }
 ```
 
-`render-slot` 的参数 `name` 代表插槽名称 `slotName`，`fallback` 代表插槽的默认内容生成的 `vnode` 数组。先忽略 `scoped-slot`，它的逻辑非常简单，如果 `this.$slot[name]` 有值，就返回它对应的 `vnode` 数组，否则返回 `fallback`。那么这个 `this.$slot` 是哪里来的呢？我们知道子组件的 `init` 时机是在父组件执行 `patch` 过程的时候，那这个时候父组件已经编译完成了。并且子组件在 `init` 过程中会执行 `initRender` 函数，`initRender` 的时候获取到 `  vm.$slot`，相关代码在 `src/core/instance/render.js` 中：
+`render-slot` 的参数 `name` 代表插槽名称 `slotName`，`fallback` 代表插槽的默认内容生成的 `vnode` 数组。先忽略 `scoped-slot`，只看默认插槽逻辑。如果 `this.$slot[name]` 有值，就返回它对应的 `vnode` 数组，否则返回 `fallback`。那么这个 `this.$slot` 是哪里来的呢？我们知道子组件的 `init` 时机是在父组件执行 `patch` 过程的时候，那这个时候父组件已经编译完成了。并且子组件在 `init` 过程中会执行 `initRender` 函数，`initRender` 的时候获取到 `  vm.$slot`，相关代码在 `src/core/instance/render.js` 中：
 
 ```js
 export function initRender (vm: Component) {
   // ...
-   const parentVnode = vm.$vnode = options._parentVnode
+  const parentVnode = vm.$vnode = options._parentVnode // the placeholder node in parent tree
   const renderContext = parentVnode && parentVnode.context
   vm.$slots = resolveSlots(options._renderChildren, renderContext)
 }
 ```
 
-`vm.$slots` 是通过执行 `resolveSlots(options._renderChildren, renderContext)` 返回的，它的定义在 `src/core/instance/render-helpers/resolve-slot.js` 中：
+`vm.$slots` 是通过执行 `resolveSlots(options._renderChildren, renderContext)` 返回的，它的定义在 `src/core/instance/render-helpers/resolve-slots.js` 中：
 
 ```js
+/**
+ * Runtime helper for resolving raw children VNodes into a slot object.
+ */
 export function resolveSlots (
   children: ?Array<VNode>,
   context: ?Component
@@ -201,9 +262,12 @@ export function resolveSlots (
   for (let i = 0, l = children.length; i < l; i++) {
     const child = children[i]
     const data = child.data
+    // remove slot attribute if the node is resolved as a Vue slot node
     if (data && data.attrs && data.attrs.slot) {
       delete data.attrs.slot
     }
+    // named slots should only be respected if the vnode was rendered in the
+    // same context.
     if ((child.context === context || child.fnContext === context) &&
       data && data.slot != null
     ) {
@@ -218,6 +282,7 @@ export function resolveSlots (
       (slots.default || (slots.default = [])).push(child)
     }
   }
+  // ignore slots that contains only whitespace
   for (const name in slots) {
     if (slots[name].every(isWhitespace)) {
       delete slots[name]
@@ -282,32 +347,39 @@ let vm = new Vue({
 
 我们可以看到子组件的 `slot` 标签多了 `text` 属性，以及 `:msg` 属性。父组件实现插槽的部分多了一个 `template` 标签，以及 `scope-slot` 属性，其实在 Vue 2.5+ 版本，`scoped-slot` 可以作用在普通元素上。这些就是作用域插槽和普通插槽在写法上的差别。
 
-在编译阶段，仍然是先编译父组件，首先会处理带有 `scoped-slot` 属性的 `template` 标签，相关代码在 `src/compiler/parser/index.js` 中：
+在编译阶段，仍然是先编译父组件，同样是通过 `processSlot` 函数去处理 `scoped-slot`，它的定义在在 `src/compiler/parser/index.js` 中：
 
 ```js
-if (el.tag === 'template') {
-  slotScope = getAndRemoveAttr(el, 'scope')
-  if (process.env.NODE_ENV !== 'production' && slotScope) {
-    warn(
-      `the "scope" attribute for scoped slots have been deprecated and ` +
-      `replaced by "slot-scope" since 2.5. The new "slot-scope" attribute ` +
-      `can also be used on plain elements in addition to <template> to ` +
-      `denote scoped slots.`,
-      true
-    )
+function processSlot (el) {
+  // ...
+  let slotScope
+  if (el.tag === 'template') {
+    slotScope = getAndRemoveAttr(el, 'scope')
+    /* istanbul ignore if */
+    if (process.env.NODE_ENV !== 'production' && slotScope) {
+      warn(
+        `the "scope" attribute for scoped slots have been deprecated and ` +
+        `replaced by "slot-scope" since 2.5. The new "slot-scope" attribute ` +
+        `can also be used on plain elements in addition to <template> to ` +
+        `denote scoped slots.`,
+        true
+      )
+    }
+    el.slotScope = slotScope || getAndRemoveAttr(el, 'slot-scope')
+  } else if ((slotScope = getAndRemoveAttr(el, 'slot-scope'))) {
+    /* istanbul ignore if */
+    if (process.env.NODE_ENV !== 'production' && el.attrsMap['v-for']) {
+      warn(
+        `Ambiguous combined usage of slot-scope and v-for on <${el.tag}> ` +
+        `(v-for takes higher priority). Use a wrapper <template> for the ` +
+        `scoped slot to make it clearer.`,
+        true
+      )
+    }
+    el.slotScope = slotScope
   }
-  el.slotScope = slotScope || getAndRemoveAttr(el, 'slot-scope')
-} else if ((slotScope = getAndRemoveAttr(el, 'slot-scope'))) {
-   if (process.env.NODE_ENV !== 'production' && el.attrsMap['v-for']) {
-     warn(
-       `Ambiguous combined usage of slot-scope and v-for on <${el.tag}> ` +
-       `(v-for takes higher priority). Use a wrapper <template> for the ` +
-       `scoped slot to make it clearer.`,
-       true
-     )
-   }
-   el.slotScope = slotScope
- }
+  // ...
+} 
 ```
 这块逻辑很简单，读取 `scoped-slot` 属性并赋值给当前 AST 元素节点的 `slotScope` 属性，接下来在构造 AST 树的时候，会执行以下逻辑：
 
@@ -362,7 +434,7 @@ function genScopedSlot (
 }
 ```
 
-`genScopedSlots` 就是对 `scopedSlots` 对想遍历，执行 `genScopedSlot`，并把结果用逗号拼接，而 `genScopedSlot` 是先生成一段函数代码，并且函数的参数就是我们的 `slotScope`，也就是写在标签属性上的 `scoped-slot` 对应的值，然后再返回一个对象，`key` 为插槽名称，`fn` 为生成的函数代码。
+`genScopedSlots` 就是对 `scopedSlots` 对象遍历，执行 `genScopedSlot`，并把结果用逗号拼接，而 `genScopedSlot` 是先生成一段函数代码，并且函数的参数就是我们的 `slotScope`，也就是写在标签属性上的 `scoped-slot` 对应的值，然后再返回一个对象，`key` 为插槽名称，`fn` 为生成的函数代码。
 
 对于我们这个例子而言，父组件最终生成的代码如下：
 
@@ -390,7 +462,7 @@ with(this){
 
 ```js
 export function resolveScopedSlots (
-  fns: ScopedSlotsData,
+  fns: ScopedSlotsData, // see flow/vnode
   res?: Object
 ): { [key: string]: Function } {
   res = res || {}

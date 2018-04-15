@@ -39,6 +39,8 @@ function genDirectives (el: ASTElement, state: CodegenState): string | void {
     needRuntime = true
     const gen: DirectiveFunction = state.directives[dir.name]
     if (gen) {
+      // compile-time directive that manipulates AST.
+      // returns true if it also needs a runtime counterpart.
       needRuntime = !!gen(el, dir, state.warn)
     }
     if (needRuntime) {
@@ -102,6 +104,8 @@ export default function model (
   const type = el.attrsMap.type
 
   if (process.env.NODE_ENV !== 'production') {
+    // inputs with type="file" are read only and setting the input's
+    // value will throw an error.
     if (tag === 'input' && type === 'file') {
       warn(
         `<${el.tag} v-model="${value}" type="file">:\n` +
@@ -112,6 +116,7 @@ export default function model (
 
   if (el.component) {
     genComponentModel(el, value, modifiers)
+    // component v-model doesn't need extra runtime
     return false
   } else if (tag === 'select') {
     genSelect(el, value, modifiers)
@@ -123,6 +128,7 @@ export default function model (
     genDefaultModel(el, value, modifiers)
   } else if (!config.isReservedTag(tag)) {
     genComponentModel(el, value, modifiers)
+    // component v-model doesn't need extra runtime
     return false
   } else if (process.env.NODE_ENV !== 'production') {
     warn(
@@ -133,6 +139,7 @@ export default function model (
     )
   }
 
+  // ensure runtime directive metadata
   return true
 }
 ```
@@ -146,9 +153,12 @@ function genDefaultModel (
 ): ?boolean {
   const type = el.attrsMap.type
 
+  // warn if v-bind:value conflicts with v-model
+  // except for inputs with v-bind:type
   if (process.env.NODE_ENV !== 'production') {
     const value = el.attrsMap['v-bind:value'] || el.attrsMap[':value']
-    if (value) {
+    const typeBinding = el.attrsMap['v-bind:type'] || el.attrsMap[':type']
+    if (value && !typeBinding) {
       const binding = el.attrsMap['v-bind:value'] ? 'v-bind:value' : ':value'
       warn(
         `${binding}="${value}" conflicts with v-model on the same element ` +
@@ -188,6 +198,9 @@ function genDefaultModel (
 `genDefaultModel` 函数先处理了 `modifiers`，它的不同主要影响的是 `event` 和 `valueExpression` 的值，对于我们的例子，`event` 为 `input`，`valueExpression` 为 `$event.target.value`。然后去执行 `genAssignmentCode` 去生成代码，它的定义在 `src/compiler/directives/model.js` 中：
 
 ```js
+/**
+ * Cross-platform codegen helper for generating v-model value assignment code.
+ */
 export function genAssignmentCode (
   value: string,
   assignment: string
@@ -389,12 +402,16 @@ export function createComponent (
   tag?: string
 ): VNode | Array<VNode> | void {
   // ...
+  // transform component v-model data into props & events
   if (isDef(data.model)) {
     transformModel(Ctor.options, data)
   }
  
+  // extract props
   const propsData = extractPropsFromVNodeData(data, Ctor, tag)
   // ...
+  // extract listeners, since these needs to be treated as
+  // child component listeners instead of DOM listeners
   const listeners = data.on
   // ...
   const vnode = new VNode(
@@ -411,6 +428,8 @@ export function createComponent (
 其中会对 `data.model` 的情况做处理，执行 `transformModel(Ctor.options, data)` 方法：
 
 ```js
+// transform component v-model info (value and callback) into
+// prop and event handler respectively.
 function transformModel (options, data: any) {
   const prop = (options.model && options.model.prop) || 'value'
   const event = (options.model && options.model.event) || 'input'

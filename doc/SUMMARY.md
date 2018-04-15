@@ -1,6 +1,6 @@
 # Summary
 
-- 准备
+- [准备](prepare/index.md)
   - [认识 FLow](prepare/flow.md)
   - [Vue.js 源码目录设计](prepare/directory.md)
   - [Vue.js 源码构建](prepare/build.md)
@@ -36,3 +36,24 @@
   - [parse](compile/parse.md)
   - [optimize](compile/optimize.md)
   - [codegen](compile/codegen.md)
+  
+- [扩展](extend/index.md)
+  - [event](extend/event.md)
+  - [v-model](extend/v-model.md)
+  - [slot](extend/slot.md)
+  - [keep-alive](extend/keep-alive.md)
+  - [transition](extend/tansition.md)
+  - [transition-group](extend/tansition-group.md)
+  
+- [Vue-Router](vue-router/index.md)
+  - [路由注册](vue-router/install.md)、
+  - [VueRouter 对象](vue-router/router.md)
+  - [matcher](vue-router/matcher.md)
+  - [路径切换](vue-router/transition-to.md)
+  
+- [Vuex](vuex/index.md)
+  - [Vuex 初始化](vuex/init.md)
+  - [API](vuex/api.md)
+  - [插件](vuex/plugin.md)
+  
+  

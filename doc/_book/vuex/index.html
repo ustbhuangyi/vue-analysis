@@ -1,0 +1,954 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Vuex · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="init.html" />
+    
+    
+    <link rel="prev" href="../vue-router/transition-to.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../prepare/">
+            
+                <a href="../prepare/">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../prepare/flow.html">
+            
+                <a href="../prepare/flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../prepare/directory.html">
+            
+                <a href="../prepare/directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../prepare/build.html">
+            
+                <a href="../prepare/build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../prepare/entrance.html">
+            
+                <a href="../prepare/entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../data-driven/">
+            
+                <a href="../data-driven/">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../data-driven/new-vue.html">
+            
+                <a href="../data-driven/new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../data-driven/mounted.html">
+            
+                <a href="../data-driven/mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../data-driven/render.html">
+            
+                <a href="../data-driven/render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../data-driven/virtual-dom.html">
+            
+                <a href="../data-driven/virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../data-driven/create-element.html">
+            
+                <a href="../data-driven/create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../data-driven/update.html">
+            
+                <a href="../data-driven/update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../components/">
+            
+                <a href="../components/">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../components/create-component.html">
+            
+                <a href="../components/create-component.html">
+            
+                    
+                    createComponent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../components/patch.html">
+            
+                <a href="../components/patch.html">
+            
+                    
+                    patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../components/merge-option.html">
+            
+                <a href="../components/merge-option.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../components/lifecycle.html">
+            
+                <a href="../components/lifecycle.html">
+            
+                    
+                    生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../components/component-register.html">
+            
+                <a href="../components/component-register.html">
+            
+                    
+                    组件注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../components/async-component.html">
+            
+                <a href="../components/async-component.html">
+            
+                    
+                    异步组件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../reactive/">
+            
+                <a href="../reactive/">
+            
+                    
+                    深入响应式原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../reactive/reactive-object.html">
+            
+                <a href="../reactive/reactive-object.html">
+            
+                    
+                    响应式对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../reactive/getters.html">
+            
+                <a href="../reactive/getters.html">
+            
+                    
+                    依赖收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../reactive/setters.html">
+            
+                <a href="../reactive/setters.html">
+            
+                    
+                    派发更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../reactive/next-tick.html">
+            
+                <a href="../reactive/next-tick.html">
+            
+                    
+                    nextTick
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../reactive/questions.html">
+            
+                <a href="../reactive/questions.html">
+            
+                    
+                    检测变化的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../reactive/computed-watcher.html">
+            
+                <a href="../reactive/computed-watcher.html">
+            
+                    
+                    计算属性 VS 侦听属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../reactive/component-update.html">
+            
+                <a href="../reactive/component-update.html">
+            
+                    
+                    组件更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../compile/">
+            
+                <a href="../compile/">
+            
+                    
+                    编译
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../compile/entrance.html">
+            
+                <a href="../compile/entrance.html">
+            
+                    
+                    编译入口
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../compile/parse.html">
+            
+                <a href="../compile/parse.html">
+            
+                    
+                    parse
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../compile/optimize.html">
+            
+                <a href="../compile/optimize.html">
+            
+                    
+                    optimize
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../compile/codegen.html">
+            
+                <a href="../compile/codegen.html">
+            
+                    
+                    codegen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../extend/">
+            
+                <a href="../extend/">
+            
+                    
+                    扩展
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../extend/event.html">
+            
+                <a href="../extend/event.html">
+            
+                    
+                    event
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../extend/v-model.html">
+            
+                <a href="../extend/v-model.html">
+            
+                    
+                    v-model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../extend/slot.html">
+            
+                <a href="../extend/slot.html">
+            
+                    
+                    slot
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../extend/keep-alive.html">
+            
+                <a href="../extend/keep-alive.html">
+            
+                    
+                    keep-alive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../extend/tansition.html">
+            
+                <a href="../extend/tansition.html">
+            
+                    
+                    transition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../extend/tansition-group.html">
+            
+                <a href="../extend/tansition-group.html">
+            
+                    
+                    transition-group
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../vue-router/">
+            
+                <a href="../vue-router/">
+            
+                    
+                    Vue-Router
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../vue-router/install.html">
+            
+                <a href="../vue-router/install.html">
+            
+                    
+                    路由注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../vue-router/router.html">
+            
+                <a href="../vue-router/router.html">
+            
+                    
+                    VueRouter 对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../vue-router/matcher.html">
+            
+                <a href="../vue-router/matcher.html">
+            
+                    
+                    matcher
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../vue-router/transition-to.html">
+            
+                <a href="../vue-router/transition-to.html">
+            
+                    
+                    路径切换
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Vuex
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="init.html">
+            
+                <a href="init.html">
+            
+                    
+                    Vuex 初始化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="api.html">
+            
+                <a href="api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="plugin.html">
+            
+                <a href="plugin.html">
+            
+                    
+                    插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Vuex</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="vuex">Vuex</h1>
+<p>Vuex &#x662F;&#x4E00;&#x4E2A;&#x4E13;&#x4E3A; Vue.js &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5F00;&#x53D1;&#x7684;&#x72B6;&#x6001;&#x7BA1;&#x7406;&#x6A21;&#x5F0F;&#x3002;&#x5B83;&#x91C7;&#x7528;&#x96C6;&#x4E2D;&#x5F0F;&#x5B58;&#x50A8;&#x7BA1;&#x7406;&#x5E94;&#x7528;&#x7684;&#x6240;&#x6709;&#x7EC4;&#x4EF6;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5E76;&#x4EE5;&#x76F8;&#x5E94;&#x7684;&#x89C4;&#x5219;&#x4FDD;&#x8BC1;&#x72B6;&#x6001;&#x4EE5;&#x4E00;&#x79CD;&#x53EF;&#x9884;&#x6D4B;&#x7684;&#x65B9;&#x5F0F;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x3002;</p>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;&#x72B6;&#x6001;&#x7BA1;&#x7406;&#x6A21;&#x5F0F;&#xFF1F;">&#x4EC0;&#x4E48;&#x662F;&#x201C;&#x72B6;&#x6001;&#x7BA1;&#x7406;&#x6A21;&#x5F0F;&#x201D;&#xFF1F;</h2>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x4ECE;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684; Vue &#x8BA1;&#x6570;&#x5E94;&#x7528;&#x5F00;&#x59CB;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">new</span> Vue({
+  <span class="hljs-comment">// state</span>
+  data () {
+    <span class="hljs-keyword">return</span> {
+      count: <span class="hljs-number">0</span>
+    }
+  },
+  <span class="hljs-comment">// view</span>
+  template: <span class="hljs-string">`
+    &lt;div&gt;{{ count }}&lt;/div&gt;
+  `</span>,
+  <span class="hljs-comment">// actions</span>
+  methods: {
+    increment () {
+      <span class="hljs-keyword">this</span>.count++
+    }
+  }
+})
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x72B6;&#x6001;&#x81EA;&#x7BA1;&#x7406;&#x5E94;&#x7528;&#x5305;&#x542B;&#x4EE5;&#x4E0B;&#x51E0;&#x4E2A;&#x90E8;&#x5206;&#xFF1A;</p>
+<ul>
+<li>state&#xFF0C;&#x9A71;&#x52A8;&#x5E94;&#x7528;&#x7684;&#x6570;&#x636E;&#x6E90;&#xFF1B;</li>
+<li>view&#xFF0C;&#x4EE5;&#x58F0;&#x660E;&#x65B9;&#x5F0F;&#x5C06; state &#x6620;&#x5C04;&#x5230;&#x89C6;&#x56FE;&#xFF1B;</li>
+<li>actions&#xFF0C;&#x54CD;&#x5E94;&#x5728; view &#x4E0A;&#x7684;&#x7528;&#x6237;&#x8F93;&#x5165;&#x5BFC;&#x81F4;&#x7684;&#x72B6;&#x6001;&#x53D8;&#x5316;&#x3002;</li>
+</ul>
+<p>&#x4EE5;&#x4E0B;&#x662F;&#x4E00;&#x4E2A;&#x8868;&#x793A;&#x201C;&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x201D;&#x7406;&#x5FF5;&#x7684;&#x6781;&#x7B80;&#x793A;&#x610F;&#xFF1A;</p>
+<p>// TODO &#x56FE;&#x7247;</p>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x7684;&#x5E94;&#x7528;&#x9047;&#x5230;&#x591A;&#x4E2A;&#x7EC4;&#x4EF6;&#x5171;&#x4EAB;&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x7684;&#x7B80;&#x6D01;&#x6027;&#x5F88;&#x5BB9;&#x6613;&#x88AB;&#x7834;&#x574F;&#xFF1A;</p>
+<ul>
+<li>&#x591A;&#x4E2A;&#x89C6;&#x56FE;&#x4F9D;&#x8D56;&#x4E8E;&#x540C;&#x4E00;&#x72B6;&#x6001;&#x3002;</li>
+<li>&#x6765;&#x81EA;&#x4E0D;&#x540C;&#x89C6;&#x56FE;&#x7684;&#x884C;&#x4E3A;&#x9700;&#x8981;&#x53D8;&#x66F4;&#x540C;&#x4E00;&#x72B6;&#x6001;&#x3002;</li>
+</ul>
+<p>&#x5BF9;&#x4E8E;&#x95EE;&#x9898;&#x4E00;&#xFF0C;&#x4F20;&#x53C2;&#x7684;&#x65B9;&#x6CD5;&#x5BF9;&#x4E8E;&#x591A;&#x5C42;&#x5D4C;&#x5957;&#x7684;&#x7EC4;&#x4EF6;&#x5C06;&#x4F1A;&#x975E;&#x5E38;&#x7E41;&#x7410;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x4E8E;&#x5144;&#x5F1F;&#x7EC4;&#x4EF6;&#x95F4;&#x7684;&#x72B6;&#x6001;&#x4F20;&#x9012;&#x65E0;&#x80FD;&#x4E3A;&#x529B;&#x3002;&#x5BF9;&#x4E8E;&#x95EE;&#x9898;&#x4E8C;&#xFF0C;&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x4F1A;&#x91C7;&#x7528;&#x7236;&#x5B50;&#x7EC4;&#x4EF6;&#x76F4;&#x63A5;&#x5F15;&#x7528;&#x6216;&#x8005;&#x901A;&#x8FC7;&#x4E8B;&#x4EF6;&#x6765;&#x53D8;&#x66F4;&#x548C;&#x540C;&#x6B65;&#x72B6;&#x6001;&#x7684;&#x591A;&#x4EFD;&#x62F7;&#x8D1D;&#x3002;&#x4EE5;&#x4E0A;&#x7684;&#x8FD9;&#x4E9B;&#x6A21;&#x5F0F;&#x975E;&#x5E38;&#x8106;&#x5F31;&#xFF0C;&#x901A;&#x5E38;&#x4F1A;&#x5BFC;&#x81F4;&#x65E0;&#x6CD5;&#x7EF4;&#x62A4;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x628A;&#x7EC4;&#x4EF6;&#x7684;&#x5171;&#x4EAB;&#x72B6;&#x6001;&#x62BD;&#x53D6;&#x51FA;&#x6765;&#xFF0C;&#x4EE5;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x7BA1;&#x7406;&#x5462;&#xFF1F;&#x5728;&#x8FD9;&#x79CD;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x7EC4;&#x4EF6;&#x6811;&#x6784;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x5DE8;&#x5927;&#x7684;&#x201C;&#x89C6;&#x56FE;&#x201D;&#xFF0C;&#x4E0D;&#x7BA1;&#x5728;&#x6811;&#x7684;&#x54EA;&#x4E2A;&#x4F4D;&#x7F6E;&#xFF0C;&#x4EFB;&#x4F55;&#x7EC4;&#x4EF6;&#x90FD;&#x80FD;&#x83B7;&#x53D6;&#x72B6;&#x6001;&#x6216;&#x8005;&#x89E6;&#x53D1;&#x884C;&#x4E3A;&#x3002;</p>
+<h2 id="vuex-&#x6838;&#x5FC3;&#x601D;&#x60F3;">Vuex &#x6838;&#x5FC3;&#x601D;&#x60F3;</h2>
+<p>Vuex &#x5E94;&#x7528;&#x7684;&#x6838;&#x5FC3;&#x5C31;&#x662F; store&#xFF08;&#x4ED3;&#x5E93;&#xFF09;&#x3002;&#x201C;store&#x201D;&#x57FA;&#x672C;&#x4E0A;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#xFF0C;&#x5B83;&#x5305;&#x542B;&#x7740;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x4E2D;&#x5927;&#x90E8;&#x5206;&#x7684;&#x72B6;&#x6001; (state)&#x3002;&#x6709;&#x4E9B;&#x540C;&#x5B66;&#x53EF;&#x80FD;&#x4F1A;&#x95EE;&#xFF0C;&#x90A3;&#x6211;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x5BF9;&#x8C61;&#xFF0C;&#x518D;&#x53BB;&#x4E0A;&#x5C42;&#x5C01;&#x88C5;&#x4E86;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#x5B58;&#x53D6;&#x7684;&#x63A5;&#x53E3;&#x4E0D;&#x4E5F;&#x53EF;&#x4EE5;&#x4E48;&#xFF1F;</p>
+<p>Vuex &#x548C;&#x5355;&#x7EAF;&#x7684;&#x5168;&#x5C40;&#x5BF9;&#x8C61;&#x6709;&#x4EE5;&#x4E0B;&#x4E24;&#x70B9;&#x4E0D;&#x540C;&#xFF1A;</p>
+<ul>
+<li><p>Vuex &#x7684;&#x72B6;&#x6001;&#x5B58;&#x50A8;&#x662F;&#x54CD;&#x5E94;&#x5F0F;&#x7684;&#x3002;&#x5F53; Vue &#x7EC4;&#x4EF6;&#x4ECE; store &#x4E2D;&#x8BFB;&#x53D6;&#x72B6;&#x6001;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x82E5; store &#x4E2D;&#x7684;&#x72B6;&#x6001;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x90A3;&#x4E48;&#x76F8;&#x5E94;&#x7684;&#x7EC4;&#x4EF6;&#x4E5F;&#x4F1A;&#x76F8;&#x5E94;&#x5730;&#x5F97;&#x5230;&#x9AD8;&#x6548;&#x66F4;&#x65B0;&#x3002;</p>
+</li>
+<li><p>&#x4F60;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x6539;&#x53D8; store &#x4E2D;&#x7684;&#x72B6;&#x6001;&#x3002;&#x6539;&#x53D8; store &#x4E2D;&#x7684;&#x72B6;&#x6001;&#x7684;&#x552F;&#x4E00;&#x9014;&#x5F84;&#x5C31;&#x662F;&#x663E;&#x5F0F;&#x5730;&#x63D0;&#x4EA4; (commit) mutation&#x3002;&#x8FD9;&#x6837;&#x4F7F;&#x5F97;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x65B9;&#x4FBF;&#x5730;&#x8DDF;&#x8E2A;&#x6BCF;&#x4E00;&#x4E2A;&#x72B6;&#x6001;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x4ECE;&#x800C;&#x8BA9;&#x6211;&#x4EEC;&#x80FD;&#x591F;&#x5B9E;&#x73B0;&#x4E00;&#x4E9B;&#x5DE5;&#x5177;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x66F4;&#x597D;&#x5730;&#x4E86;&#x89E3;&#x6211;&#x4EEC;&#x7684;&#x5E94;&#x7528;&#x3002;</p>
+</li>
+</ul>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x901A;&#x8FC7;&#x5B9A;&#x4E49;&#x548C;&#x9694;&#x79BB;&#x72B6;&#x6001;&#x7BA1;&#x7406;&#x4E2D;&#x7684;&#x5404;&#x79CD;&#x6982;&#x5FF5;&#x5E76;&#x5F3A;&#x5236;&#x9075;&#x5B88;&#x4E00;&#x5B9A;&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#x5C06;&#x4F1A;&#x53D8;&#x5F97;&#x66F4;&#x7ED3;&#x6784;&#x5316;&#x4E14;&#x6613;&#x7EF4;&#x62A4;&#x3002;</p>
+<p>// TODO &#x56FE;&#x7247;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../vue-router/transition-to.html" class="navigation navigation-prev " aria-label="Previous page: 路径切换">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="init.html" class="navigation navigation-next " aria-label="Next page: Vuex 初始化">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Vuex","level":"1.9","depth":1,"next":{"title":"Vuex 初始化","level":"1.9.1","depth":2,"path":"vuex/init.md","ref":"vuex/init.md","articles":[]},"previous":{"title":"路径切换","level":"1.8.4","depth":2,"path":"vue-router/transition-to.md","ref":"vue-router/transition-to.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"scripts":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"vuex/index.md","mtime":"2018-03-28T04:11:54.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-14T09:34:48.956Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

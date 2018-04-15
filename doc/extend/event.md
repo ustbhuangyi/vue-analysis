@@ -1,4 +1,6 @@
-`)让我们绑定事件，不仅仅可以绑定原生的 DOM 事件，还可以绑定自定义时间，非常灵活和方便。那么接下来我们从源码角度来看看它的实现原理。
+# event
+
+我们平时开发工作中，处理组件间的通讯，原生的交互，都离不开事件。对于一个组件元素，我们不仅仅可以绑定原生的 DOM 事件，还可以绑定自定义事件，非常灵活和方便。那么接下来我们从源码角度来看看它的实现原理。
 
 为了更加直观，我们通过一个例子来分析它的实现：
 
@@ -90,7 +92,8 @@ export function addHandler (
   warn?: Function
 ) {
   modifiers = modifiers || emptyObject
-
+  // warn prevent and passive modifier
+  /* istanbul ignore if */
   if (
     process.env.NODE_ENV !== 'production' && warn &&
     modifiers.prevent && modifiers.passive
@@ -101,20 +104,24 @@ export function addHandler (
     )
   }
 
+  // check capture modifier
   if (modifiers.capture) {
     delete modifiers.capture
-    name = '!' + name
+    name = '!' + name // mark the event as captured
   }
   if (modifiers.once) {
     delete modifiers.once
-    name = '~' + name
+    name = '~' + name // mark the event as once
   }
-  
+  /* istanbul ignore if */
   if (modifiers.passive) {
     delete modifiers.passive
-    name = '&' + name
+    name = '&' + name // mark the event as passive
   }
 
+  // normalize click.right and click.middle since they don't actually fire
+  // this is technically browser-specific, but at least for now browsers are
+  // the only target envs that have right/middle clicks.
   if (name === 'click') {
     if (modifiers.right) {
       name = 'contextmenu'
@@ -132,12 +139,15 @@ export function addHandler (
     events = el.events || (el.events = {})
   }
 
-  const newHandler: any = { value }
+  const newHandler: any = {
+    value: value.trim()
+  }
   if (modifiers !== emptyObject) {
     newHandler.modifiers = modifiers
   }
 
   const handlers = events[name]
+  /* istanbul ignore if */
   if (Array.isArray(handlers)) {
     important ? handlers.unshift(newHandler) : handlers.push(newHandler)
   } else if (handlers) {
@@ -197,7 +207,7 @@ export function genData (el: ASTElement, state: CodegenState): string {
   return data
 }
 ```
-对于这两个属性，会调用 `genHandlers` 函数，定义在 `src/compiler/codegen/index.js` 中：
+对于这两个属性，会调用 `genHandlers` 函数，定义在 `src/compiler/codegen/events.js` 中：
 
 ```js
 export function genHandlers (
@@ -233,10 +243,11 @@ function genHandler (
     if (isMethodPath || isFunctionExpression) {
       return handler.value
     }
+    /* istanbul ignore if */
     if (__WEEX__ && handler.params) {
       return genWeexHandler(handler.params, handler.value)
     }
-    return `function($event){${handler.value}}`
+    return `function($event){${handler.value}}` // inline statement
   } else {
     let code = ''
     let genModifierCode = ''
@@ -263,20 +274,23 @@ function genHandler (
     if (keys.length) {
       code += genKeyFilter(keys)
     }
+    // Make sure modifiers like prevent and stop get executed after key filtering
     if (genModifierCode) {
       code += genModifierCode
     }
     const handlerCode = isMethodPath
-      ? handler.value + '($event)'
+      ? `return ${handler.value}($event)`
       : isFunctionExpression
-        ? `(${handler.value})($event)`
+        ? `return (${handler.value})($event)`
         : handler.value
+    /* istanbul ignore if */
     if (__WEEX__ && handler.params) {
       return genWeexHandler(handler.params, code + handlerCode)
     }
     return `function($event){${code}${handlerCode}}`
   }
 }
+
 ```
 
 `genHandlers` 方法遍历事件对象 `events`，对同一个事件名称的事件调用 `genHandler(name, events[name])` 方法，它的内容看起来多，但实际上逻辑很简单，首先先判断如果 `handler` 是一个数组，就遍历它然后递归调用 `genHandler` 方法并拼接结果，然后判断 `hanlder.value` 是一个函数的调用路径还是一个函数表达式， 接着对 `modifiers` 做判断，对于没有 `modifiers` 的情况，就根据 `handler.value` 不同情况处理，要么直接返回，要么返回一个函数包裹的表达式；对于有 `modifiers` 的情况，则对各种不同的 `modifer` 情况做不同处理，添加相应的代码串。
@@ -340,6 +354,7 @@ export function updateListeners (
     def = cur = on[name]
     old = oldOn[name]
     event = normalizeEvent(name)
+    /* istanbul ignore if */
     if (__WEEX__ && isPlainObject(def)) {
       cur = def.handler
       event.params = def.params
@@ -367,6 +382,7 @@ export function updateListeners (
   }
 }
 ```
+
 `updateListeners` 的逻辑很简单，遍历 `on` 去添加事件监听，遍历 `oldOn` 去移除事件监听，关于监听和移除事件的方法都是外部传入的，因为它既处理原生 DOM 事件的添加删除，也处理自定义事件的添加删除。
 
 对于 `on` 的遍历，首先获得每一个事件名，然后做 `normalizeEvent` 的处理：
@@ -382,7 +398,7 @@ const normalizeEvent = cached((name: string): {
 } => {
   const passive = name.charAt(0) === '&'
   name = passive ? name.slice(1) : name
-  const once = name.charAt(0) === '~' 
+  const once = name.charAt(0) === '~' // Prefixed last, checked first
   name = once ? name.slice(1) : name
   const capture = name.charAt(0) === '!'
   name = capture ? name.slice(1) : name
@@ -522,6 +538,7 @@ export function initInternalComponent (vm: Component, options: InternalComponent
 export function initEvents (vm: Component) {
   vm._events = Object.create(null)
   vm._hasHookEvent = false
+  // init parent attached events
   const listeners = vm.$options._parentListeners
   if (listeners) {
     updateComponentListeners(vm, listeners)
@@ -573,6 +590,8 @@ export function eventsMixin (Vue: Class<Component>) {
       }
     } else {
       (vm._events[event] || (vm._events[event] = [])).push(fn)
+      // optimize hook:event cost by using a boolean flag marked at registration
+      // instead of a hash lookup
       if (hookRE.test(event)) {
         vm._hasHookEvent = true
       }
@@ -593,16 +612,19 @@ export function eventsMixin (Vue: Class<Component>) {
 
   Vue.prototype.$off = function (event?: string | Array<string>, fn?: Function): Component {
     const vm: Component = this
+    // all
     if (!arguments.length) {
       vm._events = Object.create(null)
       return vm
     }
+    // array of events
     if (Array.isArray(event)) {
       for (let i = 0, l = event.length; i < l; i++) {
         this.$off(event[i], fn)
       }
       return vm
     }
+    // specific event
     const cbs = vm._events[event]
     if (!cbs) {
       return vm
@@ -612,6 +634,7 @@ export function eventsMixin (Vue: Class<Component>) {
       return vm
     }
     if (fn) {
+      // specific handler
       let cb
       let i = cbs.length
       while (i--) {
@@ -657,7 +680,7 @@ export function eventsMixin (Vue: Class<Component>) {
 ```
 非常经典的事件中心的实现，把所有的事件用 `vm._events` 存储起来，当执行 `vm.$on(event,fn)` 的时候，按事件的名称 `event` 把回调函数 `fn` 存储起来 `vm._events[event].push(fn)`。当执行 `vm.$emit(event)` 的时候，根据事件名 `event` 找到所有的回调函数 `let cbs = vm._events[event]`，然后遍历执行所有的回调函数。当执行 `vm.$off(event,fn)` 的时候会移除指定事件名 `event` 和指定的 `fn` 当执行 `vm.$once(event,fn)` 的时候，内部就是执行 `vm.$on`，并且当回调函数执行一次后再通过 `vm.$off` 移除事件的回调，这样就确保了回调函数只执行一次。
 
-所以对于用户自定义的事件添加和删除就是利用了这几个事件中心的 API。需要注意的事一点，`vm.$emit` 是给当前的 `vm` 上派发的实例，之所以我们常用它做父子组件通讯，是因为它的回调函数的定义是在父组件中，对于我们这个例子而言，当子组件的 `button` 被点击了，它通过 `this.$emit('select')` 派发事件，那么子组件的实例就监听到了这个 `select` 事件，并执行它的回调函数，定义在父组件中的 `selectHandler` 方法，这样就相当于完成了一次父子组件的通讯。
+所以对于用户自定义的事件添加和删除就是利用了这几个事件中心的 API。需要注意的事一点，`vm.$emit` 是给当前的 `vm` 上派发的实例，之所以我们常用它做父子组件通讯，是因为它的回调函数的定义是在父组件中，对于我们这个例子而言，当子组件的 `button` 被点击了，它通过 `this.$emit('select')` 派发事件，那么子组件的实例就监听到了这个 `select` 事件，并执行它的回调函数——定义在父组件中的 `selectHandler` 方法，这样就相当于完成了一次父子组件的通讯。
 
 ## 总结
 

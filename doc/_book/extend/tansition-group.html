@@ -1,0 +1,1254 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>transition-group · vue-analysis</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../vue-router/" />
+    
+    
+    <link rel="prev" href="tansition.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../prepare/">
+            
+                <a href="../prepare/">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../prepare/flow.html">
+            
+                <a href="../prepare/flow.html">
+            
+                    
+                    认识 FLow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../prepare/directory.html">
+            
+                <a href="../prepare/directory.html">
+            
+                    
+                    Vue.js 源码目录设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../prepare/build.html">
+            
+                <a href="../prepare/build.html">
+            
+                    
+                    Vue.js 源码构建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../prepare/entrance.html">
+            
+                <a href="../prepare/entrance.html">
+            
+                    
+                    从入口开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../data-driven/">
+            
+                <a href="../data-driven/">
+            
+                    
+                    数据驱动
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../data-driven/new-vue.html">
+            
+                <a href="../data-driven/new-vue.html">
+            
+                    
+                    new Vue 发生了什么
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../data-driven/mounted.html">
+            
+                <a href="../data-driven/mounted.html">
+            
+                    
+                    Vue 实例挂载的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../data-driven/render.html">
+            
+                <a href="../data-driven/render.html">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../data-driven/virtual-dom.html">
+            
+                <a href="../data-driven/virtual-dom.html">
+            
+                    
+                    Virtual DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../data-driven/create-element.html">
+            
+                <a href="../data-driven/create-element.html">
+            
+                    
+                    createElement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../data-driven/update.html">
+            
+                <a href="../data-driven/update.html">
+            
+                    
+                    update
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../components/">
+            
+                <a href="../components/">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../components/create-component.html">
+            
+                <a href="../components/create-component.html">
+            
+                    
+                    createComponent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../components/patch.html">
+            
+                <a href="../components/patch.html">
+            
+                    
+                    patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../components/merge-option.html">
+            
+                <a href="../components/merge-option.html">
+            
+                    
+                    合并配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../components/lifecycle.html">
+            
+                <a href="../components/lifecycle.html">
+            
+                    
+                    生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../components/component-register.html">
+            
+                <a href="../components/component-register.html">
+            
+                    
+                    组件注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../components/async-component.html">
+            
+                <a href="../components/async-component.html">
+            
+                    
+                    异步组件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../reactive/">
+            
+                <a href="../reactive/">
+            
+                    
+                    深入响应式原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../reactive/reactive-object.html">
+            
+                <a href="../reactive/reactive-object.html">
+            
+                    
+                    响应式对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../reactive/getters.html">
+            
+                <a href="../reactive/getters.html">
+            
+                    
+                    依赖收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../reactive/setters.html">
+            
+                <a href="../reactive/setters.html">
+            
+                    
+                    派发更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../reactive/next-tick.html">
+            
+                <a href="../reactive/next-tick.html">
+            
+                    
+                    nextTick
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../reactive/questions.html">
+            
+                <a href="../reactive/questions.html">
+            
+                    
+                    检测变化的注意事项
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../reactive/computed-watcher.html">
+            
+                <a href="../reactive/computed-watcher.html">
+            
+                    
+                    计算属性 VS 侦听属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../reactive/component-update.html">
+            
+                <a href="../reactive/component-update.html">
+            
+                    
+                    组件更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../compile/">
+            
+                <a href="../compile/">
+            
+                    
+                    编译
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../compile/entrance.html">
+            
+                <a href="../compile/entrance.html">
+            
+                    
+                    编译入口
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../compile/parse.html">
+            
+                <a href="../compile/parse.html">
+            
+                    
+                    parse
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../compile/optimize.html">
+            
+                <a href="../compile/optimize.html">
+            
+                    
+                    optimize
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../compile/codegen.html">
+            
+                <a href="../compile/codegen.html">
+            
+                    
+                    codegen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    扩展
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="event.html">
+            
+                <a href="event.html">
+            
+                    
+                    event
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="v-model.html">
+            
+                <a href="v-model.html">
+            
+                    
+                    v-model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="slot.html">
+            
+                <a href="slot.html">
+            
+                    
+                    slot
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="keep-alive.html">
+            
+                <a href="keep-alive.html">
+            
+                    
+                    keep-alive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="tansition.html">
+            
+                <a href="tansition.html">
+            
+                    
+                    transition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.6" data-path="tansition-group.html">
+            
+                <a href="tansition-group.html">
+            
+                    
+                    transition-group
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../vue-router/">
+            
+                <a href="../vue-router/">
+            
+                    
+                    Vue-Router
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../vue-router/install.html">
+            
+                <a href="../vue-router/install.html">
+            
+                    
+                    路由注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../vue-router/router.html">
+            
+                <a href="../vue-router/router.html">
+            
+                    
+                    VueRouter 对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../vue-router/matcher.html">
+            
+                <a href="../vue-router/matcher.html">
+            
+                    
+                    matcher
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../vue-router/transition-to.html">
+            
+                <a href="../vue-router/transition-to.html">
+            
+                    
+                    路径切换
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../vuex/">
+            
+                <a href="../vuex/">
+            
+                    
+                    Vuex
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../vuex/init.html">
+            
+                <a href="../vuex/init.html">
+            
+                    
+                    Vuex 初始化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../vuex/api.html">
+            
+                <a href="../vuex/api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../vuex/plugin.html">
+            
+                <a href="../vuex/plugin.html">
+            
+                    
+                    插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >transition-group</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="transition-group">transition-group</h1>
+<p>&#x524D;&#x4E00;&#x8282;&#x6211;&#x4EEC;&#x4ECB;&#x7ECD;&#x4E86; <code>&lt;transiiton&gt;</code> &#x7EC4;&#x4EF6;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF0C;&#x5B83;&#x53EA;&#x80FD;&#x9488;&#x5BF9;&#x5355;&#x4E00;&#x5143;&#x7D20;&#x5B9E;&#x73B0;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#x3002;&#x6211;&#x4EEC;&#x505A;&#x524D;&#x7AEF;&#x5F00;&#x53D1;&#x7ECF;&#x5E38;&#x4F1A;&#x9047;&#x5230;&#x5217;&#x8868;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x6211;&#x4EEC;&#x5BF9;&#x5217;&#x8868;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x6DFB;&#x52A0;&#x548C;&#x5220;&#x9664;&#xFF0C;&#x6709;&#x65F6;&#x5019;&#x4E5F;&#x5E0C;&#x671B;&#x6709;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#xFF0C;Vue.js &#x63D0;&#x4F9B;&#x4E86; <code>&lt;transition-group&gt;</code> &#x7EC4;&#x4EF6;&#xFF0C;&#x5F88;&#x597D;&#x5730;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x5B9E;&#x73B0;&#x4E86;&#x5217;&#x8868;&#x7684;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#x3002;&#x90A3;&#x4E48;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5206;&#x6790;&#x4E00;&#x4E0B;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x66F4;&#x76F4;&#x89C2;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x662F;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#x6765;&#x8BF4;&#x660E;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> vm = <span class="hljs-keyword">new</span> Vue({
+  el: <span class="hljs-string">&apos;#app&apos;</span>,
+  template: <span class="hljs-string">&apos;&lt;div id=&quot;list-complete-demo&quot; class=&quot;demo&quot;&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;button v-on:click=&quot;add&quot;&gt;Add&lt;/button&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;button v-on:click=&quot;remove&quot;&gt;Remove&lt;/button&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;transition-group name=&quot;list-complete&quot; tag=&quot;p&quot;&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;span v-for=&quot;item in items&quot; v-bind:key=&quot;item&quot; class=&quot;list-complete-item&quot;&gt;&apos;</span> +
+  <span class="hljs-string">&apos;{{ item }}&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/span&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/transition-group&gt;&apos;</span> +
+  <span class="hljs-string">&apos;&lt;/div&gt;&apos;</span>,
+  data: {
+    items: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>],
+    nextNum: <span class="hljs-number">10</span>
+  },
+  methods: {
+    randomIndex: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-keyword">this</span>.items.length)
+    },
+    add: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">this</span>.items.splice(<span class="hljs-keyword">this</span>.randomIndex(), <span class="hljs-number">0</span>, <span class="hljs-keyword">this</span>.nextNum++)
+    },
+    remove: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">this</span>.items.splice(<span class="hljs-keyword">this</span>.randomIndex(), <span class="hljs-number">1</span>)
+    }
+  }
+})
+</code></pre>
+<pre><code class="lang-css"> <span class="hljs-selector-class">.list-complete-item</span> {
+  <span class="hljs-attribute">display</span>: inline-block;
+  <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">10px</span>;
+}
+<span class="hljs-selector-class">.list-complete-move</span> {
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">1s</span>;
+}
+<span class="hljs-selector-class">.list-complete-enter</span>, <span class="hljs-selector-class">.list-complete-leave-to</span> {
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(30px);
+}
+<span class="hljs-selector-class">.list-complete-enter-active</span> {
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">1s</span>;
+}
+<span class="hljs-selector-class">.list-complete-leave-active</span> {
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">1s</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x793A;&#x4F8B;&#x521D;&#x59CB;&#x4F1A;&#x5C55;&#x73B0; 1-9 &#x5341;&#x4E2A;&#x6570;&#x5B57;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x70B9;&#x51FB; <code>Add</code> &#x6309;&#x94AE;&#x65F6;&#xFF0C;&#x4F1A;&#x751F;&#x6210; <code>nextNum</code> &#x5E76;&#x968F;&#x673A;&#x5728;&#x5F53;&#x524D;&#x6570;&#x5217;&#x8868;&#x4E2D;&#x63D2;&#x5165;&#xFF1B;&#x5F53;&#x6211;&#x4EEC;&#x70B9;&#x51FB; <code>Remove</code> &#x6309;&#x94AE;&#x65F6;&#xFF0C;&#x4F1A;&#x968F;&#x673A;&#x5220;&#x9664;&#x6389;&#x4E00;&#x4E2A;&#x6570;&#x3002;&#x6211;&#x4EEC;&#x4F1A;&#x53D1;&#x73B0;&#x5728;&#x6570;&#x6DFB;&#x52A0;&#x5220;&#x9664;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x5728;&#x5217;&#x8868;&#x4E2D;&#x4F1A;&#x6709;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#xFF0C;&#x8FD9;&#x5C31;&#x662F; <code>&lt;transition-group&gt;</code> &#x7EC4;&#x4EF6;&#x914D;&#x5408;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x7684; CSS &#x4EA7;&#x751F;&#x7684;&#x6548;&#x679C;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x9996;&#x5148;&#x8FD8;&#x662F;&#x6765;&#x5206;&#x6790; <code>&lt;transtion-group&gt;</code> &#x7EC4;&#x4EF6;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5728; <code>src/platforms/web/runtime/components/transitions.js</code> &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> props = extend({
+  tag: <span class="hljs-built_in">String</span>,
+  moveClass: <span class="hljs-built_in">String</span>
+}, transitionProps)
+
+<span class="hljs-keyword">delete</span> props.mode
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  props,
+
+  beforeMount () {
+    <span class="hljs-keyword">const</span> update = <span class="hljs-keyword">this</span>._update
+    <span class="hljs-keyword">this</span>._update = (vnode, hydrating) =&gt; {
+      <span class="hljs-comment">// force removing pass</span>
+      <span class="hljs-keyword">this</span>.__patch__(
+        <span class="hljs-keyword">this</span>._vnode,
+        <span class="hljs-keyword">this</span>.kept,
+        <span class="hljs-literal">false</span>, <span class="hljs-comment">// hydrating</span>
+        <span class="hljs-literal">true</span> <span class="hljs-comment">// removeOnly (!important, avoids unnecessary moves)</span>
+      )
+      <span class="hljs-keyword">this</span>._vnode = <span class="hljs-keyword">this</span>.kept
+      update.call(<span class="hljs-keyword">this</span>, vnode, hydrating)
+    }
+  },
+
+  render (h: <span class="hljs-built_in">Function</span>) {
+    <span class="hljs-keyword">const</span> tag: string = <span class="hljs-keyword">this</span>.tag || <span class="hljs-keyword">this</span>.$vnode.data.tag || <span class="hljs-string">&apos;span&apos;</span>
+    <span class="hljs-keyword">const</span> map: <span class="hljs-built_in">Object</span> = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>)
+    <span class="hljs-keyword">const</span> prevChildren: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = <span class="hljs-keyword">this</span>.prevChildren = <span class="hljs-keyword">this</span>.children
+    <span class="hljs-keyword">const</span> rawChildren: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = <span class="hljs-keyword">this</span>.$slots.default || []
+    <span class="hljs-keyword">const</span> children: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = <span class="hljs-keyword">this</span>.children = []
+    <span class="hljs-keyword">const</span> transitionData: <span class="hljs-built_in">Object</span> = extractTransitionData(<span class="hljs-keyword">this</span>)
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; rawChildren.length; i++) {
+      <span class="hljs-keyword">const</span> c: VNode = rawChildren[i]
+      <span class="hljs-keyword">if</span> (c.tag) {
+        <span class="hljs-keyword">if</span> (c.key != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-built_in">String</span>(c.key).indexOf(<span class="hljs-string">&apos;__vlist&apos;</span>) !== <span class="hljs-number">0</span>) {
+          children.push(c)
+          map[c.key] = c
+          ;(c.data || (c.data = {})).transition = transitionData
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+          <span class="hljs-keyword">const</span> opts: ?VNodeComponentOptions = c.componentOptions
+          <span class="hljs-keyword">const</span> name: string = opts ? (opts.Ctor.options.name || opts.tag || <span class="hljs-string">&apos;&apos;</span>) : c.tag
+          warn(<span class="hljs-string">`&lt;transition-group&gt; children must be keyed: &lt;<span class="hljs-subst">${name}</span>&gt;`</span>)
+        }
+      }
+    }
+
+    <span class="hljs-keyword">if</span> (prevChildren) {
+      <span class="hljs-keyword">const</span> kept: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = []
+      <span class="hljs-keyword">const</span> removed: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = []
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; prevChildren.length; i++) {
+        <span class="hljs-keyword">const</span> c: VNode = prevChildren[i]
+        c.data.transition = transitionData
+        c.data.pos = c.elm.getBoundingClientRect()
+        <span class="hljs-keyword">if</span> (map[c.key]) {
+          kept.push(c)
+        } <span class="hljs-keyword">else</span> {
+          removed.push(c)
+        }
+      }
+      <span class="hljs-keyword">this</span>.kept = h(tag, <span class="hljs-literal">null</span>, kept)
+      <span class="hljs-keyword">this</span>.removed = removed
+    }
+
+    <span class="hljs-keyword">return</span> h(tag, <span class="hljs-literal">null</span>, children)
+  },
+
+  updated () {
+    <span class="hljs-keyword">const</span> children: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = <span class="hljs-keyword">this</span>.prevChildren
+    <span class="hljs-keyword">const</span> moveClass: string = <span class="hljs-keyword">this</span>.moveClass || ((<span class="hljs-keyword">this</span>.name || <span class="hljs-string">&apos;v&apos;</span>) + <span class="hljs-string">&apos;-move&apos;</span>)
+    <span class="hljs-keyword">if</span> (!children.length || !<span class="hljs-keyword">this</span>.hasMove(children[<span class="hljs-number">0</span>].elm, moveClass)) {
+      <span class="hljs-keyword">return</span>
+    }
+
+    <span class="hljs-comment">// we divide the work into three loops to avoid mixing DOM reads and writes</span>
+    <span class="hljs-comment">// in each iteration - which helps prevent layout thrashing.</span>
+    children.forEach(callPendingCbs)
+    children.forEach(recordPosition)
+    children.forEach(applyTranslation)
+
+    <span class="hljs-comment">// force reflow to put everything in position</span>
+    <span class="hljs-comment">// assign to this to avoid being removed in tree-shaking</span>
+    <span class="hljs-comment">// $flow-disable-line</span>
+    <span class="hljs-keyword">this</span>._reflow = <span class="hljs-built_in">document</span>.body.offsetHeight
+
+    children.forEach((c: VNode) =&gt; {
+      <span class="hljs-keyword">if</span> (c.data.moved) {
+        <span class="hljs-keyword">var</span> el: any = c.elm
+        <span class="hljs-keyword">var</span> s: any = el.style
+        addTransitionClass(el, moveClass)
+        s.transform = s.WebkitTransform = s.transitionDuration = <span class="hljs-string">&apos;&apos;</span>
+        el.addEventListener(transitionEndEvent, el._moveCb = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cb</span> (<span class="hljs-params">e</span>) </span>{
+          <span class="hljs-keyword">if</span> (!e || <span class="hljs-regexp">/transform$/</span>.test(e.propertyName)) {
+            el.removeEventListener(transitionEndEvent, cb)
+            el._moveCb = <span class="hljs-literal">null</span>
+            removeTransitionClass(el, moveClass)
+          }
+        })
+      }
+    })
+  },
+
+  methods: {
+    hasMove (el: any, moveClass: string): boolean {
+      <span class="hljs-comment">/* istanbul ignore if */</span>
+      <span class="hljs-keyword">if</span> (!hasTransition) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+      }
+      <span class="hljs-comment">/* istanbul ignore if */</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._hasMove) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._hasMove
+      }
+      <span class="hljs-comment">// Detect whether an element with the move class applied has</span>
+      <span class="hljs-comment">// CSS transitions. Since the element may be inside an entering</span>
+      <span class="hljs-comment">// transition at this very moment, we make a clone of it and remove</span>
+      <span class="hljs-comment">// all other transition classes applied to ensure only the move class</span>
+      <span class="hljs-comment">// is applied.</span>
+      <span class="hljs-keyword">const</span> clone: HTMLElement = el.cloneNode()
+      <span class="hljs-keyword">if</span> (el._transitionClasses) {
+        el._transitionClasses.forEach((cls: string) =&gt; { removeClass(clone, cls) })
+      }
+      addClass(clone, moveClass)
+      clone.style.display = <span class="hljs-string">&apos;none&apos;</span>
+      <span class="hljs-keyword">this</span>.$el.appendChild(clone)
+      <span class="hljs-keyword">const</span> info: <span class="hljs-built_in">Object</span> = getTransitionInfo(clone)
+      <span class="hljs-keyword">this</span>.$el.removeChild(clone)
+      <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span>._hasMove = info.hasTransform)
+    }
+  }
+}
+</code></pre>
+<h2 id="render-&#x51FD;&#x6570;">render &#x51FD;&#x6570;</h2>
+<p><code>&lt;transition-group&gt;</code> &#x7EC4;&#x4EF6;&#x4E5F;&#x662F;&#x7531; <code>render</code> &#x51FD;&#x6570;&#x6E32;&#x67D3;&#x751F;&#x6210; <code>vnode</code>&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5148;&#x5206;&#x6790; <code>render</code> &#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+<ul>
+<li>&#x5B9A;&#x4E49;&#x4E00;&#x4E9B;&#x53D8;&#x91CF;</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> tag: string = <span class="hljs-keyword">this</span>.tag || <span class="hljs-keyword">this</span>.$vnode.data.tag || <span class="hljs-string">&apos;span&apos;</span>
+<span class="hljs-keyword">const</span> map: <span class="hljs-built_in">Object</span> = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>)
+<span class="hljs-keyword">const</span> prevChildren: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = <span class="hljs-keyword">this</span>.prevChildren = <span class="hljs-keyword">this</span>.children
+<span class="hljs-keyword">const</span> rawChildren: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = <span class="hljs-keyword">this</span>.$slots.default || []
+<span class="hljs-keyword">const</span> children: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = <span class="hljs-keyword">this</span>.children = []
+<span class="hljs-keyword">const</span> transitionData: <span class="hljs-built_in">Object</span> = extractTransitionData(<span class="hljs-keyword">this</span>)
+</code></pre>
+<p>&#x4E0D;&#x540C;&#x4E8E; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#xFF0C;<code>&lt;transition-group&gt;</code> &#x7EC4;&#x4EF6;&#x975E;&#x62BD;&#x8C61;&#x7EC4;&#x4EF6;&#xFF0C;&#x5B83;&#x4F1A;&#x6E32;&#x67D3;&#x6210;&#x4E00;&#x4E2A;&#x771F;&#x5B9E;&#x5143;&#x7D20;&#xFF0C;&#x9ED8;&#x8BA4; <code>tag</code> &#x662F; <code>span</code>&#x3002; <code>prevChildren</code> &#x7528;&#x6765;&#x5B58;&#x50A8;&#x4E0A;&#x4E00;&#x6B21;&#x7684;&#x5B50;&#x8282;&#x70B9;&#xFF1B;<code>children</code> &#x7528;&#x6765;&#x5B58;&#x50A8;&#x5F53;&#x524D;&#x7684;&#x5B50;&#x8282;&#x70B9;&#xFF1B;<code>rawChildren</code> &#x8868;&#x793A; <code>&lt;transtition-group&gt;</code> &#x5305;&#x88F9;&#x7684;&#x539F;&#x59CB;&#x5B50;&#x8282;&#x70B9;&#xFF1B;<code>transtionData</code> &#x662F;&#x4ECE; <code>&lt;transtition-group&gt;</code> &#x7EC4;&#x4EF6;&#x4E0A;&#x63D0;&#x53D6;&#x51FA;&#x6765;&#x7684;&#x4E00;&#x4E9B;&#x6E32;&#x67D3;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x70B9;&#x548C; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x7684;&#x5B9E;&#x73B0;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;</p>
+<ul>
+<li>&#x904D;&#x5386; <code>rawChidren</code>&#xFF0C;&#x521D;&#x59CB;&#x5316; <code>children</code></li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; rawChildren.length; i++) {
+  <span class="hljs-keyword">const</span> c: VNode = rawChildren[i]
+  <span class="hljs-keyword">if</span> (c.tag) {
+    <span class="hljs-keyword">if</span> (c.key != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-built_in">String</span>(c.key).indexOf(<span class="hljs-string">&apos;__vlist&apos;</span>) !== <span class="hljs-number">0</span>) {
+      children.push(c)
+      map[c.key] = c
+      ;(c.data || (c.data = {})).transition = transitionData
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+      <span class="hljs-keyword">const</span> opts: ?VNodeComponentOptions = c.componentOptions
+      <span class="hljs-keyword">const</span> name: string = opts ? (opts.Ctor.options.name || opts.tag || <span class="hljs-string">&apos;&apos;</span>) : c.tag
+      warn(<span class="hljs-string">`&lt;transition-group&gt; children must be keyed: &lt;<span class="hljs-subst">${name}</span>&gt;`</span>)
+    }
+  }
+}
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x5BF9; <code>rawChildren</code> &#x904D;&#x5386;&#xFF0C;&#x62FF;&#x5230;&#x6BCF;&#x4E2A; <code>vnode</code>&#xFF0C;&#x7136;&#x540E;&#x4F1A;&#x5224;&#x65AD;&#x6BCF;&#x4E2A; <code>vnode</code> &#x662F;&#x5426;&#x8BBE;&#x7F6E;&#x4E86; <code>key</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x662F; <code>&lt;transition-group&gt;</code> &#x5BF9;&#x5217;&#x8868;&#x5143;&#x7D20;&#x7684;&#x8981;&#x6C42;&#x3002;&#x7136;&#x540E;&#x628A; <code>vnode</code> &#x6DFB;&#x52A0;&#x5230; <code>children</code> &#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x521A;&#x521A;&#x63D0;&#x53D6;&#x7684;&#x8FC7;&#x6E21;&#x6570;&#x636E; <code>transitionData</code> &#x6DFB;&#x52A0;&#x7684; <code>vnode.data.transition</code> &#x4E2D;&#xFF0C;&#x8FD9;&#x70B9;&#x5F88;&#x5173;&#x952E;&#xFF0C;&#x53EA;&#x6709;&#x8FD9;&#x6837;&#x624D;&#x80FD;&#x5B9E;&#x73B0;&#x5217;&#x8868;&#x4E2D;&#x5355;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x3002;</p>
+<ul>
+<li>&#x5904;&#x7406; prevChildren</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">if</span> (prevChildren) {
+  <span class="hljs-keyword">const</span> kept: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = []
+  <span class="hljs-keyword">const</span> removed: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = []
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; prevChildren.length; i++) {
+    <span class="hljs-keyword">const</span> c: VNode = prevChildren[i]
+    c.data.transition = transitionData
+    c.data.pos = c.elm.getBoundingClientRect()
+    <span class="hljs-keyword">if</span> (map[c.key]) {
+      kept.push(c)
+    } <span class="hljs-keyword">else</span> {
+      removed.push(c)
+    }
+  }
+  <span class="hljs-keyword">this</span>.kept = h(tag, <span class="hljs-literal">null</span>, kept)
+  <span class="hljs-keyword">this</span>.removed = removed
+}
+
+<span class="hljs-keyword">return</span> h(tag, <span class="hljs-literal">null</span>, children)
+</code></pre>
+<p>&#x5F53;&#x6709; <code>prevChildren</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x5BF9;&#x5B83;&#x505A;&#x904D;&#x5386;&#xFF0C;&#x83B7;&#x53D6;&#x5230;&#x6BCF;&#x4E2A; <code>vnode</code>&#xFF0C;&#x7136;&#x540E;&#x628A; <code>transitionData</code> &#x8D4B;&#x503C;&#x5230; <code>vnode.data.transition</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x662F;&#x4E3A;&#x4E86;&#x5F53;&#x5B83;&#x5728; <code>enter</code> &#x548C; <code>leave</code> &#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x4E2D;&#x6709;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x4E0A;&#x8282;&#x4ECB;&#x7ECD; <code>transition</code> &#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#x8BF4;&#x8FC7;&#x3002;&#x63A5;&#x7740;&#x53C8;&#x8C03;&#x7528;&#x4E86;&#x539F;&#x751F; DOM &#x7684; <code>getBoundingClientRect</code> &#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x5230;&#x539F;&#x751F; DOM &#x7684;&#x4F4D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x8BB0;&#x5F55;&#x5230; <code>vnode.data.pos</code> &#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x5224;&#x65AD;&#x4E00;&#x4E0B; <code>vnode.key</code> &#x662F;&#x5426;&#x5728; <code>map</code> &#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x5728;&#x5219;&#x653E;&#x5165; <code>kept</code> &#x4E2D;&#xFF0C;&#x5426;&#x5219;&#x8868;&#x793A;&#x8BE5;&#x8282;&#x70B9;&#x5DF2;&#x88AB;&#x5220;&#x9664;&#xFF0C;&#x653E;&#x5165; <code>removed</code> &#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x6267;&#x884C; <code>h(tag, null, kept)</code> &#x6E32;&#x67D3;&#x540E;&#x653E;&#x5165; <code>this.kept</code> &#x4E2D;&#xFF0C;&#x628A; <code>removed</code> &#x7528; <code>this.removed</code> &#x4FDD;&#x5B58;&#x3002;&#x6700;&#x540E;&#x6574;&#x4E2A; <code>render</code> &#x51FD;&#x6570;&#x901A;&#x8FC7; <code>h(tag, null, children)</code> &#x751F;&#x6210;&#x6E32;&#x67D3; <code>vnode</code>&#x3002;</p>
+<p>&#x5982;&#x679C; <code>transition-group</code> &#x53EA;&#x5B9E;&#x73B0;&#x4E86;&#x8FD9;&#x4E2A; <code>render</code> &#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x6BCF;&#x6B21;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x7684;&#x5143;&#x7D20;&#x7684;&#x7F13;&#x52A8;&#x52A8;&#x753B;&#x662F;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x5F53;&#x65B0;&#x589E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5B83;&#x7684;&#x63D2;&#x5165;&#x7684;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x662F;&#x6709;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5269;&#x4F59;&#x5143;&#x7D20;&#x5E73;&#x79FB;&#x7684;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#x662F;&#x51FA;&#x4E0D;&#x6765;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x6765;&#x5206;&#x6790; <code>&lt;transition-group&gt;</code> &#x7EC4;&#x4EF6;&#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x5269;&#x4F59;&#x5143;&#x7D20;&#x5E73;&#x79FB;&#x7684;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#x7684;&#x3002;</p>
+<h2 id="move-&#x8FC7;&#x6E21;&#x5B9E;&#x73B0;">move &#x8FC7;&#x6E21;&#x5B9E;&#x73B0;</h2>
+<p>&#x5176;&#x5B9E;&#x6211;&#x4EEC;&#x5728;&#x5B9E;&#x73B0;&#x5143;&#x7D20;&#x7684;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#xFF0C;&#x65E0;&#x975E;&#x5C31;&#x662F;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#xFF0C;&#x63A7;&#x5236;&#x5B83;&#x4EEC;&#x7684;&#x6DFB;&#x52A0;&#x548C;&#x5220;&#x9664;&#x3002;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x65B0;&#x589E;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x6DFB;&#x52A0;&#x4E00;&#x6761;&#x6570;&#x636E;&#xFF0C;&#x9664;&#x4E86;&#x91CD;&#x65B0;&#x6267;&#x884C; <code>render</code> &#x51FD;&#x6570;&#x6E32;&#x67D3;&#x65B0;&#x7684;&#x8282;&#x70B9;&#x5916;&#xFF0C;&#x8FD8;&#x8981;&#x89E6;&#x53D1; <code>updated</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x63A5;&#x7740;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5206;&#x6790; <code>updated</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+<ul>
+<li>&#x5224;&#x65AD;&#x5B50;&#x5143;&#x7D20;&#x662F;&#x5426;&#x5B9A;&#x4E49; <code>move</code> &#x76F8;&#x5173;&#x6837;&#x5F0F;</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> children: <span class="hljs-built_in">Array</span>&lt;VNode&gt; = <span class="hljs-keyword">this</span>.prevChildren
+<span class="hljs-keyword">const</span> moveClass: string = <span class="hljs-keyword">this</span>.moveClass || ((<span class="hljs-keyword">this</span>.name || <span class="hljs-string">&apos;v&apos;</span>) + <span class="hljs-string">&apos;-move&apos;</span>)
+<span class="hljs-keyword">if</span> (!children.length || !<span class="hljs-keyword">this</span>.hasMove(children[<span class="hljs-number">0</span>].elm, moveClass)) {
+  <span class="hljs-keyword">return</span>
+}
+
+hasMove (el: any, moveClass: string): boolean {
+  <span class="hljs-comment">/* istanbul ignore if */</span>
+  <span class="hljs-keyword">if</span> (!hasTransition) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+  }
+  <span class="hljs-comment">/* istanbul ignore if */</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._hasMove) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._hasMove
+  }
+  <span class="hljs-comment">// Detect whether an element with the move class applied has</span>
+  <span class="hljs-comment">// CSS transitions. Since the element may be inside an entering</span>
+  <span class="hljs-comment">// transition at this very moment, we make a clone of it and remove</span>
+  <span class="hljs-comment">// all other transition classes applied to ensure only the move class</span>
+  <span class="hljs-comment">// is applied.</span>
+  <span class="hljs-keyword">const</span> clone: HTMLElement = el.cloneNode()
+  <span class="hljs-keyword">if</span> (el._transitionClasses) {
+    el._transitionClasses.forEach((cls: string) =&gt; { removeClass(clone, cls) })
+  }
+  addClass(clone, moveClass)
+  clone.style.display = <span class="hljs-string">&apos;none&apos;</span>
+  <span class="hljs-keyword">this</span>.$el.appendChild(clone)
+  <span class="hljs-keyword">const</span> info: <span class="hljs-built_in">Object</span> = getTransitionInfo(clone)
+  <span class="hljs-keyword">this</span>.$el.removeChild(clone)
+  <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span>._hasMove = info.hasTransform)
+}
+</code></pre>
+<p>&#x6838;&#x5FC3;&#x5C31;&#x662F; <code>hasMove</code> &#x7684;&#x5224;&#x65AD;&#xFF0C;&#x9996;&#x5148;&#x514B;&#x9686;&#x4E00;&#x4E2A; DOM &#x8282;&#x70B9;&#xFF0C;&#x7136;&#x540E;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x5F71;&#x54CD;&#xFF0C;&#x79FB;&#x9664;&#x5B83;&#x7684;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x7684;&#x8FC7;&#x6E21; <code>Class</code>&#xFF1B;&#x63A5;&#x7740;&#x6DFB;&#x52A0;&#x4E86; <code>moveClass</code> &#x6837;&#x5F0F;&#xFF0C;&#x8BBE;&#x7F6E; <code>display</code> &#x4E3A; <code>none</code>&#xFF0C;&#x6DFB;&#x52A0;&#x5230;&#x7EC4;&#x4EF6;&#x6839;&#x8282;&#x70B9;&#x4E0A;&#xFF1B;&#x63A5;&#x4E0B;&#x6765;&#x901A;&#x8FC7; <code>getTransitionInfo</code> &#x83B7;&#x53D6;&#x5B83;&#x7684;&#x4E00;&#x4E9B;&#x7F13;&#x52A8;&#x76F8;&#x5173;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5728;&#x4E0A;&#x4E00;&#x8282;&#x6211;&#x4EEC;&#x4E5F;&#x4ECB;&#x7ECD;&#x8FC7;&#xFF0C;&#x7136;&#x540E;&#x4ECE;&#x7EC4;&#x4EF6;&#x6839;&#x8282;&#x70B9;&#x4E0A;&#x5220;&#x9664;&#x8FD9;&#x4E2A;&#x514B;&#x9686;&#x8282;&#x70B9;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;&#x5224;&#x65AD; <code>info.hasTransform</code> &#x6765;&#x5224;&#x65AD; <code>hasMove</code>&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x8BE5;&#x503C;&#x4E3A; <code>true</code>&#x3002;</p>
+<ul>
+<li>&#x5B50;&#x8282;&#x70B9;&#x9884;&#x5904;&#x7406;</li>
+</ul>
+<pre><code class="lang-js">children.forEach(callPendingCbs)
+children.forEach(recordPosition)
+children.forEach(applyTranslation)
+</code></pre>
+<p>&#x5BF9; <code>children</code> &#x505A;&#x4E86; 3 &#x8F6E;&#x5FAA;&#x73AF;&#xFF0C;&#x5206;&#x522B;&#x505A;&#x4E86;&#x5982;&#x4E0B;&#x4E00;&#x4E9B;&#x5904;&#x7406;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callPendingCbs</span> (<span class="hljs-params">c: VNode</span>) </span>{
+  <span class="hljs-keyword">if</span> (c.elm._moveCb) {
+    c.elm._moveCb()
+  }
+  <span class="hljs-keyword">if</span> (c.elm._enterCb) {
+    c.elm._enterCb()
+  }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">recordPosition</span> (<span class="hljs-params">c: VNode</span>) </span>{
+  c.data.newPos = c.elm.getBoundingClientRect()
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">applyTranslation</span> (<span class="hljs-params">c: VNode</span>) </span>{
+  <span class="hljs-keyword">const</span> oldPos = c.data.pos
+  <span class="hljs-keyword">const</span> newPos = c.data.newPos
+  <span class="hljs-keyword">const</span> dx = oldPos.left - newPos.left
+  <span class="hljs-keyword">const</span> dy = oldPos.top - newPos.top
+  <span class="hljs-keyword">if</span> (dx || dy) {
+    c.data.moved = <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">const</span> s = c.elm.style
+    s.transform = s.WebkitTransform = <span class="hljs-string">`translate(<span class="hljs-subst">${dx}</span>px,<span class="hljs-subst">${dy}</span>px)`</span>
+    s.transitionDuration = <span class="hljs-string">&apos;0s&apos;</span>
+  }
+}
+</code></pre>
+<p><code>callPendingCbs</code> &#x65B9;&#x6CD5;&#x662F;&#x5728;&#x524D;&#x4E00;&#x4E2A;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x6CA1;&#x6267;&#x884C;&#x5B8C;&#x53C8;&#x518D;&#x6B21;&#x6267;&#x884C;&#x5230;&#x8BE5;&#x65B9;&#x6CD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x63D0;&#x524D;&#x6267;&#x884C; <code>_moveCb</code> &#x548C; <code>_enterCb</code>&#x3002;</p>
+<p><code>recordPosition</code> &#x7684;&#x4F5C;&#x7528;&#x662F;&#x8BB0;&#x5F55;&#x8282;&#x70B9;&#x7684;&#x65B0;&#x4F4D;&#x7F6E;&#x3002;</p>
+<p><code>applyTranslation</code> &#x7684;&#x4F5C;&#x7528;&#x662F;&#x5148;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x65B0;&#x4F4D;&#x7F6E;&#x548C;&#x65E7;&#x4F4D;&#x7F6E;&#x7684;&#x5DEE;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x5DEE;&#x503C;&#x4E0D;&#x4E3A; 0&#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x8FD9;&#x4E9B;&#x8282;&#x70B9;&#x662F;&#x9700;&#x8981;&#x79FB;&#x52A8;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x8BB0;&#x5F55; <code>vnode.data.moved</code> &#x4E3A; true&#xFF0C;&#x5E76;&#x4E14;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E; <code>transform</code> &#x628A;&#x9700;&#x8981;&#x79FB;&#x52A8;&#x7684;&#x8282;&#x70B9;&#x7684;&#x4F4D;&#x7F6E;&#x53C8;&#x504F;&#x79FB;&#x5230;&#x4E4B;&#x524D;&#x7684;&#x65E7;&#x4F4D;&#x7F6E;&#xFF0C;&#x76EE;&#x7684;&#x662F;&#x4E3A;&#x4E86;&#x505A; <code>move</code> &#x7F13;&#x52A8;&#x505A;&#x51C6;&#x5907;&#x3002;</p>
+<ul>
+<li>&#x904D;&#x5386;&#x5B50;&#x5143;&#x7D20;&#x5B9E;&#x73B0; move &#x8FC7;&#x6E21;</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">this</span>._reflow = <span class="hljs-built_in">document</span>.body.offsetHeight
+
+children.forEach((c: VNode) =&gt; {
+  <span class="hljs-keyword">if</span> (c.data.moved) {
+    <span class="hljs-keyword">var</span> el: any = c.elm
+    <span class="hljs-keyword">var</span> s: any = el.style
+    addTransitionClass(el, moveClass)
+    s.transform = s.WebkitTransform = s.transitionDuration = <span class="hljs-string">&apos;&apos;</span>
+    el.addEventListener(transitionEndEvent, el._moveCb = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cb</span> (<span class="hljs-params">e</span>) </span>{
+      <span class="hljs-keyword">if</span> (!e || <span class="hljs-regexp">/transform$/</span>.test(e.propertyName)) {
+        el.removeEventListener(transitionEndEvent, cb)
+        el._moveCb = <span class="hljs-literal">null</span>
+        removeTransitionClass(el, moveClass)
+      }
+    })
+  }
+})
+</code></pre>
+<p>&#x9996;&#x5148;&#x901A;&#x8FC7; <code>document.body.offsetHeight</code> &#x5F3A;&#x5236;&#x89E6;&#x53D1;&#x6D4F;&#x89C8;&#x5668;&#x91CD;&#x7ED8;&#xFF0C;&#x63A5;&#x7740;&#x518D;&#x6B21;&#x5BF9; <code>children</code> &#x904D;&#x5386;&#xFF0C;&#x5148;&#x7ED9;&#x5B50;&#x8282;&#x70B9;&#x6DFB;&#x52A0; <code>moveClass</code>&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;<code>moveClass</code> &#x5B9A;&#x4E49;&#x4E86; <code>transition: all 1s;</code> &#x7F13;&#x52A8;&#xFF1B;&#x63A5;&#x7740;&#x628A;&#x5B50;&#x8282;&#x70B9;&#x7684; <code>style.transform</code> &#x8BBE;&#x7F6E;&#x4E3A;&#x7A7A;&#xFF0C;&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x524D;&#x9762;&#x628A;&#x8FD9;&#x4E9B;&#x8282;&#x70B9;&#x504F;&#x79FB;&#x5230;&#x4E4B;&#x524D;&#x7684;&#x65E7;&#x4F4D;&#x7F6E;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x5C31;&#x4F1A;&#x4ECE;&#x65E7;&#x4F4D;&#x7F6E;&#x6309;&#x7167; <code>1s</code> &#x7684;&#x7F13;&#x52A8;&#x65F6;&#x95F4;&#x8FC7;&#x6E21;&#x504F;&#x79FB;&#x5230;&#x5B83;&#x7684;&#x5F53;&#x524D;&#x76EE;&#x6807;&#x4F4D;&#x7F6E;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x5B9E;&#x73B0;&#x4E86; move &#x7684;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x3002;&#x5E76;&#x4E14;&#x63A5;&#x4E0B;&#x6765;&#x4F1A;&#x76D1;&#x542C; <code>transitionEndEvent</code> &#x8FC7;&#x6E21;&#x7ED3;&#x675F;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x505A;&#x4E00;&#x4E9B;&#x6E05;&#x7406;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x7531;&#x4E8E;&#x865A;&#x62DF; DOM &#x7684;&#x5B50;&#x5143;&#x7D20;&#x66F4;&#x65B0;&#x7B97;&#x6CD5;&#x662F;&#x4E0D;&#x7A33;&#x5B9A;&#x7684;&#xFF0C;&#x5B83;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x88AB;&#x79FB;&#x9664;&#x5143;&#x7D20;&#x7684;&#x76F8;&#x5BF9;&#x4F4D;&#x7F6E;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5F3A;&#x5236; <code>&lt;transition-group&gt;</code> &#x7EC4;&#x4EF6;&#x66F4;&#x65B0;&#x5B50;&#x8282;&#x70B9;&#x901A;&#x8FC7; 2 &#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;&#x7B2C;&#x4E00;&#x6B65;&#x6211;&#x4EEC;&#x79FB;&#x9664;&#x9700;&#x8981;&#x79FB;&#x9664;&#x7684; <code>vnode</code>&#xFF0C;&#x540C;&#x65F6;&#x89E6;&#x53D1;&#x5B83;&#x4EEC;&#x7684; <code>leaving</code> &#x8FC7;&#x6E21;&#xFF1B;&#x7B2C;&#x4E8C;&#x6B65;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x628A;&#x63D2;&#x5165;&#x548C;&#x79FB;&#x52A8;&#x7684;&#x8282;&#x70B9;&#x8FBE;&#x5230;&#x5B83;&#x4EEC;&#x7684;&#x6700;&#x7EC8;&#x6001;&#xFF0C;&#x540C;&#x65F6;&#x8FD8;&#x8981;&#x4FDD;&#x8BC1;&#x79FB;&#x9664;&#x7684;&#x8282;&#x70B9;&#x4FDD;&#x7559;&#x5728;&#x5E94;&#x8BE5;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x662F;&#x901A;&#x8FC7; <code>beforeUpdate</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#x6765;&#x5B9E;&#x73B0;&#x7684;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">this</span>.__patch__(
+  <span class="hljs-keyword">this</span>._vnode,
+  <span class="hljs-keyword">this</span>.kept,
+  <span class="hljs-literal">false</span>,
+  <span class="hljs-literal">true</span>
+)
+<span class="hljs-keyword">this</span>._vnode = <span class="hljs-keyword">this</span>.kept
+</code></pre>
+<p>&#x901A;&#x8FC7;&#x628A; <code>__patch__</code> &#x65B9;&#x6CD5;&#x7684;&#x7B2C;&#x56DB;&#x4E2A;&#x53C2;&#x6570; <code>removeOnly</code> &#x8BBE;&#x7F6E;&#x4E3A; true&#xFF0C;&#x8FD9;&#x6837;&#x5728; <code>updateChildren</code> &#x9636;&#x6BB5;&#xFF0C;&#x662F;&#x4E0D;&#x4F1A;&#x79FB;&#x52A8; <code>vnode</code> &#x8282;&#x70B9;&#x7684;&#x3002;</p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x90A3;&#x4E48;&#x5230;&#x6B64;&#xFF0C;<code>&lt;transtion-group&gt;</code> &#x7EC4;&#x4EF6;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x5C31;&#x4ECB;&#x7ECD;&#x5B8C;&#x6BD5;&#x4E86;&#xFF0C;&#x5B83;&#x548C; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x76F8;&#x6BD4;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;&#x5217;&#x8868;&#x7684;&#x8FC7;&#x6E21;&#xFF0C;&#x4EE5;&#x53CA;&#x5B83;&#x4F1A;&#x6E32;&#x67D3;&#x6210;&#x771F;&#x5B9E;&#x7684;&#x5143;&#x7D20;&#x3002;&#x5F53;&#x6211;&#x4EEC;&#x53BB;&#x4FEE;&#x6539;&#x5217;&#x8868;&#x7684;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x6DFB;&#x52A0;&#x6216;&#x8005;&#x5220;&#x9664;&#x6570;&#x636E;&#xFF0C;&#x5219;&#x4F1A;&#x89E6;&#x53D1;&#x76F8;&#x5E94;&#x5143;&#x7D20;&#x672C;&#x8EAB;&#x7684;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#xFF0C;&#x8FD9;&#x70B9;&#x548C; <code>&lt;transition&gt;</code> &#x7EC4;&#x4EF6;&#x5B9E;&#x73B0;&#x6548;&#x679C;&#x4E00;&#x6837;&#xFF0C;&#x9664;&#x6B64;&#x4E4B;&#x5916; <code>&lt;transtion-group&gt;</code> &#x8FD8;&#x5B9E;&#x73B0;&#x4E86; move &#x7684;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x7684;&#x5217;&#x8868;&#x8FC7;&#x6E21;&#x52A8;&#x753B;&#x66F4;&#x52A0;&#x4E30;&#x5BCC;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="tansition.html" class="navigation navigation-prev " aria-label="Previous page: transition">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../vue-router/" class="navigation navigation-next " aria-label="Next page: Vue-Router">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"transition-group","level":"1.7.6","depth":2,"next":{"title":"Vue-Router","level":"1.8","depth":1,"path":"vue-router/index.md","ref":"vue-router/index.md","articles":[{"title":"路由注册","level":"1.8.1","depth":2,"path":"vue-router/install.md","ref":"vue-router/install.md","articles":[]},{"title":"VueRouter 对象","level":"1.8.2","depth":2,"path":"vue-router/router.md","ref":"vue-router/router.md","articles":[]},{"title":"matcher","level":"1.8.3","depth":2,"path":"vue-router/matcher.md","ref":"vue-router/matcher.md","articles":[]},{"title":"路径切换","level":"1.8.4","depth":2,"path":"vue-router/transition-to.md","ref":"vue-router/transition-to.md","articles":[]}]},"previous":{"title":"transition","level":"1.7.5","depth":2,"path":"extend/tansition.md","ref":"extend/tansition.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"scripts":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"extend/tansition-group.md","mtime":"2018-04-15T09:39:28.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-14T09:34:48.956Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

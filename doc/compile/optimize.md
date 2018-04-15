@@ -132,7 +132,7 @@ function markStaticRoots (node: ASTNode, isInFor: boolean) {
 ```
 
 `markStaticRoots` 第二个参数是 `isInFor`，对于已经是 `static` 的节点或者是 `v-once` 指令的节点，`node.staticInFor = isInFor`。
-接着就是对于 `staticRoot` 的判断逻辑，对于有资格成为 `staticRoot` 的节点，除了本身是一个静态节点外，必须满足拥有 `children`，并且 `children` 不能只是一个文本节点，不然的话把它标记成静态根节点的收益就很小了，这点我们在稍后的代码生成阶段会说明。
+接着就是对于 `staticRoot` 的判断逻辑，从注释中我们可以看到，对于有资格成为 `staticRoot` 的节点，除了本身是一个静态节点外，必须满足拥有 `children`，并且 `children` 不能只是一个文本节点，不然的话把它标记成静态根节点的收益就很小了。
 
 接下来和标记静态节点的逻辑一样，遍历 `children` 以及 `ifConditions`，递归执行 `markStaticRoots`。
 

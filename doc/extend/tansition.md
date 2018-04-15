@@ -1,8 +1,8 @@
-# 过渡
+# transition
 
 在我们平时的前端项目开发中，经常会遇到如下需求，一个 DOM 节点的插入和删除或者是显示和隐藏，我们不想让它特别生硬，通常会考虑加一些过渡效果。
 
-Vue.js 除了实现了强大的数据驱动，组件化的能力，也给我们提供了一整套过渡的解决方案。它内置了 `transition` 组件，我们可以利用它配合一些 CSS3 样式很方便地实现过渡动画，也可以利用它配合 JavaScript 的钩子函数实现过渡动画，在下列情形中，可以给任何元素和组件添加 entering/leaving 过渡：
+Vue.js 除了实现了强大的数据驱动，组件化的能力，也给我们提供了一整套过渡的解决方案。它内置了 `<transition>` 组件，我们可以利用它配合一些 CSS3 样式很方便地实现过渡动画，也可以利用它配合 JavaScript 的钩子函数实现过渡动画，在下列情形中，可以给任何元素和组件添加 entering/leaving 过渡：
 
 - 条件渲染 (使用 `v-if`)
 - 条件展示 (使用 `v-show`)
@@ -39,11 +39,11 @@ let vm = new Vue({
 }
 ```
 
-当我们点击按钮切换显示状态的时候，被 `transition` 包裹的内容会有过渡动画。那么接下来我们从源码的角度来分析它的实现原理。
+当我们点击按钮切换显示状态的时候，被 `<transition>` 包裹的内容会有过渡动画。那么接下来我们从源码的角度来分析它的实现原理。
 
-## transition 组件
+## 内置组件
 
-`transition` 组件和 `keep-alive` 组件一样，都是 Vue 的内置组件，而 `transtion` 的定义在 `src/platforms/web/runtime/component/transtion.js` 中，只所以在这里定义，是因为 `transtion` 组件是 web 平台独有的，先来看一下它的实现：
+`<transition>` 组件和 `<keep-alive>` 组件一样，都是 Vue 的内置组件，而 `<transition>` 的定义在 `src/platforms/web/runtime/component/transtion.js` 中，之所以在这里定义，是因为 `<transition>` 组件是 web 平台独有的，先来看一下它的实现：
 
 ```js
 export default {
@@ -57,12 +57,14 @@ export default {
       return
     }
 
+    // filter out text nodes (possible whitespaces)
     children = children.filter((c: VNode) => c.tag || isAsyncPlaceholder(c))
-    
+    /* istanbul ignore if */
     if (!children.length) {
       return
     }
 
+    // warn multiple elements
     if (process.env.NODE_ENV !== 'production' && children.length > 1) {
       warn(
         '<transition> can only be used on a single element. Use ' +
@@ -73,6 +75,7 @@ export default {
 
     const mode: string = this.mode
 
+    // warn invalid mode
     if (process.env.NODE_ENV !== 'production' &&
       mode && mode !== 'in-out' && mode !== 'out-in'
     ) {
@@ -84,11 +87,16 @@ export default {
 
     const rawChild: VNode = children[0]
 
+    // if this is a component root node and the component's
+    // parent container node also has transition, skip.
     if (hasParentTransition(this.$vnode)) {
       return rawChild
     }
 
+    // apply transition data to child
+    // use getRealChild() to ignore abstract components e.g. keep-alive
     const child: ?VNode = getRealChild(rawChild)
+    /* istanbul ignore if */
     if (!child) {
       return rawChild
     }
@@ -97,6 +105,9 @@ export default {
       return placeholder(h, rawChild)
     }
 
+    // ensure a key that is unique to the vnode type and to this transition
+    // component instance. This key will be used to remove pending leaving nodes
+    // during entering.
     const id: string = `__transition-${this._uid}-`
     child.key = child.key == null
       ? child.isComment
@@ -110,6 +121,8 @@ export default {
     const oldRawChild: VNode = this._vnode
     const oldChild: VNode = getRealChild(oldRawChild)
 
+    // mark v-show
+    // so that the transition module can hand over the control to the directive
     if (child.data.directives && child.data.directives.some(d => d.name === 'show')) {
       child.data.show = true
     }
@@ -119,10 +132,15 @@ export default {
       oldChild.data &&
       !isSameChild(child, oldChild) &&
       !isAsyncPlaceholder(oldChild) &&
+      // #6687 component root is a comment node
       !(oldChild.componentInstance && oldChild.componentInstance._vnode.isComment)
     ) {
+      // replace old child transition data with fresh one
+      // important for dynamic transitions!
       const oldData: Object = oldChild.data.transition = extend({}, data)
+      // handle transition mode
       if (mode === 'out-in') {
+        // return placeholder node and queue update when leave finishes
         this._leaving = true
         mergeVNodeHook(oldData, 'afterLeave', () => {
           this._leaving = false
@@ -146,7 +164,7 @@ export default {
 }
 ```
 
-`transition` 组件和 `keep-alive` 组件有几点实现类似，同样是抽象组件，同样直接实现 `render` 函数，同样利用了默认插槽。`transition` 组件非常灵活，支持的 `props` 非常多：
+`<transition>` 组件和 `<keep-alive>` 组件有几点实现类似，同样是抽象组件，同样直接实现 `render` 函数，同样利用了默认插槽。`<transition>` 组件非常灵活，支持的 `props` 非常多：
 
 ```js
 export const transitionProps = {
@@ -168,7 +186,7 @@ export const transitionProps = {
 }
 ```
 
-这些配置我们稍后会分析它们的作用，`transition` 组件另一个重要的就是 `render` 函数的实现，`render` 函数主要作用就是渲染生成 `vnode`，下面来看一下这部分的逻辑。
+这些配置我们稍后会分析它们的作用，`<transition>` 组件另一个重要的就是 `render` 函数的实现，`render` 函数主要作用就是渲染生成 `vnode`，下面来看一下这部分的逻辑。
 
 - 处理 `children`
 
@@ -178,12 +196,14 @@ if (!children) {
   return
 }
 
+// filter out text nodes (possible whitespaces)
 children = children.filter((c: VNode) => c.tag || isAsyncPlaceholder(c))
-
+/* istanbul ignore if */
 if (!children.length) {
   return
 }
 
+// warn multiple elements
 if (process.env.NODE_ENV !== 'production' && children.length > 1) {
   warn(
     '<transition> can only be used on a single element. Use ' +
@@ -193,13 +213,14 @@ if (process.env.NODE_ENV !== 'production' && children.length > 1) {
 }
 ```
 
-先从默认插槽中获取 `transition` 包裹的子节点，并且判断了子节点的长度，如果长度为 0，则直接返回，否则判断长度如果大于 1，也会在开发环境报警告，因为 `transition` 组件是只能包裹一个子节点的。
+先从默认插槽中获取 `<transition>` 包裹的子节点，并且判断了子节点的长度，如果长度为 0，则直接返回，否则判断长度如果大于 1，也会在开发环境报警告，因为 `<transition>` 组件是只能包裹一个子节点的。
 
 - 处理 `model`
 
 ```js
 const mode: string = this.mode
 
+// warn invalid mode
 if (process.env.NODE_ENV !== 'production' &&
   mode && mode !== 'in-out' && mode !== 'out-in'
 ) {
@@ -217,17 +238,23 @@ if (process.env.NODE_ENV !== 'production' &&
 ```js
 const rawChild: VNode = children[0]
 
+// if this is a component root node and the component's
+// parent container node also has transition, skip.
 if (hasParentTransition(this.$vnode)) {
   return rawChild
 }
 
+// apply transition data to child
+// use getRealChild() to ignore abstract components e.g. keep-alive
 const child: ?VNode = getRealChild(rawChild)
+/* istanbul ignore if */
 if (!child) {
   return rawChild
 }
+
 ```
 
-`rawChild` 就是第一个子节点 `vnode`，接着判断当前 `transition` 如果是组件根节点并且外面包裹该组件的容器也是 `transition` 的时候要跳过。来看一下 `hasParentTransition` 的实现：
+`rawChild` 就是第一个子节点 `vnode`，接着判断当前 `<transition>` 如果是组件根节点并且外面包裹该组件的容器也是 `<transition>` 的时候要跳过。来看一下 `hasParentTransition` 的实现：
 
 ```js
 function hasParentTransition (vnode: VNode): ?boolean {
@@ -238,12 +265,13 @@ function hasParentTransition (vnode: VNode): ?boolean {
   }
 }
 ```
+因为传入的是 `this.$vnode`，也就是 `<transition>` 组件的 占位 `vnode`，只有当它又同时作为渲染 `vnode`，也就是 `vm._vnode` 的时候，它的 `parent` 才不会为空，并且判断 `parent` 也是 `<transition>` 组件，才返回 true，`vnode.data.transition` 我们稍后会介绍。
 
-因为传入的是 `this.$vnode`，也就是 `transition` 组件的 `vnode`，只有当它作为根组件的时候，它的 `parent` 才不会为空，并且判断 `parent` 也是 `transition` 组件，才返回 true。
-
-`getRealChild` 的目的是获取非抽象组件的子节点，因为 `transition` 很可能会包裹一个 `keep-alive`，它的实现如下：
+`getRealChild` 的目的是获取组件的非抽象子节点，因为 `<transition>` 很可能会包裹一个 `keep-alive`，它的实现如下：
 
 ```js
+// in case the child is also an abstract component, e.g. <keep-alive>
+// we want to recursively retrieve the real component to be rendered
 function getRealChild (vnode: ?VNode): ?VNode {
   const compOptions: ?VNodeComponentOptions = vnode && vnode.componentOptions
   if (compOptions && compOptions.Ctor.options.abstract) {
@@ -258,6 +286,9 @@ function getRealChild (vnode: ?VNode): ?VNode {
 - 处理 `id` & `data`
 
 ```js
+// ensure a key that is unique to the vnode type and to this transition
+// component instance. This key will be used to remove pending leaving nodes
+// during entering.
 const id: string = `__transition-${this._uid}-`
 child.key = child.key == null
   ? child.isComment
@@ -271,6 +302,8 @@ const data: Object = (child.data || (child.data = {})).transition = extractTrans
 const oldRawChild: VNode = this._vnode
 const oldChild: VNode = getRealChild(oldRawChild)
 
+// mark v-show
+// so that the transition module can hand over the control to the directive
 if (child.data.directives && child.data.directives.some(d => d.name === 'show')) {
   child.data.show = true
 }
@@ -282,10 +315,12 @@ if (child.data.directives && child.data.directives.some(d => d.name === 'show'))
 export function extractTransitionData (comp: Component): Object {
   const data = {}
   const options: ComponentOptions = comp.$options
+  // props
   for (const key in options.propsData) {
     data[key] = comp[key]
   }
- 
+  // events.
+  // extract listeners and pass them directly to the transition methods
   const listeners: ?Object = options._parentListeners
   for (const key in listeners) {
     data[camelize(key)] = listeners[key]
@@ -309,7 +344,7 @@ export function extractTransitionData (comp: Component): Object {
 
 ## transition module
 
-刚刚我们介绍完 `transition` 组件的实现，它的 `render` 阶段只获取了一些数据，并且返回了渲染的 `vnode`，并没有任何和动画相关，而动画相关的逻辑全部在 `src/platforms/web/modules/transition.js` 中：
+刚刚我们介绍完 `<transition>` 组件的实现，它的 `render` 阶段只获取了一些数据，并且返回了渲染的 `vnode`，并没有任何和动画相关，而动画相关的逻辑全部在 `src/platforms/web/modules/transition.js` 中：
 
 ```js
 function _enter (_: any, vnode: VNodeWithData) {
@@ -322,6 +357,7 @@ export default inBrowser ? {
   create: _enter,
   activate: _enter,
   remove (vnode: VNode, rm: Function) {
+    /* istanbul ignore else */
     if (vnode.data.show !== true) {
       leave(vnode, rm)
     } else {
@@ -331,7 +367,7 @@ export default inBrowser ? {
 } : {}
 ```
 
-在之前介绍事件实现的章节中我们提到过在 `vnode patch` 的过程中，会执行很多钩子函数，那么对于过渡的实现，它只接收了 `create` 和 `activate` 2 个钩子函数，我们知道 `create` 钩子函数只有当节点的创建过程才会执行，而 `remove` 会在节点销毁的时候执行，这也就印证了 `transition` 必须要满足 `v-if` 、动态组件、组件根节点条件之一了，对于 `v-show` 在它的指令的钩子函数中也会执行相关逻辑，这块儿先不介绍。
+在之前介绍事件实现的章节中我们提到过在 `vnode patch` 的过程中，会执行很多钩子函数，那么对于过渡的实现，它只接收了 `create` 和 `activate` 2 个钩子函数，我们知道 `create` 钩子函数只有当节点的创建过程才会执行，而 `remove` 会在节点销毁的时候执行，这也就印证了 `<transition>` 必须要满足 `v-if` 、动态组件、组件根节点条件之一了，对于 `v-show` 在它的指令的钩子函数中也会执行相关逻辑，这块儿先不介绍。
 
 过渡动画提供了 2 个时机，一个是 `create` 和 `activate` 的时候提供了 entering 进入动画，一个是 `remove` 的时候提供了 leaving 离开动画，那么接下来我们就来分别去分析这两个过程。
 
@@ -343,6 +379,7 @@ export default inBrowser ? {
 export function enter (vnode: VNodeWithData, toggleDisplay: ?() => void) {
   const el: any = vnode.elm
 
+  // call leave callback now
   if (isDef(el._leaveCb)) {
     el._leaveCb.cancelled = true
     el._leaveCb()
@@ -353,6 +390,7 @@ export function enter (vnode: VNodeWithData, toggleDisplay: ?() => void) {
     return
   }
 
+  /* istanbul ignore if */
   if (isDef(el._enterCb) || el.nodeType !== 1) {
     return
   }
@@ -377,6 +415,10 @@ export function enter (vnode: VNodeWithData, toggleDisplay: ?() => void) {
     duration
   } = data
 
+  // activeInstance will always be the <transition> component managing this
+  // transition. One edge case to check is when the <transition> is placed
+  // as the root node of a child component. In that case we need to check
+  // <transition>'s parent for appear check.
   let context = activeInstance
   let transitionNode = activeInstance.$vnode
   while (transitionNode && transitionNode.parent) {
@@ -443,6 +485,7 @@ export function enter (vnode: VNodeWithData, toggleDisplay: ?() => void) {
   })
 
   if (!vnode.data.show) {
+    // remove pending leave element on enter by injecting an insert hook
     mergeVNodeHook(vnode, 'insert', () => {
       const parent = el.parentNode
       const pendingNode = parent && parent._pending && parent._pending[vnode.key]
@@ -456,6 +499,7 @@ export function enter (vnode: VNodeWithData, toggleDisplay: ?() => void) {
     })
   }
 
+  // start enter transition
   beforeEnterHook && beforeEnterHook(el)
   if (expectsCSS) {
     addTransitionClass(el, startClass)
@@ -517,13 +561,14 @@ const {
 } = data
 ```
 
-从 `vnode` 中解析出过渡相关的一些数据，`resolveTransition` 的定义在 `src/platforms/web/runtime-util.js` 中：
+从 `vnode.data.transition` 中解析出过渡相关的一些数据，`resolveTransition` 的定义在 `src/platforms/web/transition-util.js` 中：
 
 ```js
 export function resolveTransition (def?: string | Object): ?Object {
   if (!def) {
     return
   }
+  /* istanbul ignore else */
   if (typeof def === 'object') {
     const res = {}
     if (def.css !== false) {
@@ -552,12 +597,17 @@ const autoCssTransition: (name: string) => Object = cached(name => {
 - 处理边界情况
 
 ```js
+// activeInstance will always be the <transition> component managing this
+// transition. One edge case to check is when the <transition> is placed
+// as the root node of a child component. In that case we need to check
+// <transition>'s parent for appear check.
 let context = activeInstance
 let transitionNode = activeInstance.$vnode
 while (transitionNode && transitionNode.parent) {
   transitionNode = transitionNode.parent
   context = transitionNode.context
 }
+
 const isAppear = !context._isMounted || !vnode.isRootInsert
 
 if (isAppear && !appear && appear !== '') {
@@ -565,9 +615,9 @@ if (isAppear && !appear && appear !== '') {
 }
 ```
 
-这是为了处理当 `transition` 作为子组件的根组件，并且外部包裹该子组件也是 `transition` 组件，那么子组件的 `transition` 会被忽略，上下文环境也切到父组件实例。
+这是为了处理当 `<transition>` 作为子组件的根组件，并且外部包裹该子组件也是 `<transition>` 组件，那么子组件的 `<transition>` 会被忽略，上下文环境也切到父组件实例。
 
-`isAppear` 表示当前上下文实例还没有 `mounted`，第一次出现的时机，如果是第一次并且 `transition` 组件没有配置 `appear` 的话，直接返回。
+`isAppear` 表示当前上下文实例还没有 `mounted`，第一次出现的时机，如果是第一次并且 `<transition>` 组件没有配置 `appear` 的话，直接返回。
 
 - 定义过渡类名、钩子函数和其它配置
 
@@ -609,23 +659,23 @@ const expectsCSS = css !== false && !isIE9
 const userWantsControl = getHookArgumentsLength(enterHook)
 
 const cb = el._enterCb = once(() => {
-if (expectsCSS) {
-  removeTransitionClass(el, toClass)
-  removeTransitionClass(el, activeClass)
-}
-if (cb.cancelled) {
   if (expectsCSS) {
-    removeTransitionClass(el, startClass)
+    removeTransitionClass(el, toClass)
+    removeTransitionClass(el, activeClass)
   }
-  enterCancelledHook && enterCancelledHook(el)
-} else {
-  afterEnterHook && afterEnterHook(el)
-}
-el._enterCb = null
+  if (cb.cancelled) {
+    if (expectsCSS) {
+      removeTransitionClass(el, startClass)
+    }
+    enterCancelledHook && enterCancelledHook(el)
+  } else {
+    afterEnterHook && afterEnterHook(el)
+  }
+  el._enterCb = null
 })
 ```
 
-对于过渡类名方面，`startClass` 定义进入过渡的开始状态，在元素被插入时生效，在下一个帧移除；`activeClass` 定义过渡的状态，在元素整个过渡过程中作用，在元素被插入时生效，在 `transition/animation` 完成之后移除；`toClass` 定义进入过渡的结束状态，在元素被插入一帧后生效 (与此同时 `startClass` 被删除)，在 `transition/animation` 完成之后移除。
+对于过渡类名方面，`startClass` 定义进入过渡的开始状态，在元素被插入时生效，在下一个帧移除；`activeClass` 定义过渡的状态，在元素整个过渡过程中作用，在元素被插入时生效，在 `transition/animation` 完成之后移除；`toClass` 定义进入过渡的结束状态，在元素被插入一帧后生效 (与此同时 `startClass` 被删除)，在 `<transition>/animation` 完成之后移除。
 
 对于过渡钩子函数方面，`beforeEnterHook` 是过渡开始前执行的钩子函数，`enterHook` 是在元素插入后或者是 `v-show` 显示切换后执行的钩子函数。`afterEnterHook` 是在过渡动画执行完后的钩子函数。
 
@@ -638,7 +688,8 @@ el._enterCb = null
 - 合并 `insert` 钩子函数
 
 ```js
- if (!vnode.data.show) {
+if (!vnode.data.show) {
+  // remove pending leave element on enter by injecting an insert hook
   mergeVNodeHook(vnode, 'insert', () => {
     const parent = el.parentNode
     const pendingNode = parent && parent._pending && parent._pending[vnode.key]
@@ -650,7 +701,7 @@ el._enterCb = null
     }
     enterHook && enterHook(el, cb)
   })
-}  
+}
 ```
 
 `mergeVNodeHook` 的定义在 `src/core/vdom/helpers/merge-hook.js` 中：
@@ -665,16 +716,22 @@ export function mergeVNodeHook (def: Object, hookKey: string, hook: Function) {
 
   function wrappedHook () {
     hook.apply(this, arguments)
+    // important: remove merged hook to ensure it's called only once
+    // and prevent memory leak
     remove(invoker.fns, wrappedHook)
   }
 
   if (isUndef(oldHook)) {
+    // no existing hook
     invoker = createFnInvoker([wrappedHook])
   } else {
+    /* istanbul ignore if */
     if (isDef(oldHook.fns) && isTrue(oldHook.merged)) {
+      // already a merged invoker
       invoker = oldHook
       invoker.fns.push(wrappedHook)
     } else {
+      // existing plain hook
       invoker = createFnInvoker([oldHook, wrappedHook])
     }
   }
@@ -685,11 +742,12 @@ export function mergeVNodeHook (def: Object, hookKey: string, hook: Function) {
 ```
 `mergeVNodeHook` 的逻辑很简单，就是把 `hook` 函数合并到 `def.data.hook[hookey]` 中，生成新的 `invoker`，`createFnInvoker` 方法我们在分析事件章节的时候已经介绍过了。
 
-我们之前知道组件的 `vnode` 原本定义了 `init`、`prepatch`、`insert`、`destroy` 四个钩子函数，而 `mergeVNodeHook` 函数就是把一些新的钩子函数合并进来，例如在 `transition` 过程中合并的 `insert` 钩子函数，就会合并到组件 `vnode` 的 `insert` 钩子函数中，这样当组件插入后，就会执行我们定义的 `enterHook` 了。
+我们之前知道组件的 `vnode` 原本定义了 `init`、`prepatch`、`insert`、`destroy` 四个钩子函数，而 `mergeVNodeHook` 函数就是把一些新的钩子函数合并进来，例如在 `<transition>` 过程中合并的 `insert` 钩子函数，就会合并到组件 `vnode` 的 `insert` 钩子函数中，这样当组件插入后，就会执行我们定义的 `enterHook` 了。
 
 - 开始执行过渡动画
 
 ```js
+// start enter transition
 beforeEnterHook && beforeEnterHook(el)
 if (expectsCSS) {
   addTransitionClass(el, startClass)
@@ -761,7 +819,7 @@ export function whenTransitionEnds (
 ) {
   const { type, timeout, propCount } = getTransitionInfo(el, expectedType)
   if (!type) return cb()
-  const event: string = type === TRANSITION ? transitionEndEvent : animationEndEvent
+  const event: string = type === <transition> ? transitionEndEvent : animationEndEvent
   let ended = 0
   const end = () => {
     el.removeEventListener(event, onEnd)
@@ -788,19 +846,19 @@ export function whenTransitionEnds (
 
 ```js
 const cb = el._enterCb = once(() => {
-if (expectsCSS) {
-  removeTransitionClass(el, toClass)
-  removeTransitionClass(el, activeClass)
-}
-if (cb.cancelled) {
   if (expectsCSS) {
-    removeTransitionClass(el, startClass)
+    removeTransitionClass(el, toClass)
+    removeTransitionClass(el, activeClass)
   }
-  enterCancelledHook && enterCancelledHook(el)
-} else {
-  afterEnterHook && afterEnterHook(el)
-}
-el._enterCb = null
+  if (cb.cancelled) {
+    if (expectsCSS) {
+      removeTransitionClass(el, startClass)
+    }
+    enterCancelledHook && enterCancelledHook(el)
+  } else {
+    afterEnterHook && afterEnterHook(el)
+  }
+  el._enterCb = null
 })
 ```
 
@@ -886,9 +944,11 @@ export function leave (vnode: VNodeWithData, rm: Function) {
   }
 
   function performLeave () {
+    // the delayed leave may have already been cancelled
     if (cb.cancelled) {
       return
     }
+    // record leaving element
     if (!vnode.data.show) {
       (el.parentNode._pending || (el.parentNode._pending = {}))[(vnode.key: any)] = vnode
     }
@@ -922,7 +982,7 @@ export function leave (vnode: VNodeWithData, rm: Function) {
 
 ## 总结
 
-那么到此为止基本的 `transition` 过渡的实现分析完毕了，总结起来，Vue 的过渡实现分为以下几个步骤：
+那么到此为止基本的 `<transition>` 过渡的实现分析完毕了，总结起来，Vue 的过渡实现分为以下几个步骤：
 
 1. 自动嗅探目标元素是否应用了 CSS 过渡或动画，如果是，在恰当的时机添加/删除 CSS 类名。
 
@@ -930,7 +990,7 @@ export function leave (vnode: VNodeWithData, rm: Function) {
 
 3. 如果没有找到 JavaScript 钩子并且也没有检测到 CSS 过渡/动画，DOM 操作 (插入/删除) 在下一帧中立即执行。
 
-所以真正执行动画的是我们写的 CSS 或者是 JavaScript 钩子函数，而 Vue 的 `transition` 只是帮我们很好地管理了这些 CSS 的添加/删除 以及钩子函数的执行时机。
+所以真正执行动画的是我们写的 CSS 或者是 JavaScript 钩子函数，而 Vue 的 `<transition>` 只是帮我们很好地管理了这些 CSS 的添加/删除 以及钩子函数的执行时机。
 
 
  

@@ -1,4 +1,4 @@
-# VueRouter
+# VueRouter 对象
 
 VueRouter 的实现是一个类，我们先对它做一个简单地分析，它的定义在 `src/index.js` 中：
 
