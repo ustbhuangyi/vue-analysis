@@ -45,11 +45,14 @@ let childComp = {
   }
 }
 
-let app = new Vue({
-  el: '#app',
+Vue.mixin({
   created() {
     console.log('parent created')
-  },
+  }
+})
+
+let app = new Vue({
+  el: '#app',
   render: h => h(childComp)
 })
 ```
