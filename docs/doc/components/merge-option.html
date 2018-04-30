@@ -840,24 +840,41 @@
 }
 </code></pre>
 <p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x4E0D;&#x540C;&#x573A;&#x666F;&#x5BF9;&#x4E8E; <code>options</code> &#x7684;&#x5408;&#x5E76;&#x903B;&#x8F91;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x4F20;&#x5165;&#x7684; <code>options</code> &#x503C;&#x4E5F;&#x6709;&#x975E;&#x5E38;&#x5927;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4F1A;&#x5206;&#x5F00;&#x4ECB;&#x7ECD; 2 &#x79CD;&#x573A;&#x666F;&#x7684; options &#x5408;&#x5E76;&#x8FC7;&#x7A0B;&#x3002;</p>
-<h2 id="&#x5916;&#x90E8;&#x8C03;&#x7528;&#x573A;&#x666F;">&#x5916;&#x90E8;&#x8C03;&#x7528;&#x573A;&#x666F;</h2>
+<p>&#x4E3A;&#x4E86;&#x66F4;&#x76F4;&#x89C2;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4E3E;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x793A;&#x4F8B;&#xFF1A;</p>
 <pre><code class="lang-js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;vue&apos;</span>
-<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./App&apos;</span>
 
-<span class="hljs-comment">/* eslint-disable no-new */</span>
-<span class="hljs-keyword">new</span> Vue({
+<span class="hljs-keyword">let</span> childComp = {
+  template: <span class="hljs-string">&apos;&lt;div&gt;{{msg}}&lt;/div&gt;&apos;</span>,
+  created() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;child created&apos;</span>)
+  },
+  mounted() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;child mounted&apos;</span>)
+  },
+  data() {
+    <span class="hljs-keyword">return</span> {
+      msg: <span class="hljs-string">&apos;Hello Vue&apos;</span>
+    }
+  }
+}
+
+<span class="hljs-keyword">let</span> app = <span class="hljs-keyword">new</span> Vue({
   el: <span class="hljs-string">&apos;#app&apos;</span>,
-  render: h =&gt; h(App)
+  created() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;parent created&apos;</span>)
+  },
+  render: h =&gt; h(childComp)
 })
 </code></pre>
-<p>&#x4E3E;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x8FD9;&#x91CC;&#x7684; <code>options</code> &#x6709; <code>el</code> &#x548C; <code>render</code> &#x4E24;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x6267;&#x884C; <code>this._init(options)</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x4F1A;&#x6267;&#x884C;&#x5982;&#x4E0B;&#x903B;&#x8F91;&#x53BB;&#x5408;&#x5E76; <code>options</code>&#xFF1A;</p>
+<h2 id="&#x5916;&#x90E8;&#x8C03;&#x7528;&#x573A;&#x666F;">&#x5916;&#x90E8;&#x8C03;&#x7528;&#x573A;&#x666F;</h2>
+<p>&#x5F53;&#x6267;&#x884C; <code>new Vue</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5728;&#x6267;&#x884C; <code>this._init(options)</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x4F1A;&#x6267;&#x884C;&#x5982;&#x4E0B;&#x903B;&#x8F91;&#x53BB;&#x5408;&#x5E76; <code>options</code>&#xFF1A;</p>
 <pre><code class="lang-js">vm.$options = mergeOptions(
   resolveConstructorOptions(vm.constructor),
   options || {},
   vm
 )
 </code></pre>
-<p>&#x8FD9;&#x91CC;&#x901A;&#x8FC7;&#x8C03;&#x7528; <code>mergeOptions</code> &#x65B9;&#x6CD5;&#x6765;&#x5408;&#x5E76;&#xFF0C;&#x5B83;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x628A; <code>resolveConstructorOptions(vm.constructor)</code> &#x7684;&#x8FD4;&#x56DE;&#x503C;&#x548C; <code>options</code> &#x505A;&#x5408;&#x5E76;&#xFF0C;<code>resolveConstructorOptions</code> &#x7684;&#x5B9E;&#x73B0;&#x5148;&#x4E0D;&#x8003;&#x8651;&#xFF0C;&#x5B83;&#x4E3B;&#x8981;&#x662F;&#x89E3;&#x51B3;&#x540E;&#x6267;&#x884C;&#x5168;&#x5C40; <code>Mixin</code> &#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x4EE5;&#x540E;&#x4ECB;&#x7ECD; <code>Mixin</code> &#x7684;&#x65F6;&#x5019;&#x6211;&#x4F1A;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x3002;&#x5728;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x5B83;&#x8FD8;&#x662F;&#x7B80;&#x5355;&#x8FD4;&#x56DE; <code>vm.constructor.options</code>&#xFF0C;&#x76F8;&#x5F53;&#x4E8E; <code>Vue.options</code>&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x503C;&#x53C8;&#x662F;&#x4EC0;&#x4E48;&#x5462;&#xFF0C;&#x5176;&#x5B9E;&#x5728; <code>initGlobalAPI(Vue)</code> &#x7684;&#x65F6;&#x5019;&#x5B9A;&#x4E49;&#x4E86;&#x8FD9;&#x4E2A;&#x503C;&#xFF0C;&#x4EE3;&#x7801;&#x5728; <code>src/core/global-api/index.js</code> &#x4E2D;&#xFF1A;</p>
+<p>&#x8FD9;&#x91CC;&#x901A;&#x8FC7;&#x8C03;&#x7528; <code>mergeOptions</code> &#x65B9;&#x6CD5;&#x6765;&#x5408;&#x5E76;&#xFF0C;&#x5B83;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x628A; <code>resolveConstructorOptions(vm.constructor)</code> &#x7684;&#x8FD4;&#x56DE;&#x503C;&#x548C; <code>options</code> &#x505A;&#x5408;&#x5E76;&#xFF0C;<code>resolveConstructorOptions</code> &#x7684;&#x5B9E;&#x73B0;&#x5148;&#x4E0D;&#x8003;&#x8651;&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x5B83;&#x8FD8;&#x662F;&#x7B80;&#x5355;&#x8FD4;&#x56DE; <code>vm.constructor.options</code>&#xFF0C;&#x76F8;&#x5F53;&#x4E8E; <code>Vue.options</code>&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x503C;&#x53C8;&#x662F;&#x4EC0;&#x4E48;&#x5462;&#xFF0C;&#x5176;&#x5B9E;&#x5728; <code>initGlobalAPI(Vue)</code> &#x7684;&#x65F6;&#x5019;&#x5B9A;&#x4E49;&#x4E86;&#x8FD9;&#x4E2A;&#x503C;&#xFF0C;&#x4EE3;&#x7801;&#x5728; <code>src/core/global-api/index.js</code> &#x4E2D;&#xFF1A;</p>
 <pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initGlobalAPI</span> (<span class="hljs-params">Vue: GlobalAPI</span>) </span>{
   <span class="hljs-comment">// ...</span>
   Vue.options = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>)
@@ -981,6 +998,11 @@ LIFECYCLE_HOOKS.forEach(hook =&gt; {
 <p><code>vm.$options</code> &#x7684;&#x503C;&#x5DEE;&#x4E0D;&#x591A;&#x662F;&#x5982;&#x4E0B;&#x8FD9;&#x6837;&#xFF1A;</p>
 <pre><code class="lang-js">vm.$options = {
   components: { },
+  created: [
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">created</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;parent created&apos;</span>) 
+    }
+  ],
   directives: { },
   filters: { },
   _base: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vue</span>(<span class="hljs-params">options</span>) </span>{
@@ -993,26 +1015,6 @@ LIFECYCLE_HOOKS.forEach(hook =&gt; {
 }
 </code></pre>
 <h2 id="&#x7EC4;&#x4EF6;&#x573A;&#x666F;">&#x7EC4;&#x4EF6;&#x573A;&#x666F;</h2>
-<p>&#x6211;&#x4EEC;&#x5728;&#x5199;&#x7EC4;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x901A;&#x5E38;&#x5B9A;&#x4E49;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
-  created() {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;created&apos;</span>)
-  },
-  mounted() {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;mounted&apos;</span>)
-  },
-  data() {
-    <span class="hljs-keyword">return</span> {
-      msg: <span class="hljs-string">&apos;hello vue&apos;</span>
-    }
-  },
-  method:{
-    sayHello() {
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;hello&apos;</span>)
-    }
-  }
-}
-</code></pre>
 <p>&#x7531;&#x4E8E;&#x7EC4;&#x4EF6;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x662F;&#x901A;&#x8FC7; <code>Vue.extend</code> &#x7EE7;&#x627F;&#x81EA; <code>Vue</code> &#x7684;&#xFF0C;&#x5148;&#x56DE;&#x987E;&#x4E00;&#x4E0B;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#xFF0C;&#x4EE3;&#x7801;&#x5B9A;&#x4E49;&#x5728; <code>src/core/global-api/extend.js</code> &#x4E2D;&#x3002;</p>
 <pre><code class="lang-js"><span class="hljs-comment">/**
  * Class inheritance
@@ -1079,13 +1081,10 @@ Vue.extend = <span class="hljs-function"><span class="hljs-keyword">function</sp
 </code></pre>
 <p><code>vm.$options</code> &#x7684;&#x503C;&#x5DEE;&#x4E0D;&#x591A;&#x662F;&#x5982;&#x4E0B;&#x8FD9;&#x6837;&#xFF1A;</p>
 <pre><code class="lang-js">vm.$options = {
-  parent: <span class="hljs-comment">/*Vue&#x5B9E;&#x4F8B;*/</span>,
+  parent: Vue <span class="hljs-comment">/*&#x7236;Vue&#x5B9E;&#x4F8B;*/</span>,
   propsData: <span class="hljs-literal">undefined</span>,
   _componentTag: <span class="hljs-literal">undefined</span>,
-  _parentElm: body,
-  _parentListeners: <span class="hljs-literal">undefined</span>,
-  _parentVnode: VNode,
-  _refElm: text,
+  _parentVnode: VNode <span class="hljs-comment">/*&#x7236;VNode&#x5B9E;&#x4F8B;*/</span>,
   _renderChildren:<span class="hljs-literal">undefined</span>,
   __proto__: {
     components: { },
@@ -1094,26 +1093,25 @@ Vue.extend = <span class="hljs-function"><span class="hljs-keyword">function</sp
     _base: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vue</span>(<span class="hljs-params">options</span>) </span>{
         <span class="hljs-comment">//...</span>
     },
-    _Ctor: Vue,
-    created() {
-       <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;created&apos;</span>)
-    },
-    mounted() {
-       <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;mounted&apos;</span>)
-    },
+    _Ctor: {},
+    created: [
+      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">created</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;parent created&apos;</span>) 
+      }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">created</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;child created&apos;</span>) 
+      }
+    ],
+    mounted: [
+      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mounted</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;child mounted&apos;</span>) 
+      }
+    ],
     data() {
        <span class="hljs-keyword">return</span> {
-         msg: <span class="hljs-string">&apos;hello vue&apos;</span>
+         msg: <span class="hljs-string">&apos;Hello Vue&apos;</span>
        }
     },
-    method:{
-       sayHello() {
-         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;hello&apos;</span>)
-       }
-    },
-    render: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{  
-
-    }
+    template: <span class="hljs-string">&apos;&lt;div&gt;{{msg}}&lt;/div&gt;&apos;</span>
   }
 }
 </code></pre>
@@ -1163,7 +1161,7 @@ Vue.extend = <span class="hljs-function"><span class="hljs-keyword">function</sp
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"合并配置","level":"1.4.3","depth":2,"next":{"title":"生命周期","level":"1.4.4","depth":2,"path":"components/lifecycle.md","ref":"components/lifecycle.md","articles":[]},"previous":{"title":"patch","level":"1.4.2","depth":2,"path":"components/patch.md","ref":"components/patch.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"scripts":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"components/merge-option.md","mtime":"2018-04-11T07:56:10.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-23T03:51:48.641Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"合并配置","level":"1.4.3","depth":2,"next":{"title":"生命周期","level":"1.4.4","depth":2,"path":"components/lifecycle.md","ref":"components/lifecycle.md","articles":[]},"previous":{"title":"patch","level":"1.4.2","depth":2,"path":"components/patch.md","ref":"components/patch.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"scripts":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"components/merge-option.md","mtime":"2018-04-30T08:29:36.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-30T08:30:22.481Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
