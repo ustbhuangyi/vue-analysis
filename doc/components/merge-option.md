@@ -25,19 +25,38 @@ Vue.prototype._init = function (options?: Object) {
 
 可以看到不同场景对于 `options` 的合并逻辑是不一样的，并且传入的 `options` 值也有非常大的不同，接下来我会分开介绍 2 种场景的 options 合并过程。
 
-## 外部调用场景
+为了更直观，我们可以举个简单的示例：
 
 ```js
 import Vue from 'vue'
-import App from './App'
 
-/* eslint-disable no-new */
-new Vue({
+let childComp = {
+  template: '<div>{{msg}}</div>',
+  created() {
+    console.log('child created')
+  },
+  mounted() {
+    console.log('child mounted')
+  },
+  data() {
+    return {
+      msg: 'Hello Vue'
+    }
+  }
+}
+
+let app = new Vue({
   el: '#app',
-  render: h => h(App)
+  created() {
+    console.log('parent created')
+  },
+  render: h => h(childComp)
 })
 ```
-举个最简单的例子，这里的 `options` 有 `el` 和 `render` 两个属性，那么在执行 `this._init(options)` 的时候，就会执行如下逻辑去合并 `options`：
+
+## 外部调用场景
+
+当执行 `new Vue` 的时候，在执行 `this._init(options)` 的时候，就会执行如下逻辑去合并 `options`：
 
 ```js
 vm.$options = mergeOptions(
@@ -47,7 +66,7 @@ vm.$options = mergeOptions(
 )
 ```
 
-这里通过调用 `mergeOptions` 方法来合并，它实际上就是把 `resolveConstructorOptions(vm.constructor)` 的返回值和 `options` 做合并，`resolveConstructorOptions` 的实现先不考虑，它主要是解决后执行全局 `Mixin` 的情况，以后介绍 `Mixin` 的时候我会详细介绍。在我们这个场景下，它还是简单返回 `vm.constructor.options`，相当于 `Vue.options`，那么这个值又是什么呢，其实在 `initGlobalAPI(Vue)` 的时候定义了这个值，代码在 `src/core/global-api/index.js` 中：
+这里通过调用 `mergeOptions` 方法来合并，它实际上就是把 `resolveConstructorOptions(vm.constructor)` 的返回值和 `options` 做合并，`resolveConstructorOptions` 的实现先不考虑，在我们这个场景下，它还是简单返回 `vm.constructor.options`，相当于 `Vue.options`，那么这个值又是什么呢，其实在 `initGlobalAPI(Vue)` 的时候定义了这个值，代码在 `src/core/global-api/index.js` 中：
 
 ```js
 export function initGlobalAPI (Vue: GlobalAPI) {
@@ -194,6 +213,11 @@ vm.$options = mergeOptions(
 ```js
 vm.$options = {
   components: { },
+  created: [
+    function created() {
+      console.log('parent created') 
+    }
+  ],
   directives: { },
   filters: { },
   _base: function Vue(options) {
@@ -208,28 +232,6 @@ vm.$options = {
 
 ## 组件场景
 
-我们在写组件的时候通常定义的是一个对象，如下：
-
-```js
-export default {
-  created() {
-    console.log('created')
-  },
-  mounted() {
-    console.log('mounted')
-  },
-  data() {
-    return {
-      msg: 'hello vue'
-    }
-  },
-  method:{
-    sayHello() {
-      console.log('hello')
-    }
-  }
-}
-```
 由于组件的构造函数是通过 `Vue.extend` 继承自 `Vue` 的，先回顾一下这个过程，代码定义在 `src/core/global-api/extend.js` 中。
 
 ```js
@@ -313,13 +315,10 @@ initInternalComponent(vm, options)
 
 ```js
 vm.$options = {
-  parent: /*Vue实例*/,
+  parent: Vue /*父Vue实例*/,
   propsData: undefined,
   _componentTag: undefined,
-  _parentElm: body,
-  _parentListeners: undefined,
-  _parentVnode: VNode,
-  _refElm: text,
+  _parentVnode: VNode /*父VNode实例*/,
   _renderChildren:undefined,
   __proto__: {
     components: { },
@@ -328,26 +327,25 @@ vm.$options = {
     _base: function Vue(options) {
         //...
     },
-    _Ctor: Vue,
-    created() {
-       console.log('created')
-    },
-    mounted() {
-       console.log('mounted')
-    },
+    _Ctor: {},
+    created: [
+      function created() {
+        console.log('parent created') 
+      }, function created() {
+        console.log('child created') 
+      }
+    ],
+    mounted: [
+      function mounted() {
+        console.log('child mounted') 
+      }
+    ],
     data() {
        return {
-         msg: 'hello vue'
+         msg: 'Hello Vue'
        }
     },
-    method:{
-       sayHello() {
-         console.log('hello')
-       }
-    },
-    render: function () {  
-     
-    }
+    template: '<div>{{msg}}</div>'
   }
 }
 ```
