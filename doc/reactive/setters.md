@@ -253,7 +253,7 @@ export function queueWatcher (watcher: Watcher) {
   }
 }
 ```
-可以看到，这时候 `flushing` 为 true，就会执行到 else 的逻辑，然后就会从后往前找，找到第一个待插入 `watcher` 的 id 比当前队列中 `watcher` 的 id 小的位置。把 `watcher` 按照 `id `的插入到队列中，因此 `queue` 的长度发送了变化。
+可以看到，这时候 `flushing` 为 true，就会执行到 else 的逻辑，然后就会从后往前找，找到第一个待插入 `watcher` 的 id 比当前队列中 `watcher` 的 id 大的位置。把 `watcher` 按照 `id `的插入到队列中，因此 `queue` 的长度发送了变化。
 
 - 状态恢复
 
@@ -324,7 +324,7 @@ class Watcher {
 
 `run` 函数实际上就是执行 `this.getAndInvoke` 方法，并传入 `watcher` 的回调函数。`getAndInvoke` 函数逻辑也很简单，先通过 `this.get()` 得到它当前的值，然后做判断，如果满足新旧值不等、新值是对象类型、`deep` 模式任何一个条件，则执行 `watcher` 的回调，注意回调函数执行的时候会把第一个和第二个参数传入新值 `value` 和旧值 `oldValue`，这就是当我们添加自定义 `watcher` 的时候能在回调函数的参数中拿到新旧值的原因。
 
-那么对于渲染 `watcher` 而言，它的回调函数就是：
+那么对于渲染 `watcher` 而言，它在执行 `this.get()` 方法求值的时候，会执行 `getter` 方法：
 
 ```js
 updateComponent = () => {
