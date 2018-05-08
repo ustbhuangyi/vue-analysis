@@ -101,7 +101,7 @@ export function defineReactive (
 
 接着说一下数组的情况，Vue 也是不能检测到以下变动的数组：
 
-1. 当你利用索引直接设置一个项时，例如：`vm.items[indexOfItem] = newValue`
+1.当你利用索引直接设置一个项时，例如：`vm.items[indexOfItem] = newValue`
 
 2.当你修改数组的长度时，例如：`vm.items.length = newLength`
 
@@ -200,7 +200,7 @@ methodsToPatch.forEach(function (method) {
   })
 })
 ```
-可以看到，`arrayMethods` 首先继承了 `Array`，然后对数组中所有能改变数组自身的方法，如 `push、pop` 等这些方法进行重写。重写后的方法会先执行它们本身原有的逻辑后，并对能增加数组长度的 3 个方法 `push、unshift、splice` 方法做了判断，获取到插入的值，然后把新添加的值变成一个响应式对象，并且再调用 ` ob.dep.notify()` 手动触发依赖通知，这就很好地解释了之前的示例中调用 `vm.items.splice(newLength)` 方法可以检测到变化。
+可以看到，`arrayMethods` 首先继承了 `Array`，然后对数组中所有能改变数组自身的方法，如 `push、pop` 等这些方法进行重写。重写后的方法会先执行它们本身原有的逻辑，并对能增加数组长度的 3 个方法 `push、unshift、splice` 方法做了判断，获取到插入的值，然后把新添加的值变成一个响应式对象，并且再调用 ` ob.dep.notify()` 手动触发依赖通知，这就很好地解释了之前的示例中调用 `vm.items.splice(newLength)` 方法可以检测到变化。
 
 ## 总结
 
