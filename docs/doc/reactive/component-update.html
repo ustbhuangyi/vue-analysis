@@ -1289,8 +1289,128 @@ createElm(
 }
 </code></pre>
 <p>&#x518D;&#x6267;&#x884C;&#x5B8C; <code>patch</code> &#x8FC7;&#x7A0B;&#x540E;&#xFF0C;&#x4F1A;&#x6267;&#x884C; <code>postpatch</code> &#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x662F;&#x7EC4;&#x4EF6;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x6709;&#x5219;&#x6267;&#x884C;&#x3002;</p>
-<p>&#x90A3;&#x4E48;&#x5728;&#x6574;&#x4E2A; <code>pathVnode</code> &#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6700;&#x590D;&#x6742;&#x7684;&#x5C31;&#x662F; <code>updateChilren</code> &#x65B9;&#x6CD5;&#x4E86;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x5355;&#x72EC;&#x4ECB;&#x7ECD;&#x5B83;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#x5728;&#x6574;&#x4E2A; <code>pathVnode</code> &#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6700;&#x590D;&#x6742;&#x7684;&#x5C31;&#x662F; <code>updateChildren</code> &#x65B9;&#x6CD5;&#x4E86;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x5355;&#x72EC;&#x4ECB;&#x7ECD;&#x5B83;&#x3002;</p>
 <h2 id="updatechildren">updateChildren</h2>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">updateChildren</span> (<span class="hljs-params">parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly</span>) </span>{
+  <span class="hljs-keyword">let</span> oldStartIdx = <span class="hljs-number">0</span>
+  <span class="hljs-keyword">let</span> newStartIdx = <span class="hljs-number">0</span>
+  <span class="hljs-keyword">let</span> oldEndIdx = oldCh.length - <span class="hljs-number">1</span>
+  <span class="hljs-keyword">let</span> oldStartVnode = oldCh[<span class="hljs-number">0</span>]
+  <span class="hljs-keyword">let</span> oldEndVnode = oldCh[oldEndIdx]
+  <span class="hljs-keyword">let</span> newEndIdx = newCh.length - <span class="hljs-number">1</span>
+  <span class="hljs-keyword">let</span> newStartVnode = newCh[<span class="hljs-number">0</span>]
+  <span class="hljs-keyword">let</span> newEndVnode = newCh[newEndIdx]
+  <span class="hljs-keyword">let</span> oldKeyToIdx, idxInOld, vnodeToMove, refElm
+
+  <span class="hljs-comment">// removeOnly is a special flag used only by &lt;transition-group&gt;</span>
+  <span class="hljs-comment">// to ensure removed elements stay in correct relative positions</span>
+  <span class="hljs-comment">// during leaving transitions</span>
+  <span class="hljs-keyword">const</span> canMove = !removeOnly
+
+  <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">&apos;production&apos;</span>) {
+    checkDuplicateKeys(newCh)
+  }
+
+  <span class="hljs-keyword">while</span> (oldStartIdx &lt;= oldEndIdx &amp;&amp; newStartIdx &lt;= newEndIdx) {
+    <span class="hljs-keyword">if</span> (isUndef(oldStartVnode)) {
+      oldStartVnode = oldCh[++oldStartIdx] <span class="hljs-comment">// Vnode has been moved left</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isUndef(oldEndVnode)) {
+      oldEndVnode = oldCh[--oldEndIdx]
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sameVnode(oldStartVnode, newStartVnode)) {
+      patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue)
+      oldStartVnode = oldCh[++oldStartIdx]
+      newStartVnode = newCh[++newStartIdx]
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sameVnode(oldEndVnode, newEndVnode)) {
+      patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue)
+      oldEndVnode = oldCh[--oldEndIdx]
+      newEndVnode = newCh[--newEndIdx]
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sameVnode(oldStartVnode, newEndVnode)) { <span class="hljs-comment">// Vnode moved right</span>
+      patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue)
+      canMove &amp;&amp; nodeOps.insertBefore(parentElm, oldStartVnode.elm, nodeOps.nextSibling(oldEndVnode.elm))
+      oldStartVnode = oldCh[++oldStartIdx]
+      newEndVnode = newCh[--newEndIdx]
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sameVnode(oldEndVnode, newStartVnode)) { <span class="hljs-comment">// Vnode moved left</span>
+      patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue)
+      canMove &amp;&amp; nodeOps.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm)
+      oldEndVnode = oldCh[--oldEndIdx]
+      newStartVnode = newCh[++newStartIdx]
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">if</span> (isUndef(oldKeyToIdx)) oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
+      idxInOld = isDef(newStartVnode.key)
+        ? oldKeyToIdx[newStartVnode.key]
+        : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)
+      <span class="hljs-keyword">if</span> (isUndef(idxInOld)) { <span class="hljs-comment">// New element</span>
+        createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, <span class="hljs-literal">false</span>, newCh, newStartIdx)
+      } <span class="hljs-keyword">else</span> {
+        vnodeToMove = oldCh[idxInOld]
+        <span class="hljs-keyword">if</span> (sameVnode(vnodeToMove, newStartVnode)) {
+          patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue)
+          oldCh[idxInOld] = <span class="hljs-literal">undefined</span>
+          canMove &amp;&amp; nodeOps.insertBefore(parentElm, vnodeToMove.elm, oldStartVnode.elm)
+        } <span class="hljs-keyword">else</span> {
+          <span class="hljs-comment">// same key but different element. treat as new element</span>
+          createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, <span class="hljs-literal">false</span>, newCh, newStartIdx)
+        }
+      }
+      newStartVnode = newCh[++newStartIdx]
+    }
+  }
+  <span class="hljs-keyword">if</span> (oldStartIdx &gt; oldEndIdx) {
+    refElm = isUndef(newCh[newEndIdx + <span class="hljs-number">1</span>]) ? <span class="hljs-literal">null</span> : newCh[newEndIdx + <span class="hljs-number">1</span>].elm
+    addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue)
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (newStartIdx &gt; newEndIdx) {
+    removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)
+  }
+}
+</code></pre>
+<p><code>updateChildren</code> &#x7684;&#x903B;&#x8F91;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#xFF0C;&#x76F4;&#x63A5;&#x8BFB;&#x6E90;&#x7801;&#x6BD4;&#x8F83;&#x6666;&#x6DA9;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7684;&#x793A;&#x4F8B;&#x6765;&#x5206;&#x6790;&#x5B83;&#x3002;</p>
+<pre><code class="lang-js">&lt;template&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;div&gt;
+      &lt;ul&gt;
+        &lt;li v-for=&quot;item in items&quot; :key=&quot;item.id&quot;&gt;{{ item.val }}&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;button @click=&quot;change&quot;&gt;change&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    name: &apos;App&apos;,
+    data() {
+      return {
+        items: [
+          {id: 0, val: &apos;A&apos;},
+          {id: 1, val: &apos;B&apos;},
+          {id: 2, val: &apos;C&apos;},
+          {id: 3, val: &apos;D&apos;}
+        ]
+      }
+    },
+    methods: {
+      change() {
+        this.items.reverse().push({id: 4, val: &apos;E&apos;})
+      }
+    }
+  }
+&lt;/script&gt;
+</code></pre>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x70B9;&#x51FB; <code>change</code> &#x6309;&#x94AE;&#x53BB;&#x6539;&#x53D8;&#x6570;&#x636E;&#xFF0C;&#x6700;&#x7EC8;&#x4F1A;&#x6267;&#x884C;&#x5230; <code>updateChildren</code> &#x53BB;&#x66F4;&#x65B0; <code>li</code> &#x90E8;&#x5206;&#x7684;&#x5217;&#x8868;&#x6570;&#x636E;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x56FE;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x63CF;&#x8FF0;&#x4E00;&#x4E0B;&#x5B83;&#x7684;&#x66F4;&#x65B0;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<p>&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;
+<img src="../assets/update-children-1.png"></p>
+<p>&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;
+<img src="../assets/update-children-2.png"></p>
+<p>&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;
+<img src="../assets/update-children-3.png"></p>
+<p>&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;
+<img src="../assets/update-children-4.png"></p>
+<p>&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;
+<img src="../assets/update-children-5.png"></p>
+<p>&#x7B2C;&#x516D;&#x6B65;&#xFF1A;
+<img src="../assets/update-children-6.png"></p>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p>&#x7EC4;&#x4EF6;&#x66F4;&#x65B0;&#x7684;&#x8FC7;&#x7A0B;&#x6838;&#x5FC3;&#x5C31;&#x662F;&#x65B0;&#x65E7; vnode diff&#xFF0C;&#x5BF9;&#x65B0;&#x65E7;&#x8282;&#x70B9;&#x76F8;&#x540C;&#x4EE5;&#x53CA;&#x4E0D;&#x540C;&#x7684;&#x60C5;&#x51B5;&#x5206;&#x522B;&#x505A;&#x4E0D;&#x540C;&#x7684;&#x5904;&#x7406;&#x3002;&#x65B0;&#x65E7;&#x8282;&#x70B9;&#x4E0D;&#x540C;&#x7684;&#x66F4;&#x65B0;&#x6D41;&#x7A0B;&#x662F;&#x521B;&#x5EFA;&#x65B0;&#x8282;&#x70B9;-&gt;&#x66F4;&#x65B0;&#x7236;&#x5360;&#x4F4D;&#x7B26;&#x8282;&#x70B9;-&gt;&#x5220;&#x9664;&#x65E7;&#x8282;&#x70B9;&#xFF1B;&#x800C;&#x65B0;&#x65E7;&#x8282;&#x70B9;&#x76F8;&#x540C;&#x7684;&#x66F4;&#x65B0;&#x6D41;&#x7A0B;&#x662F;&#x53BB;&#x83B7;&#x53D6;&#x5B83;&#x4EEC;&#x7684; children&#xFF0C;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x60C5;&#x51B5;&#x505A;&#x4E0D;&#x540C;&#x7684;&#x66F4;&#x65B0;&#x903B;&#x8F91;&#x3002;&#x6700;&#x590D;&#x6742;&#x7684;&#x60C5;&#x51B5;&#x662F;&#x65B0;&#x65E7;&#x8282;&#x70B9;&#x76F8;&#x540C;&#x4E14;&#x5B83;&#x4EEC;&#x90FD;&#x5B58;&#x5728;&#x5B50;&#x8282;&#x70B9;&#xFF0C;&#x90A3;&#x4E48;&#x4F1A;&#x6267;&#x884C; <code>updateChildren</code> &#x903B;&#x8F91;&#xFF0C;&#x8FD9;&#x5757;&#x513F;&#x53EF;&#x4EE5;&#x501F;&#x52A9;&#x753B;&#x56FE;&#x7684;&#x65B9;&#x5F0F;&#x914D;&#x5408;&#x7406;&#x89E3;&#x3002;</p>
 
                                 
                                 </section>
@@ -1334,7 +1454,7 @@ createElm(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"组件更新","level":"1.5.7","depth":2,"next":{"title":"编译","level":"1.6","depth":1,"path":"compile/index.md","ref":"compile/index.md","articles":[{"title":"编译入口","level":"1.6.1","depth":2,"path":"compile/entrance.md","ref":"compile/entrance.md","articles":[]},{"title":"parse","level":"1.6.2","depth":2,"path":"compile/parse.md","ref":"compile/parse.md","articles":[]},{"title":"optimize","level":"1.6.3","depth":2,"path":"compile/optimize.md","ref":"compile/optimize.md","articles":[]},{"title":"codegen","level":"1.6.4","depth":2,"path":"compile/codegen.md","ref":"compile/codegen.md","articles":[]}]},"previous":{"title":"计算属性 VS 侦听属性","level":"1.5.6","depth":2,"path":"reactive/computed-watcher.md","ref":"reactive/computed-watcher.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"scripts":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"reactive/component-update.md","mtime":"2018-05-05T17:13:12.724Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-08T13:44:25.272Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"组件更新","level":"1.5.7","depth":2,"next":{"title":"编译","level":"1.6","depth":1,"path":"compile/index.md","ref":"compile/index.md","articles":[{"title":"编译入口","level":"1.6.1","depth":2,"path":"compile/entrance.md","ref":"compile/entrance.md","articles":[]},{"title":"parse","level":"1.6.2","depth":2,"path":"compile/parse.md","ref":"compile/parse.md","articles":[]},{"title":"optimize","level":"1.6.3","depth":2,"path":"compile/optimize.md","ref":"compile/optimize.md","articles":[]},{"title":"codegen","level":"1.6.4","depth":2,"path":"compile/codegen.md","ref":"compile/codegen.md","articles":[]}]},"previous":{"title":"计算属性 VS 侦听属性","level":"1.5.6","depth":2,"path":"reactive/computed-watcher.md","ref":"reactive/computed-watcher.md","articles":[]},"dir":"ltr"},"config":{"plugins":["scripts","edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/ustbhuangyi/vue-analysis/tree/master/doc"},"scripts":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-analysis","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"reactive/component-update.md","mtime":"2018-05-11T10:09:56.011Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-11T10:13:45.638Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
