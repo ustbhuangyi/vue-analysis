@@ -67,7 +67,7 @@ ast = {
 }
 ```
 
-可以看到，生成的 AST 是一个树状结构，每一个节点都是一个 `ast element`，除了它自身的一些属性，还维护了它的父子关系，如 `parent` 指向它的父节点，`chillren` 指向它的所有子节点。先对 AST 有一些直观的印象，那么接下来我们来分析一下这个 AST 是如何得到的。
+可以看到，生成的 AST 是一个树状结构，每一个节点都是一个 `ast element`，除了它自身的一些属性，还维护了它的父子关系，如 `parent` 指向它的父节点，`children` 指向它的所有子节点。先对 AST 有一些直观的印象，那么接下来我们来分析一下这个 AST 是如何得到的。
 
 ## 整体流程
 
@@ -220,7 +220,19 @@ function advance (n) {
 
 为了更加直观地说明 `advance` 的作用，可以通过一副图表示：
 
-// TODO 图
+<img src="../assets/advance-1.png">
+
+调用 `advance` 函数：
+
+```js
+advance(4)
+```
+
+得到结果：
+
+
+<img src="../assets/advance-2.png">
+
 
 匹配的过程中主要利用了正则表达式，如下：
 
@@ -313,7 +325,7 @@ function parseStartTag () {
 ```
 对于开始标签，除了标签名之外，还有一些标签相关的属性。函数先通过正则表达式 `startTagOpen` 匹配到开始标签，然后定义了 `match` 对象，接着循环去匹配开始标签中的属性并添加到 `match.attrs` 中，直到匹配的开始标签的闭合符结束。如果匹配到闭合符，则获取一元斜线符，前进到闭合符尾，并把当前索引赋值给 `match.end`。
 
-`parseStartTag` 对开始标签解析拿到 `match` 后，紧接着会执行 `` 对 `match` 做处理：
+`parseStartTag` 对开始标签解析拿到 `match` 后，紧接着会执行 `handleStartTag` 对 `match` 做处理：
 
 ```js
 function handleStartTag (match) {
@@ -433,7 +445,7 @@ function parseEndTag (tagName, start, end) {
 
 `parseEndTag` 的核心逻辑很简单，在介绍之前我们回顾一下在执行 `handleStartTag` 的时候，对于非一元标签（有 endTag）我们都把它构造成一个对象压入到 `stack` 中，如图所示：
 
-//TODO 图
+<img src='../assets/stack.png'>
 
 那么对于闭合标签的解析，就是倒序 `stack`，找到第一个和当前 `endTag` 匹配的元素。如果是正常的标签匹配，那么 `stack` 的最后一个元素应该和当前的 `endTag` 匹配，但是考虑到如下错误情况：
 
