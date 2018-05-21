@@ -194,7 +194,7 @@ function genIfConditions (
 在我们的例子中，只有一个 `condition`，`exp` 为 `isShow`，因此生成如下伪代码：
 
 ```js
-return (isShow) ? genElement(el, state) : _c()
+return (isShow) ? genElement(el, state) : _e()
 ```
 
 ## `genFor`
