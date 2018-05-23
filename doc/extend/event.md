@@ -6,12 +6,12 @@
 
 ```js
 let Child = {
-  template: '<button @click="clickHandler">' +
+  template: '<button @click="clickHandler($event)">' +
   'click me' +
   '</button>',
   methods: {
-    clickHandler() {
-      console.log('Button clicked!')
+    clickHandler(e) {
+      console.log('Button clicked!', e)
       this.$emit('select')
     }
   }
@@ -186,7 +186,7 @@ el.nativeEvents = {
 ```js
 el.events = {
   click: {
-    value: 'clickHandler'
+    value: 'clickHandler($event)'
   }
 }
 ```
@@ -300,9 +300,10 @@ function genHandler (
 ```js
 {
   on: {"select": selectHandler},
-  nativeOn: {"click": function($event){
-    $event.preventDefault();
-    clickHandler($event)}
+  nativeOn: {"click": function($event) {
+      $event.preventDefault();
+      return clickHandler($event)
+    }
   }
 }
 ```
@@ -310,7 +311,10 @@ function genHandler (
 
 ```js
 {
-  on: {"click": clickHandler}
+  on: {"click": function($event) {
+      clickHandler($event)
+    }
+  }
 }
 ```
 
