@@ -18,7 +18,7 @@ let vm = new Vue({
   '<button v-on:click="show = !show">' +
   'Toggle' +
   '</button>' +
-  '<transition appear="" name="fade">' +
+  '<transition :appear="true" name="fade">' +
   '<p v-if="show">hello</p>' +
   '</transition>' +
   '</div>',
@@ -265,7 +265,7 @@ function hasParentTransition (vnode: VNode): ?boolean {
   }
 }
 ```
-因为传入的是 `this.$vnode`，也就是 `<transition>` 组件的 占位 `vnode`，只有当它又同时作为渲染 `vnode`，也就是 `vm._vnode` 的时候，它的 `parent` 才不会为空，并且判断 `parent` 也是 `<transition>` 组件，才返回 true，`vnode.data.transition` 我们稍后会介绍。
+因为传入的是 `this.$vnode`，也就是 `<transition>` 组件的 占位 `vnode`，只有当它同时作为根 `vnode`，也就是 `vm._vnode` 的时候，它的 `parent` 才不会为空，并且判断 `parent` 也是 `<transition>` 组件，才返回 true，`vnode.data.transition` 我们稍后会介绍。
 
 `getRealChild` 的目的是获取组件的非抽象子节点，因为 `<transition>` 很可能会包裹一个 `keep-alive`，它的实现如下：
 
@@ -335,6 +335,7 @@ export function extractTransitionData (comp: Component): Object {
 ```js
 {
   transition: {
+    appear: true,
     name: 'fade'
   }
 }
@@ -615,9 +616,7 @@ if (isAppear && !appear && appear !== '') {
 }
 ```
 
-这是为了处理当 `<transition>` 作为子组件的根组件，并且外部包裹该子组件也是 `<transition>` 组件，那么子组件的 `<transition>` 会被忽略，上下文环境也切到父组件实例。
-
-`isAppear` 表示当前上下文实例还没有 `mounted`，第一次出现的时机，如果是第一次并且 `<transition>` 组件没有配置 `appear` 的话，直接返回。
+这是为了处理当 `<transition>` 作为子组件的根节点，那么我们需要检查它的父组件作为 `appear` 的检查。`isAppear` 表示当前上下文实例还没有 `mounted`，第一次出现的时机。如果是第一次并且 `<transition>` 组件没有配置 `appear` 的话，直接返回。
 
 - 定义过渡类名、钩子函数和其它配置
 
@@ -990,7 +989,7 @@ export function leave (vnode: VNodeWithData, rm: Function) {
 
 3. 如果没有找到 JavaScript 钩子并且也没有检测到 CSS 过渡/动画，DOM 操作 (插入/删除) 在下一帧中立即执行。
 
-所以真正执行动画的是我们写的 CSS 或者是 JavaScript 钩子函数，而 Vue 的 `<transition>` 只是帮我们很好地管理了这些 CSS 的添加/删除 以及钩子函数的执行时机。
+所以真正执行动画的是我们写的 CSS 或者是 JavaScript 钩子函数，而 Vue 的 `<transition>` 只是帮我们很好地管理了这些 CSS 的添加/删除，以及钩子函数的执行时机。
 
 
  
