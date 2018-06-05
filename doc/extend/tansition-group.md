@@ -366,16 +366,23 @@ children.forEach((c: VNode) => {
 
 首先通过 `document.body.offsetHeight` 强制触发浏览器重绘，接着再次对 `children` 遍历，先给子节点添加 `moveClass`，在我们的例子中，`moveClass` 定义了 `transition: all 1s;` 缓动；接着把子节点的 `style.transform` 设置为空，由于我们前面把这些节点偏移到之前的旧位置，所以它就会从旧位置按照 `1s` 的缓动时间过渡偏移到它的当前目标位置，这样就实现了 move 的过渡动画。并且接下来会监听 `transitionEndEvent` 过渡结束的事件，做一些清理的操作。
 
-另外，由于虚拟 DOM 的子元素更新算法是不稳定的，它不能保证被移除元素的相对位置，所以我们强制 `<transition-group>` 组件更新子节点通过 2 个步骤：第一步我们移除需要移除的 `vnode`，同时触发它们的 `leaving` 过渡；第二步我们需要把插入和移动的节点达到它们的最终态，同时还要保证移除的节点保留在应该的位置，而这个是通过 `beforeUpdate` 钩子函数来实现的：
+另外，由于虚拟 DOM 的子元素更新算法是不稳定的，它不能保证被移除元素的相对位置，所以我们强制 `<transition-group>` 组件更新子节点通过 2 个步骤：第一步我们移除需要移除的 `vnode`，同时触发它们的 `leaving` 过渡；第二步我们需要把插入和移动的节点达到它们的最终态，同时还要保证移除的节点保留在应该的位置，而这个是通过 `beforeMount` 钩子函数来实现的：
 
 ```js
-this.__patch__(
-  this._vnode,
-  this.kept,
-  false,
-  true
-)
-this._vnode = this.kept
+beforeMount () {
+  const update = this._update
+  this._update = (vnode, hydrating) => {
+    // force removing pass
+    this.__patch__(
+      this._vnode,
+      this.kept,
+      false, // hydrating
+      true // removeOnly (!important, avoids unnecessary moves)
+    )
+    this._vnode = this.kept
+    update.call(this, vnode, hydrating)
+  }
+}
 ```
 
 通过把 `__patch__` 方法的第四个参数 `removeOnly` 设置为 true，这样在 `updateChildren` 阶段，是不会移动 `vnode` 节点的。
