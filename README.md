@@ -46,5 +46,5 @@
 
 对于通过正版渠道购买课程的同学，可以加学习群交流，验证信息就是你们的订单号，感谢对正版的支持，比心~
 
-<img src="./doc/assets/qq.png">
+<img src="./doc/assets/qq.jpg">
 
