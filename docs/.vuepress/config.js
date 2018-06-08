@@ -93,7 +93,7 @@ module.exports = {
         ]
       },
       {
-        title: '扩展',
+        title: 'Vue Router',
         collapsable: false,
         children: [
           ['vue-router/', 'Introduction'],
