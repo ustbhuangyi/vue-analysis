@@ -8,7 +8,7 @@
 
 为了把 Vue.js 的源码讲明白，课程设计成由浅入深，分为核心、编译、扩展、生态四个方面去讲总共，并拆成了八个章节，如下图：
 
-<img src="$withBase('/assets/mind.png')>
+<img src="https://ustbhuangyi.github.io/vue-analysis/assets/mind.png">
 
 **第一章：准备工作**
 
@@ -46,5 +46,5 @@
 
 对于通过正版渠道购买课程的同学，快来做我的粉丝吧，验证信息就是你们的**订单号**，感谢对正版的支持，比心~
 
-<img src="$withBase('/assets/qq.jpg')>
+<img src="https://ustbhuangyi.github.io/vue-analysis/assets/qq.png">
 
