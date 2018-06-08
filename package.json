@@ -6,7 +6,9 @@
     "doc": "doc"
   },
   "scripts": {
-    "doc": "cd doc && gitbook install && gitbook serve"
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "deploy": "sh deploy.sh"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/ustbhuangyi/vue-analysis/issues"
   },
-  "homepage": "https://github.com/ustbhuangyi/vue-analysis#readme"
+  "homepage": "https://github.com/ustbhuangyi/vue-analysis#readme",
+  "devDependencies": {
+    "vuepress": "^0.10.0"
+  }
 }
