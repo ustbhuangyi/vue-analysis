@@ -46,5 +46,5 @@
 
 对于通过正版渠道购买课程的同学，快来做我的粉丝吧，验证信息就是你们的**订单号**，感谢对正版的支持，比心~
 
-<img src="https://ustbhuangyi.github.io/vue-analysis/assets/qq.png">
+<img src="https://ustbhuangyi.github.io/vue-analysis/assets/qq.jpg">
 
