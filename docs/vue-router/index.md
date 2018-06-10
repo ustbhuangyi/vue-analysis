@@ -25,6 +25,7 @@
 ```js
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import App from './App'
 
 Vue.use(VueRouter)
 
@@ -53,8 +54,12 @@ const router = new VueRouter({
 // 记得要通过 router 配置参数注入路由，
 // 从而让整个应用都有路由功能
 const app = new Vue({
+  el: '#app',
+  render(h) {
+    return h(App)
+  },
   router
-}).$mount('#app')
+})
 ```
 
 这是一个非常简单的例子，接下来我们先从 `Vue.use(VueRouter)` 说起。
