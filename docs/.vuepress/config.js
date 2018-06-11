@@ -21,6 +21,12 @@ module.exports = {
         docsDir: 'docs',
         editLinkText: '在 GitHub 上编辑此页',
         lastUpdated: '上次更新',
+        nav: [
+            {
+                text: '配套视频',
+                link: 'https://coding.imooc.com/class/228.html'
+            }
+        ],
         sidebar: [
             {
                 title: '准备工作',
