@@ -44,9 +44,4 @@
 
 分析了 Vuex 的实现原理，深入分析了它的初始化过程，常用 API 以及插件部分的实现。
 
-## 粉丝福利
-
-对于通过正版渠道购买课程的同学，快来做我的粉丝吧，验证信息就是你们的**订单号**，感谢对正版的支持，比心~
-
-<img src="https://ustbhuangyi.github.io/vue-analysis/assets/qq.jpg">
 
