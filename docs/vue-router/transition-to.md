@@ -884,7 +884,7 @@ Vue.mixin({
 return h(component, data, children)
 ```
 
-那么当我们执行 `transitionTo` 来更改路由线路后，组件是如何重新渲染的呢？在我们混入的 `beforeCreated` 钩子函数中有这么一段逻辑：
+那么当我们执行 `transitionTo` 来更改路由线路后，组件是如何重新渲染的呢？在我们混入的 `beforeCreate` 钩子函数中有这么一段逻辑：
 
 ```js
 Vue.mixin({

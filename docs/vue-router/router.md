@@ -243,10 +243,10 @@ constructor (options: RouterOptions = {}) {
 构造函数定义了一些属性，其中 `this.app` 表示根 `Vue` 实例，`this.apps` 保存所有子组件的 `Vue` 实例，`this.options` 保存传入的路由配置，`this.beforeHooks`、
 `this.resolveHooks`、`this.afterHooks` 表示一些钩子函数，我们之后会介绍，`this.matcher` 表示路由匹配器，我们之后会介绍，`this.fallback` 表示路由创建失败的回调函数，`this.mode` 表示路由创建的模式，`this.history` 表示路由历史的具体的实现实例，它是根据 `this.mode` 的不同实现不同，它有 `History` 基类，然后不同的 `history` 实现都是继承 `History`，这块我们之后会重点讲。
 
-实例化 `VueRouter` 后会返回它的实例 `router`，我们在 `new Vue` 的时候会把 `router` 作为配置的属性传入，回顾一下上一节我们讲 `beforeCreated` 混入的时候有这么一段代码：
+实例化 `VueRouter` 后会返回它的实例 `router`，我们在 `new Vue` 的时候会把 `router` 作为配置的属性传入，回顾一下上一节我们讲 `beforeCreate` 混入的时候有这么一段代码：
 
 ```js
-beforeCreated() {
+beforeCreate() {
   if (isDef(this.$options.router)) {
     // ...
     this._router = this.$options.router
@@ -256,7 +256,7 @@ beforeCreated() {
 }  
 ```
 
-所以每个组件在执行 `beforeCreated` 钩子函数的时候，都会执行 `router.init` 方法：
+所以每个组件在执行 `beforeCreate` 钩子函数的时候，都会执行 `router.init` 方法：
 
 ```js
 init (app: any) {
@@ -322,5 +322,5 @@ match (
 
 ## 总结
 
-通过这一节的分析，我们大致对 `VueRouter` 类有了大致了解，知道了它的一些属性和方法，同时了了解到在组件的初始化阶段，执行到 `beforeCreated` 钩子函数的时候会执行 `router.init` 方法，然后又会执行 `history.transitionTo` 方法做路由过渡，进而引出了 `matcher` 的概念，接下来我们先研究一下 `matcher` 的相关实现。
+通过这一节的分析，我们大致对 `VueRouter` 类有了大致了解，知道了它的一些属性和方法，同时了了解到在组件的初始化阶段，执行到 `beforeCreate` 钩子函数的时候会执行 `router.init` 方法，然后又会执行 `history.transitionTo` 方法做路由过渡，进而引出了 `matcher` 的概念，接下来我们先研究一下 `matcher` 的相关实现。
 
