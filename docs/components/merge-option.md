@@ -88,7 +88,7 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 }
 ```
 首先通过 `Vue.options = Object.create(null)` 创建一个空对象，然后遍历 `ASSET_TYPES`，`ASSET_TYPES` 的定义在 `src/shared/constants.js` 中：
- 
+
 ```js
 export const ASSET_TYPES = [
   'component',
@@ -198,11 +198,11 @@ export const LIFECYCLE_HOOKS = [
 ]
 ```
 这里定义了 Vue.js 所有的钩子函数名称，所以对于钩子函数，他们的合并策略都是 `mergeHook` 函数。这个函数的实现也非常有意思，用了一个多层 3 元运算符，逻辑就是如果不存在 `childVal` ，就返回 `parentVal`；否则再判断是否存在 `parentVal`，如果存在就把 `childVal` 添加到 `parentVal` 后返回新数组；否则返回 `childVal` 的数组。所以回到 `mergeOptions` 函数，一旦 `parent` 和 `child` 都定义了相同的钩子函数，那么它们会把 2 个钩子函数合并成一个数组。
- 
+
 关于其它属性的合并策略的定义都可以在 `src/core/util/options.js` 文件中看到，这里不一一介绍了，感兴趣的同学可以自己看。
- 
+
 通过执行 `mergeField` 函数，把合并后的结果保存到 `options` 对象中，最终返回它。
- 
+
 因此，在我们当前这个 case 下，执行完如下合并后：
 ```js
 vm.$options = mergeOptions(
@@ -218,7 +218,7 @@ vm.$options = {
   components: { },
   created: [
     function created() {
-      console.log('parent created') 
+      console.log('parent created')
     }
   ],
   directives: { },
@@ -227,7 +227,7 @@ vm.$options = {
     // ...
   },
   el: "#app",
-  render: function (h) {  
+  render: function (h) {
     //...
   }
 }
@@ -247,7 +247,7 @@ Vue.extend = function (extendOptions: Object): Function {
     Super.options,
     extendOptions
   )
-  
+
   // ...
   // keep a reference to the super options at extension time.
   // later at instantiation we can check if Super's options have
@@ -302,14 +302,14 @@ export function initInternalComponent (vm: Component, options: InternalComponent
 }
 ```
 
-`initInternalComponent` 方法首先执行 `const opts = vm.$options = Object.create(vm.constructor.options)`，这里的 `vm.construction` 就是子组件的构造函数 `Sub`，相当于 `vm.$options = Sub.options`。
+`initInternalComponent` 方法首先执行 `const opts = vm.$options = Object.create(vm.constructor.options)`，这里的 `vm.construction` 就是子组件的构造函数 `Sub`，相当于 `vm.$options = Object.create(Sub.options)`。
 
 接着又把实例化子组件传入的子组件父 VNode 实例 `parentVnode`、子组件的父 Vue 实例 `parent` 保存到 `vm.$options` 中，另外还保留了 `parentVnode` 配置中的如 `propsData` 等其它的属性。
 
 这么看来，`initInternalComponent` 只是做了简单一层对象赋值，并不涉及到递归、合并策略等复杂逻辑。
- 
+
 因此，在我们当前这个 case 下，执行完如下合并后：
- 
+
 ```js
 initInternalComponent(vm, options)
 ```
@@ -333,14 +333,14 @@ vm.$options = {
     _Ctor: {},
     created: [
       function created() {
-        console.log('parent created') 
+        console.log('parent created')
       }, function created() {
-        console.log('child created') 
+        console.log('child created')
       }
     ],
     mounted: [
       function mounted() {
-        console.log('child mounted') 
+        console.log('child mounted')
       }
     ],
     data() {
