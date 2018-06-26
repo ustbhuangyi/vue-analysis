@@ -568,29 +568,31 @@ afterEach (fn: Function): Function {
 
 ## url
 
-在 `confirmTransition` 的 `onComplete` 函数中，在 `updateRoute` 后，会执行 `this.ensureURL()` 函数，这个函数是子类实现的，不同模式下该函数的实现略有不同，我们来看一下平时使用最多的 `hash` 模式该函数的实现，在 `src/history/hash.js` 中。
+当我们点击 `router-link` 的时候，实际上最终会执行 `router.push`，如下：
 
 ```js
-ensureURL (push?: boolean) {
-  const current = this.current.fullPath
-  if (getHash() !== current) {
-   push ? pushHash(current) : replaceHash(current)
- }
+push (location: RawLocation, onComplete?: Function, onAbort?: Function) {
+  this.history.push(location, onComplete, onAbort)
+}
+```
+
+`this.history.push` 函数，这个函数是子类实现的，不同模式下该函数的实现略有不同，我们来看一下平时使用比较多的 `hash` 模式该函数的实现，在 `src/history/hash.js` 中：
+
+```js
+push (location: RawLocation, onComplete?: Function, onAbort?: Function) {
+  const { current: fromRoute } = this
+  this.transitionTo(location, route => {
+    pushHash(route.fullPath)
+    handleScroll(this.router, route, fromRoute, false)
+    onComplete && onComplete(route)
+  }, onAbort)
 }
 
-export function getHash (): string {
-  const href = window.location.href
-  const index = href.indexOf('#')
-  return index === -1 ? '' : href.slice(index + 1)
-}
+```
 
-function getUrl (path) {
-  const href = window.location.href
-  const i = href.indexOf('#')
-  const base = i >= 0 ? href.slice(0, i) : href
-  return `${base}#${path}`
-}
+`push` 函数会先执行 `this.transitionTo` 做路径切换，在切换完成的回调函数中，执行 `pushHash` 函数：
 
+```js
 function pushHash (path) {
   if (supportsPushState) {
     pushState(getUrl(path))
@@ -598,17 +600,7 @@ function pushHash (path) {
     window.location.hash = path
   }
 }
-
-function replaceHash (path) {
-  if (supportsPushState) {
-    replaceState(getUrl(path))
-  } else {
-    window.location.replace(getUrl(path))
-  }
-}
 ```
-
-`ensureURL` 函数首先判断当前 `hash` 和当前的券路径是否相等，如果不相等，则根据 `push` 参数决定执行 `pushHash` 或者是 `replaceHash`。
 
 `supportsPushState` 的定义在 `src/util/push-state.js` 中：
 
@@ -692,8 +684,35 @@ function ensureSlash (): boolean {
   replaceHash('/' + path)
   return false
 }
+
+export function getHash (): string {
+  // We can't use window.location.hash here because it's not
+  // consistent across browsers - Firefox will pre-decode it!
+  const href = window.location.href
+  const index = href.indexOf('#')
+  return index === -1 ? '' : href.slice(index + 1)
+}
+
+function getUrl (path) {
+  const href = window.location.href
+  const i = href.indexOf('#')
+  const base = i >= 0 ? href.slice(0, i) : href
+  return `${base}#${path}`
+}
+
+function replaceHash (path) {
+  if (supportsPushState) {
+    replaceState(getUrl(path))
+  } else {
+    window.location.replace(getUrl(path))
+  }
+}
+
+export function replaceState (url?: string) {
+  pushState(url, true)
+}
 ```
-这个时候 `path` 为空，所以执行 `replaceHash('/' + path)`，然后内部会执行一次 `getUrl`，计算出来的新的 url 为 `http://localhost:8080/#/`，这就是 url 会改变的原因。
+这个时候 `path` 为空，所以执行 `replaceHash('/' + path)`，然后内部会执行一次 `getUrl`，计算出来的新的 `url` 为 `http://localhost:8080/#/`，最终会执行 `pushState(url, true)`，这就是 url 会改变的原因。
 
 ## 组件
 
