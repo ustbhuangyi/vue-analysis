@@ -80,7 +80,7 @@ function parseModifiers (name: string): Object | void {
 }
 ```
 
-在对标签属性的处理过程中，判断如果是指令，首先通过 `parseModifiers` 解析出修饰符，然后判断如果事件的指令，则执行 `addHaddHandler(el, name, value, modifiers, false, warn)` 方法，它的定义在 `src/compiler/helpers.js` 中：
+在对标签属性的处理过程中，判断如果是指令，首先通过 `parseModifiers` 解析出修饰符，然后判断如果事件的指令，则执行 `addHandler(el, name, value, modifiers, false, warn)` 方法，它的定义在 `src/compiler/helpers.js` 中：
 
 ```js
 export function addHandler (
