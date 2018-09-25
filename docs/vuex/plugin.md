@@ -99,7 +99,7 @@ function genericSubscribe (fn, subs) {
 
 `subscribe` 的逻辑很简单，就是往 `this._subscribers` 去添加一个函数，并返回一个 `unsubscribe` 的方法。
 
-而我们在执行 `store.commit` 的方法的时候，会遍历 `this._` 执行它们对应的回调函数：
+而我们在执行 `store.commit` 的方法的时候，会遍历 `this._subscribers` 执行它们对应的回调函数：
 
 ```js
 commit (_type, _payload, _options) {
