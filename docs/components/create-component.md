@@ -371,10 +371,10 @@ function mergeHook (f1: any, f2: any): Function {
 ```js
 const name = Ctor.options.name || tag
 const vnode = new VNode(
-`vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,
-data, undefined, undefined, undefined, context,
-{ Ctor, propsData, listeners, tag, children },
-asyncFactory
+  `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,
+  data, undefined, undefined, undefined, context,
+  { Ctor, propsData, listeners, tag, children },
+  asyncFactory
 )
 return vnode
 ```
