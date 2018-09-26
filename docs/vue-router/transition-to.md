@@ -835,7 +835,7 @@ updateRoute (route: Route) {
 }
 ```
 
-也就是我们执行 `transitionTo` 方法最后执行 `updateRoute` 的时候会执行回调，然后会更新所有组件实例的 `_route` 值，所以说 `$route` 对应的就是当前的路由线路。
+也就是我们执行 `transitionTo` 方法最后执行 `updateRoute` 的时候会执行回调，然后会更新 `this.apps` 保存的组件实例的 `_route` 值，`this.apps` 数组保存的实例的特点都是在初始化的时候传入了 `router` 配置项，一般的场景数组只会保存根 Vue 实例，因为我们是在 `new Vue` 传入了 `router` 实例。`$route` 是定义在 `Vue.prototype` 上。每个组件实例访问 `$route` 属性，就是访问根实例的 `_route`，也就是当前的路由线路。
 
 `<router-view>` 是支持嵌套的，回到 `render` 函数，其中定义了 `depth` 的概念，它表示 `<router-view>` 嵌套的深度。每个 `<router-view>` 在渲染的时候，执行如下逻辑：
 
