@@ -13,7 +13,7 @@ Vue.js 源码是基于 [Rollup](https://github.com/rollup/rollup) 构建的，�
   "script": {
     "build": "node scripts/build.js",
     "build:ssr": "npm run build -- web-runtime-cjs,web-server-renderer",
-    "build:weex": "npm run build --weex"
+    "build:weex": "npm run build -- weex"
   }
 }
  
