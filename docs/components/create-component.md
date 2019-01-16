@@ -175,7 +175,7 @@ export default {
 // components with in Weex's multi-instance scenarios.
 Vue.options._base = Vue
 ```
-细心的同学会发现，这里定义的是 `Vue.option`，而我们的 `createComponent` 取的是 `context.$options`，实际上在 `src/core/instance/init.js` 里 Vue 原型上的 `_init` 函数中有这么一段逻辑：
+细心的同学会发现，这里定义的是 `Vue.options`，而我们的 `createComponent` 取的是 `context.$options`，实际上在 `src/core/instance/init.js` 里 Vue 原型上的 `_init` 函数中有这么一段逻辑：
 
 ```js
 vm.$options = mergeOptions(
@@ -185,7 +185,7 @@ vm.$options = mergeOptions(
 )
 ```
 
-这样就把 Vue 上的一些 `option` 扩展到了 vm.$option 上，所以我们也就能通过 `vm.$options._base` 拿到 Vue 这个构造函数了。`mergeOptions` 的实现我们会在后续章节中具体分析，现在只需要理解它的功能是把 Vue 构造函数的 `options` 和用户传入的 `options` 做一层合并，到 `vm.$options ` 上。
+这样就把 Vue 上的一些 `option` 扩展到了 vm.$options 上，所以我们也就能通过 `vm.$options._base` 拿到 Vue 这个构造函数了。`mergeOptions` 的实现我们会在后续章节中具体分析，现在只需要理解它的功能是把 Vue 构造函数的 `options` 和用户传入的 `options` 做一层合并，到 `vm.$options ` 上。
 
 在了解了 `baseCtor` 指向了 Vue 之后，我们来看一下 `Vue.extend` 函数的定义，在 `src/core/global-api/extend.js` 中。
 
