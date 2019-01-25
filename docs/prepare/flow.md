@@ -24,7 +24,7 @@ JavaScript 是动态类型语言，它的灵活性有目共睹，但是过于灵
 通过一个简单例子说明一下：
 
 ```js
-/*@flow*/``
+/*@flow*/
 
 function split(str) {
   return str.split(' ')
