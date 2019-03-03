@@ -108,7 +108,8 @@ export function pushTarget (_target: ?Watcher) {
 }
 
 export function popTarget () {
-  Dep.target = targetStack.pop()
+  targetStack.pop()
+  Dep.target = targetStack[targetStack.length - 1]
 }
 ```
 
@@ -359,7 +360,8 @@ popTarget()
 `popTarget` 的定义在 `src/core/observer/dep.js` 中：
 
 ```js
-Dep.target = targetStack.pop()
+targetStack.pop()
+Dep.target = targetStack[targetStack.length - 1]
 ```
 
 实际上就是把 `Dep.target` 恢复成上一个状态，因为当前 vm 的数据依赖收集已经完成，那么对应的渲染`Dep.target` 也需要改变。最后执行：
