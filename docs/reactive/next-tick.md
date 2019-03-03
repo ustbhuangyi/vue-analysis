@@ -16,20 +16,19 @@ JS 执行是单线程的，它是基于事件循环的。事件循环大致分�
 
 <img :src="$withBase('/assets/event-loop.png')"/>
 
-主线程的执行过程就是一个 tick，而所有的异步结果都是通过 “任务队列” 来调度。 消息队列中存放的是一个个的任务（task）。 规范中规定 task 分为两大类，分别是 macro task 和 micro task，并且每个 macro task 结束后，都要清空所有的 micro task。
+主线程的执行过程就是一个 tick，而所有的异步结果都是通过 “任务队列” 来调度。 消息队列中存放的是一个个的任务（task）。 规范中规定 task 分为两大类，分别是 macro task 和 micro task，顺序是先清空所有的 micro task，然后从 macro task队列中取出一个（如果有的话）并执行。
 
 关于 macro task 和 micro task 的概念，这里不会细讲，简单通过一段代码演示他们的执行顺序：
 
 ```js
-for (macroTask of macroTaskQueue) {
-    // 1. Handle current MACRO-TASK
-    handleMacroTask();
-      
-    // 2. Handle all MICRO-TASK
+while(true){
     for (microTask of microTaskQueue) {
         handleMicroTask(microTask);
     }
-}
+    let macroTask = macroTaskQueue[Symbol.iterator]().next();
+    if (!macroTask.done){
+        handleMacroTask(macroTask.value);
+    }
 ```
 在浏览器环境中，常见的 macro task 有 setTimeout、MessageChannel、postMessage、setImmediate；常见的 micro task 有 MutationObsever 和 Promise.then。
 
