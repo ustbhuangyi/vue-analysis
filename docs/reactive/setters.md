@@ -253,7 +253,7 @@ export function queueWatcher (watcher: Watcher) {
   }
 }
 ```
-可以看到，这时候 `flushing` 为 true，就会执行到 else 的逻辑，然后就会从后往前找，找到第一个待插入 `watcher` 的 id 比当前队列中 `watcher` 的 id 大的位置。把 `watcher` 按照 `id `的插入到队列中，因此 `queue` 的长度发送了变化。
+可以看到，这时候 `flushing` 为 true，就会执行到 else 的逻辑，然后就会从后往前找，找到第一个待插入 `watcher` 的 id 比当前队列中 `watcher` 的 id 大的位置。把 `watcher` 按照 `id `的插入到队列中，因此 `queue` 的长度发生了变化。
 
 - 状态恢复
 
