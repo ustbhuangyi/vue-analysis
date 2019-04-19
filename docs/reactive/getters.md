@@ -47,7 +47,7 @@ export function defineReactive (
   })
 }
 ```
-这段代码我们只需要关注 2 个地方，一个是 `const dep = new Dep()` 实例化一个 `Dep` 的实例，另一个是在 `get` 函数中通过 `dep.depend` 做依赖收集，这里还有个对 `childObj` 判断的逻辑，我们之后会介绍它的作用。
+这段代码我们只需要关注 2 个地方，一个是 `const dep = new Dep()` 实例化一个 `Dep` 的实例，另一个是在 `get` 函数中通过 `dep.depend` 做依赖收集，这里还有个对 `childOb` 判断的逻辑，我们之后会介绍它的作用。
 
 ## Dep
 
