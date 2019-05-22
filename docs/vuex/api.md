@@ -29,7 +29,7 @@ function installModule (store, rootState, path, module, hot) {
 
 ````js
 getters: {
-  total (state, getters, localState, localGetters) {
+  total (state, getters, rootState, rootGetters) {
     // 可访问全局 state 和 getters，以及如果是在 modules 下面，可以访问到局部 state 和 局部 getters
     return state.a + state.b
   }
