@@ -379,7 +379,7 @@ if (name) {
 
 由于 `pathList`、`pathMap`、`nameMap` 都是引用类型，所以在遍历整个 `routes` 过程中去执行 `addRouteRecord` 方法，会不断给他们添加数据。那么经过整个 `createRouteMap` 方法的执行，我们得到的就是 `pathList`、`pathMap` 和 `nameMap`。其中 `pathList` 是为了记录路由配置中的所有 `path`，而 `pathMap` 和 `nameMap` 都是为了通过 `path` 和 `name` 能快速查到对应的 `RouteRecord`。
 
-再回到 `createMather` 函数，接下来就定义了一系列方法，最后返回了一个对象。
+再回到 `createMatcher` 函数，接下来就定义了一系列方法，最后返回了一个对象。
 
 ```js
 return {
@@ -588,7 +588,7 @@ function formatMatch (record: ?RouteRecord): Array<RouteRecord> {
 }
 ```
 
-可以看它是通过 `record` 循环向上找 `parent`，只到找到最外层，并把所有的 `record` 都 push 到一个数组中，最终返回的就是 `record` 的数组，它记录了一条线路上的所有 `record`。`matched` 属性非常有用，它为之后渲染组件提供了依据。
+可以看它是通过 `record` 循环向上找 `parent`，直到找到最外层，并把所有的 `record` 都 push 到一个数组中，最终返回的就是 `record` 的数组，它记录了一条线路上的所有 `record`。`matched` 属性非常有用，它为之后渲染组件提供了依据。
 
 ## 总结
 
