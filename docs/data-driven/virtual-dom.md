@@ -4,7 +4,7 @@ Virtual DOM 这个概念相信大部分人都不会陌生，它产生的前提�
 
 <img :src="$withBase('/assets/dom.png')">
 
-可以看到，真正的 DOM 元素是非常庞大的，因为浏览器的标准就把 DOM 设计的非常复杂。当我们频繁的去做 DOM 更新，会产生一定的性能问题。
+可以看到，真正的 DOM 元素是非常庞大的，因为浏览器的标准就把 DOM 设计的非常复杂。所以真实的DOM节点数据占据更大的内存，当我们频繁的去做 DOM 更新，会产生一定的性能问题，因为DOM的更新有可能带来页面的重绘或重排。
 
 而 Virtual DOM 就是用一个原生的 JS 对象去描述一个 DOM 节点，所以它比创建一个 DOM 的代价要小很多。在 Vue.js 中，Virtual DOM 是用 `VNode` 这么一个 Class 去描述，它是定义在 `src/core/vdom/vnode.js` 中的。
 
@@ -81,6 +81,8 @@ export default class VNode {
 ```
 
 可以看到 Vue.js 中的 Virtual DOM 的定义还是略微复杂一些的，因为它这里包含了很多 Vue.js 的特性。这里千万不要被这些茫茫多的属性吓到，实际上 Vue.js 中 Virtual DOM 是借鉴了一个开源库 [snabbdom](https://github.com/snabbdom/snabbdom) 的实现，然后加入了一些 Vue.js 特色的东西。我建议大家如果想深入了解 Vue.js 的 Virtual DOM 前不妨先阅读这个库的源码，因为它更加简单和纯粹。
+
+使用Virtual DOM也能使得Vue.js不再依赖于浏览器环境。我们很容易在Broswer端或者服务器端操作Virtual DOM, 需要render时再将Virtual DOM转换为真实DOM即可。这也使得Vue.js有了实现服务器端渲染的能力。
 
 ## 总结
 
