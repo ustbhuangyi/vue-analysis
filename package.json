@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/ustbhuangyi/vue-analysis#readme",
   "devDependencies": {
-    "vuepress": "^0.10.0"
+    "vuepress": "^1.2.0"
   }
 }
