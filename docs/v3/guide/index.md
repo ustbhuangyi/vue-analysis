@@ -2,7 +2,7 @@
 
 ## 前言
 
-2018 年 6 月我在慕课网发布了 Vue.js 2.x 的源码解析课程 [《Vue.js 源码全方位深入解析》]([https://coding.imooc.com/class/228.html](https://coding.imooc.com/class/228.html))，同时也开源了课程配套[电子书]([https://ustbhuangyi.github.io/vue-analysis/](https://ustbhuangyi.github.io/vue-analysis/))。时隔一年多，Vue 官方也开源了 Vue.js 3.x，那么在不久的将来，我也会系统化地做 Vue.js 3.x 的源码分析，同时更新我的这门课程视频以及电子书。
+2018 年 6 月我在慕课网发布了 Vue.js 2.x 的源码解析课程 [《Vue.js 源码全方位深入解析》](https://coding.imooc.com/class/228.html)，同时也开源了课程配套[电子书](https://ustbhuangyi.github.io/vue-analysis/)。时隔一年多，Vue 官方也开源了 Vue.js 3.x，那么在不久的将来，我也会系统化地做 Vue.js 3.x 的源码分析，同时更新我的这门课程视频以及电子书。
 
 Vue.js 3.x 源码刚开源不久，很多人都非常兴奋，我也不例外。我写下这篇文章作为 Vue.js 3.x 源码解析课程的先导片，和大家聊聊我对 Vue.js 源码的一些感悟。
 
@@ -16,7 +16,7 @@ Vue.js 3.x 目前处于 **Pre-Alpha** 的状态，从 Vue 官方的 [Roadmap](ht
 
 Vue.js 官方设立 RFC 的初衷是为了让 Vue.js 本身的开发流程更加规范化，当有一个新功能的想法出现，会先发布一份 RFC 的提案，由社区在一起讨论，当提案通过后再去开发实现。
 
-Vue.js 3.x 在开发之前也发布了多分 RFC 提案，其中讨论比较多的是 Vue.js 3.x 关于组件的写法，由最初的 [Class-API](https://github.com/vuejs/rfcs/pull/17) 提案被废弃到之后热烈讨论的 [Function-based component API](https://github.com/vuejs/rfcs/pull/42)，再到最后确认的基于 `Function-based component API` 修订的 [Composition API](https://github.com/vuejs/rfcs/pull/78)，经历了很长一段的时间，期间社区出现了不少反对的声音，比如 “和 React 更像了，为啥我不直接用 React”、“Class API 更好”、“Vue.js 变得一点都不简单了” 等等，官方都做了很好的[回应](https://github.com/vuejs/rfcs/blob/function-apis/active-rfcs/0000-function-api.md)，因此学习 Vue.js 3.x，你应该先去学习这份 [RFC](https://vue-composition-api-rfc.netlify.com/)。
+Vue.js 3.x 在开发之前也发布了多份 RFC 提案，其中讨论比较多的是 Vue.js 3.x 关于组件的写法，由最初的 [Class-API](https://github.com/vuejs/rfcs/pull/17) 提案被废弃到之后热烈讨论的 [Function-based component API](https://github.com/vuejs/rfcs/pull/42)，再到最后确认的基于 `Function-based component API` 修订的 [Composition API](https://github.com/vuejs/rfcs/pull/78)，经历了很长一段的时间，期间社区出现了不少反对的声音，比如 “和 React 更像了，为啥我不直接用 React”、“Class API 更好”、“Vue.js 变得一点都不简单了” 等等，官方都做了很好的[回应](https://github.com/vuejs/rfcs/blob/function-apis/active-rfcs/0000-function-api.md)，因此学习 Vue.js 3.x，你应该先去学习这份 [RFC](https://vue-composition-api-rfc.netlify.com/)。
 
 通过这份 RFC 的学习，你会大致了解 Vue.js 3.x 组件的写法、详细设计、甚至是一些”缺点“。Vue.js 3.x 摒弃了 2.x `Options API`，拥抱了 `Composition API`，为了更好的逻辑复用、代码组织以及更好的类型推导。
 
@@ -32,7 +32,7 @@ Vue.js 3.x [源码](https://github.com/vuejs/vue-next)已经开放，虽然没�
 
 Vue.js 3.x 源码放出来的第二天，社区就有出来源码分析的文章，不过看了好几篇都是在分析 `Reactive` 相关的 API，给人的错觉好像 Vue 只有响应式一样，甚至还有某些培训机构也跟着蹭起了热度。有些文章写的还是很不错的，比如我记得掘金有一篇是教大家从单测看起，确实是一个很好的学习源码的思路，但还有几篇也未免有蹭热度之嫌。对我而言，除了 `Reactive`，我更愿意去关注 `Setup` 函数的初始化逻辑、`Compile` 过程的优化、`Render` 写法的变化、以及 `Patch` 过程的优化。
 
-Vue.js 3.x 源码采用了 monorepo 的管理方式，采用 TypeScript 编写，对于 Vue.js 的开发者而言，这种代码是更易于维护的。如果你想学习 Vue.js 3.x 的源码，首先你得学会 TypeScript。
+Vue.js 3.x 源码采用了 monorepo 的管理方式，采用 TypeScript 编写，对于 Vue.js 的开发者而言，这种方式是更易于维护源码的。如果你想学习 Vue.js 3.x 的源码，首先你得学会 TypeScript。
 
 对于大部分人而言，现在去看 Vue.js 3.x 的源码还为时过早了，主要是你现在还用不到，我之前在掘金发布过一篇文章[来聊聊源码学习](https://juejin.im/post/5b18d2d7f265da6e410e0e20)，现在还不是学习 Vue.js 3.x 源码的好时机。
 
@@ -45,9 +45,9 @@ Vue.js 3.x 源码开放了，很多小伙伴不免担心，我现在学习 Vue.j
 
 ### 成熟稳定的 Vue.js 2.x
 
-Vue.js 2.x 从 16 年底发布距今已接近 3 年，有无数大厂已经使用 Vue.js 重构和开发项目，Vue.js 2.x 的 npm 下载量每月有 90 多万，Jsdelivr CDN 每月有 5 亿次引用，Chrome DevTools 每周有 90 万的活跃用户。如此庞大的用户量足以说明 Vue.js 是一个非常靠谱和成熟的框架，另外官网对 Issue、Pull Request 的响应也是比较快的，除了高达 97% 的单元测试之外，官方还尝试做了一些[回归测试]([https://github.com/vuejs/regression-testing](https://github.com/vuejs/regression-testing))。
+Vue.js 2.x 从 16 年底发布距今已接近 3 年，有无数大厂已经使用 Vue.js 重构和开发项目，Vue.js 2.x 的 npm 下载量每月有 90 多万，Jsdelivr CDN 每月有 5 亿次引用，Chrome DevTools 每周有 90 万的活跃用户。如此庞大的用户量足以说明 Vue.js 是一个非常靠谱和成熟的框架，另外官网对 Issue、Pull Request 的响应也是比较快的，除了高达 97% 的单元测试之外，官方还尝试做了一些[回归测试](https://github.com/vuejs/regression-testing)。
 
-我们知道 Vue.js 是一个渐进式框架，除了官方提供的一些生态插件 `vue-router`、`vuex`、`vue-cli` 之外，社区还有非常多的优秀的轮子如 `element-ui`、`cube-ui`、`vue-lazyload`、`vue-i18n` 等。这些插件能很好地辅助我们平时的业务开发。
+我们知道 Vue.js 是一个渐进式框架，除了官方提供的一些生态插件 `vue-router`、`vuex`、`vue-cli` 之外，社区还有非常多的优秀的轮子如 `element-ui`、`cube-ui`、`vue-lazyload`、`vue-i18n` 等，这些插件能很好地辅助我们平时的业务开发。
 
 ### 升级的成本
 
@@ -77,7 +77,7 @@ Vue.js 3.x 想全面替代 Vue.js 2.x 需要有相当长的路要走，未来相
 
 ### 学习源码的好处
 
-学习是为了更好的工作，工作中难免会遇到一些问题，学习源码最直接的好处是能帮你直接定位问题的根本原因，从而帮助你解决问题。很多人抱怨加班多，不妨问问自己，有多少时间是在写业务，多少时间是在写（找） bug。快速定位问题解决 bug，可以有效地提升你的工作效率，很可能就不用加班了，甚至会多出学习的时间，形成一个良性循环。
+学习是为了更好的工作，工作中难免会遇到一些问题，学习源码最直接的好处是能帮你直接定位问题的根本原因，从而帮助你解决问题。很多人抱怨加班多，不妨问问自己，有多少时间是在写业务，多少时间是在写（找） bug。快速定位问题解决 bug，可以有效地提升你的工作效率，很可能就不用加班了，甚至会多出学习的时间，形成一个良性循环。
 
 学习源码可以很好地巩固基础，修炼内功，提升技术。前端几乎都会学习 JS 的基础知识，如类型、变量、函数、作用域、闭包、原型链、event loop 等知识，但很多人很难把这些知识在实践中运用自如，主要原因还是实践的少了，大部分时间都在写业务的胶水代码。学习 Vue.js 这类框架的源码，会不断去巩固这些知识点，如果你源码看熟练了，那么你的 JS 基础就会更扎实。
 
