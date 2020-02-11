@@ -86,6 +86,7 @@ module.exports = {
             'reactive/questions',
             'reactive/computed-watcher',
             'reactive/component-update',
+            'reactive/props',
             'reactive/summary'
           ]
         },
