@@ -754,7 +754,7 @@ closeElement(element)
 
 首先处理了尾部空格的情况，然后把 `stack` 的元素弹一个出栈，并把 `stack` 最后一个元素赋值给 `currentParent`，这样就保证了当遇到闭合标签的时候，可以正确地更新 `stack` 的长度以及 `currentParent` 的值，这样就维护了整个 AST 树。
 
-最后执行了 `closeElement(elment)`：
+最后执行了 `closeElement(element)`：
 
 ```js
 function closeElement (element) {
