@@ -809,7 +809,7 @@ if (text) {
   }
 }
 ```
-文本构造的 AST 元素有 2 种类型，一种是有表达式的，`type` 为 2，一种是纯文本，`type` 为 3。在我们的例子中，文本就是 `{{item}}:{{index}}`，是个表达式，通过执行 `parseText(text, delimiters)` 对文本解析，它的定义在 `src/compiler/parser/text-parsre.js` 中：
+文本构造的 AST 元素有 2 种类型，一种是有表达式的，`type` 为 2，一种是纯文本，`type` 为 3。在我们的例子中，文本就是 `{{item}}:{{index}}`，是个表达式，通过执行 `parseText(text, delimiters)` 对文本解析，它的定义在 `src/compiler/parser/text-parser.js` 中：
 
 ```js
 const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g
