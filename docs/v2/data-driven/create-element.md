@@ -1,6 +1,6 @@
 # createElement
 
-Vue.js 利用 createElement 方法创建 VNode，它定义在 `src/core/vdom/create-elemenet.js` 中：
+Vue.js 利用 createElement 方法创建 VNode，它定义在 `src/core/vdom/create-element.js` 中：
 
 ```js
 // wrapper function for providing a more flexible interface
