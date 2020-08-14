@@ -754,7 +754,7 @@ closeElement(element)
 
 首先处理了尾部空格的情况，然后把 `stack` 的元素弹一个出栈，并把 `stack` 最后一个元素赋值给 `currentParent`，这样就保证了当遇到闭合标签的时候，可以正确地更新 `stack` 的长度以及 `currentParent` 的值，这样就维护了整个 AST 树。
 
-最后执行了 `closeElement(elment)`：
+最后执行了 `closeElement(element)`：
 
 ```js
 function closeElement (element) {
@@ -809,7 +809,7 @@ if (text) {
   }
 }
 ```
-文本构造的 AST 元素有 2 种类型，一种是有表达式的，`type` 为 2，一种是纯文本，`type` 为 3。在我们的例子中，文本就是 `{{item}}:{{index}}`，是个表达式，通过执行 `parseText(text, delimiters)` 对文本解析，它的定义在 `src/compiler/parser/text-parsre.js` 中：
+文本构造的 AST 元素有 2 种类型，一种是有表达式的，`type` 为 2，一种是纯文本，`type` 为 3。在我们的例子中，文本就是 `{{item}}:{{index}}`，是个表达式，通过执行 `parseText(text, delimiters)` 对文本解析，它的定义在 `src/compiler/parser/text-parser.js` 中：
 
 ```js
 const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g

@@ -310,7 +310,7 @@ let vm = new Vue({
 
 可以看到，父组件引用 `child` 子组件的地方使用了 `v-model` 关联了数据 `message`；而子组件定义了一个 `value` 的 `prop`，并且在 `input` 事件的回调函数中，通过 `this.$emit('input', e.target.value)` 派发了一个事件，为了让 `v-model` 生效，这两点是必须的。
 
-接着我们从源码角度分析实现原理，还是从编译阶段说起，对于父组件而言，在编译阶段会解析 `v-modle` 指令，依然会执行 `genData` 函数中的 `genDirectives` 函数，接着执行 `src/platforms/web/compiler/directives/model.js` 中定义的 `model` 函数，并命中如下逻辑：
+接着我们从源码角度分析实现原理，还是从编译阶段说起，对于父组件而言，在编译阶段会解析 `v-model` 指令，依然会执行 `genData` 函数中的 `genDirectives` 函数，接着执行 `src/platforms/web/compiler/directives/model.js` 中定义的 `model` 函数，并命中如下逻辑：
 
 ```js
 else if (!config.isReservedTag(tag)) {
