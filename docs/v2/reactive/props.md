@@ -167,7 +167,7 @@ function initProps (vm: Component, propsOptions: Object) {
 
 ### 校验
 
-校验的逻辑很简单，遍历 `propsOptions`，执行 `validateProp(key, propsOptions, propsData, vm)` 方法。这里的 `propsOptions` 就是我们定义的 `props` 在规范后生成的 `options.props` 对象，`propsData` 是从父组件传递的 `prop` 数据。所谓校验的目的就是检查一下我们传递的数据是否满足 `prop `的定义规范。再来看一下 `validateProp` 方法，它定义在 `src/core/util/options.js` 中：
+校验的逻辑很简单，遍历 `propsOptions`，执行 `validateProp(key, propsOptions, propsData, vm)` 方法。这里的 `propsOptions` 就是我们定义的 `props` 在规范后生成的 `options.props` 对象，`propsData` 是从父组件传递的 `prop` 数据。所谓校验的目的就是检查一下我们传递的数据是否满足 `prop `的定义规范。再来看一下 `validateProp` 方法，它定义在 `src/core/util/props.js` 中：
 
 ```js
 export function validateProp (
