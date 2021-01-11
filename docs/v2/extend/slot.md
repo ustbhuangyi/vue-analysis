@@ -296,7 +296,7 @@ export function resolveSlots (
 
 `resolveSlots` 函数的逻辑就是遍历 `chilren`，拿到每一个 `child` 的 `data`，然后通过 `data.slot` 获取到插槽名称，这个 `slot` 就是我们之前编译父组件在 `codegen` 阶段设置的 `data.slot`。接着以插槽名称为 `key` 把 `child` 添加到 `slots` 中，如果 `data.slot` 不存在，则是默认插槽的内容，则把对应的 `child` 添加到 `slots.defaults` 中。这样就获取到整个 `slots`，它是一个对象，`key` 是插槽名称，`value` 是一个 `vnode` 类型的数组，因为它可以有多个同名插槽。
 
-这样我们就拿到了 `vm.$slots` 了，回到 `renderSlot` 函数，`const slotNodes = this.$slots[name]`，我们也就能根据插槽名称获取到对应的 `vnode` 数组了，这个数组里的 `vnode` 都是在父组件创建的，这样就实现了在父组替换子组件插槽的内容了。
+这样我们就拿到了 `vm.$slots` 了，回到 `renderSlot` 函数，`const slotNodes = this.$slots[name]`，我们也就能根据插槽名称获取到对应的 `vnode` 数组了，这个数组里的 `vnode` 都是在父组件创建的，这样就实现了在父组件替换子组件插槽的内容了。
 
 对应的 `slot` 渲染成 `vnodes`，作为当前组件渲染 `vnode` 的 `children`，之后的渲染过程之前分析过，不再赘述。
 
