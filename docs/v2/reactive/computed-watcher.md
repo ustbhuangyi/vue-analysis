@@ -182,24 +182,8 @@ evaluate () {
 
 ````js
 /* istanbul ignore else */
-if (this.computed) {
-  // A computed property watcher has two modes: lazy and activated.
-  // It initializes as lazy by default, and only becomes activated when
-  // it is depended on by at least one subscriber, which is typically
-  // another computed property or a component's render function.
-  if (this.dep.subs.length === 0) {
-    // In lazy mode, we don't want to perform computations until necessary,
-    // so we simply mark the watcher as dirty. The actual computation is
-    // performed just-in-time in this.evaluate() when the computed property
-    // is accessed.
-    this.dirty = true
-  } else {
-    // In activated mode, we want to proactively perform the computation
-    // but only notify our subscribers when the value has indeed changed.
-    this.getAndInvoke(() => {
-      this.dep.notify()
-    })
-  }
+if (this.lazy) {
+  this.dirty = true
 } else if (this.sync) {
   this.run()
 } else {
@@ -207,44 +191,7 @@ if (this.computed) {
 }
 ````
 
-那么对于计算属性这样的 `computed watcher`，它实际上是有 2 种模式，lazy 和 active。如果 `this.dep.subs.length === 0` 成立，则说明没有人去订阅这个 `computed watcher` 的变化，仅仅把 `this.dirty = true`，只有当下次再访问这个计算属性的时候才会重新求值。在我们的场景下，渲染 `watcher` 订阅了这个 `computed watcher` 的变化，那么它会执行：
-
-```js
-this.getAndInvoke(() => {
-  this.dep.notify()
-})
-
-getAndInvoke (cb: Function) {
-  const value = this.get()
-  if (
-    value !== this.value ||
-    // Deep watchers and watchers on Object/Arrays should fire even
-    // when the value is the same, because the value may
-    // have mutated.
-    isObject(value) ||
-    this.deep
-  ) {
-    // set new value
-    const oldValue = this.value
-    this.value = value
-    this.dirty = false
-    if (this.user) {
-      try {
-        cb.call(this.vm, value, oldValue)
-      } catch (e) {
-        handleError(e, this.vm, `callback for watcher "${this.expression}"`)
-      }
-    } else {
-      cb.call(this.vm, value, oldValue)
-    }
-  }
-}
-
-```
-
-`getAndInvoke` 函数会重新计算，然后对比新旧值，如果变化了则执行回调函数，那么这里这个回调函数是 `this.dep.notify()`，在我们这个场景下就是触发了渲染 `watcher` 重新渲染。
-
-通过以上的分析，我们知道计算属性本质上就是一个 `computed watcher`，也了解了它的创建过程和被访问触发 getter 以及依赖更新的过程，其实这是最新的计算属性的实现，之所以这么设计是因为 Vue 想确保不仅仅是计算属性依赖的值发生变化，而是当计算属性最终计算的值发生变化才会触发渲染 `watcher` 重新渲染，本质上是一种优化。
+经过上面的分析我们可以知道，每次访问计算属性的时候都要去判断`dirty`是否为`true`,如果为`true`则重新执行`watcher.evaluate`重新计算。在我们的场景下，渲染 `watcher` 订阅了这个 `computed watcher` ，计算属性依赖的数据发生了变化，则`computed watcher`中的`dirty`重新设置为`true`。所以重新渲染视图的时候需要重新执行`watcher.evaluate`,并且将`dirty`设置为`false`。假如其他数据发生了变化，而计算属性依赖的数据没有发生变化，所以`computed watcher`的`dirty`为`false`,不会重新计算。
 
 接下来我们来分析一下侦听属性 `watch` 是怎么实现的。
 
