@@ -96,8 +96,13 @@ function createComputedGetter (key) {
   return function computedGetter () {
     const watcher = this._computedWatchers && this._computedWatchers[key]
     if (watcher) {
-      watcher.depend()
-      return watcher.evaluate()
+      if (watcher.dirty) {
+        watcher.evaluate()
+      }
+      if (Dep.target) {
+        watcher.depend()
+      }
+      return watcher.value
     }
   }
 }
@@ -131,31 +136,29 @@ constructor (
   isRenderWatcher?: boolean
 ) {
   // ...
-  if (this.computed) {
-    this.value = undefined
-    this.dep = new Dep()
-  } else {
-    this.value = this.get()
-  }
+  this.value = this.lazy
+      ? undefined
+      : this.get()
 }  
 ```
 
-可以发现 `computed watcher` 会并不会立刻求值，同时持有一个 `dep` 实例。
+可以发现 `computed watcher` 会并不会立刻求值。
 
 然后当我们的 `render` 函数执行访问到 `this.fullName` 的时候，就触发了计算属性的 `getter`，它会拿到计算属性对应的 `watcher`，然后执行 `watcher.depend()`，来看一下它的定义：
 
 ```js
 /**
-  * Depend on this watcher. Only for computed property watchers.
+  * Depend on all deps collected by this watcher.
   */
 depend () {
-  if (this.dep && Dep.target) {
-    this.dep.depend()
+  let i = this.deps.length
+  while (i--) {
+    this.deps[i].depend()
   }
 }
 ```
 
-注意，这时候的 `Dep.target` 是渲染 `watcher`，所以 `this.dep.depend()` 相当于渲染 `watcher` 订阅了这个 `computed watcher` 的变化。
+注意，这时候的 `Dep.target` 是渲染 `watcher`，所以 `this.deps[i].depend()` 相当于渲染 `watcher` 订阅了这个 `computed watcher` 的变化。
 
 然后再执行 `watcher.evaluate()` 去求值，来看一下它的定义：
 
@@ -165,14 +168,11 @@ depend () {
   * This only gets called for computed property watchers.
   */
 evaluate () {
-  if (this.dirty) {
-    this.value = this.get()
-    this.dirty = false
-  }
-  return this.value
+  this.value = this.get()
+  this.dirty = false
 }
 ```
-`evaluate` 的逻辑非常简单，判断 `this.dirty`，如果为 `true` 则通过 `this.get()` 求值，然后把 `this.dirty` 设置为 false。在求值过程中，会执行 `value = this.getter.call(vm, vm)`，这实际上就是执行了计算属性定义的 `getter` 函数，在我们这个例子就是执行了 `return this.firstName + ' ' + this.lastName`。
+`evaluate` 的逻辑非常简单，触发计算属性对应的 getter时，判断 `this.dirty`，如果为 `true`，执行了`evaluate` 则通过 `this.get()` 求值，然后把 `this.dirty` 设置为 false。在求值过程中，会执行 `value = this.getter.call(vm, vm)`，这实际上就是执行了计算属性定义的 `getter` 函数，在我们这个例子就是执行了 `return this.firstName + ' ' + this.lastName`。
 
 这里需要特别注意的是，由于 `this.firstName` 和 `this.lastName` 都是响应式对象，这里会触发它们的 getter，根据我们之前的分析，它们会把自身持有的 `dep` 添加到当前正在计算的 `watcher` 中，这个时候 `Dep.target` 就是这个 `computed watcher`。
 
