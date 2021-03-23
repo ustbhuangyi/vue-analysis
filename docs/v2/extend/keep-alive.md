@@ -8,7 +8,7 @@
 
 ```js
 export default {
-  name: 'keep-alive,
+  name: 'keep-alive',
   abstract: true,
 
   props: {
