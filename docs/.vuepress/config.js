@@ -37,6 +37,10 @@ module.exports = {
       {
         text: '3.x 源码解析课程',
         link: 'https://kaiwu.lagou.com/course/courseInfo.htm?courseId=326#/content'
+      },
+      {
+        text: 'React技术揭秘',
+        link: 'https://react.iamkasong.com/'
       }
     ],
     sidebar: {
