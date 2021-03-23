@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>合并配置 | Vue.js 技术揭秘</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    <link rel="icon" href="/vue-analysis/logo.png">
+    <link rel="manifest" href="/vue-analysis/manifest.json">
+    <link rel="apple-touch-icon" href="/vue-analysis/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/vue-analysis/icons/safari-pinned-tab.svg" color="#3eaf7c">
+    <meta name="description" content="Analysis vue.js deeply">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <link rel="preload" href="/vue-analysis/assets/css/0.styles.1df1aa93.css" as="style"><link rel="preload" href="/vue-analysis/assets/js/app.dc0db797.js" as="script"><link rel="preload" href="/vue-analysis/assets/js/1.116748a5.js" as="script"><link rel="preload" href="/vue-analysis/assets/js/46.cf7f2c4d.js" as="script"><link rel="prefetch" href="/vue-analysis/assets/js/2.fc8e0a65.js"><link rel="prefetch" href="/vue-analysis/assets/js/3.fcc611e4.js"><link rel="prefetch" href="/vue-analysis/assets/js/4.6849b7a5.js"><link rel="prefetch" href="/vue-analysis/assets/js/5.b1d7f308.js"><link rel="prefetch" href="/vue-analysis/assets/js/6.8c027019.js"><link rel="prefetch" href="/vue-analysis/assets/js/7.f58945fe.js"><link rel="prefetch" href="/vue-analysis/assets/js/8.d2701782.js"><link rel="prefetch" href="/vue-analysis/assets/js/9.037ca01f.js"><link rel="prefetch" href="/vue-analysis/assets/js/10.af0fff33.js"><link rel="prefetch" href="/vue-analysis/assets/js/11.59f03371.js"><link rel="prefetch" href="/vue-analysis/assets/js/12.9e9b1a70.js"><link rel="prefetch" href="/vue-analysis/assets/js/13.d968b2a6.js"><link rel="prefetch" href="/vue-analysis/assets/js/14.87c5c852.js"><link rel="prefetch" href="/vue-analysis/assets/js/15.888d192c.js"><link rel="prefetch" href="/vue-analysis/assets/js/16.973d1149.js"><link rel="prefetch" href="/vue-analysis/assets/js/17.5ee13a1e.js"><link rel="prefetch" href="/vue-analysis/assets/js/18.96228bde.js"><link rel="prefetch" href="/vue-analysis/assets/js/19.5acc8fba.js"><link rel="prefetch" href="/vue-analysis/assets/js/20.8b41793c.js"><link rel="prefetch" href="/vue-analysis/assets/js/21.ac4c6642.js"><link rel="prefetch" href="/vue-analysis/assets/js/22.c08c41a2.js"><link rel="prefetch" href="/vue-analysis/assets/js/23.06639f65.js"><link rel="prefetch" href="/vue-analysis/assets/js/24.47c1e3d4.js"><link rel="prefetch" href="/vue-analysis/assets/js/25.4b97b7e9.js"><link rel="prefetch" href="/vue-analysis/assets/js/26.69498640.js"><link rel="prefetch" href="/vue-analysis/assets/js/27.8fcd6a1a.js"><link rel="prefetch" href="/vue-analysis/assets/js/28.47607775.js"><link rel="prefetch" href="/vue-analysis/assets/js/29.8cc49e12.js"><link rel="prefetch" href="/vue-analysis/assets/js/30.fe9ed92d.js"><link rel="prefetch" href="/vue-analysis/assets/js/31.a5972532.js"><link rel="prefetch" href="/vue-analysis/assets/js/32.2153f0ad.js"><link rel="prefetch" href="/vue-analysis/assets/js/33.d4a2c81a.js"><link rel="prefetch" href="/vue-analysis/assets/js/34.8dace7fb.js"><link rel="prefetch" href="/vue-analysis/assets/js/35.ad412d1c.js"><link rel="prefetch" href="/vue-analysis/assets/js/36.a2e34e00.js"><link rel="prefetch" href="/vue-analysis/assets/js/37.cb604173.js"><link rel="prefetch" href="/vue-analysis/assets/js/38.8984ce41.js"><link rel="prefetch" href="/vue-analysis/assets/js/39.40e01aad.js"><link rel="prefetch" href="/vue-analysis/assets/js/40.83999d11.js"><link rel="prefetch" href="/vue-analysis/assets/js/41.6f4c7220.js"><link rel="prefetch" href="/vue-analysis/assets/js/42.442e8bc5.js"><link rel="prefetch" href="/vue-analysis/assets/js/43.1c57200a.js"><link rel="prefetch" href="/vue-analysis/assets/js/44.8c421ed3.js"><link rel="prefetch" href="/vue-analysis/assets/js/45.fd597b3a.js"><link rel="prefetch" href="/vue-analysis/assets/js/47.5e501866.js"><link rel="prefetch" href="/vue-analysis/assets/js/48.4be72693.js"><link rel="prefetch" href="/vue-analysis/assets/js/49.02e368f8.js"><link rel="prefetch" href="/vue-analysis/assets/js/50.2acc3318.js"><link rel="prefetch" href="/vue-analysis/assets/js/51.1b9098e3.js"><link rel="prefetch" href="/vue-analysis/assets/js/52.3fa951d8.js"><link rel="prefetch" href="/vue-analysis/assets/js/53.58b8b965.js"><link rel="prefetch" href="/vue-analysis/assets/js/54.9e1f9c8f.js"><link rel="prefetch" href="/vue-analysis/assets/js/55.78ccca63.js"><link rel="prefetch" href="/vue-analysis/assets/js/56.82b929ea.js">
+    <link rel="stylesheet" href="/vue-analysis/assets/css/0.styles.1df1aa93.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-analysis/" class="home-link router-link-active"><!----> <span class="site-name">Vue.js 技术揭秘</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-analysis/v2/prepare/" class="nav-link">
+  2.x 版本
+</a></div><div class="nav-item"><a href="/vue-analysis/v3/new/" class="nav-link">
+  3.x 版本
+</a></div><div class="nav-item"><a href="https://coding.imooc.com/class/228.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  2.x 源码配套视频
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=326#/content" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  3.x 源码解析课程
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://react.iamkasong.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  React技术揭秘
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/ustbhuangyi/vue-analysis" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-analysis/v2/prepare/" class="nav-link">
+  2.x 版本
+</a></div><div class="nav-item"><a href="/vue-analysis/v3/new/" class="nav-link">
+  3.x 版本
+</a></div><div class="nav-item"><a href="https://coding.imooc.com/class/228.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  2.x 源码配套视频
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=326#/content" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  3.x 源码解析课程
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://react.iamkasong.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  React技术揭秘
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/ustbhuangyi/vue-analysis" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>准备工作</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/prepare/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/prepare/flow.html" class="sidebar-link">认识 Flow</a></li><li><a href="/vue-analysis/v2/prepare/directory.html" class="sidebar-link">Vue.js 源码目录设计</a></li><li><a href="/vue-analysis/v2/prepare/build.html" class="sidebar-link">Vue.js 源码构建</a></li><li><a href="/vue-analysis/v2/prepare/entrance.html" class="sidebar-link">从入口开始</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>数据驱动</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/data-driven/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/data-driven/new-vue.html" class="sidebar-link">new Vue 发生了什么</a></li><li><a href="/vue-analysis/v2/data-driven/mounted.html" class="sidebar-link">Vue 实例挂载的实现</a></li><li><a href="/vue-analysis/v2/data-driven/render.html" class="sidebar-link">render</a></li><li><a href="/vue-analysis/v2/data-driven/virtual-dom.html" class="sidebar-link">Virtual DOM</a></li><li><a href="/vue-analysis/v2/data-driven/create-element.html" class="sidebar-link">createElement</a></li><li><a href="/vue-analysis/v2/data-driven/update.html" class="sidebar-link">update</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>组件化</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/components/" aria-current="page" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/components/create-component.html" class="sidebar-link">createComponent</a></li><li><a href="/vue-analysis/v2/components/patch.html" class="sidebar-link">patch</a></li><li><a href="/vue-analysis/v2/components/merge-option.html" aria-current="page" class="active sidebar-link">合并配置</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vue-analysis/v2/components/merge-option.html#外部调用场景" class="sidebar-link">外部调用场景</a></li><li class="sidebar-sub-header"><a href="/vue-analysis/v2/components/merge-option.html#组件场景" class="sidebar-link">组件场景</a></li><li class="sidebar-sub-header"><a href="/vue-analysis/v2/components/merge-option.html#总结" class="sidebar-link">总结</a></li></ul></li><li><a href="/vue-analysis/v2/components/lifecycle.html" class="sidebar-link">生命周期</a></li><li><a href="/vue-analysis/v2/components/component-register.html" class="sidebar-link">组件注册</a></li><li><a href="/vue-analysis/v2/components/async-component.html" class="sidebar-link">异步组件</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>深入响应式原理</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/reactive/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/reactive/reactive-object.html" class="sidebar-link">响应式对象</a></li><li><a href="/vue-analysis/v2/reactive/getters.html" class="sidebar-link">依赖收集</a></li><li><a href="/vue-analysis/v2/reactive/setters.html" class="sidebar-link">派发更新</a></li><li><a href="/vue-analysis/v2/reactive/next-tick.html" class="sidebar-link">nextTick</a></li><li><a href="/vue-analysis/v2/reactive/questions.html" class="sidebar-link">检测变化的注意事项</a></li><li><a href="/vue-analysis/v2/reactive/computed-watcher.html" class="sidebar-link">计算属性 VS 侦听属性</a></li><li><a href="/vue-analysis/v2/reactive/component-update.html" class="sidebar-link">组件更新</a></li><li><a href="/vue-analysis/v2/reactive/props.html" class="sidebar-link">Props (v2.6.11)</a></li><li><a href="/vue-analysis/v2/reactive/summary.html" class="sidebar-link">原理图</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>编译</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/compile/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/compile/entrance.html" class="sidebar-link">编译入口</a></li><li><a href="/vue-analysis/v2/compile/parse.html" class="sidebar-link">parse</a></li><li><a href="/vue-analysis/v2/compile/optimize.html" class="sidebar-link">optimize</a></li><li><a href="/vue-analysis/v2/compile/codegen.html" class="sidebar-link">codegen</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>扩展</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/extend/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/extend/event.html" class="sidebar-link">event</a></li><li><a href="/vue-analysis/v2/extend/v-model.html" class="sidebar-link">v-model</a></li><li><a href="/vue-analysis/v2/extend/slot.html" class="sidebar-link">slot</a></li><li><a href="/vue-analysis/v2/extend/keep-alive.html" class="sidebar-link">keep-alive</a></li><li><a href="/vue-analysis/v2/extend/tansition.html" class="sidebar-link">transition</a></li><li><a href="/vue-analysis/v2/extend/tansition-group.html" class="sidebar-link">transition-group</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vue Router</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/vue-router/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/vue-router/install.html" class="sidebar-link">路由注册</a></li><li><a href="/vue-analysis/v2/vue-router/router.html" class="sidebar-link">VueRouter 对象</a></li><li><a href="/vue-analysis/v2/vue-router/matcher.html" class="sidebar-link">matcher</a></li><li><a href="/vue-analysis/v2/vue-router/transition-to.html" class="sidebar-link">路径切换</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vuex</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/vuex/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/vuex/init.html" class="sidebar-link">Vuex 初始化</a></li><li><a href="/vue-analysis/v2/vuex/api.html" class="sidebar-link">API</a></li><li><a href="/vue-analysis/v2/vuex/plugin.html" class="sidebar-link">插件</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="合并配置"><a href="#合并配置" class="header-anchor">#</a> 合并配置</h1> <p>通过之前章节的源码分析我们知道，<code>new Vue</code> 的过程通常有 2 种场景，一种是外部我们的代码主动调用 <code>new Vue(options)</code> 的方式实例化一个 Vue 对象；另一种是我们上一节分析的组件过程中内部通过 <code>new Vue(options)</code> 实例化子组件。</p> <p>无论哪种场景，都会执行实例的 <code>_init(options)</code> 方法，它首先会执行一个 <code>merge options</code> 的逻辑，相关的代码在 <code>src/core/instance/init.js</code> 中：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">_init</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">?</span><span class="token operator">:</span> Object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// merge options</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>options <span class="token operator">&amp;&amp;</span> options<span class="token punctuation">.</span>_isComponent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// optimize internal component instantiation</span>
+    <span class="token comment">// since dynamic options merging is pretty slow, and none of the</span>
+    <span class="token comment">// internal component options needs special treatment.</span>
+    <span class="token function">initInternalComponent</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span> options<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    vm<span class="token punctuation">.</span>$options <span class="token operator">=</span> <span class="token function">mergeOptions</span><span class="token punctuation">(</span>
+      <span class="token function">resolveConstructorOptions</span><span class="token punctuation">(</span>vm<span class="token punctuation">.</span>constructor<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      options <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      vm
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>可以看到不同场景对于 <code>options</code> 的合并逻辑是不一样的，并且传入的 <code>options</code> 值也有非常大的不同，接下来我会分开介绍 2 种场景的 options 合并过程。</p> <p>为了更直观，我们可以举个简单的示例：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+
+<span class="token keyword">let</span> childComp <span class="token operator">=</span> <span class="token punctuation">{</span>
+  template<span class="token operator">:</span> <span class="token string">'&lt;div&gt;{{msg}}&lt;/div&gt;'</span><span class="token punctuation">,</span>
+  <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'child created'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'child mounted'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      msg<span class="token operator">:</span> <span class="token string">'Hello Vue'</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">mixin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'parent created'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">let</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  el<span class="token operator">:</span> <span class="token string">'#app'</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>childComp<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="外部调用场景"><a href="#外部调用场景" class="header-anchor">#</a> 外部调用场景</h2> <p>当执行 <code>new Vue</code> 的时候，在执行 <code>this._init(options)</code> 的时候，就会执行如下逻辑去合并 <code>options</code>：</p> <div class="language-js extra-class"><pre class="language-js"><code>vm<span class="token punctuation">.</span>$options <span class="token operator">=</span> <span class="token function">mergeOptions</span><span class="token punctuation">(</span>
+  <span class="token function">resolveConstructorOptions</span><span class="token punctuation">(</span>vm<span class="token punctuation">.</span>constructor<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  options <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  vm
+<span class="token punctuation">)</span>
+</code></pre></div><p>这里通过调用 <code>mergeOptions</code> 方法来合并，它实际上就是把 <code>resolveConstructorOptions(vm.constructor)</code> 的返回值和 <code>options</code> 做合并，<code>resolveConstructorOptions</code> 的实现先不考虑，在我们这个场景下，它还是简单返回 <code>vm.constructor.options</code>，相当于 <code>Vue.options</code>，那么这个值又是什么呢，其实在 <code>initGlobalAPI(Vue)</code> 的时候定义了这个值，代码在 <code>src/core/global-api/index.js</code> 中：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">initGlobalAPI</span> <span class="token punctuation">(</span><span class="token parameter">Vue<span class="token operator">:</span> GlobalAPI</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  Vue<span class="token punctuation">.</span>options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+  <span class="token constant">ASSET_TYPES</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">type</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    Vue<span class="token punctuation">.</span>options<span class="token punctuation">[</span>type <span class="token operator">+</span> <span class="token string">'s'</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token comment">// this is used to identify the &quot;base&quot; constructor to extend all plain-object</span>
+  <span class="token comment">// components with in Weex's multi-instance scenarios.</span>
+  Vue<span class="token punctuation">.</span>options<span class="token punctuation">.</span>_base <span class="token operator">=</span> Vue
+
+  <span class="token function">extend</span><span class="token punctuation">(</span>Vue<span class="token punctuation">.</span>options<span class="token punctuation">.</span>components<span class="token punctuation">,</span> builtInComponents<span class="token punctuation">)</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>首先通过 <code>Vue.options = Object.create(null)</code> 创建一个空对象，然后遍历 <code>ASSET_TYPES</code>，<code>ASSET_TYPES</code> 的定义在 <code>src/shared/constants.js</code> 中：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">ASSET_TYPES</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token string">'component'</span><span class="token punctuation">,</span>
+  <span class="token string">'directive'</span><span class="token punctuation">,</span>
+  <span class="token string">'filter'</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>所以上面遍历 <code>ASSET_TYPES</code> 后的代码相当于：</p> <div class="language-js extra-class"><pre class="language-js"><code>Vue<span class="token punctuation">.</span>options<span class="token punctuation">.</span>components <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+Vue<span class="token punctuation">.</span>options<span class="token punctuation">.</span>directives <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+Vue<span class="token punctuation">.</span>options<span class="token punctuation">.</span>filters <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre></div><p>接着执行了 <code>Vue.options._base = Vue</code>，它的作用在我们上节实例化子组件的时候介绍了。</p> <p>最后通过 <code>extend(Vue.options.components, builtInComponents)</code> 把一些内置组件扩展到 <code>Vue.options.components</code> 上，Vue 的内置组件目前有 <code>&lt;keep-alive&gt;</code>、<code>&lt;transition&gt;</code> 和 <code>&lt;transition-group&gt;</code> 组件，这也就是为什么我们在其它组件中使用 <code>&lt;keep-alive&gt;</code> 组件不需要注册的原因，这块儿后续我们介绍 <code>&lt;keep-alive&gt;</code> 组件的时候会详细讲。</p> <p>那么回到 <code>mergeOptions</code> 这个函数，它的定义在 <code>src/core/util/options.js</code> 中：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * Merge two option objects into a new one.
+ * Core utility used in both instantiation and inheritance.
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">mergeOptions</span> <span class="token punctuation">(</span>
+  <span class="token parameter">parent<span class="token operator">:</span> Object<span class="token punctuation">,</span>
+  child<span class="token operator">:</span> Object<span class="token punctuation">,</span>
+  vm<span class="token operator">?</span><span class="token operator">:</span> Component</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Object <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">'production'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">checkComponents</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> child <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    child <span class="token operator">=</span> child<span class="token punctuation">.</span>options
+  <span class="token punctuation">}</span>
+
+  <span class="token function">normalizeProps</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+  <span class="token function">normalizeInject</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+  <span class="token function">normalizeDirectives</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span>
+  <span class="token keyword">const</span> extendsFrom <span class="token operator">=</span> child<span class="token punctuation">.</span>extends
+  <span class="token class-name">if</span> <span class="token punctuation">(</span>extendsFrom<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    parent <span class="token operator">=</span> <span class="token function">mergeOptions</span><span class="token punctuation">(</span>parent<span class="token punctuation">,</span> extendsFrom<span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>child<span class="token punctuation">.</span>mixins<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> l <span class="token operator">=</span> child<span class="token punctuation">.</span>mixins<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> l<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      parent <span class="token operator">=</span> <span class="token function">mergeOptions</span><span class="token punctuation">(</span>parent<span class="token punctuation">,</span> child<span class="token punctuation">.</span>mixins<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> vm<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token keyword">let</span> key
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>key <span class="token keyword">in</span> parent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">mergeField</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>key <span class="token keyword">in</span> child<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">hasOwn</span><span class="token punctuation">(</span>parent<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">mergeField</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">function</span> <span class="token function">mergeField</span> <span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> strat <span class="token operator">=</span> strats<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">||</span> defaultStrat
+    options<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">strat</span><span class="token punctuation">(</span>parent<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> child<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> vm<span class="token punctuation">,</span> key<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> options
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>mergeOptions</code> 主要功能就是把 <code>parent</code> 和 <code>child</code> 这两个对象根据一些合并策略，合并成一个新对象并返回。比较核心的几步，先递归把 <code>extends</code> 和 <code>mixins</code> 合并到 <code>parent</code> 上，然后遍历 <code>parent</code>，调用 <code>mergeField</code>，然后再遍历 <code>child</code>，如果 <code>key</code> 不在 <code>parent</code> 的自身属性上，则调用 <code>mergeField</code>。</p> <p>这里有意思的是 <code>mergeField</code> 函数，它对不同的 <code>key</code> 有着不同的合并策略。举例来说，对于生命周期函数，它的合并策略是这样的：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">mergeHook</span> <span class="token punctuation">(</span>
+  <span class="token parameter">parentVal<span class="token operator">:</span> <span class="token operator">?</span>Array<span class="token operator">&lt;</span>Function<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  childVal<span class="token operator">:</span> <span class="token operator">?</span>Function <span class="token operator">|</span> <span class="token operator">?</span>Array<span class="token operator">&lt;</span>Function<span class="token operator">&gt;</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token operator">?</span>Array<span class="token operator">&lt;</span>Function<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> childVal
+    <span class="token operator">?</span> parentVal
+      <span class="token operator">?</span> parentVal<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>childVal<span class="token punctuation">)</span>
+      <span class="token operator">:</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>childVal<span class="token punctuation">)</span>
+        <span class="token operator">?</span> childVal
+        <span class="token operator">:</span> <span class="token punctuation">[</span>childVal<span class="token punctuation">]</span>
+    <span class="token operator">:</span> parentVal
+<span class="token punctuation">}</span>
+
+<span class="token constant">LIFECYCLE_HOOKS</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">hook</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  strats<span class="token punctuation">[</span>hook<span class="token punctuation">]</span> <span class="token operator">=</span> mergeHook
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>这其中的 <code>LIFECYCLE_HOOKS</code> 的定义在 <code>src/shared/constants.js</code> 中：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">LIFECYCLE_HOOKS</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token string">'beforeCreate'</span><span class="token punctuation">,</span>
+  <span class="token string">'created'</span><span class="token punctuation">,</span>
+  <span class="token string">'beforeMount'</span><span class="token punctuation">,</span>
+  <span class="token string">'mounted'</span><span class="token punctuation">,</span>
+  <span class="token string">'beforeUpdate'</span><span class="token punctuation">,</span>
+  <span class="token string">'updated'</span><span class="token punctuation">,</span>
+  <span class="token string">'beforeDestroy'</span><span class="token punctuation">,</span>
+  <span class="token string">'destroyed'</span><span class="token punctuation">,</span>
+  <span class="token string">'activated'</span><span class="token punctuation">,</span>
+  <span class="token string">'deactivated'</span><span class="token punctuation">,</span>
+  <span class="token string">'errorCaptured'</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>这里定义了 Vue.js 所有的钩子函数名称，所以对于钩子函数，他们的合并策略都是 <code>mergeHook</code> 函数。这个函数的实现也非常有意思，用了一个多层 3 元运算符，逻辑就是如果不存在 <code>childVal</code> ，就返回 <code>parentVal</code>；否则再判断是否存在 <code>parentVal</code>，如果存在就把 <code>childVal</code> 添加到 <code>parentVal</code> 后返回新数组；否则返回 <code>childVal</code> 的数组。所以回到 <code>mergeOptions</code> 函数，一旦 <code>parent</code> 和 <code>child</code> 都定义了相同的钩子函数，那么它们会把 2 个钩子函数合并成一个数组。</p> <p>关于其它属性的合并策略的定义都可以在 <code>src/core/util/options.js</code> 文件中看到，这里不一一介绍了，感兴趣的同学可以自己看。</p> <p>通过执行 <code>mergeField</code> 函数，把合并后的结果保存到 <code>options</code> 对象中，最终返回它。</p> <p>因此，在我们当前这个 case 下，执行完如下合并后：</p> <div class="language-js extra-class"><pre class="language-js"><code>vm<span class="token punctuation">.</span>$options <span class="token operator">=</span> <span class="token function">mergeOptions</span><span class="token punctuation">(</span>
+  <span class="token function">resolveConstructorOptions</span><span class="token punctuation">(</span>vm<span class="token punctuation">.</span>constructor<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  options <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  vm
+<span class="token punctuation">)</span>
+</code></pre></div><p><code>vm.$options</code> 的值差不多是如下这样：</p> <div class="language-js extra-class"><pre class="language-js"><code>vm<span class="token punctuation">.</span>$options <span class="token operator">=</span> <span class="token punctuation">{</span>
+  components<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  created<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">function</span> <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'parent created'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  directives<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  filters<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">_base</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token function">Vue</span><span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  el<span class="token operator">:</span> <span class="token string">&quot;#app&quot;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">h</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//...</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="组件场景"><a href="#组件场景" class="header-anchor">#</a> 组件场景</h2> <p>由于组件的构造函数是通过 <code>Vue.extend</code> 继承自 <code>Vue</code> 的，先回顾一下这个过程，代码定义在 <code>src/core/global-api/extend.js</code> 中。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * Class inheritance
+ */</span>
+Vue<span class="token punctuation">.</span><span class="token function-variable function">extend</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">extendOptions<span class="token operator">:</span> Object</span><span class="token punctuation">)</span><span class="token operator">:</span> Function <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  Sub<span class="token punctuation">.</span>options <span class="token operator">=</span> <span class="token function">mergeOptions</span><span class="token punctuation">(</span>
+    Super<span class="token punctuation">.</span>options<span class="token punctuation">,</span>
+    extendOptions
+  <span class="token punctuation">)</span>
+
+  <span class="token comment">// ...</span>
+  <span class="token comment">// keep a reference to the super options at extension time.</span>
+  <span class="token comment">// later at instantiation we can check if Super's options have</span>
+  <span class="token comment">// been updated.</span>
+  Sub<span class="token punctuation">.</span>superOptions <span class="token operator">=</span> Super<span class="token punctuation">.</span>options
+  Sub<span class="token punctuation">.</span>extendOptions <span class="token operator">=</span> extendOptions
+  Sub<span class="token punctuation">.</span>sealedOptions <span class="token operator">=</span> <span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> Sub<span class="token punctuation">.</span>options<span class="token punctuation">)</span>
+
+  <span class="token comment">// ...</span>
+  <span class="token keyword">return</span> Sub
+<span class="token punctuation">}</span>
+</code></pre></div><p>我们只保留关键逻辑，这里的 <code>extendOptions</code> 对应的就是前面定义的组件对象，它会和 <code>Vue.options</code> 合并到 <code>Sub.opitons</code> 中。</p> <p>接下来我们再回忆一下子组件的初始化过程，代码定义在 <code>src/core/vdom/create-component.js</code> 中：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createComponentInstanceForVnode</span> <span class="token punctuation">(</span>
+  vnode<span class="token operator">:</span> any<span class="token punctuation">,</span> <span class="token comment">// we know it's MountedComponentVNode but flow doesn't</span>
+  parent<span class="token operator">:</span> any<span class="token punctuation">,</span> <span class="token comment">// activeInstance in lifecycle state</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Component <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> options<span class="token operator">:</span> InternalComponentOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
+    _isComponent<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    _parentVnode<span class="token operator">:</span> vnode<span class="token punctuation">,</span>
+    parent
+  <span class="token punctuation">}</span>
+  <span class="token comment">// ...</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">vnode<span class="token punctuation">.</span>componentOptions<span class="token punctuation">.</span>Ctor</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>这里的 <code>vnode.componentOptions.Ctor</code> 就是指向 <code>Vue.extend</code> 的返回值 <code>Sub</code>， 所以 执行 <code>new vnode.componentOptions.Ctor(options)</code> 接着执行 <code>this._init(options)</code>，因为 <code>options._isComponent</code> 为 true，那么合并 <code>options</code> 的过程走到了 <code>initInternalComponent(vm, options)</code> 逻辑。先来看一下它的代码实现，在 <code>src/core/instance/init.js</code> 中：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">initInternalComponent</span> <span class="token punctuation">(</span><span class="token parameter">vm<span class="token operator">:</span> Component<span class="token punctuation">,</span> options<span class="token operator">:</span> InternalComponentOptions</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> opts <span class="token operator">=</span> vm<span class="token punctuation">.</span>$options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>vm<span class="token punctuation">.</span>constructor<span class="token punctuation">.</span>options<span class="token punctuation">)</span>
+  <span class="token comment">// doing this because it's faster than dynamic enumeration.</span>
+  <span class="token keyword">const</span> parentVnode <span class="token operator">=</span> options<span class="token punctuation">.</span>_parentVnode
+  opts<span class="token punctuation">.</span>parent <span class="token operator">=</span> options<span class="token punctuation">.</span>parent
+  opts<span class="token punctuation">.</span>_parentVnode <span class="token operator">=</span> parentVnode
+
+  <span class="token keyword">const</span> vnodeComponentOptions <span class="token operator">=</span> parentVnode<span class="token punctuation">.</span>componentOptions
+  opts<span class="token punctuation">.</span>propsData <span class="token operator">=</span> vnodeComponentOptions<span class="token punctuation">.</span>propsData
+  opts<span class="token punctuation">.</span>_parentListeners <span class="token operator">=</span> vnodeComponentOptions<span class="token punctuation">.</span>listeners
+  opts<span class="token punctuation">.</span>_renderChildren <span class="token operator">=</span> vnodeComponentOptions<span class="token punctuation">.</span>children
+  opts<span class="token punctuation">.</span>_componentTag <span class="token operator">=</span> vnodeComponentOptions<span class="token punctuation">.</span>tag
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>options<span class="token punctuation">.</span>render<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    opts<span class="token punctuation">.</span>render <span class="token operator">=</span> options<span class="token punctuation">.</span>render
+    opts<span class="token punctuation">.</span>staticRenderFns <span class="token operator">=</span> options<span class="token punctuation">.</span>staticRenderFns
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>initInternalComponent</code> 方法首先执行 <code>const opts = vm.$options = Object.create(vm.constructor.options)</code>，这里的 <code>vm.constructor</code> 就是子组件的构造函数 <code>Sub</code>，相当于 <code>vm.$options = Object.create(Sub.options)</code>。</p> <p>接着又把实例化子组件传入的子组件父 VNode 实例 <code>parentVnode</code>、子组件的父 Vue 实例 <code>parent</code> 保存到 <code>vm.$options</code> 中，另外还保留了 <code>parentVnode</code> 配置中的如 <code>propsData</code> 等其它的属性。</p> <p>这么看来，<code>initInternalComponent</code> 只是做了简单一层对象赋值，并不涉及到递归、合并策略等复杂逻辑。</p> <p>因此，在我们当前这个 case 下，执行完如下合并后：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">initInternalComponent</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span> options<span class="token punctuation">)</span>
+</code></pre></div><p><code>vm.$options</code> 的值差不多是如下这样：</p> <div class="language-js extra-class"><pre class="language-js"><code>vm<span class="token punctuation">.</span>$options <span class="token operator">=</span> <span class="token punctuation">{</span>
+  parent<span class="token operator">:</span> Vue <span class="token comment">/*父Vue实例*/</span><span class="token punctuation">,</span>
+  propsData<span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+  _componentTag<span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+  _parentVnode<span class="token operator">:</span> VNode <span class="token comment">/*父VNode实例*/</span><span class="token punctuation">,</span>
+  _renderChildren<span class="token operator">:</span><span class="token keyword">undefined</span><span class="token punctuation">,</span>
+  __proto__<span class="token operator">:</span> <span class="token punctuation">{</span>
+    components<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    directives<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    filters<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">_base</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token function">Vue</span><span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//...</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    _Ctor<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    created<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token keyword">function</span> <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'parent created'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'child created'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    mounted<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token keyword">function</span> <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'child mounted'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token punctuation">{</span>
+         msg<span class="token operator">:</span> <span class="token string">'Hello Vue'</span>
+       <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    template<span class="token operator">:</span> <span class="token string">'&lt;div&gt;{{msg}}&lt;/div&gt;'</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <p>那么至此，Vue 初始化阶段对于 <code>options</code> 的合并过程就介绍完了，我们需要知道对于 <code>options</code> 的合并有 2 种方式，子组件初始化过程通过 <code>initInternalComponent</code> 方式要比外部初始化 Vue 通过 <code>mergeOptions</code> 的过程要快，合并完的结果保留在 <code>vm.$options</code> 中。</p> <p>纵观一些库、框架的设计几乎都是类似的，自身定义了一些默认配置，同时又可以在初始化阶段传入一些定义配置，然后去 merge 默认配置，来达到定制化不同需求的目的。只不过在 Vue 的场景下，会对 merge 的过程做一些精细化控制，虽然我们在开发自己的 JSSDK 的时候并没有 Vue 这么复杂，但这个设计思想是值得我们借鉴的。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ustbhuangyi/vue-analysis/edit/master/docs/v2/components/merge-option.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">10/23/2019, 12:56:55 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue-analysis/v2/components/patch.html" class="prev">
+        patch
+      </a></span> <span class="next"><a href="/vue-analysis/v2/components/lifecycle.html">
+        生命周期
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/vue-analysis/assets/js/app.dc0db797.js" defer></script><script src="/vue-analysis/assets/js/1.116748a5.js" defer></script><script src="/vue-analysis/assets/js/46.cf7f2c4d.js" defer></script>
+  </body>
+</html>

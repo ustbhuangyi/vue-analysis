@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VueRouter 对象 | Vue.js 技术揭秘</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    <link rel="icon" href="/vue-analysis/logo.png">
+    <link rel="manifest" href="/vue-analysis/manifest.json">
+    <link rel="apple-touch-icon" href="/vue-analysis/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/vue-analysis/icons/safari-pinned-tab.svg" color="#3eaf7c">
+    <meta name="description" content="Analysis vue.js deeply">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <link rel="preload" href="/vue-analysis/assets/css/0.styles.1df1aa93.css" as="style"><link rel="preload" href="/vue-analysis/assets/js/app.dc0db797.js" as="script"><link rel="preload" href="/vue-analysis/assets/js/1.116748a5.js" as="script"><link rel="preload" href="/vue-analysis/assets/js/11.59f03371.js" as="script"><link rel="prefetch" href="/vue-analysis/assets/js/2.fc8e0a65.js"><link rel="prefetch" href="/vue-analysis/assets/js/3.fcc611e4.js"><link rel="prefetch" href="/vue-analysis/assets/js/4.6849b7a5.js"><link rel="prefetch" href="/vue-analysis/assets/js/5.b1d7f308.js"><link rel="prefetch" href="/vue-analysis/assets/js/6.8c027019.js"><link rel="prefetch" href="/vue-analysis/assets/js/7.f58945fe.js"><link rel="prefetch" href="/vue-analysis/assets/js/8.d2701782.js"><link rel="prefetch" href="/vue-analysis/assets/js/9.037ca01f.js"><link rel="prefetch" href="/vue-analysis/assets/js/10.af0fff33.js"><link rel="prefetch" href="/vue-analysis/assets/js/12.9e9b1a70.js"><link rel="prefetch" href="/vue-analysis/assets/js/13.d968b2a6.js"><link rel="prefetch" href="/vue-analysis/assets/js/14.87c5c852.js"><link rel="prefetch" href="/vue-analysis/assets/js/15.888d192c.js"><link rel="prefetch" href="/vue-analysis/assets/js/16.973d1149.js"><link rel="prefetch" href="/vue-analysis/assets/js/17.5ee13a1e.js"><link rel="prefetch" href="/vue-analysis/assets/js/18.96228bde.js"><link rel="prefetch" href="/vue-analysis/assets/js/19.5acc8fba.js"><link rel="prefetch" href="/vue-analysis/assets/js/20.8b41793c.js"><link rel="prefetch" href="/vue-analysis/assets/js/21.ac4c6642.js"><link rel="prefetch" href="/vue-analysis/assets/js/22.c08c41a2.js"><link rel="prefetch" href="/vue-analysis/assets/js/23.06639f65.js"><link rel="prefetch" href="/vue-analysis/assets/js/24.47c1e3d4.js"><link rel="prefetch" href="/vue-analysis/assets/js/25.4b97b7e9.js"><link rel="prefetch" href="/vue-analysis/assets/js/26.69498640.js"><link rel="prefetch" href="/vue-analysis/assets/js/27.8fcd6a1a.js"><link rel="prefetch" href="/vue-analysis/assets/js/28.47607775.js"><link rel="prefetch" href="/vue-analysis/assets/js/29.8cc49e12.js"><link rel="prefetch" href="/vue-analysis/assets/js/30.fe9ed92d.js"><link rel="prefetch" href="/vue-analysis/assets/js/31.a5972532.js"><link rel="prefetch" href="/vue-analysis/assets/js/32.2153f0ad.js"><link rel="prefetch" href="/vue-analysis/assets/js/33.d4a2c81a.js"><link rel="prefetch" href="/vue-analysis/assets/js/34.8dace7fb.js"><link rel="prefetch" href="/vue-analysis/assets/js/35.ad412d1c.js"><link rel="prefetch" href="/vue-analysis/assets/js/36.a2e34e00.js"><link rel="prefetch" href="/vue-analysis/assets/js/37.cb604173.js"><link rel="prefetch" href="/vue-analysis/assets/js/38.8984ce41.js"><link rel="prefetch" href="/vue-analysis/assets/js/39.40e01aad.js"><link rel="prefetch" href="/vue-analysis/assets/js/40.83999d11.js"><link rel="prefetch" href="/vue-analysis/assets/js/41.6f4c7220.js"><link rel="prefetch" href="/vue-analysis/assets/js/42.442e8bc5.js"><link rel="prefetch" href="/vue-analysis/assets/js/43.1c57200a.js"><link rel="prefetch" href="/vue-analysis/assets/js/44.8c421ed3.js"><link rel="prefetch" href="/vue-analysis/assets/js/45.fd597b3a.js"><link rel="prefetch" href="/vue-analysis/assets/js/46.cf7f2c4d.js"><link rel="prefetch" href="/vue-analysis/assets/js/47.5e501866.js"><link rel="prefetch" href="/vue-analysis/assets/js/48.4be72693.js"><link rel="prefetch" href="/vue-analysis/assets/js/49.02e368f8.js"><link rel="prefetch" href="/vue-analysis/assets/js/50.2acc3318.js"><link rel="prefetch" href="/vue-analysis/assets/js/51.1b9098e3.js"><link rel="prefetch" href="/vue-analysis/assets/js/52.3fa951d8.js"><link rel="prefetch" href="/vue-analysis/assets/js/53.58b8b965.js"><link rel="prefetch" href="/vue-analysis/assets/js/54.9e1f9c8f.js"><link rel="prefetch" href="/vue-analysis/assets/js/55.78ccca63.js"><link rel="prefetch" href="/vue-analysis/assets/js/56.82b929ea.js">
+    <link rel="stylesheet" href="/vue-analysis/assets/css/0.styles.1df1aa93.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-analysis/" class="home-link router-link-active"><!----> <span class="site-name">Vue.js 技术揭秘</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-analysis/v2/prepare/" class="nav-link">
+  2.x 版本
+</a></div><div class="nav-item"><a href="/vue-analysis/v3/new/" class="nav-link">
+  3.x 版本
+</a></div><div class="nav-item"><a href="https://coding.imooc.com/class/228.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  2.x 源码配套视频
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=326#/content" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  3.x 源码解析课程
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://react.iamkasong.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  React技术揭秘
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/ustbhuangyi/vue-analysis" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-analysis/v2/prepare/" class="nav-link">
+  2.x 版本
+</a></div><div class="nav-item"><a href="/vue-analysis/v3/new/" class="nav-link">
+  3.x 版本
+</a></div><div class="nav-item"><a href="https://coding.imooc.com/class/228.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  2.x 源码配套视频
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=326#/content" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  3.x 源码解析课程
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://react.iamkasong.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  React技术揭秘
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/ustbhuangyi/vue-analysis" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>准备工作</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/prepare/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/prepare/flow.html" class="sidebar-link">认识 Flow</a></li><li><a href="/vue-analysis/v2/prepare/directory.html" class="sidebar-link">Vue.js 源码目录设计</a></li><li><a href="/vue-analysis/v2/prepare/build.html" class="sidebar-link">Vue.js 源码构建</a></li><li><a href="/vue-analysis/v2/prepare/entrance.html" class="sidebar-link">从入口开始</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>数据驱动</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/data-driven/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/data-driven/new-vue.html" class="sidebar-link">new Vue 发生了什么</a></li><li><a href="/vue-analysis/v2/data-driven/mounted.html" class="sidebar-link">Vue 实例挂载的实现</a></li><li><a href="/vue-analysis/v2/data-driven/render.html" class="sidebar-link">render</a></li><li><a href="/vue-analysis/v2/data-driven/virtual-dom.html" class="sidebar-link">Virtual DOM</a></li><li><a href="/vue-analysis/v2/data-driven/create-element.html" class="sidebar-link">createElement</a></li><li><a href="/vue-analysis/v2/data-driven/update.html" class="sidebar-link">update</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>组件化</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/components/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/components/create-component.html" class="sidebar-link">createComponent</a></li><li><a href="/vue-analysis/v2/components/patch.html" class="sidebar-link">patch</a></li><li><a href="/vue-analysis/v2/components/merge-option.html" class="sidebar-link">合并配置</a></li><li><a href="/vue-analysis/v2/components/lifecycle.html" class="sidebar-link">生命周期</a></li><li><a href="/vue-analysis/v2/components/component-register.html" class="sidebar-link">组件注册</a></li><li><a href="/vue-analysis/v2/components/async-component.html" class="sidebar-link">异步组件</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>深入响应式原理</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/reactive/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/reactive/reactive-object.html" class="sidebar-link">响应式对象</a></li><li><a href="/vue-analysis/v2/reactive/getters.html" class="sidebar-link">依赖收集</a></li><li><a href="/vue-analysis/v2/reactive/setters.html" class="sidebar-link">派发更新</a></li><li><a href="/vue-analysis/v2/reactive/next-tick.html" class="sidebar-link">nextTick</a></li><li><a href="/vue-analysis/v2/reactive/questions.html" class="sidebar-link">检测变化的注意事项</a></li><li><a href="/vue-analysis/v2/reactive/computed-watcher.html" class="sidebar-link">计算属性 VS 侦听属性</a></li><li><a href="/vue-analysis/v2/reactive/component-update.html" class="sidebar-link">组件更新</a></li><li><a href="/vue-analysis/v2/reactive/props.html" class="sidebar-link">Props (v2.6.11)</a></li><li><a href="/vue-analysis/v2/reactive/summary.html" class="sidebar-link">原理图</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>编译</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/compile/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/compile/entrance.html" class="sidebar-link">编译入口</a></li><li><a href="/vue-analysis/v2/compile/parse.html" class="sidebar-link">parse</a></li><li><a href="/vue-analysis/v2/compile/optimize.html" class="sidebar-link">optimize</a></li><li><a href="/vue-analysis/v2/compile/codegen.html" class="sidebar-link">codegen</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>扩展</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/extend/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/extend/event.html" class="sidebar-link">event</a></li><li><a href="/vue-analysis/v2/extend/v-model.html" class="sidebar-link">v-model</a></li><li><a href="/vue-analysis/v2/extend/slot.html" class="sidebar-link">slot</a></li><li><a href="/vue-analysis/v2/extend/keep-alive.html" class="sidebar-link">keep-alive</a></li><li><a href="/vue-analysis/v2/extend/tansition.html" class="sidebar-link">transition</a></li><li><a href="/vue-analysis/v2/extend/tansition-group.html" class="sidebar-link">transition-group</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Vue Router</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/vue-router/" aria-current="page" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/vue-router/install.html" class="sidebar-link">路由注册</a></li><li><a href="/vue-analysis/v2/vue-router/router.html" aria-current="page" class="active sidebar-link">VueRouter 对象</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vue-analysis/v2/vue-router/router.html#总结" class="sidebar-link">总结</a></li></ul></li><li><a href="/vue-analysis/v2/vue-router/matcher.html" class="sidebar-link">matcher</a></li><li><a href="/vue-analysis/v2/vue-router/transition-to.html" class="sidebar-link">路径切换</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vuex</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-analysis/v2/vuex/" class="sidebar-link">Introduction</a></li><li><a href="/vue-analysis/v2/vuex/init.html" class="sidebar-link">Vuex 初始化</a></li><li><a href="/vue-analysis/v2/vuex/api.html" class="sidebar-link">API</a></li><li><a href="/vue-analysis/v2/vuex/plugin.html" class="sidebar-link">插件</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vuerouter-对象"><a href="#vuerouter-对象" class="header-anchor">#</a> VueRouter 对象</h1> <p>VueRouter 的实现是一个类，我们先对它做一个简单地分析，它的定义在 <code>src/index.js</code> 中：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">VueRouter</span> <span class="token punctuation">{</span>
+  <span class="token keyword">static</span> <span class="token function-variable function">install</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+  <span class="token keyword">static</span> version<span class="token operator">:</span> string<span class="token punctuation">;</span>
+
+  app<span class="token operator">:</span> any<span class="token punctuation">;</span>
+  apps<span class="token operator">:</span> Array<span class="token operator">&lt;</span>any<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  ready<span class="token operator">:</span> boolean<span class="token punctuation">;</span>
+  readyCbs<span class="token operator">:</span> Array<span class="token operator">&lt;</span>Function<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  options<span class="token operator">:</span> RouterOptions<span class="token punctuation">;</span>
+  mode<span class="token operator">:</span> string<span class="token punctuation">;</span>
+  history<span class="token operator">:</span> HashHistory <span class="token operator">|</span> HTML5History <span class="token operator">|</span> AbstractHistory<span class="token punctuation">;</span>
+  matcher<span class="token operator">:</span> Matcher<span class="token punctuation">;</span>
+  fallback<span class="token operator">:</span> boolean<span class="token punctuation">;</span>
+  beforeHooks<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token operator">?</span>NavigationGuard<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  resolveHooks<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token operator">?</span>NavigationGuard<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  afterHooks<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token operator">?</span>AfterNavigationHook<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span> <span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> RouterOptions <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>app <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>apps <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> options
+    <span class="token keyword">this</span><span class="token punctuation">.</span>beforeHooks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>resolveHooks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>afterHooks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>matcher <span class="token operator">=</span> <span class="token function">createMatcher</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>routes <span class="token operator">||</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">let</span> mode <span class="token operator">=</span> options<span class="token punctuation">.</span>mode <span class="token operator">||</span> <span class="token string">'hash'</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>fallback <span class="token operator">=</span> mode <span class="token operator">===</span> <span class="token string">'history'</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>supportsPushState <span class="token operator">&amp;&amp;</span> options<span class="token punctuation">.</span>fallback <span class="token operator">!==</span> <span class="token boolean">false</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>fallback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      mode <span class="token operator">=</span> <span class="token string">'hash'</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>inBrowser<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      mode <span class="token operator">=</span> <span class="token string">'abstract'</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>mode <span class="token operator">=</span> mode
+
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>mode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> <span class="token string">'history'</span><span class="token operator">:</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>history <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HTML5History</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> options<span class="token punctuation">.</span>base<span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+      <span class="token keyword">case</span> <span class="token string">'hash'</span><span class="token operator">:</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>history <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashHistory</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> options<span class="token punctuation">.</span>base<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fallback<span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+      <span class="token keyword">case</span> <span class="token string">'abstract'</span><span class="token operator">:</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>history <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AbstractHistory</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> options<span class="token punctuation">.</span>base<span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+      <span class="token keyword">default</span><span class="token operator">:</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">'production'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token function">assert</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">invalid mode: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>mode<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">match</span> <span class="token punctuation">(</span>
+    raw<span class="token operator">:</span> RawLocation<span class="token punctuation">,</span>
+    current<span class="token operator">?</span><span class="token operator">:</span> Route<span class="token punctuation">,</span>
+    redirectedFrom<span class="token operator">?</span><span class="token operator">:</span> Location
+  <span class="token punctuation">)</span><span class="token operator">:</span> Route <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>matcher<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span>raw<span class="token punctuation">,</span> current<span class="token punctuation">,</span> redirectedFrom<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">get</span> <span class="token function">currentRoute</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token operator">?</span>Route <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>history <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span>current
+  <span class="token punctuation">}</span>
+
+  <span class="token function">init</span> <span class="token punctuation">(</span><span class="token parameter">app<span class="token operator">:</span> any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">'production'</span> <span class="token operator">&amp;&amp;</span> <span class="token function">assert</span><span class="token punctuation">(</span>
+      install<span class="token punctuation">.</span>installed<span class="token punctuation">,</span>
+      <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">not installed. Make sure to call \`Vue.use(VueRouter)\` </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+      <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">before creating root instance.</span><span class="token template-punctuation string">`</span></span>
+    <span class="token punctuation">)</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>apps<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>app<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>app <span class="token operator">=</span> app
+
+    <span class="token keyword">const</span> history <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>history
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>history <span class="token keyword">instanceof</span> <span class="token class-name">HTML5History</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      history<span class="token punctuation">.</span><span class="token function">transitionTo</span><span class="token punctuation">(</span>history<span class="token punctuation">.</span><span class="token function">getCurrentLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>history <span class="token keyword">instanceof</span> <span class="token class-name">HashHistory</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> <span class="token function-variable function">setupHashListener</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        history<span class="token punctuation">.</span><span class="token function">setupListeners</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      history<span class="token punctuation">.</span><span class="token function">transitionTo</span><span class="token punctuation">(</span>
+        history<span class="token punctuation">.</span><span class="token function">getCurrentLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        setupHashListener<span class="token punctuation">,</span>
+        setupHashListener
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    history<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token parameter">route</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>apps<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">app</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        app<span class="token punctuation">.</span>_route <span class="token operator">=</span> route
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">beforeEach</span> <span class="token punctuation">(</span>fn<span class="token operator">:</span> Function<span class="token punctuation">)</span><span class="token operator">:</span> Function <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">registerHook</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>beforeHooks<span class="token punctuation">,</span> fn<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">beforeResolve</span> <span class="token punctuation">(</span>fn<span class="token operator">:</span> Function<span class="token punctuation">)</span><span class="token operator">:</span> Function <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">registerHook</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>resolveHooks<span class="token punctuation">,</span> fn<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">afterEach</span> <span class="token punctuation">(</span>fn<span class="token operator">:</span> Function<span class="token punctuation">)</span><span class="token operator">:</span> Function <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">registerHook</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>afterHooks<span class="token punctuation">,</span> fn<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">onReady</span> <span class="token punctuation">(</span><span class="token parameter">cb<span class="token operator">:</span> Function<span class="token punctuation">,</span> errorCb<span class="token operator">?</span><span class="token operator">:</span> Function</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span><span class="token function">onReady</span><span class="token punctuation">(</span>cb<span class="token punctuation">,</span> errorCb<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">onError</span> <span class="token punctuation">(</span><span class="token parameter">errorCb<span class="token operator">:</span> Function</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span><span class="token function">onError</span><span class="token punctuation">(</span>errorCb<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">push</span> <span class="token punctuation">(</span><span class="token parameter">location<span class="token operator">:</span> RawLocation<span class="token punctuation">,</span> onComplete<span class="token operator">?</span><span class="token operator">:</span> Function<span class="token punctuation">,</span> onAbort<span class="token operator">?</span><span class="token operator">:</span> Function</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>location<span class="token punctuation">,</span> onComplete<span class="token punctuation">,</span> onAbort<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">replace</span> <span class="token punctuation">(</span><span class="token parameter">location<span class="token operator">:</span> RawLocation<span class="token punctuation">,</span> onComplete<span class="token operator">?</span><span class="token operator">:</span> Function<span class="token punctuation">,</span> onAbort<span class="token operator">?</span><span class="token operator">:</span> Function</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>location<span class="token punctuation">,</span> onComplete<span class="token punctuation">,</span> onAbort<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">go</span> <span class="token punctuation">(</span><span class="token parameter">n<span class="token operator">:</span> number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">back</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">forward</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">getMatchedComponents</span> <span class="token punctuation">(</span>to<span class="token operator">?</span><span class="token operator">:</span> RawLocation <span class="token operator">|</span> Route<span class="token punctuation">)</span><span class="token operator">:</span> Array<span class="token operator">&lt;</span>any<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> route<span class="token operator">:</span> any <span class="token operator">=</span> to
+      <span class="token operator">?</span> to<span class="token punctuation">.</span>matched
+        <span class="token operator">?</span> to
+        <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>to<span class="token punctuation">)</span><span class="token punctuation">.</span>route
+      <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>currentRoute
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>route<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> route<span class="token punctuation">.</span>matched<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">m</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span>components<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">key</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> m<span class="token punctuation">.</span>components<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">resolve</span> <span class="token punctuation">(</span>
+    to<span class="token operator">:</span> RawLocation<span class="token punctuation">,</span>
+    current<span class="token operator">?</span><span class="token operator">:</span> Route<span class="token punctuation">,</span>
+    append<span class="token operator">?</span><span class="token operator">:</span> boolean
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    location<span class="token operator">:</span> Location<span class="token punctuation">,</span>
+    route<span class="token operator">:</span> Route<span class="token punctuation">,</span>
+    href<span class="token operator">:</span> string<span class="token punctuation">,</span>
+    normalizedTo<span class="token operator">:</span> Location<span class="token punctuation">,</span>
+    resolved<span class="token operator">:</span> Route
+  <span class="token punctuation">}</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> location <span class="token operator">=</span> <span class="token function">normalizeLocation</span><span class="token punctuation">(</span>
+      to<span class="token punctuation">,</span>
+      current <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span>current<span class="token punctuation">,</span>
+      append<span class="token punctuation">,</span>
+      <span class="token keyword">this</span>
+    <span class="token punctuation">)</span>
+    <span class="token keyword">const</span> route <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span>location<span class="token punctuation">,</span> current<span class="token punctuation">)</span>
+    <span class="token keyword">const</span> fullPath <span class="token operator">=</span> route<span class="token punctuation">.</span>redirectedFrom <span class="token operator">||</span> route<span class="token punctuation">.</span>fullPath
+    <span class="token keyword">const</span> base <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span>base
+    <span class="token keyword">const</span> href <span class="token operator">=</span> <span class="token function">createHref</span><span class="token punctuation">(</span>base<span class="token punctuation">,</span> fullPath<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>mode<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      location<span class="token punctuation">,</span>
+      route<span class="token punctuation">,</span>
+      href<span class="token punctuation">,</span>
+      normalizedTo<span class="token operator">:</span> location<span class="token punctuation">,</span>
+      resolved<span class="token operator">:</span> route
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">addRoutes</span> <span class="token punctuation">(</span><span class="token parameter">routes<span class="token operator">:</span> Array<span class="token operator">&lt;</span>RouteConfig<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>matcher<span class="token punctuation">.</span><span class="token function">addRoutes</span><span class="token punctuation">(</span>routes<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span>current <span class="token operator">!==</span> <span class="token constant">START</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span><span class="token function">transitionTo</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>history<span class="token punctuation">.</span><span class="token function">getCurrentLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>VueRouter</code> 定义了一些属性和方法，我们先从它的构造函数看，当我们执行 <code>new VueRouter</code> 的时候做了哪些事情。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">constructor</span> <span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> RouterOptions <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>app <span class="token operator">=</span> <span class="token keyword">null</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>apps <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> options
+  <span class="token keyword">this</span><span class="token punctuation">.</span>beforeHooks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>resolveHooks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>afterHooks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>matcher <span class="token operator">=</span> <span class="token function">createMatcher</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>routes <span class="token operator">||</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">let</span> mode <span class="token operator">=</span> options<span class="token punctuation">.</span>mode <span class="token operator">||</span> <span class="token string">'hash'</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>fallback <span class="token operator">=</span> mode <span class="token operator">===</span> <span class="token string">'history'</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>supportsPushState <span class="token operator">&amp;&amp;</span> options<span class="token punctuation">.</span>fallback <span class="token operator">!==</span> <span class="token boolean">false</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>fallback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    mode <span class="token operator">=</span> <span class="token string">'hash'</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>inBrowser<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    mode <span class="token operator">=</span> <span class="token string">'abstract'</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>mode <span class="token operator">=</span> mode
+
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>mode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">'history'</span><span class="token operator">:</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>history <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HTML5History</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> options<span class="token punctuation">.</span>base<span class="token punctuation">)</span>
+      <span class="token keyword">break</span>
+    <span class="token keyword">case</span> <span class="token string">'hash'</span><span class="token operator">:</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>history <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashHistory</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> options<span class="token punctuation">.</span>base<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fallback<span class="token punctuation">)</span>
+      <span class="token keyword">break</span>
+    <span class="token keyword">case</span> <span class="token string">'abstract'</span><span class="token operator">:</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>history <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AbstractHistory</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> options<span class="token punctuation">.</span>base<span class="token punctuation">)</span>
+      <span class="token keyword">break</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">'production'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">assert</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">invalid mode: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>mode<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>构造函数定义了一些属性，其中 <code>this.app</code> 表示根 <code>Vue</code> 实例，<code>this.apps</code> 保存持有 <code>$options.router</code> 属性的 <code>Vue</code> 实例，<code>this.options</code> 保存传入的路由配置，<code>this.beforeHooks</code>、
+<code>this.resolveHooks</code>、<code>this.afterHooks</code> 表示一些钩子函数，我们之后会介绍，<code>this.matcher</code> 表示路由匹配器，我们之后会介绍，<code>this.fallback</code> 表示在浏览器不支持 <code>history.pushState</code> 的情况下，根据传入的 <code>fallback</code> 配置参数，决定是否回退到hash模式，<code>this.mode</code> 表示路由创建的模式，<code>this.history</code> 表示路由历史的具体的实现实例，它是根据 <code>this.mode</code> 的不同实现不同，它有 <code>History</code> 基类，然后不同的 <code>history</code> 实现都是继承 <code>History</code>。</p> <p>实例化 <code>VueRouter</code> 后会返回它的实例 <code>router</code>，我们在 <code>new Vue</code> 的时候会把 <code>router</code> 作为配置的属性传入，回顾一下上一节我们讲 <code>beforeCreate</code> 混入的时候有这么一段代码：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">beforeCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isDef</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$options<span class="token punctuation">.</span>router<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_router <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$options<span class="token punctuation">.</span>router
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_router<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token comment">// ...</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>  
+</code></pre></div><p>所以组件在执行 <code>beforeCreate</code> 钩子函数的时候，如果传入了 <code>router</code> 实例，都会执行 <code>router.init</code> 方法：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">init</span> <span class="token punctuation">(</span><span class="token parameter">app<span class="token operator">:</span> any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">'production'</span> <span class="token operator">&amp;&amp;</span> <span class="token function">assert</span><span class="token punctuation">(</span>
+    install<span class="token punctuation">.</span>installed<span class="token punctuation">,</span>
+    <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">not installed. Make sure to call \`Vue.use(VueRouter)\` </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+    <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">before creating root instance.</span><span class="token template-punctuation string">`</span></span>
+  <span class="token punctuation">)</span>
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span>apps<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>app<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span>app <span class="token operator">=</span> app
+
+  <span class="token keyword">const</span> history <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>history
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>history <span class="token keyword">instanceof</span> <span class="token class-name">HTML5History</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    history<span class="token punctuation">.</span><span class="token function">transitionTo</span><span class="token punctuation">(</span>history<span class="token punctuation">.</span><span class="token function">getCurrentLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>history <span class="token keyword">instanceof</span> <span class="token class-name">HashHistory</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">setupHashListener</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      history<span class="token punctuation">.</span><span class="token function">setupListeners</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    history<span class="token punctuation">.</span><span class="token function">transitionTo</span><span class="token punctuation">(</span>
+      history<span class="token punctuation">.</span><span class="token function">getCurrentLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      setupHashListener<span class="token punctuation">,</span>
+      setupHashListener
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  history<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token parameter">route</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>apps<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">app</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      app<span class="token punctuation">.</span>_route <span class="token operator">=</span> route
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>init</code> 的逻辑很简单，它传入的参数是 <code>Vue</code> 实例，然后存储到 <code>this.apps</code> 中；只有根 <code>Vue</code> 实例会保存到 <code>this.app</code> 中，并且会拿到当前的 <code>this.history</code>，根据它的不同类型来执行不同逻辑，由于我们平时使用 <code>hash</code> 路由多一些，所以我们先看这部分逻辑，先定义了 <code>setupHashListener</code> 函数，接着执行了 <code>history.transitionTo</code> 方法，它是定义在 <code>History</code> 基类中，代码在 <code>src/history/base.js</code>：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">transitionTo</span> <span class="token punctuation">(</span><span class="token parameter">location<span class="token operator">:</span> RawLocation<span class="token punctuation">,</span> onComplete<span class="token operator">?</span><span class="token operator">:</span> Function<span class="token punctuation">,</span> onAbort<span class="token operator">?</span><span class="token operator">:</span> Function</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> route <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>router<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span>location<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>current<span class="token punctuation">)</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>我们先不着急去看 <code>transitionTo</code> 的具体实现，先看第一行代码，它调用了 <code>this.router.match</code> 函数：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">match</span> <span class="token punctuation">(</span>
+  raw<span class="token operator">:</span> RawLocation<span class="token punctuation">,</span>
+  current<span class="token operator">?</span><span class="token operator">:</span> Route<span class="token punctuation">,</span>
+  redirectedFrom<span class="token operator">?</span><span class="token operator">:</span> Location
+<span class="token punctuation">)</span><span class="token operator">:</span> Route <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>matcher<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span>raw<span class="token punctuation">,</span> current<span class="token punctuation">,</span> redirectedFrom<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>实际上是调用了 <code>this.matcher.match</code> 方法去做匹配，所以接下来我们先来了解一下 <code>matcher</code> 的相关实现。</p> <h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <p>通过这一节的分析，我们大致对 <code>VueRouter</code> 类有了大致了解，知道了它的一些属性和方法，同时了解到在组件的初始化阶段，执行到 <code>beforeCreate</code> 钩子函数的时候会执行 <code>router.init</code> 方法，然后又会执行 <code>history.transitionTo</code> 方法做路由过渡，进而引出了 <code>matcher</code> 的概念，接下来我们先研究一下 <code>matcher</code> 的相关实现。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ustbhuangyi/vue-analysis/edit/master/docs/v2/vue-router/router.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">10/23/2019, 12:56:55 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue-analysis/v2/vue-router/install.html" class="prev">
+        路由注册
+      </a></span> <span class="next"><a href="/vue-analysis/v2/vue-router/matcher.html">
+        matcher
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/vue-analysis/assets/js/app.dc0db797.js" defer></script><script src="/vue-analysis/assets/js/1.116748a5.js" defer></script><script src="/vue-analysis/assets/js/11.59f03371.js" defer></script>
+  </body>
+</html>
