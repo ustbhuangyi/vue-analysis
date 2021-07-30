@@ -343,7 +343,7 @@ function updateDOMListeners (oldVnode: VNodeWithData, vnode: VNodeWithData) {
 }
 ```
 
-首先获取 `vnode.data.on`，这就是我们之前的生成的 `data` 中对应的事件对象，`target` 是当前 `vnode` 对于的 DOM 对象，`normalizeEvents` 主要是对 `v-model` 相关的处理，我们之后分析 `v-model` 的时候会介绍，接着调用 `updateListeners(on, oldOn, add, remove, vnode.context)` 方法，它的定义在 `src/core/vdom/helpers/update-listeners.js` 中：
+首先获取 `vnode.data.on`，这就是我们之前的生成的 `data` 中对应的事件对象，`target` 是当前 `vnode` 对应的 DOM 对象，`normalizeEvents` 主要是对 `v-model` 相关的处理，我们之后分析 `v-model` 的时候会介绍，接着调用 `updateListeners(on, oldOn, add, remove, vnode.context)` 方法，它的定义在 `src/core/vdom/helpers/update-listeners.js` 中：
 
 ```js
 export function updateListeners (
